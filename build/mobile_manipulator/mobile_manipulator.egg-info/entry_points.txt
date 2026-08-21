@@ -1,5 +1,0 @@
-[console_scripts]
-ball_detector = mobile_manipulator.ball_detector:main
-metrics_logger = mobile_manipulator.metrics_logger:main
-target_trajectory = mobile_manipulator.target_trajectory:main
-visual_tracker = mobile_manipulator.visual_tracker:main
