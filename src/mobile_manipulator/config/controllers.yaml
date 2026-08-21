@@ -19,4 +19,4 @@ arm_controller:
   ros__parameters:
     joints: [arm_base_yaw, shoulder_pitch, elbow_pitch, wrist_pitch, left_finger_joint, right_finger_joint]
     command_interfaces: [position]
-    state_interfaces: [position, velocity]
+    state_interfaces: [position]
