@@ -1,0 +1,34 @@
+[0.855s] Invoking command in '/home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator': PYTHONPATH=/home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/build --no-deps symlink_data
+[1.045s] running develop
+[1.149s] running egg_info
+[1.149s] creating mobile_manipulator.egg-info
+[1.158s] writing mobile_manipulator.egg-info/PKG-INFO
+[1.158s] writing dependency_links to mobile_manipulator.egg-info/dependency_links.txt
+[1.158s] writing entry points to mobile_manipulator.egg-info/entry_points.txt
+[1.158s] writing requirements to mobile_manipulator.egg-info/requires.txt
+[1.158s] writing top-level names to mobile_manipulator.egg-info/top_level.txt
+[1.159s] writing manifest file 'mobile_manipulator.egg-info/SOURCES.txt'
+[1.178s] reading manifest file 'mobile_manipulator.egg-info/SOURCES.txt'
+[1.178s] writing manifest file 'mobile_manipulator.egg-info/SOURCES.txt'
+[1.190s] running build_ext
+[1.190s] Creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/lib/python3.12/site-packages/mobile-manipulator.egg-link (link to .)
+[1.191s] Installing ball_detector script to /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/lib/mobile_manipulator
+[1.191s] Installing metrics_logger script to /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/lib/mobile_manipulator
+[1.191s] Installing target_trajectory script to /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/lib/mobile_manipulator
+[1.191s] Installing visual_tracker script to /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/lib/mobile_manipulator
+[1.191s] 
+[1.191s] Installed /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator
+[1.191s] running symlink_data
+[1.191s] creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/ament_index
+[1.191s] creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/ament_index/resource_index
+[1.192s] creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/ament_index/resource_index/packages
+[1.192s] symbolically linking /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/resource/mobile_manipulator -> /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/ament_index/resource_index/packages
+[1.192s] symbolically linking /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/package.xml -> /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator
+[1.192s] creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/urdf
+[1.192s] symbolically linking /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/urdf/mobile_manipulator.urdf.xacro -> /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/urdf
+[1.192s] creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config
+[1.192s] symbolically linking /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/config/controllers.yaml -> /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config
+[1.192s] creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/worlds
+[1.192s] symbolically linking /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/worlds/ball_arena.sdf -> /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/worlds
+[1.193s] creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/launch
+[1.212s] Invoked command in '/home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator' returned '0': PYTHONPATH=/home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/build --no-deps symlink_data

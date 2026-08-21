@@ -1,0 +1,32 @@
+running develop
+running egg_info
+creating mobile_manipulator.egg-info
+writing mobile_manipulator.egg-info/PKG-INFO
+writing dependency_links to mobile_manipulator.egg-info/dependency_links.txt
+writing entry points to mobile_manipulator.egg-info/entry_points.txt
+writing requirements to mobile_manipulator.egg-info/requires.txt
+writing top-level names to mobile_manipulator.egg-info/top_level.txt
+writing manifest file 'mobile_manipulator.egg-info/SOURCES.txt'
+reading manifest file 'mobile_manipulator.egg-info/SOURCES.txt'
+writing manifest file 'mobile_manipulator.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/lib/python3.12/site-packages/mobile-manipulator.egg-link (link to .)
+Installing ball_detector script to /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/lib/mobile_manipulator
+Installing metrics_logger script to /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/lib/mobile_manipulator
+Installing target_trajectory script to /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/lib/mobile_manipulator
+Installing visual_tracker script to /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/lib/mobile_manipulator
+
+Installed /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator
+running symlink_data
+creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/ament_index
+creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/ament_index/resource_index
+creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/ament_index/resource_index/packages
+symbolically linking /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/resource/mobile_manipulator -> /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/ament_index/resource_index/packages
+symbolically linking /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/package.xml -> /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator
+creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/urdf
+symbolically linking /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/urdf/mobile_manipulator.urdf.xacro -> /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/urdf
+creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config
+symbolically linking /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/config/controllers.yaml -> /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config
+creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/worlds
+symbolically linking /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/worlds/ball_arena.sdf -> /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/worlds
+creating /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/launch
