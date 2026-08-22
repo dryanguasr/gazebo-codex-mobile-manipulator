@@ -1,17 +1,27 @@
-# Informe final provisional
+# Informe parcial de progreso
 
-## Estado
+## Estado al 22 de agosto de 2026
 
-El entorno ROS 2 Jazzy/Gazebo Harmonic quedó instalado y auditado. Se creó un primer modelo integrado Xacro con base 4WD, brazo de cuatro GDL, pinza y soporte de cámara; también configuración inicial de ros2_control, mundo con bola y nodos clásicos de detector/control.
+El prototipo ya se instancia en Gazebo Sim, publica estados articulares y entrega una imagen de la camara frontal a ROS 2. La base diferencial y el brazo se cargan y activan mediante ros2_control.
 
-## Validado
+La evidencia reproducible se conserva en `results/diagnostic/` y `captures/png/`. La captura frontal real esta en `captures/png/front_camera.png`.
 
-`colcon build` y la expansión Xacro desde el overlay son correctas. `check_urdf` produce solo avisos de materiales sin definición RGBA; no se considera validación de Gazebo ni de control.
+## Arquitectura
 
-## Pendiente crítico
+Xacro describe la base 4WD, brazo, pinza y camara. Gazebo aporta fisica, sensor y plugin gz_ros2_control. ROS 2 puentea la camara y ejecuta detector, tracker y controladores. El script `scripts/run_diagnostic.sh` recompila y ejercita esta cadena.
 
-No se ha implementado el sensor de cámara SDF, lanzamiento/spawn, bridge, activación de controladores, pruebas físicas, métricas A ni diagnóstico B. Por tanto, este repositorio no cumple todavía el objetivo completo y no debe presentarse como experimento finalizado.
+## Resultado del diagnostico
 
-## Recomendación
+- Spawn: exitoso.
+- Camara: imagen guardada.
+- Estados articulares: recibidos.
+- Controladores base y brazo: activados.
+- Pendiente: odometria/TF comprobable, metrica A/B, seguimiento visual y agarre.
 
-Completar y validar primero el spawn y `gz_ros2_control`; resolver los avisos visuales; añadir cámara/bridge; solo después medir prueba A. No usar pose de Gazebo en el controlador.
+## Riesgos conocidos
+
+La sesion headless de WSL no permite una captura 3D externa de GUI. Ademas, no fue posible instalar FFmpeg ni bibliotecas de PDF porque sudo requiere contrasena interactiva. Por ello este archivo Markdown sustituye temporalmente al PDF solicitado; no debe confundirse con una validacion final.
+
+## Proximo hito
+
+Tras habilitar las dependencias, generar MP4 H.264 a 60 fps desde PNGs reales, crear el PDF con esta evidencia y renderizar cada pagina para inspeccion visual.
