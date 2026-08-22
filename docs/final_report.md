@@ -4,7 +4,7 @@
 
 El prototipo ya se instancia en Gazebo Sim, publica estados articulares y entrega una imagen de la camara frontal a ROS 2. La base diferencial y el brazo se cargan y activan mediante ros2_control.
 
-La evidencia reproducible se conserva en `results/diagnostic/` y `captures/png/`. La captura frontal real esta en `captures/png/front_camera.png`.
+La evidencia reproducible se conserva en `results/diagnostic/` y `captures/png/`. La captura frontal real esta en `captures/png/front_camera.png`. El video `captures/diagnostic_front_camera_60fps.mp4` usa H.264 y fue verificado con 60 fps, 3 segundos y 180 fotogramas.
 
 ## Arquitectura
 
@@ -20,8 +20,8 @@ Xacro describe la base 4WD, brazo, pinza y camara. Gazebo aporta fisica, sensor 
 
 ## Riesgos conocidos
 
-La sesion headless de WSL no permite una captura 3D externa de GUI. Ademas, no fue posible instalar FFmpeg ni bibliotecas de PDF porque sudo requiere contrasena interactiva. Por ello este archivo Markdown sustituye temporalmente al PDF solicitado; no debe confundirse con una validacion final.
+La sesion headless de WSL no permite una captura 3D externa de GUI. El PDF no se genero porque el flujo obligatorio de PDF requiere el marcador local `container_tools/mark_artifact_operation_started.mjs`, ausente en esta sesion; no se omite su verificacion visual.
 
 ## Proximo hito
 
-Tras habilitar las dependencias, generar MP4 H.264 a 60 fps desde PNGs reales, crear el PDF con esta evidencia y renderizar cada pagina para inspeccion visual.
+Restaurar el marcador de artefacto PDF, generar el informe con esta evidencia y renderizar cada pagina para inspeccion visual.

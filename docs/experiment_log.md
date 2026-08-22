@@ -16,10 +16,11 @@
 | Controladores base y brazo | Activos | `launch.log`: configuracion y activacion correctas |
 | Joint states | Correcto | `joint_states.txt` contiene los 10 joints |
 | Camara y bridge | Correctos | `front_camera.png`, `camera_capture.txt` |
+| Video H.264 | Correcto | `diagnostic_front_camera_60fps.mp4`: 60 fps, 3 s, 180 frames |
 | Odometria y TF | Pendiente de evidencia | el proceso headless no publico `/odom` durante esta corrida |
 | CLI de controladores | No disponible | falta el plugin `ros2controlcli`; se conserva el log del manager |
 | Captura 3D externa | Pendiente | WSL headless no dispone de una ventana/renderizador GUI para screenshot |
-| Video MP4 60 fps y PDF | Pendientes | FFmpeg y ReportLab no estan instalables sin la contrasena de sudo |
+| PDF parcial | Bloqueado por automatizacion | falta el marcador local `container_tools/mark_artifact_operation_started.mjs` requerido por el flujo de revision |
 
 ### Correcciones aplicadas
 
@@ -36,7 +37,7 @@
 
 ### Limitaciones y siguientes pasos
 
-1. Instalar `ffmpeg`, `python3-reportlab`, `python3-pypdf` y `python3-pdfplumber` con una sesion sudo autorizada; despues codificar la secuencia PNG a H.264 60 fps y generar/verificar el PDF.
+1. Restaurar el marcador de operacion de artefactos PDF para generar y renderizar/verificar el informe parcial.
 2. Activar/puentear `/clock` y verificar `/odom` y TF de forma repetible.
 3. Implementar trayectorias deterministas de la bola y mediciones A/B; la pose de Gazebo se usara solo como referencia de error.
 4. Validar seguimiento visual repetible y luego pick-and-place.
