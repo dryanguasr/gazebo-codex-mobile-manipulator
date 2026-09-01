@@ -1,5 +1,13 @@
 <?xml version="1.0"?>
 <robot name="mobile_manipulator" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <material name="SlateGray"><color rgba="0.44 0.50 0.56 1"/></material>
+  <material name="Black"><color rgba="0.04 0.04 0.04 1"/></material>
+  <material name="DarkOrange"><color rgba="1.0 0.35 0.0 1"/></material>
+  <material name="Goldenrod"><color rgba="0.85 0.65 0.13 1"/></material>
+  <material name="Khaki"><color rgba="0.94 0.90 0.55 1"/></material>
+  <material name="LightSteelBlue"><color rgba="0.69 0.77 0.87 1"/></material>
+  <material name="Silver"><color rgba="0.75 0.75 0.75 1"/></material>
+  <material name="Blue"><color rgba="0.1 0.25 0.9 1"/></material>
   <xacro:macro name="box" params="name xyz size mass color">
     <link name="${name}"><inertial><mass value="${mass}"/><inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/></inertial><visual><origin xyz="${xyz}"/><geometry><box size="${size}"/></geometry><material name="${color}"/></visual><collision><origin xyz="${xyz}"/><geometry><box size="${size}"/></geometry></collision></link>
   </xacro:macro>

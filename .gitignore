@@ -1,7 +1,10 @@
 build/
 install/
 log/
+.venv*/
 __pycache__/
 *.pyc
 *.urdf
-results/
+results/*
+!results/verified/
+!results/verified/**
