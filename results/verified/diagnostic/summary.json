@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "odometry_topic": "/base_controller/odom",
+  "tf": "odom -> base_footprint",
+  "initial_position_m": {
+    "x": 4.8573009768423373e-08,
+    "y": -1.3121836388448206e-15
+  },
+  "final_position_m": {
+    "x": 0.3700000485726965,
+    "y": -1.9990383277218993e-08
+  },
+  "final_tf_translation_m": {
+    "x": 0.37,
+    "y": -0.0
+  },
+  "base_displacement_m": 0.3699999999996873,
+  "camera_focal_length_px": 554.3827056884766,
+  "initial_estimated_ball_distance_m": 1.633061526059032,
+  "arm_commanded_positions_rad_or_m": {
+    "arm_base_yaw": 0.2,
+    "shoulder_pitch": -0.3,
+    "elbow_pitch": 0.5,
+    "wrist_pitch": -0.2,
+    "left_finger_joint": 0.02,
+    "right_finger_joint": -0.02
+  }
+}

@@ -1,0 +1,10 @@
+header:
+  stamp:
+    sec: 14
+    nanosec: 917000000
+  frame_id: mobile_manipulator/base_footprint/front_camera
+vector:
+  x: -0.0011963844299316406
+  y: 0.13373209635416666
+  z: 1.633061526059032
+---

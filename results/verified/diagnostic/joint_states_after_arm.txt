@@ -1,0 +1,53 @@
+A message was lost!!!
+	total count change:1
+	total count: 1---
+header:
+  stamp:
+    sec: 38
+    nanosec: 580000000
+  frame_id: base_link
+name:
+- arm_base_yaw
+- elbow_pitch
+- front_left_joint
+- front_right_joint
+- left_finger_joint
+- rear_left_joint
+- rear_right_joint
+- right_finger_joint
+- shoulder_pitch
+- wrist_pitch
+position:
+- 0.19999999999922669
+- 0.5000000000076815
+- 3.2173921499785423
+- 3.2173918672118673
+- 0.019999999999922684
+- 3.217391585337877
+- 3.2173913043471636
+- -0.019999999999922687
+- -0.299999999990489
+- -0.19999999999699156
+velocity:
+- .nan
+- .nan
+- 1.0021496009190991e-16
+- 1.1986269436127012e-16
+- .nan
+- 6.928356289603927e-17
+- 7.666598968206421e-17
+- .nan
+- .nan
+- .nan
+effort:
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+---

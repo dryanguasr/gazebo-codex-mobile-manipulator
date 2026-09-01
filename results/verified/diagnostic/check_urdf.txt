@@ -1,0 +1,15 @@
+robot name is: mobile_manipulator
+---------- Successfully Parsed XML ---------------
+root Link: base_footprint has 1 child(ren)
+    child(1):  base_link
+        child(1):  shoulder_link
+            child(1):  upper_arm_link
+                child(1):  forearm_link
+                    child(1):  wrist_link
+                        child(1):  left_finger
+                        child(2):  right_finger
+        child(2):  camera_link
+        child(3):  front_left_link
+        child(4):  front_right_link
+        child(5):  rear_left_link
+        child(6):  rear_right_link
