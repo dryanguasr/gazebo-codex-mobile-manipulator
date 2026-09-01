@@ -1,43 +1,99 @@
-# Bitacora del experimento
+# Bitácora del experimento
 
-## 2026-08-21 - Auditoria inicial
+## 2026-08-21 — Prototipo inicial
 
-- ROS 2 Jazzy, Gazebo Sim 8, ros_gz, gz_ros2_control, controladores, Xacro y OpenCV quedaron instalados sin actualizar paquetes ajenos.
-- El modelo integra base 4WD, brazo de 4 GDL, pinza, camara frontal y una esfera objetivo.
-- La expansion Xacro y `check_urdf` se ejecutaron correctamente. Los avisos de materiales sin definicion RGBA no bloquean la cinematica, pero se deben normalizar para la presentacion final.
+- Se comprobó la disponibilidad de ROS 2 Jazzy, Gazebo Sim 8, `ros_gz`,
+  `gz_ros2_control`, Xacro y OpenCV.
+- Se creó el modelo con base 4WD, brazo de 4 GDL, pinza, cámara y esfera.
+- Xacro y `check_urdf` finalizaron sin errores estructurales.
+- Se incorporaron detector HSV, controlador visual básico y comandos manuales.
 
-## 2026-08-22 - Diagnostico posterior a suspension
+## 2026-08-22 — Evidencia experimental inicial
 
-| Componente | Estado | Evidencia |
-|---|---|---|
-| Compilacion | Correcta | `results/diagnostic/build.log` |
-| Xacro y URDF | Correcto | `robot.urdf`, `check_urdf.txt` |
-| Spawn en Gazebo | Correcto | `launch.log`: Entity creation successful |
-| Controladores base y brazo | Activos | `launch.log`: configuracion y activacion correctas |
-| Joint states | Correcto | `joint_states.txt` contiene los 10 joints |
-| Camara y bridge | Correctos | `front_camera.png`, `camera_capture.txt` |
-| Video H.264 | Correcto | `diagnostic_front_camera_60fps.mp4`: 60 fps, 3 s, 180 frames |
-| Odometria y TF | Pendiente de evidencia | el proceso headless no publico `/odom` durante esta corrida |
-| CLI de controladores | No disponible | falta el plugin `ros2controlcli`; se conserva el log del manager |
-| Captura 3D externa | Pendiente | WSL headless no dispone de una ventana/renderizador GUI para screenshot |
-| PDF parcial | Bloqueado por automatizacion | falta el marcador local `container_tools/mark_artifact_operation_started.mjs` requerido por el flujo de revision |
+Se obtuvo spawn, cámara, vídeo y activación aparente de controladores. También se
+registraron como pendientes odometría, TF, seguimiento y métricas. Estas
+evidencias motivaron el hito actual, pero no se toman como aceptación final:
+posteriormente se descubrió que el script podía continuar tras un build fallido
+y cargar un overlay anterior.
 
-### Correcciones aplicadas
+La limitación de GUI/PDF anotada entonces fue circunstancial y no es criterio de
+aceptación del sistema.
 
-1. Se reemplazaron temporizadores de 5/9 s por eventos de finalizacion de Xacro/spawn y los spawners esperan hasta 120 s el servicio de `controller_manager`.
-2. Se agrego `gz-sim-sensors-system` al mundo: la camara ahora genera la imagen ROS capturada.
-3. Se retiro el spawner redundante de `joint_state_broadcaster`: el plugin ya lo deja activo y el intento paralelo fallaba al reconfigurarlo desde estado activo.
-4. Se agrego `scripts/run_diagnostic.sh` y el nodo `evidence_capture` para repetir la prueba y guardar artefactos locales.
+## 2026-09-01 — Auditoría desde estado limpio
 
-### Pruebas ejecutadas
+La auditoría se realizó antes de cambiar odometría:
 
-- Se publico un `TwistStamped` fijo (avance 0.15 m/s, giro 0.25 rad/s) en `/base_controller/cmd_vel`.
-- Se publico una trayectoria articular determinista para los seis joints de brazo/pinza.
-- La base acepto el comando; el log registra la recepcion. La prueba aun no incluye metrica de desplazamiento porque falta odometria en esta ejecucion.
+1. `colcon build` falló porque `setup.py` copiaba `launch/__pycache__` mediante
+   un glob demasiado amplio.
+2. El diagnóstico ignoraba el fallo y hacía `source install/setup.bash`, por lo
+   que mezclaba código fuente nuevo con una instalación anterior.
+3. El topic real del `DiffDriveController` apareció como
+   `/base_controller/odom`. La consulta histórica a `/odom` era incorrecta; la
+   configuración del controlador no necesitaba remap.
+4. Gazebo Transport sí publicaba `/clock`, pero no existía bridge hacia ROS 2.
+   El controller manager avisaba que no recibía reloj; odom llevaba stamp cero y
+   TF no era consumible.
+5. `enable_odom_tf=true`, `odom_frame_id=odom` y
+   `base_frame_id=base_footprint` ya eran correctos.
+6. En una ejecución realmente limpia, `joint_state_broadcaster` no estaba
+   activo. El topic se descubría con cero publicadores.
 
-### Limitaciones y siguientes pasos
+## Correcciones aplicadas
 
-1. Restaurar el marcador de operacion de artefactos PDF para generar y renderizar/verificar el informe parcial.
-2. Activar/puentear `/clock` y verificar `/odom` y TF de forma repetible.
-3. Implementar trayectorias deterministas de la bola y mediciones A/B; la pose de Gazebo se usara solo como referencia de error.
-4. Validar seguimiento visual repetible y luego pick-and-place.
+- Globs de instalación limitados a extensiones de archivo.
+- Bridge Gazebo→ROS para `/clock`, imagen y `CameraInfo`.
+- `use_sim_time=true` en los nodos de simulación.
+- Spawner explícito para `joint_state_broadcaster`, base y brazo.
+- Diagnóstico estricto: build y señales críticas ya no usan tolerancia.
+- Validación numérica de desplazamiento, TF, intrínsecos y posiciones del brazo.
+- Limpieza de procesos Gazebo ligada a `OnShutdown`.
+- Detector refactorizado y parametrizado.
+- `fx` tomado de `CameraInfo`; fallback derivado de resolución/FOV.
+- Conversión de profundidad óptica a rango 3D para objetivos descentrados.
+- Trayectoria estática/móvil mediante `SetEntityPose`.
+- Tracker proporcional parametrizado, con saturaciones, deadbands y watchdog.
+- Logger CSV/JSON y comparación A/B con criterios ejecutables.
+
+## Incidencias durante la automatización
+
+- `grep -q` combinado con `pipefail` cerraba la tubería al encontrar un topic.
+  `ros2` terminaba con `BrokenPipeError` y la condición se interpretaba como
+  falsa. Se cambió a un grep que consume toda la salida.
+- El wrapper de `gz sim` dejaba un proceso hijo tras el cierre. El launch mata
+  únicamente el proceso cuyo comando incluye el mundo `ball_arena.sdf`.
+- La primera métrica A reveló que la profundidad óptica se comparaba contra
+  rango Euclídeo. Se añadió el factor del rayo pinhole usando `fx, fy, cx, cy`.
+
+## Validación final
+
+### Diagnóstico
+
+- Build y URDF: PASS.
+- Tres controladores activos: PASS.
+- 10 joint states y seis consignas brazo/pinza alcanzadas: PASS.
+- Cámara e intrínsecos: `fx=554.383 px`.
+- Odometría real: `/base_controller/odom`.
+- Movimiento ordenado: 0.666 m.
+- TF `odom -> base_footprint`: disponible y consistente con odometría.
+- Procesos huérfanos al terminar: ninguno.
+
+### Experimento A/B, 30 s por condición
+
+| Métrica | A | B |
+|---|---:|---:|
+| Frames válidos tras warmup | 667/667 | 698/698 |
+| MAE de rango | 0.097 m | 0.016 m |
+| RMS horizontal | 0.528 | 0.034 |
+| MAE a distancia objetivo | 0.535 m | 0.088 m |
+| Error estacionario | 0.568 m | 0.083 m |
+| Desplazamiento | ~0 m | 0.368 m |
+
+Mejora del MAE de distancia objetivo: 83.6%. El comparador terminó con PASS.
+
+## Decisiones de alcance
+
+- No se añadió MoveIt, IK ni pick-and-place.
+- No se convirtió el objetivo en un sistema físico complejo.
+- No se dedicó trabajo a GUI o PDF.
+- Las imágenes existentes se conservan; los criterios se basan en topics, CSV,
+  JSON y validadores reproducibles.
