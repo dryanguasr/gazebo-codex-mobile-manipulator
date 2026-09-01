@@ -129,7 +129,7 @@ Estas limitaciones son decisiones docentes, no resultados ocultos.
 
 ### Commit SHA final validado
 
-`VALIDATED_COMMIT_SHA`
+`251a1f6ca761c85449af9aeaf162c1fa8aa78e47`
 
 El valor identifica el commit de código, documentación y evidencia sobre el que
 se ejecutó la validación final. Si existe un commit posterior que solo sustituye
