@@ -14,16 +14,33 @@ def target_position(
     longitudinal_amplitude_m,
     lateral_amplitude_m,
     angular_frequency_rad_s,
+    trefoil_radius_m=1.15,
+    trefoil_lap_period_s=30.0,
+    trefoil_lobes=5,
 ):
     """Return a deterministic planar target position."""
     if mode == 'static':
         return centre_x_m, 0.0
-    if mode != 'moving':
-        raise ValueError(f'Unsupported target mode: {mode}')
-    phase = angular_frequency_rad_s * elapsed_s
-    x = centre_x_m + longitudinal_amplitude_m * math.sin(phase)
-    y = lateral_amplitude_m * math.sin(0.5 * phase)
-    return x, y
+    if mode == 'moving':
+        phase = angular_frequency_rad_s * elapsed_s
+        x = centre_x_m + longitudinal_amplitude_m * math.sin(phase)
+        y = lateral_amplitude_m * math.sin(0.5 * phase)
+        return x, y
+    if mode == 'trefoil':
+        if trefoil_lap_period_s <= 0.0:
+            raise ValueError('trefoil_lap_period_s must be positive')
+        lobes = int(trefoil_lobes)
+        if lobes < 3 or lobes % 2 == 0:
+            raise ValueError('trefoil_lobes must be an odd integer >= 3')
+        # An odd-lobed rose closes after pi radians. This phase definition
+        # completes one full clover every trefoil_lap_period_s.
+        phase = math.pi * elapsed_s / trefoil_lap_period_s
+        radius = trefoil_radius_m * math.cos(float(lobes) * phase)
+        return (
+            centre_x_m + radius * math.cos(phase),
+            radius * math.sin(phase),
+        )
+    raise ValueError(f'Unsupported target mode: {mode}')
 
 
 class TargetTrajectory(Node):
@@ -37,8 +54,11 @@ class TargetTrajectory(Node):
         self.declare_parameter('height_m', 0.12)
         self.declare_parameter('longitudinal_amplitude_m', 0.45)
         self.declare_parameter('lateral_amplitude_m', 0.65)
+        self.declare_parameter('trefoil_radius_m', 1.15)
+        self.declare_parameter('trefoil_lap_period_s', 30.0)
+        self.declare_parameter('trefoil_lobes', 5)
         self.declare_parameter('angular_frequency_rad_s', 0.25)
-        self.declare_parameter('update_rate_hz', 20.0)
+        self.declare_parameter('update_rate_hz', 60.0)
         self.declare_parameter(
             'set_pose_service', '/world/ball_arena/set_pose'
         )
@@ -82,6 +102,9 @@ class TargetTrajectory(Node):
             float(self.get_parameter('longitudinal_amplitude_m').value),
             float(self.get_parameter('lateral_amplitude_m').value),
             float(self.get_parameter('angular_frequency_rad_s').value),
+            float(self.get_parameter('trefoil_radius_m').value),
+            float(self.get_parameter('trefoil_lap_period_s').value),
+            int(self.get_parameter('trefoil_lobes').value),
         )
 
         pose = PoseStamped()

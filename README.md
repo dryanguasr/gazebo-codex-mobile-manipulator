@@ -13,11 +13,11 @@ El flujo completo fue validado en ROS 2 Jazzy y Gazebo Sim 8:
 - build, Xacro/URDF y spawn correctos;
 - `joint_state_broadcaster`, `base_controller` y `arm_controller` activos;
 - cámara, `CameraInfo`, `/clock`, odometría y TF operativos;
-- trayectoria de esfera estática o móvil, suave y determinista;
+- trayectoria estática, móvil o de cinco lóbulos, suave y determinista;
 - detector HSV y estimación monocular sin usar pose privilegiada de Gazebo;
 - controlador visual proporcional parametrizado;
 - diagnóstico estricto y experimento A/B reproducibles;
-- seis pruebas unitarias.
+- siete pruebas unitarias.
 
 En la corrida A/B verificada, el seguimiento redujo el MAE de distancia objetivo
 de **0.535 m** a **0.088 m** (mejora de **83.6%**), con 100% de detección, RMS
@@ -86,7 +86,7 @@ colcon test --event-handlers console_direct+
 colcon test-result --verbose
 ```
 
-El resultado esperado es `6 tests, 0 errors, 0 failures`.
+El resultado esperado es `7 tests, 0 errors, 0 failures`.
 
 ## Lanzamiento interactivo
 
@@ -103,6 +103,19 @@ Esfera con trayectoria determinista:
 ```bash
 ros2 launch mobile_manipulator sim.launch.py target_mode:=moving
 ```
+
+Trayectoria rápida de cinco lóbulos, con una vuelta cada 30 s y su recorrido
+marcado como una línea punteada sobre el piso:
+
+```bash
+ros2 launch mobile_manipulator sim.launch.py target_mode:=trefoil
+```
+
+En una ventana de un minuto la esfera completa exactamente dos vueltas. Los
+valores predeterminados son cinco lóbulos, radio de 1.15 m y velocidad máxima
+aproximada de 0.60 m/s. Se parametrizan mediante `trefoil_lobes`,
+`trefoil_radius_m` y `trefoil_lap_period_s`. El seguidor admite hasta 0.90 m/s
+y 2.5 rad/s; las ruedas tienen un límite explícito de 12 rad/s.
 
 El estudiante debería observar:
 

@@ -53,6 +53,37 @@ def test_target_trajectory_is_deterministic_and_two_dimensional():
     )
 
 
+def test_five_lobe_clover_completes_two_fast_laps_per_minute():
+    def position(elapsed_s):
+        return target_position(
+            elapsed_s,
+            'trefoil',
+            2.0,
+            0.45,
+            0.65,
+            0.25,
+            trefoil_radius_m=1.15,
+            trefoil_lap_period_s=30.0,
+            trefoil_lobes=5,
+        )
+
+    assert position(0.0) == pytest.approx(position(30.0))
+    assert position(0.0) == pytest.approx(position(60.0))
+    samples = [position(index * 0.05) for index in range(601)]
+    x_values = [point[0] for point in samples]
+    y_values = [point[1] for point in samples]
+    path_length_m = sum(
+        math.hypot(
+            current[0] - previous[0],
+            current[1] - previous[1],
+        )
+        for previous, current in zip(samples, samples[1:])
+    )
+    assert max(x_values) - min(x_values) > 1.8
+    assert max(y_values) - min(y_values) > 1.8
+    assert path_length_m > 11.0
+
+
 def test_clamp():
     assert clamp(2.0, -1.0, 1.0) == 1.0
     assert clamp(-2.0, -1.0, 1.0) == -1.0

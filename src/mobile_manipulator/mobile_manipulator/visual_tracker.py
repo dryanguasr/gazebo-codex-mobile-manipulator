@@ -15,13 +15,13 @@ class VisualTracker(Node):
     def __init__(self):
         super().__init__('visual_tracker')
         self.declare_parameter('target_distance_m', 1.2)
-        self.declare_parameter('linear_gain', 0.7)
-        self.declare_parameter('angular_gain', 1.8)
-        self.declare_parameter('max_linear_speed_mps', 0.45)
-        self.declare_parameter('max_angular_speed_radps', 1.2)
+        self.declare_parameter('linear_gain', 1.1)
+        self.declare_parameter('angular_gain', 2.6)
+        self.declare_parameter('max_linear_speed_mps', 0.90)
+        self.declare_parameter('max_angular_speed_radps', 2.5)
         self.declare_parameter('distance_deadband_m', 0.04)
         self.declare_parameter('horizontal_deadband', 0.02)
-        self.declare_parameter('alignment_slowdown', 0.8)
+        self.declare_parameter('alignment_slowdown', 0.6)
         self.declare_parameter('measurement_timeout_s', 0.3)
 
         self.command_publisher = self.create_publisher(
