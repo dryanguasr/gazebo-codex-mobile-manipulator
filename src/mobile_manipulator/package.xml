@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>mobile_manipulator</name>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
   <description>Reproducible ROS 2 Jazzy and Gazebo visual tracking example.</description>
   <maintainer email="dryanguasr@users.noreply.github.com">dryanguasr</maintainer>
   <license>Apache-2.0</license>

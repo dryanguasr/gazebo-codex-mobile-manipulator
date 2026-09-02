@@ -3,8 +3,9 @@
 Ejemplo reproducible para estudiantes de ingeniería mecatrónica: un robot móvil
 4WD observa una esfera roja con una cámara monocular, estima su rango usando
 los intrínsecos de `CameraInfo` y controla la base para mantener una distancia
-de referencia. El brazo y la pinza permanecen disponibles como extensión, pero
-el alcance de este hito termina en el seguimiento visual medible.
+de referencia. El manipulador integra ahora seis motores y geometría CAD
+oficial de Poppy Ergo Jr, incluida su pinza rotativa, sin perder el seguimiento
+visual medible.
 
 ## Estado verificado
 
@@ -16,12 +17,14 @@ El flujo completo fue validado en ROS 2 Jazzy y Gazebo Sim 8:
 - trayectoria estática, móvil o de cinco lóbulos, suave y determinista;
 - detector HSV y estimación monocular sin usar pose privilegiada de Gazebo;
 - controlador visual proporcional parametrizado;
+- brazo Poppy CAD-first con visuales y colisiones separadas;
+- seis joints que alcanzan dos poses con validación numérica;
 - diagnóstico estricto y experimento A/B reproducibles;
 - siete pruebas unitarias.
 
 En la corrida A/B verificada, el seguimiento redujo el MAE de distancia objetivo
-de **0.535 m** a **0.088 m** (mejora de **83.6%**), con 100% de detección, RMS
-horizontal de 0.034 y error estacionario de 0.083 m. Los archivos fuente están
+de **0.528 m** a **0.043 m** (mejora de **92.0%**), con 100% de detección, RMS
+horizontal de 0.022 y error estacionario de 0.051 m. Los archivos fuente están
 en [`results/verified/`](results/verified/).
 
 ## Arquitectura resumida
@@ -142,9 +145,9 @@ bash scripts/run_diagnostic.sh
 ```
 
 Este comando recompila y falla si no puede demostrar una condición obligatoria.
-Verifica controladores, joint states, cámara, intrínsecos, detector, `/clock`,
-`/base_controller/odom`, TF, desplazamiento de la base y posiciones finales del
-brazo/pinza. La evidencia queda en
+Verifica controladores, joint states, carga de meshes sin errores, cámara,
+intrínsecos, detector, `/clock`, `/base_controller/odom`, TF, desplazamiento
+de la base y dos poses de los seis joints Poppy con tolerancia numérica. La evidencia queda en
 [`results/verified/diagnostic/`](results/verified/diagnostic/).
 
 ## Experimento A/B
@@ -169,15 +172,20 @@ src/mobile_manipulator/
   config/controllers.yaml        controladores ros2_control
   launch/sim.launch.py           composición y argumentos del sistema
   mobile_manipulator/            percepción, control, trayectoria y métricas
+  meshes/poppy_ergo_jr/         CAD fuente, visual, collision y manifest
   test/test_algorithms.py        pruebas de geometría y funciones puras
   urdf/mobile_manipulator.urdf.xacro
   worlds/ball_arena.sdf
 scripts/
+  cad/                            preparación y validación de meshes
   run_diagnostic.sh              aceptación de integración
   run_experiments.sh             comparación A/B
   validate_diagnostic.py
   compare_experiments.py
 docs/
+  cad_import_tutorial.md
+  cad_import_troubleshooting.md
+  cad_import_final_report.md
   architecture.md
   tutorial_handoff.md
   experiment_log.md
@@ -198,6 +206,8 @@ results/verified/                evidencia textual, CSV e imágenes
 - Navegación, manipulación, múltiples objetos, calibración real y control
   avanzado quedan deliberadamente fuera de este corte.
 
-Para convertir el repositorio en material docente, empezar por
-[`docs/tutorial_handoff.md`](docs/tutorial_handoff.md) y
-[`docs/architecture.md`](docs/architecture.md).
+Para estudiar el flujo CAD→Gazebo, empezar por
+[`docs/cad_import_tutorial.md`](docs/cad_import_tutorial.md) y
+[`docs/cad_import_final_report.md`](docs/cad_import_final_report.md).
+Para el sistema perceptivo previo, continuar con
+[`docs/tutorial_handoff.md`](docs/tutorial_handoff.md).

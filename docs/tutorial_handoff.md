@@ -1,5 +1,8 @@
 # Transferencia para generar un tutorial
 
+> **Documento histórico:** este handoff describe el hito perceptivo previo. Para el flujo CAD→Gazebo actual, empezar por [cad_import_tutorial.md](cad_import_tutorial.md).
+
+
 ## Uso previsto
 
 Este documento permite que otra instancia de ChatGPT audite el repositorio

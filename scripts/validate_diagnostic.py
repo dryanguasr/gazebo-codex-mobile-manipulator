@@ -6,6 +6,21 @@ import sys
 from pathlib import Path
 
 
+JOINTS = [
+    'poppy_m1_joint',
+    'poppy_m2_joint',
+    'poppy_m3_joint',
+    'poppy_m4_joint',
+    'poppy_m5_joint',
+    'poppy_m6_joint',
+]
+POSES = {
+    'pose_1': dict(zip(JOINTS, [0.25, -0.35, 0.30, -0.25, 0.20, 0.45])),
+    'pose_2': dict(zip(JOINTS, [-0.20, 0.30, -0.25, 0.35, -0.30, 0.85])),
+}
+TOLERANCE_RAD = 0.03
+
+
 def require(condition, message):
     if not condition:
         raise RuntimeError(message)
@@ -39,8 +54,11 @@ def joint_positions(path):
         r'position:\n((?:- [-+.0-9a-zA-Z]+\n)+)',
         text,
     )
-    require(names_match is not None, 'Could not parse joint names')
-    require(positions_match is not None, 'Could not parse joint positions')
+    require(names_match is not None, f'Could not parse joint names: {path}')
+    require(
+        positions_match is not None,
+        f'Could not parse joint positions: {path}',
+    )
     names = re.findall(r'^- (.+)$', names_match.group(1), re.MULTILINE)
     positions = [
         float(value)
@@ -54,8 +72,26 @@ def joint_positions(path):
     return dict(zip(names, positions))
 
 
+def validate_pose(results, label, expected):
+    observed = joint_positions(results / f'joint_states_after_{label}.txt')
+    errors = {}
+    for joint, target in expected.items():
+        require(joint in observed, f'Joint missing from {label}: {joint}')
+        errors[joint] = abs(observed[joint] - target)
+        require(
+            errors[joint] < TOLERANCE_RAD,
+            f'{joint} failed {label}: target={target}, '
+            f'observed={observed[joint]}, error={errors[joint]}',
+        )
+    return observed, errors
+
+
 def main():
     results = Path(sys.argv[1])
+    initial_positions = joint_positions(results / 'joint_states.txt')
+    for joint in JOINTS:
+        require(joint in initial_positions, f'Expected Poppy joint missing: {joint}')
+
     before_x, before_y = odom_xy(results / 'odom_before.txt')
     after_x, after_y = odom_xy(results / 'odom_after.txt')
     displacement = math.hypot(after_x - before_x, after_y - before_y)
@@ -83,21 +119,22 @@ def main():
         f'Unexpected ball distance: {estimated_distance_m}',
     )
 
-    positions = joint_positions(results / 'joint_states_after_arm.txt')
-    expected_positions = {
-        'arm_base_yaw': 0.2,
-        'shoulder_pitch': -0.3,
-        'elbow_pitch': 0.5,
-        'wrist_pitch': -0.2,
-        'left_finger_joint': 0.02,
-        'right_finger_joint': -0.02,
-    }
-    for joint, expected in expected_positions.items():
-        require(joint in positions, f'Joint missing from state: {joint}')
-        require(
-            abs(positions[joint] - expected) < 0.03,
-            f'{joint} did not reach the commanded position',
+    pose_results = {}
+    for label, expected in POSES.items():
+        observed, errors = validate_pose(results, label, expected)
+        pose_results[label] = {
+            'commanded_rad': expected,
+            'observed_rad': {joint: observed[joint] for joint in JOINTS},
+            'absolute_error_rad': errors,
+            'max_absolute_error_rad': max(errors.values()),
+        }
+
+    for joint in JOINTS:
+        delta = abs(
+            pose_results['pose_2']['observed_rad'][joint]
+            - pose_results['pose_1']['observed_rad'][joint]
         )
+        require(delta > 0.15, f'{joint} appears blocked across the two poses')
 
     summary = {
         'status': 'passed',
@@ -109,7 +146,9 @@ def main():
         'base_displacement_m': displacement,
         'camera_focal_length_px': focal_length_px,
         'initial_estimated_ball_distance_m': estimated_distance_m,
-        'arm_commanded_positions_rad_or_m': expected_positions,
+        'arm_joint_names': JOINTS,
+        'arm_tolerance_rad': TOLERANCE_RAD,
+        'arm_pose_results': pose_results,
     }
     (results / 'summary.json').write_text(
         json.dumps(summary, indent=2) + '\n',

@@ -10,20 +10,11 @@
   <material name="Black">
     <color rgba="0.04 0.04 0.04 1"/>
   </material>
-  <material name="DarkOrange">
-    <color rgba="1.0 0.35 0.0 1"/>
+  <material name="PoppyOrange">
+    <color rgba="1.0 0.32 0.05 1"/>
   </material>
-  <material name="Goldenrod">
-    <color rgba="0.85 0.65 0.13 1"/>
-  </material>
-  <material name="Khaki">
-    <color rgba="0.94 0.90 0.55 1"/>
-  </material>
-  <material name="LightSteelBlue">
-    <color rgba="0.69 0.77 0.87 1"/>
-  </material>
-  <material name="Silver">
-    <color rgba="0.75 0.75 0.75 1"/>
+  <material name="ServoGray">
+    <color rgba="0.28 0.30 0.32 1"/>
   </material>
   <material name="Blue">
     <color rgba="0.1 0.25 0.9 1"/>
@@ -77,6 +68,7 @@
     <child link="front_left_link"/>
     <origin xyz="0.25 0.3 0"/>
     <axis xyz="0 1 0"/>
+    <limit effort="40" velocity="12.0"/>
   </joint>
   <link name="rear_left_link">
     <inertial>
@@ -102,6 +94,7 @@
     <child link="rear_left_link"/>
     <origin xyz="-0.25 0.3 0"/>
     <axis xyz="0 1 0"/>
+    <limit effort="40" velocity="12.0"/>
   </joint>
   <link name="front_right_link">
     <inertial>
@@ -127,6 +120,7 @@
     <child link="front_right_link"/>
     <origin xyz="0.25 -0.3 0"/>
     <axis xyz="0 1 0"/>
+    <limit effort="40" velocity="12.0"/>
   </joint>
   <link name="rear_right_link">
     <inertial>
@@ -152,163 +146,236 @@
     <child link="rear_right_link"/>
     <origin xyz="-0.25 -0.3 0"/>
     <axis xyz="0 1 0"/>
+    <limit effort="40" velocity="12.0"/>
   </joint>
-  <link name="shoulder_link">
+  <!-- The printed Poppy base and motor m1 body remain fixed to the vehicle. -->
+  <link name="poppy_mount_link">
     <inertial>
-      <mass value="3"/>
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      <origin xyz="0 0 0.025"/>
+      <mass value="0.0283"/>
+      <inertia ixx="1.36e-5" ixy="0" ixz="0" iyy="1.36e-5" iyz="0" izz="1.53e-5"/>
     </inertial>
     <visual>
-      <origin xyz="0 0 0.13"/>
       <geometry>
-        <box size="0.18 0.18 0.26"/>
+        <mesh filename="file:///home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/meshes/poppy_ergo_jr/visual/poppy_mount.stl"/>
       </geometry>
-      <material name="DarkOrange"/>
+      <material name="PoppyOrange"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.027"/>
+      <geometry>
+        <box size="0.024 0.027 0.036"/>
+      </geometry>
+      <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0.13"/>
       <geometry>
-        <box size="0.18 0.18 0.26"/>
+        <mesh filename="file:///home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/meshes/poppy_ergo_jr/collision/poppy_mount_convex.stl"/>
       </geometry>
     </collision>
   </link>
-  <joint name="arm_base_yaw" type="revolute">
+  <joint name="poppy_mount_joint" type="fixed">
     <parent link="base_link"/>
-    <child link="shoulder_link"/>
+    <child link="poppy_mount_link"/>
     <origin xyz="-0.05 0 0.08"/>
+  </joint>
+  <link name="poppy_link_1">
+    <inertial>
+      <origin xyz="0 0 0.025"/>
+      <mass value="0.0223"/>
+      <inertia ixx="6.32e-6" ixy="0" ixz="0" iyy="7.62e-6" iyz="0" izz="4.65e-6"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="file:///home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/meshes/poppy_ergo_jr/visual/poppy_link_1.stl"/>
+      </geometry>
+      <material name="PoppyOrange"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.024"/>
+      <geometry>
+        <box size="0.024 0.027 0.036"/>
+      </geometry>
+      <material name="ServoGray"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.031"/>
+      <geometry>
+        <box size="0.040 0.032 0.062"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="poppy_m1_joint" type="revolute">
+    <parent link="poppy_mount_link"/>
+    <child link="poppy_link_1"/>
+    <origin xyz="0 0 0.0328"/>
     <axis xyz="0 0 1"/>
-    <limit effort="30" lower="-3.14" upper="3.14" velocity="1.5"/>
+    <limit effort="0.39" lower="-2.61799" upper="2.61799" velocity="2.0"/>
   </joint>
-  <link name="upper_arm_link">
+  <link name="poppy_link_2">
     <inertial>
-      <mass value="2.2"/>
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      <origin xyz="0 0 0.041"/>
+      <mass value="0.0216"/>
+      <inertia ixx="8.99e-6" ixy="0" ixz="0" iyy="1.03e-5" iyz="0" izz="4.50e-6"/>
     </inertial>
     <visual>
-      <origin xyz="0.17 0 0"/>
       <geometry>
-        <box size="0.34 0.14 0.14"/>
+        <mesh filename="file:///home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/meshes/poppy_ergo_jr/visual/poppy_link_2.stl"/>
       </geometry>
-      <material name="Goldenrod"/>
+      <material name="PoppyOrange"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.054"/>
+      <geometry>
+        <box size="0.027 0.024 0.036"/>
+      </geometry>
+      <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0.17 0 0"/>
+      <origin xyz="0 0 0.0415"/>
       <geometry>
-        <box size="0.34 0.14 0.14"/>
+        <box size="0.040 0.030 0.050"/>
       </geometry>
     </collision>
   </link>
-  <joint name="shoulder_pitch" type="revolute">
-    <parent link="shoulder_link"/>
-    <child link="upper_arm_link"/>
-    <origin xyz="0 0 0.22"/>
+  <joint name="poppy_m2_joint" type="revolute">
+    <parent link="poppy_link_1"/>
+    <child link="poppy_link_2"/>
+    <origin xyz="0 0 0.024"/>
     <axis xyz="0 1 0"/>
-    <limit effort="25" lower="-1.5" upper="1.5" velocity="1.5"/>
+    <limit effort="0.39" lower="-1.5708" upper="1.5708" velocity="2.0"/>
   </joint>
-  <link name="forearm_link">
+  <link name="poppy_link_3">
     <inertial>
-      <mass value="1.5"/>
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      <origin xyz="0 0 0.030"/>
+      <mass value="0.0186"/>
+      <inertia ixx="6.98e-6" ixy="0" ixz="0" iyy="7.48e-6" iyz="0" izz="3.29e-6"/>
     </inertial>
     <visual>
-      <origin xyz="0.15 0 0"/>
       <geometry>
-        <box size="0.30 0.12 0.12"/>
+        <mesh filename="file:///home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/meshes/poppy_ergo_jr/visual/poppy_link_3.stl"/>
       </geometry>
-      <material name="Khaki"/>
+      <material name="PoppyOrange"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.045"/>
+      <geometry>
+        <box size="0.024 0.027 0.036"/>
+      </geometry>
+      <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0.15 0 0"/>
+      <origin xyz="0 0 0.030"/>
       <geometry>
-        <box size="0.30 0.12 0.12"/>
+        <box size="0.036 0.032 0.060"/>
       </geometry>
     </collision>
   </link>
-  <joint name="elbow_pitch" type="revolute">
-    <parent link="upper_arm_link"/>
-    <child link="forearm_link"/>
-    <origin xyz="0.34 0 0"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="20" lower="-2.0" upper="2.0" velocity="1.8"/>
+  <joint name="poppy_m3_joint" type="revolute">
+    <parent link="poppy_link_2"/>
+    <child link="poppy_link_3"/>
+    <origin xyz="0 0 0.054"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="0.39" lower="-1.5708" upper="1.5708" velocity="2.0"/>
   </joint>
-  <link name="wrist_link">
+  <link name="poppy_link_4">
     <inertial>
-      <mass value="0.8"/>
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      <origin xyz="0 0 0.041"/>
+      <mass value="0.0216"/>
+      <inertia ixx="8.99e-6" ixy="0" ixz="0" iyy="1.03e-5" iyz="0" izz="4.50e-6"/>
     </inertial>
     <visual>
-      <origin xyz="0.10 0 0"/>
       <geometry>
-        <box size="0.20 0.10 0.10"/>
+        <mesh filename="file:///home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/meshes/poppy_ergo_jr/visual/poppy_link_4.stl"/>
       </geometry>
-      <material name="LightSteelBlue"/>
+      <material name="PoppyOrange"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.048"/>
+      <geometry>
+        <box size="0.027 0.024 0.036"/>
+      </geometry>
+      <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0.10 0 0"/>
+      <origin xyz="0 0 0.0415"/>
       <geometry>
-        <box size="0.20 0.10 0.10"/>
+        <box size="0.040 0.030 0.050"/>
       </geometry>
     </collision>
   </link>
-  <joint name="wrist_pitch" type="revolute">
-    <parent link="forearm_link"/>
-    <child link="wrist_link"/>
-    <origin xyz="0.30 0 0"/>
+  <joint name="poppy_m4_joint" type="revolute">
+    <parent link="poppy_link_3"/>
+    <child link="poppy_link_4"/>
+    <origin xyz="0 0 0.045"/>
     <axis xyz="0 1 0"/>
-    <limit effort="12" lower="-1.8" upper="1.8" velocity="2.0"/>
+    <limit effort="0.39" lower="-1.5708" upper="1.5708" velocity="2.0"/>
   </joint>
-  <link name="left_finger">
+  <link name="poppy_link_5">
     <inertial>
-      <mass value="0.12"/>
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      <origin xyz="0.025 0 0.045"/>
+      <mass value="0.0244"/>
+      <inertia ixx="1.06e-5" ixy="0" ixz="0" iyy="2.77e-5" iyz="0" izz="2.36e-5"/>
     </inertial>
     <visual>
-      <origin xyz="0.15 0.045 0"/>
       <geometry>
-        <box size="0.16 0.035 0.07"/>
+        <mesh filename="file:///home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/meshes/poppy_ergo_jr/visual/poppy_link_5.stl"/>
       </geometry>
-      <material name="Silver"/>
+      <material name="PoppyOrange"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.058"/>
+      <geometry>
+        <box size="0.024 0.027 0.036"/>
+      </geometry>
+      <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0.15 0.045 0"/>
+      <origin xyz="0 0 0.032"/>
       <geometry>
-        <box size="0.16 0.035 0.07"/>
+        <box size="0.024 0.032 0.028"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.025 0.0145 0.058"/>
+      <geometry>
+        <box size="0.092 0.008 0.024"/>
       </geometry>
     </collision>
   </link>
-  <link name="right_finger">
+  <joint name="poppy_m5_joint" type="revolute">
+    <parent link="poppy_link_4"/>
+    <child link="poppy_link_5"/>
+    <origin xyz="0 0 0.048"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="0.39" lower="-1.5708" upper="1.5708" velocity="2.0"/>
+  </joint>
+  <link name="poppy_link_6">
     <inertial>
-      <mass value="0.12"/>
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      <origin xyz="0.030 -0.0035 0"/>
+      <mass value="0.00614"/>
+      <inertia ixx="9.72e-7" ixy="0" ixz="0" iyy="3.87e-6" iyz="0" izz="3.65e-6"/>
     </inertial>
     <visual>
-      <origin xyz="0.15 -0.045 0"/>
       <geometry>
-        <box size="0.16 0.035 0.07"/>
+        <mesh filename="file:///home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/meshes/poppy_ergo_jr/visual/poppy_link_6.stl"/>
       </geometry>
-      <material name="Silver"/>
+      <material name="PoppyOrange"/>
     </visual>
     <collision>
-      <origin xyz="0.15 -0.045 0"/>
       <geometry>
-        <box size="0.16 0.035 0.07"/>
+        <mesh filename="file:///home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/meshes/poppy_ergo_jr/collision/poppy_link_6_convex.stl"/>
       </geometry>
     </collision>
   </link>
-  <joint name="left_finger_joint" type="prismatic">
-    <parent link="wrist_link"/>
-    <child link="left_finger"/>
-    <origin xyz="0.20 0.045 0"/>
+  <joint name="poppy_m6_joint" type="revolute">
+    <parent link="poppy_link_5"/>
+    <child link="poppy_link_6"/>
+    <origin xyz="0 0 0.058"/>
     <axis xyz="0 1 0"/>
-    <limit effort="8" lower="0" upper="0.04" velocity="0.1"/>
+    <limit effort="0.39" lower="0.0" upper="1.20" velocity="2.0"/>
   </joint>
-  <joint name="right_finger_joint" type="prismatic">
-    <parent link="wrist_link"/>
-    <child link="right_finger"/>
-    <origin xyz="0.20 -0.045 0"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="8" lower="-0.04" upper="0" velocity="0.1"/>
-  </joint>
+  <!-- The tracking camera stays on the vehicle front to preserve the A/B task. -->
   <link name="camera_link">
     <visual>
       <geometry>
@@ -346,27 +413,27 @@
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="arm_base_yaw">
+    <joint name="poppy_m1_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
     </joint>
-    <joint name="shoulder_pitch">
+    <joint name="poppy_m2_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
     </joint>
-    <joint name="elbow_pitch">
+    <joint name="poppy_m3_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
     </joint>
-    <joint name="wrist_pitch">
+    <joint name="poppy_m4_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
     </joint>
-    <joint name="left_finger_joint">
+    <joint name="poppy_m5_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
     </joint>
-    <joint name="right_finger_joint">
+    <joint name="poppy_m6_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
     </joint>

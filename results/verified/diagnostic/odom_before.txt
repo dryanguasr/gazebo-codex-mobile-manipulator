@@ -1,20 +1,20 @@
 header:
   stamp:
-    sec: 16
-    nanosec: 220000000
+    sec: 17
+    nanosec: 990000000
   frame_id: odom
 child_frame_id: base_footprint
 pose:
   pose:
     position:
-      x: 4.8573009768423373e-08
-      y: -1.3121836388448206e-15
+      x: -2.194733119903597e-18
+      y: -2.8412574603107236e-37
       z: 0.0
     orientation:
       x: 0.0
       y: 0.0
-      z: -2.701466606789879e-08
-      w: 0.9999999999999997
+      z: 8.896231200433278e-19
+      w: 1.0
   covariance:
   - 0.0
   - 0.0
@@ -55,13 +55,13 @@ pose:
 twist:
   twist:
     linear:
-      x: 2.9843778132635983e-19
+      x: 1.787624146493341e-19
       y: 0.0
       z: 0.0
     angular:
       x: 0.0
       y: 0.0
-      z: 6.756713150329308e-20
+      z: 3.612102157667238e-19
   covariance:
   - 0.0
   - 0.0

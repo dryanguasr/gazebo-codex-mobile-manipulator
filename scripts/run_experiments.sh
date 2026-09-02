@@ -8,6 +8,8 @@ mkdir -p "$OUTPUT_DIR"
 
 source /opt/ros/jazzy/setup.bash
 cd "$ROOT"
+python3 scripts/cad/prepare_poppy_assets.py
+python3 scripts/cad/validate_meshes.py
 colcon build --symlink-install >"$OUTPUT_DIR/build.log" 2>&1
 source install/setup.bash
 set -u
@@ -25,6 +27,11 @@ run_case() {
     target_distance_m:=1.2 \
     >"$OUTPUT_DIR/${label}_launch.log" 2>&1
 
+  if grep -q '\[Err\]' "$OUTPUT_DIR/${label}_launch.log"; then
+    echo "Gazebo reported an error in case $label" >&2
+    grep '\[Err\]' "$OUTPUT_DIR/${label}_launch.log" >&2
+    return 1
+  fi
   test -s "$OUTPUT_DIR/${label}.csv"
   test -s "$OUTPUT_DIR/${label}_summary.json"
   if pgrep -f "gz sim.*ball_arena.sdf" >/dev/null; then

@@ -9,6 +9,8 @@ mkdir -p "$RESULTS" "$CAPTURES"
 source /opt/ros/jazzy/setup.bash
 cd "$ROOT"
 
+python3 scripts/cad/prepare_poppy_assets.py
+python3 scripts/cad/validate_meshes.py
 colcon build --symlink-install >"$RESULTS/build.log" 2>&1
 source install/setup.bash
 set -u
@@ -125,15 +127,30 @@ grep -q 'Translation:' "$RESULTS/tf_after.txt"
 timeout 10 ros2 topic pub --once \
   /arm_controller/joint_trajectory \
   trajectory_msgs/msg/JointTrajectory \
-  '{joint_names: [arm_base_yaw, shoulder_pitch, elbow_pitch, wrist_pitch, left_finger_joint, right_finger_joint], points: [{positions: [0.2, -0.3, 0.5, -0.2, 0.02, -0.02], time_from_start: {sec: 2}}]}' \
-  >"$RESULTS/arm_command.txt" 2>&1
+  '{joint_names: [poppy_m1_joint, poppy_m2_joint, poppy_m3_joint, poppy_m4_joint, poppy_m5_joint, poppy_m6_joint], points: [{positions: [0.25, -0.35, 0.30, -0.25, 0.20, 0.45], time_from_start: {sec: 2}}]}' \
+  >"$RESULTS/arm_command_pose_1.txt" 2>&1
 sleep 3
 timeout 10 ros2 topic echo --once /joint_states \
-  >"$RESULTS/joint_states_after_arm.txt"
+  >"$RESULTS/joint_states_after_pose_1.txt"
+
+timeout 10 ros2 topic pub --once \
+  /arm_controller/joint_trajectory \
+  trajectory_msgs/msg/JointTrajectory \
+  '{joint_names: [poppy_m1_joint, poppy_m2_joint, poppy_m3_joint, poppy_m4_joint, poppy_m5_joint, poppy_m6_joint], points: [{positions: [-0.20, 0.30, -0.25, 0.35, -0.30, 0.85], time_from_start: {sec: 2}}]}' \
+  >"$RESULTS/arm_command_pose_2.txt" 2>&1
+sleep 3
+timeout 10 ros2 topic echo --once /joint_states \
+  >"$RESULTS/joint_states_after_pose_2.txt"
 
 timeout 12 ros2 run mobile_manipulator evidence_capture \
   --ros-args -p output_dir:="$CAPTURES" \
   >"$RESULTS/camera_capture.txt" 2>&1
+
+if grep -q '\[Err\]' "$RESULTS/launch.log"; then
+  echo "Gazebo reported an error; inspect $RESULTS/launch.log" >&2
+  grep '\[Err\]' "$RESULTS/launch.log" >&2
+  exit 1
+fi
 
 python3 scripts/validate_diagnostic.py "$RESULTS"
 echo "Diagnostic passed. Evidence: $RESULTS"

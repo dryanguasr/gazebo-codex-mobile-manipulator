@@ -1,7 +1,7 @@
 header:
   stamp:
-    sec: 13
-    nanosec: 267000000
+    sec: 15
+    nanosec: 280000000
   frame_id: mobile_manipulator/base_footprint/front_camera
 height: 480
 width: 640

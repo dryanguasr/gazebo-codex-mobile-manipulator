@@ -3,26 +3,83 @@
   "odometry_topic": "/base_controller/odom",
   "tf": "odom -> base_footprint",
   "initial_position_m": {
-    "x": 4.8573009768423373e-08,
-    "y": -1.3121836388448206e-15
+    "x": -2.194733119903597e-18,
+    "y": -2.8412574603107236e-37
   },
   "final_position_m": {
-    "x": 0.3700000485726965,
-    "y": -1.9990383277218993e-08
+    "x": 0.6759999999995993,
+    "y": 6.409454903835507e-13
   },
   "final_tf_translation_m": {
-    "x": 0.37,
-    "y": -0.0
+    "x": 0.676,
+    "y": 0.0
   },
-  "base_displacement_m": 0.3699999999996873,
+  "base_displacement_m": 0.6759999999995993,
   "camera_focal_length_px": 554.3827056884766,
-  "initial_estimated_ball_distance_m": 1.633061526059032,
-  "arm_commanded_positions_rad_or_m": {
-    "arm_base_yaw": 0.2,
-    "shoulder_pitch": -0.3,
-    "elbow_pitch": 0.5,
-    "wrist_pitch": -0.2,
-    "left_finger_joint": 0.02,
-    "right_finger_joint": -0.02
+  "initial_estimated_ball_distance_m": 1.6296088782957332,
+  "arm_joint_names": [
+    "poppy_m1_joint",
+    "poppy_m2_joint",
+    "poppy_m3_joint",
+    "poppy_m4_joint",
+    "poppy_m5_joint",
+    "poppy_m6_joint"
+  ],
+  "arm_tolerance_rad": 0.03,
+  "arm_pose_results": {
+    "pose_1": {
+      "commanded_rad": {
+        "poppy_m1_joint": 0.25,
+        "poppy_m2_joint": -0.35,
+        "poppy_m3_joint": 0.3,
+        "poppy_m4_joint": -0.25,
+        "poppy_m5_joint": 0.2,
+        "poppy_m6_joint": 0.45
+      },
+      "observed_rad": {
+        "poppy_m1_joint": 0.24999999999999883,
+        "poppy_m2_joint": -0.35000000001330267,
+        "poppy_m3_joint": 0.30000000002158506,
+        "poppy_m4_joint": -0.2500000000261127,
+        "poppy_m5_joint": 0.20000000002744703,
+        "poppy_m6_joint": 0.4500000000172896
+      },
+      "absolute_error_rad": {
+        "poppy_m1_joint": 1.1657341758564144e-15,
+        "poppy_m2_joint": 1.3302692281058626e-11,
+        "poppy_m3_joint": 2.1585067067064756e-11,
+        "poppy_m4_joint": 2.6112723094939838e-11,
+        "poppy_m5_joint": 2.7447016881509967e-11,
+        "poppy_m6_joint": 1.7289614184790025e-11
+      },
+      "max_absolute_error_rad": 2.7447016881509967e-11
+    },
+    "pose_2": {
+      "commanded_rad": {
+        "poppy_m1_joint": -0.2,
+        "poppy_m2_joint": 0.3,
+        "poppy_m3_joint": -0.25,
+        "poppy_m4_joint": 0.35,
+        "poppy_m5_joint": -0.3,
+        "poppy_m6_joint": 0.85
+      },
+      "observed_rad": {
+        "poppy_m1_joint": -0.19999999999550938,
+        "poppy_m2_joint": 0.3000000000064494,
+        "poppy_m3_joint": -0.250000000015779,
+        "poppy_m4_joint": 0.35000000003326415,
+        "poppy_m5_joint": -0.30000000001901506,
+        "poppy_m6_joint": 0.8499999999958302
+      },
+      "absolute_error_rad": {
+        "poppy_m1_joint": 4.490630090003833e-12,
+        "poppy_m2_joint": 6.449396572349997e-12,
+        "poppy_m3_joint": 1.5778989226333806e-11,
+        "poppy_m4_joint": 3.326416919691155e-11,
+        "poppy_m5_joint": 1.9015067298511212e-11,
+        "poppy_m6_joint": 4.169775635887163e-12
+      },
+      "max_absolute_error_rad": 3.326416919691155e-11
+    }
   }
 }

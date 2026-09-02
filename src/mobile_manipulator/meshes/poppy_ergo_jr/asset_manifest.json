@@ -1,0 +1,661 @@
+{
+  "collision": {
+    "poppy_link_6_convex.stl": {
+      "boundary_edges": 0,
+      "bounds_max": [
+        0.07,
+        0.01,
+        0.017
+      ],
+      "bounds_min": [
+        -0.01,
+        -0.017,
+        -0.017
+      ],
+      "extents": [
+        0.08,
+        0.027,
+        0.034
+      ],
+      "nonmanifold_edges": 0,
+      "signed_volume": 3.4633e-05,
+      "surface_area": 0.007288522185,
+      "triangles": 92,
+      "vertices": 48,
+      "watertight": true
+    },
+    "poppy_mount_convex.stl": {
+      "boundary_edges": 0,
+      "bounds_max": [
+        0.028,
+        0.028,
+        0.027
+      ],
+      "bounds_min": [
+        -0.028,
+        -0.028,
+        0.0
+      ],
+      "extents": [
+        0.056,
+        0.056,
+        0.027
+      ],
+      "nonmanifold_edges": 0,
+      "signed_volume": 5.5804333e-05,
+      "surface_area": 0.008601764393,
+      "triangles": 134,
+      "vertices": 69,
+      "watertight": true
+    }
+  },
+  "hardware_license": "CC BY-SA 4.0",
+  "pipeline": {
+    "manual_geometry_edits": false,
+    "numpy": "1.26.4",
+    "output_units": "metres",
+    "python": "3.12.3",
+    "scipy": "1.11.4",
+    "script": "scripts/cad/prepare_poppy_assets.py"
+  },
+  "source": {
+    "base.stl": {
+      "geometry": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          28.0,
+          28.0,
+          24.5
+        ],
+        "bounds_min": [
+          -28.0,
+          -28.9993534,
+          -2.0999999
+        ],
+        "extents": [
+          56.0,
+          56.9993534,
+          26.5999999
+        ],
+        "nonmanifold_edges": 0,
+        "signed_volume": 9314.882979478463,
+        "surface_area": 9438.263456557906,
+        "triangles": 102888,
+        "vertices": 51390,
+        "watertight": true
+      },
+      "original_path": "hardware/STL/base.stl",
+      "sha256": "c3150095267a94d0df530167b9bb22d22d00ec74918969fdbf33aa83f77ca63b",
+      "units": "millimetres"
+    },
+    "disk_support.stl": {
+      "geometry": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          75.0,
+          112.8815842,
+          -0.1
+        ],
+        "bounds_min": [
+          -75.0,
+          -37.118412,
+          -4.1999998
+        ],
+        "extents": [
+          150.0,
+          149.9999962,
+          4.0999998
+        ],
+        "nonmanifold_edges": 0,
+        "signed_volume": 34209.84870931168,
+        "surface_area": 34381.153545371606,
+        "triangles": 21024,
+        "vertices": 10458,
+        "watertight": true
+      },
+      "original_path": "hardware/STL/disk_support.stl",
+      "sha256": "45941750fa44a9b625d471589e919e69b5d0e881c435da8f733b7bb797fe8827",
+      "units": "millimetres"
+    },
+    "horn2horn.stl": {
+      "geometry": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          17.1000004,
+          9.8999996,
+          63.9000015
+        ],
+        "bounds_min": [
+          12.0,
+          -9.8999996,
+          19.0
+        ],
+        "extents": [
+          5.1000004,
+          19.7999992,
+          44.9000015
+        ],
+        "nonmanifold_edges": 0,
+        "signed_volume": 1575.617081392922,
+        "surface_area": 1954.996230166973,
+        "triangles": 4800,
+        "vertices": 2388,
+        "watertight": true
+      },
+      "original_path": "hardware/STL/horn2horn.stl",
+      "sha256": "cc6d40d692c6d12e4ad16f9566cf90b6e401c1a46848564d8dda83072ed75dbb",
+      "units": "millimetres"
+    },
+    "long_U.stl": {
+      "geometry": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          17.1000004,
+          9.8999996,
+          33.9000015
+        ],
+        "bounds_min": [
+          -17.1000004,
+          -9.8999996,
+          -0.0
+        ],
+        "extents": [
+          34.2000008,
+          19.7999992,
+          33.9000015
+        ],
+        "nonmanifold_edges": 0,
+        "signed_volume": 4530.329976358059,
+        "surface_area": 4126.415338125283,
+        "triangles": 27638,
+        "vertices": 13803,
+        "watertight": true
+      },
+      "original_path": "hardware/STL/long_U.stl",
+      "sha256": "8f6b02d1be0517bb018c28496cc8d4129be730b838f8db11ea8e93f3711fe0fe",
+      "units": "millimetres"
+    },
+    "short_U.stl": {
+      "geometry": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          14.1000004,
+          10.0,
+          54.0
+        ],
+        "bounds_min": [
+          -14.1000004,
+          -10.0,
+          44.0
+        ],
+        "extents": [
+          28.2000008,
+          20.0,
+          10.0
+        ],
+        "nonmanifold_edges": 0,
+        "signed_volume": 1504.684100655132,
+        "surface_area": 1931.568893591197,
+        "triangles": 6748,
+        "vertices": 3356,
+        "watertight": true
+      },
+      "original_path": "hardware/STL/short_U.stl",
+      "sha256": "aeb94f32e01d08db7a00f137fec3b970a2d7247b4b3447dea5c84f4382c1efd1",
+      "units": "millimetres"
+    },
+    "side2side.stl": {
+      "geometry": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          -12.0,
+          9.8999996,
+          63.9000015
+        ],
+        "bounds_min": [
+          -17.1000004,
+          -9.8999996,
+          19.0
+        ],
+        "extents": [
+          5.1000004,
+          19.7999992,
+          44.9000015
+        ],
+        "nonmanifold_edges": 0,
+        "signed_volume": 2366.821057759156,
+        "surface_area": 2107.929517061872,
+        "triangles": 24166,
+        "vertices": 12077,
+        "watertight": true
+      },
+      "original_path": "hardware/STL/side2side.stl",
+      "sha256": "0527075781cdb4221049aa5d0fef7d218e132986196dadcee7b82862985c4d02",
+      "units": "millimetres"
+    },
+    "support_camera.stl": {
+      "geometry": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          16.1000004,
+          -20.0,
+          30.0
+        ],
+        "bounds_min": [
+          -16.1000004,
+          -28.0,
+          8.0
+        ],
+        "extents": [
+          32.2000008,
+          8.0,
+          22.0
+        ],
+        "nonmanifold_edges": 0,
+        "signed_volume": 1082.023990036091,
+        "surface_area": 1664.507265638517,
+        "triangles": 32412,
+        "vertices": 16190,
+        "watertight": true
+      },
+      "original_path": "hardware/STL/support_camera.stl",
+      "sha256": "f26f269ffd4ca92fc5d4615e3f7bdcd20519e8a5909ce94ace47295ecbd72969",
+      "units": "millimetres"
+    },
+    "tools/gripper-fixation.stl": {
+      "geometry": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          10.0,
+          -20.0,
+          14.1000004
+        ],
+        "bounds_min": [
+          -10.0,
+          -44.0,
+          -14.1000004
+        ],
+        "extents": [
+          20.0,
+          24.0,
+          28.2000008
+        ],
+        "nonmanifold_edges": 0,
+        "signed_volume": 2216.301418233631,
+        "surface_area": 2914.847813546523,
+        "triangles": 9388,
+        "vertices": 4670,
+        "watertight": true
+      },
+      "original_path": "hardware/STL/tools/gripper-fixation.stl",
+      "sha256": "52663bd2b410975eaf59751bdbd981dd51ce24b9356cf13acf8508e975b61c4c",
+      "units": "millimetres"
+    },
+    "tools/gripper-fixed_part.stl": {
+      "geometry": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          -12.0,
+          70.0,
+          12.0
+        ],
+        "bounds_min": [
+          -17.1000004,
+          -22.0,
+          -12.0
+        ],
+        "extents": [
+          5.1000004,
+          92.0,
+          24.0
+        ],
+        "nonmanifold_edges": 0,
+        "signed_volume": 3973.388438829396,
+        "surface_area": 4969.892273122685,
+        "triangles": 7442,
+        "vertices": 3711,
+        "watertight": true
+      },
+      "original_path": "hardware/STL/tools/gripper-fixed_part.stl",
+      "sha256": "78d22d532083d36677f54f75575d5bd9a2208222eafda29a12f7cb0144b368a6",
+      "units": "millimetres"
+    },
+    "tools/gripper-rotative_part.stl": {
+      "geometry": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          17.1000004,
+          70.0,
+          17.1000004
+        ],
+        "bounds_min": [
+          -9.8999271,
+          -9.8999815,
+          -17.1000004
+        ],
+        "extents": [
+          26.9999275,
+          79.8999815,
+          34.2000008
+        ],
+        "nonmanifold_edges": 0,
+        "signed_volume": 4951.528832876885,
+        "surface_area": 5570.287498230153,
+        "triangles": 32168,
+        "vertices": 16074,
+        "watertight": true
+      },
+      "original_path": "hardware/STL/tools/gripper-rotative_part.stl",
+      "sha256": "c4afe084b66d845d64fa19e9c82c457b171f6f85538500aa532bec783ca1eac6",
+      "units": "millimetres"
+    }
+  },
+  "source_commit": "97ce599be8c717843c45ebf48341f2ebf8f250b3",
+  "source_repository": "https://github.com/poppy-project/poppy-ergo-jr",
+  "step_reference": {
+    "U_parts.step": {
+      "declared_units": "metres",
+      "original_path": "hardware/STEP/U_parts.step",
+      "role": "B-rep audit/reference; the official STL export drives meshes",
+      "sha256": "099ea2c65bb806e280d8e2a06b30f002be026a2dc6f72785559c794e6248c056"
+    },
+    "base.step": {
+      "declared_units": "metres",
+      "original_path": "hardware/STEP/base.step",
+      "role": "B-rep audit/reference; the official STL export drives meshes",
+      "sha256": "c6f222b8cb2bd227412fad26ee7f5eeb8a1c56c1555b45d4d3072bd74c164e5a"
+    },
+    "lateral_parts.step": {
+      "declared_units": "metres",
+      "original_path": "hardware/STEP/lateral_parts.step",
+      "role": "B-rep audit/reference; the official STL export drives meshes",
+      "sha256": "f4a3494e56e9543655446a23b73b3e583146f86940e4dd88ba044188f36d28ed"
+    },
+    "tools/gripper.step": {
+      "declared_units": "metres",
+      "original_path": "hardware/STEP/tools/gripper.step",
+      "role": "B-rep audit/reference; the official STL export drives meshes",
+      "sha256": "f67540cef54d364f57d19afdf3019e4fe453319d8034a073f4e73564e3c8e9ee"
+    }
+  },
+  "transformations": {
+    "poppy_camera_support.stl": {
+      "inputs": [
+        "support_camera.stl"
+      ],
+      "reason": "audited derivative; retained for teaching/reference",
+      "scale": 0.001
+    },
+    "poppy_link_1.stl": {
+      "inputs": [
+        "long_U.stl"
+      ],
+      "reason": "raw origin already coincides with the first horn axis",
+      "scale": 0.001
+    },
+    "poppy_link_2.stl": {
+      "inputs": [
+        "horn2horn.stl",
+        "side2side.stl"
+      ],
+      "reason": "paired bracket halves share the official assembly frame",
+      "scale": 0.001
+    },
+    "poppy_link_3.stl": {
+      "inputs": [
+        "short_U.stl"
+      ],
+      "reason": "preserve the measured 44-54 mm offset from its parent axis",
+      "scale": 0.001
+    },
+    "poppy_link_4.stl": {
+      "inputs": [
+        "horn2horn.stl",
+        "side2side.stl"
+      ],
+      "reason": "same repeated paired bracket as link 2",
+      "scale": 0.001
+    },
+    "poppy_link_5.stl": {
+      "inputs": [
+        "tools/gripper-fixation.stl",
+        "tools/gripper-fixed_part.stl"
+      ],
+      "reason": "place the fixed jaw on the parent side of motor m6",
+      "rotations": {
+        "gripper-fixation.stl": "Rx(-90 deg): CAD -Y becomes link +Z",
+        "gripper-fixed_part.stl": "Rz(-90 deg): CAD +Y becomes tool +X"
+      },
+      "scale": 0.001,
+      "translation_m": {
+        "gripper-fixed_part.stl": [
+          0.0,
+          0.0,
+          0.058
+        ]
+      }
+    },
+    "poppy_link_6.stl": {
+      "inputs": [
+        "tools/gripper-rotative_part.stl"
+      ],
+      "reason": "make the original motor-axis pivot the link frame",
+      "rotation": "Rz(-90 deg): CAD +Y becomes tool +X",
+      "scale": 0.001
+    },
+    "poppy_link_6_convex.stl": {
+      "input": "visual/poppy_link_6.stl",
+      "operation": "SciPy Qhull convex hull after 1 mm vertex voxelization"
+    },
+    "poppy_mount.stl": {
+      "inputs": [
+        "base.stl"
+      ],
+      "reason": "convert mm to m, centre XY, and put the mesh bottom at z=0",
+      "scale": 0.001,
+      "translation_m": [
+        -0.0,
+        0.0004996767044067388,
+        0.0020999999046325685
+      ]
+    },
+    "poppy_mount_convex.stl": {
+      "input": "visual/poppy_mount.stl",
+      "operation": "SciPy Qhull convex hull after 1 mm vertex voxelization"
+    }
+  },
+  "visual": {
+    "poppy_camera_support.stl": {
+      "boundary_edges": 0,
+      "bounds_max": [
+        0.0161,
+        -0.02,
+        0.03
+      ],
+      "bounds_min": [
+        -0.0161,
+        -0.028,
+        0.008
+      ],
+      "extents": [
+        0.0322,
+        0.008,
+        0.022
+      ],
+      "nonmanifold_edges": 0,
+      "signed_volume": 1.082024e-06,
+      "surface_area": 0.001664507266,
+      "triangles": 32412,
+      "vertices": 16190,
+      "watertight": true
+    },
+    "poppy_link_1.stl": {
+      "boundary_edges": 0,
+      "bounds_max": [
+        0.0171,
+        0.0099,
+        0.0339
+      ],
+      "bounds_min": [
+        -0.0171,
+        -0.0099,
+        -0.0
+      ],
+      "extents": [
+        0.0342,
+        0.0198,
+        0.0339
+      ],
+      "nonmanifold_edges": 0,
+      "signed_volume": 4.53033e-06,
+      "surface_area": 0.004126415338,
+      "triangles": 27638,
+      "vertices": 13803,
+      "watertight": true
+    },
+    "poppy_link_2.stl": {
+      "boundary_edges": 0,
+      "bounds_max": [
+        0.0171,
+        0.0099,
+        0.0639
+      ],
+      "bounds_min": [
+        -0.0171,
+        -0.0099,
+        0.019
+      ],
+      "extents": [
+        0.0342,
+        0.0198,
+        0.0449
+      ],
+      "nonmanifold_edges": 0,
+      "signed_volume": 3.942438e-06,
+      "surface_area": 0.004062925747,
+      "triangles": 28966,
+      "vertices": 14465,
+      "watertight": true
+    },
+    "poppy_link_3.stl": {
+      "boundary_edges": 0,
+      "bounds_max": [
+        0.0141,
+        0.01,
+        0.054
+      ],
+      "bounds_min": [
+        -0.0141,
+        -0.01,
+        0.044
+      ],
+      "extents": [
+        0.0282,
+        0.02,
+        0.01
+      ],
+      "nonmanifold_edges": 0,
+      "signed_volume": 1.504684e-06,
+      "surface_area": 0.001931568894,
+      "triangles": 6748,
+      "vertices": 3356,
+      "watertight": true
+    },
+    "poppy_link_4.stl": {
+      "boundary_edges": 0,
+      "bounds_max": [
+        0.0171,
+        0.0099,
+        0.0639
+      ],
+      "bounds_min": [
+        -0.0171,
+        -0.0099,
+        0.019
+      ],
+      "extents": [
+        0.0342,
+        0.0198,
+        0.0449
+      ],
+      "nonmanifold_edges": 0,
+      "signed_volume": 3.942438e-06,
+      "surface_area": 0.004062925747,
+      "triangles": 28966,
+      "vertices": 14465,
+      "watertight": true
+    },
+    "poppy_link_5.stl": {
+      "boundary_edges": 0,
+      "bounds_max": [
+        0.07,
+        0.0171,
+        0.07
+      ],
+      "bounds_min": [
+        -0.022,
+        -0.0141,
+        0.02
+      ],
+      "extents": [
+        0.092,
+        0.0312,
+        0.05
+      ],
+      "nonmanifold_edges": 0,
+      "signed_volume": 6.18969e-06,
+      "surface_area": 0.007884740087,
+      "triangles": 16830,
+      "vertices": 8381,
+      "watertight": true
+    },
+    "poppy_link_6.stl": {
+      "boundary_edges": 0,
+      "bounds_max": [
+        0.07,
+        0.0098999,
+        0.0171
+      ],
+      "bounds_min": [
+        -0.0099,
+        -0.0171,
+        -0.0171
+      ],
+      "extents": [
+        0.0799,
+        0.0269999,
+        0.0342
+      ],
+      "nonmanifold_edges": 0,
+      "signed_volume": 4.951529e-06,
+      "surface_area": 0.005570287498,
+      "triangles": 32168,
+      "vertices": 16074,
+      "watertight": true
+    },
+    "poppy_mount.stl": {
+      "boundary_edges": 0,
+      "bounds_max": [
+        0.028,
+        0.0284997,
+        0.0266
+      ],
+      "bounds_min": [
+        -0.028,
+        -0.0284997,
+        0.0
+      ],
+      "extents": [
+        0.056,
+        0.0569994,
+        0.0266
+      ],
+      "nonmanifold_edges": 0,
+      "signed_volume": 9.314883e-06,
+      "surface_area": 0.009438263457,
+      "triangles": 102888,
+      "vertices": 51390,
+      "watertight": true
+    }
+  }
+}

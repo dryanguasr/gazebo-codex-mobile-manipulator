@@ -1,0 +1,3 @@
+Waiting for at least 1 matching subscription(s)...
+publisher: beginning loop
+publishing #1: trajectory_msgs.msg.JointTrajectory(header=std_msgs.msg.Header(stamp=builtin_interfaces.msg.Time(sec=0, nanosec=0), frame_id=''), joint_names=['poppy_m1_joint', 'poppy_m2_joint', 'poppy_m3_joint', 'poppy_m4_joint', 'poppy_m5_joint', 'poppy_m6_joint'], points=[trajectory_msgs.msg.JointTrajectoryPoint(positions=[-0.2, 0.3, -0.25, 0.35, -0.3, 0.85], velocities=[], accelerations=[], effort=[], time_from_start=builtin_interfaces.msg.Duration(sec=2, nanosec=0))])

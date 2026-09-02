@@ -1,52 +1,33 @@
-[INFO] [1788286658.868032648] [tf2_echo]: Waiting for transform odom ->  base_footprint: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
-At time 17.580000000
-- Translation: [0.000, -0.000, 0.000]
-- Rotation: in Quaternion (xyzw) [0.000, 0.000, -0.000, 1.000]
-- Rotation: in RPY (radian) [0.000, 0.000, -0.000]
-- Rotation: in RPY (degree) [0.000, 0.000, -0.000]
+[INFO] [1788370078.633136544] [tf2_echo]: Waiting for transform odom ->  base_footprint: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1788370080.615653047] [tf2_echo]: Waiting for transform odom ->  base_footprint: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+At time 21.190000000
+- Translation: [-0.000, -0.000, 0.000]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
 - Matrix:
-  1.000  0.000  0.000  0.000
- -0.000  1.000 -0.000 -0.000
- -0.000  0.000  1.000  0.000
+  1.000 -0.000  0.000 -0.000
+  0.000  1.000  0.000 -0.000
+  0.000  0.000  1.000  0.000
   0.000  0.000  0.000  1.000
-At time 18.580000000
-- Translation: [0.000, -0.000, 0.000]
-- Rotation: in Quaternion (xyzw) [0.000, 0.000, -0.000, 1.000]
-- Rotation: in RPY (radian) [0.000, 0.000, -0.000]
-- Rotation: in RPY (degree) [0.000, 0.000, -0.000]
+At time 22.150000000
+- Translation: [-0.000, -0.000, 0.000]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
 - Matrix:
-  1.000  0.000  0.000  0.000
- -0.000  1.000 -0.000 -0.000
- -0.000  0.000  1.000  0.000
+  1.000 -0.000  0.000 -0.000
+  0.000  1.000  0.000 -0.000
+  0.000  0.000  1.000  0.000
   0.000  0.000  0.000  1.000
-At time 19.579000000
-- Translation: [0.000, -0.000, 0.000]
-- Rotation: in Quaternion (xyzw) [0.000, 0.000, -0.000, 1.000]
-- Rotation: in RPY (radian) [0.000, 0.000, -0.000]
-- Rotation: in RPY (degree) [0.000, 0.000, -0.000]
+At time 23.107000000
+- Translation: [-0.000, -0.000, 0.000]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
 - Matrix:
-  1.000  0.000  0.000  0.000
- -0.000  1.000 -0.000 -0.000
- -0.000  0.000  1.000  0.000
+  1.000 -0.000  0.000 -0.000
+  0.000  1.000  0.000 -0.000
+  0.000  0.000  1.000  0.000
   0.000  0.000  0.000  1.000
-At time 20.580000000
-- Translation: [0.000, -0.000, 0.000]
-- Rotation: in Quaternion (xyzw) [0.000, 0.000, -0.000, 1.000]
-- Rotation: in RPY (radian) [0.000, 0.000, -0.000]
-- Rotation: in RPY (degree) [0.000, 0.000, -0.000]
-- Matrix:
-  1.000  0.000  0.000  0.000
- -0.000  1.000 -0.000 -0.000
- -0.000  0.000  1.000  0.000
-  0.000  0.000  0.000  1.000
-At time 21.580000000
-- Translation: [0.000, -0.000, 0.000]
-- Rotation: in Quaternion (xyzw) [0.000, 0.000, -0.000, 1.000]
-- Rotation: in RPY (radian) [0.000, 0.000, -0.000]
-- Rotation: in RPY (degree) [0.000, 0.000, -0.000]
-- Matrix:
-  1.000  0.000  0.000  0.000
- -0.000  1.000 -0.000 -0.000
- -0.000  0.000  1.000  0.000
-  0.000  0.000  0.000  1.000
-[INFO] [1788286664.663239994] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1788370084.424713859] [rclcpp]: signal_handler(SIGINT/SIGTERM)

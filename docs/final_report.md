@@ -1,5 +1,8 @@
 # Informe final del hito de seguimiento visual
 
+> **Documento histórico:** este informe cierra el hito perceptivo anterior. El estado actual del brazo CAD está en [cad_import_final_report.md](cad_import_final_report.md).
+
+
 ## Resultado
 
 El ejemplo base ROS 2 Jazzy + Gazebo quedó cerrado como sistema reproducible,

@@ -1,0 +1,50 @@
+header:
+  stamp:
+    sec: 40
+    nanosec: 960000000
+  frame_id: base_link
+name:
+- front_left_joint
+- front_right_joint
+- poppy_m1_joint
+- poppy_m2_joint
+- poppy_m3_joint
+- poppy_m4_joint
+- poppy_m5_joint
+- poppy_m6_joint
+- rear_left_joint
+- rear_right_joint
+position:
+- 5.878260869559042
+- 5.878260869559207
+- 0.24999999999999883
+- -0.35000000001330267
+- 0.30000000002158506
+- -0.2500000000261127
+- 0.20000000002744703
+- 0.4500000000172896
+- 5.878260869564286
+- 5.878260869564369
+velocity:
+- -5.237572903651503e-16
+- -4.1210017747406467e-16
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- -5.166154828851393e-16
+- -4.17334067818959e-16
+effort:
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+---

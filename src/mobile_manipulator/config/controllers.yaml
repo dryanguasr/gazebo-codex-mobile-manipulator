@@ -17,6 +17,6 @@ base_controller:
     cmd_vel_timeout: 0.5
 arm_controller:
   ros__parameters:
-    joints: [arm_base_yaw, shoulder_pitch, elbow_pitch, wrist_pitch, left_finger_joint, right_finger_joint]
+    joints: [poppy_m1_joint, poppy_m2_joint, poppy_m3_joint, poppy_m4_joint, poppy_m5_joint, poppy_m6_joint]
     command_interfaces: [position]
     state_interfaces: [position]

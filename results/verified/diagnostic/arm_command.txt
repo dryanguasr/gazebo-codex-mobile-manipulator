@@ -1,4 +1,0 @@
-Waiting for at least 1 matching subscription(s)...
-publisher: beginning loop
-publishing #1: trajectory_msgs.msg.JointTrajectory(header=std_msgs.msg.Header(stamp=builtin_interfaces.msg.Time(sec=0, nanosec=0), frame_id=''), joint_names=['arm_base_yaw', 'shoulder_pitch', 'elbow_pitch', 'wrist_pitch', 'left_finger_joint', 'right_finger_joint'], points=[trajectory_msgs.msg.JointTrajectoryPoint(positions=[0.2, -0.3, 0.5, -0.2, 0.02, -0.02], velocities=[], accelerations=[], effort=[], time_from_start=builtin_interfaces.msg.Duration(sec=2, nanosec=0))])
-

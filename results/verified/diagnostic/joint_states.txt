@@ -3,42 +3,42 @@ A message was lost!!!
 	total count: 1---
 header:
   stamp:
-    sec: 11
-    nanosec: 750000000
+    sec: 14
+    nanosec: 140000000
   frame_id: base_link
 name:
-- arm_base_yaw
-- elbow_pitch
 - front_left_joint
 - front_right_joint
-- left_finger_joint
+- poppy_m1_joint
+- poppy_m2_joint
+- poppy_m3_joint
+- poppy_m4_joint
+- poppy_m5_joint
+- poppy_m6_joint
 - rear_left_joint
 - rear_right_joint
-- right_finger_joint
-- shoulder_pitch
-- wrist_pitch
 position:
-- 2.6159755166102623e-19
-- 1.1062129321454574e-11
-- 8.456400670377504e-07
-- 5.628589481873156e-07
-- 7.105335957997647e-16
-- 2.81000096587789e-07
-- -3.1199011156426566e-12
-- -7.699349282379261e-21
-- 7.866064333427025e-12
-- 2.3095006800672113e-12
+- -3.905508218267058e-17
+- -3.7332411084659553e-17
+- 6.3601969683811636e-21
+- 2.51853222659079e-12
+- 9.221304703219167e-14
+- 1.2302547937005682e-11
+- 9.513915544919996e-13
+- 2.0346047688213477e-11
+- -1.9237518432659172e-18
+- 8.670268382077001e-18
 velocity:
-- .nan
-- .nan
-- -3.092401281566587e-18
-- 1.089974301205324e-17
-- .nan
-- 7.663443179981627e-18
-- 8.583715676497683e-18
+- -2.2970685216015618e-17
+- -1.2632931079262912e-17
 - .nan
 - .nan
 - .nan
+- .nan
+- .nan
+- .nan
+- 1.17515681496544e-17
+- 1.7739801845496459e-19
 effort:
 - .nan
 - .nan
