@@ -4,7 +4,7 @@
 
 El brazo genérico de cuatro GDL y la pinza prismática fueron reemplazados por una cadena de seis motores basada en los STEP/STL oficiales de Poppy Ergo Jr. Los originales, derivados visuales y colisiones están físicamente separados, sus hashes y transformaciones quedan registrados y Gazebo carga todas las geometrías sin errores.
 
-Commit de implementación validado: `VALIDATED_IMPLEMENTATION_COMMIT`.
+Commit de implementación validado: `d146b36586c0b73a5892290b56d6d9c7b532da9d`.
 
 Fuente Poppy: `poppy-project/poppy-ergo-jr`, commit `97ce599be8c717843c45ebf48341f2ebf8f250b3`, hardware CC BY-SA 4.0.
 
