@@ -192,3 +192,73 @@ La terminación del servidor en el experimento aparece como `[ERROR] ... exit co
 ## 13. Limitaciones
 
 No hay medición metrológica del robot físico ni identificación dinámica. Las cajas de servo son aproximaciones visuales. La autocolisión del modelo permanece desactivada; las colisiones se validaron por simplicidad, bounds y movimiento sin bloqueo. No se generó captura 3D porque la validación disponible fue headless. El soporte de cámara Poppy está auditado, pero el sensor frontal existente se conserva para no cambiar el experimento.
+
+## 14. Procedimiento reutilizable para cualquier CAD
+
+Lo anterior conserva decisiones específicas de Poppy. Esta sección es el procedimiento que debe seguirse al recibir un CAD diferente. La secuencia general es: **B-rep/CAD → tessellation → mesh visual → collision simplificada → frames, masa e inercia → URDF/Xacro → instalación ROS → Gazebo → validación**.
+
+Antes de elegir una ruta, ejecute el preflight:
+
+```bash
+python3 scripts/cad/check_cad_dependencies.py
+```
+
+`python3-numpy` y `python3-scipy` están declarados como dependencias de ejecución del paquete, por lo que `rosdep install --from-paths src --ignore-src -r -y` las instala en un host ROS limpio. Para la ruta STEP se necesita además Gmsh/OpenCASCADE, una dependencia externa explícita:
+
+```bash
+sudo apt update
+sudo apt install gmsh python3-numpy python3-scipy
+```
+
+### Ruta 1 — ya dispongo de STL/OBJ/DAE
+
+1. **Inspeccione el mesh.** Registre formato, triángulos, bounds, unidades asumidas, watertightness y origen. Un STL no codifica unidades: compare una cota conocida con el CAD o dibujo mecánico.
+2. **Decida escala y frame.** Gazebo/URDF usa metros. No aplique `0.001` por costumbre: úselo solo si el mesh está en mm. Sitúe el frame del link en un eje físico de joint, no necesariamente en el centro del bounding box.
+3. **Genere el visual.** Conserve detalle, color/material y normales adecuados. Una transformación reproducible debe registrar escala, rotación y traslación.
+4. **Genere collision por separado.** Use primitivas para piezas simples, convex hull para una envolvente robusta, y un mesh simplificado cuando la forma sea necesaria para contacto. En Poppy, los links intermedios usan `box`; el mount y la mordaza móvil (`poppy_link_6`) usan convex hull. La mordaza ilustra la diferencia: 32 168 triángulos visuales frente a 92 de collision. No reutilice automáticamente el visual como collision.
+5. **Integre y pruebe.** Referencie únicamente el mesh de runtime desde Xacro, compruebe URI resuelta, masa positiva e inercia físicamente válida; después inspeccione spawn, pose inicial, una pose distinta y collisions en Gazebo.
+
+### Ruta 2 — parto de CAD STEP/B-rep
+
+STEP describe superficies y sólidos paramétricos (B-rep), no una lista de triángulos; Gazebo no lo renderiza ni colisiona directamente. La **tessellation** aproxima esas superficies por triángulos. Es una decisión de ingeniería: menor tolerancia/tamaño objetivo da más detalle, más triángulos y más coste; mayor tolerancia da menos triángulos, menor coste y riesgo de perder aristas, agujeros o curvatura.
+
+El ejemplo real del repositorio usa `source/hardware/STEP/base.step`, no usa ningún STL como entrada y ejecuta Gmsh/OpenCASCADE de forma no interactiva:
+
+```bash
+python3 scripts/cad/convert_step_example.py
+```
+
+El script ejecuta conceptualmente:
+
+```bash
+gmsh source/hardware/STEP/base.step -2 -clscale 0.5 -format stl -o base_raw.stl
+```
+
+Después registra la versión de Gmsh, `-clscale`, formato STL binario, hash del STEP, unidades y cada transformación. Para este STEP AP214, Gmsh 4.12.1 expuso coordenadas numéricas en mm aunque el B-rep declara metros; el ejemplo escala el resultado por `0.001` **después** de tessellar y lo deja escrito en el reporte. Es un hallazgo específico de esta combinación de archivo/herramienta, no una regla general.
+
+Se producen dos resoluciones deliberadas:
+
+| Variante | `-clscale` | Triángulos | Resultado pedagógico |
+|---|---:|---:|---|
+| coarse | 1.0 | 23 482 | pierde hasta 1.52 mm de extensión frente a referencia; no satisface la tolerancia de 1 mm |
+| fine | 0.5 | 26 330 | error de extensión máximo 0.000000017 m; pasa |
+
+El resultado queda en `meshes/poppy_ergo_jr/source/derived_step/` y la evidencia legible en `results/verified/cad_step_conversion/summary.json`. El STL oficial agregado (`base`, `disk_support`, `support_camera`) se abre exclusivamente **después** de la conversión para validación: unidades, bounds, dimensiones XYZ, orientación, origen/bounds, volumen firmado, triangulación y coherencia. No se exige triangulación idéntica: se aceptan hasta 1 mm por extensión y 2 % por volumen. El validador exige que la variante `fine` sea PASS y que el campo de política confirme que el STL oficial nunca se pasó a Gmsh.
+
+Para otra pieza STEP cambie de forma explícita el input y las referencias en el script; si contiene varios sólidos, decida y documente si exporta el ensamblaje completo o un link por sólido. Inspeccione siempre el mesh generado antes de escribir el Xacro: una exportación puede cambiar ejes, dejar un origen desplazado o interpretar mal unidades.
+
+### Fuente CAD frente a assets de runtime
+
+La jerarquía `source/` se conserva en Git para atribución, auditoría y reproducción: STEP original, STL oficial y el ejemplo STEP derivado. `visual/`, `collision/` y `asset_manifest.json` aportan los assets que Gazebo necesita. `setup.py` instala únicamente `visual/*.stl`, `collision/*.stl`, el manifest y los archivos de licencia/atribución; no instala `source/` ni los STEP pesados. Esto reduce la instalación sin romper las rutas `file://$(find mobile_manipulator)/meshes/...` ya expandidas por Xacro.
+
+### Gate de validación antes de Gazebo
+
+```bash
+python3 scripts/cad/prepare_poppy_assets.py
+python3 scripts/cad/convert_step_example.py
+python3 scripts/cad/validate_meshes.py
+```
+
+El validador explica cada control: origen/URI de mesh, existencia de archivos, escalas y dimensiones razonables, conversión STEP y tolerancias, simplificación de collision, masas positivas e inercias válidas. Una captura visual complementa esos controles; no los sustituye.
+
+La sección 9 anterior queda actualizada por esta política de instalación: no se instala recursivamente todo `meshes/`; los CAD originales continúan solo en el árbol fuente del repositorio.

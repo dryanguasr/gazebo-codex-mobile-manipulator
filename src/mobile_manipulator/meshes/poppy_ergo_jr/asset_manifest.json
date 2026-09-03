@@ -352,29 +352,39 @@
   },
   "source_commit": "97ce599be8c717843c45ebf48341f2ebf8f250b3",
   "source_repository": "https://github.com/poppy-project/poppy-ergo-jr",
+  "step_conversion_example": {
+    "input": "source/hardware/STEP/base.step",
+    "outputs": [
+      "source/derived_step/base_step_gmsh_coarse.stl",
+      "source/derived_step/base_step_gmsh_fine.stl"
+    ],
+    "reference_policy": "official STL files are validation references only; never passed to Gmsh",
+    "script": "scripts/cad/convert_step_example.py",
+    "tool": "Gmsh/OpenCASCADE (install with: sudo apt install gmsh)"
+  },
   "step_reference": {
     "U_parts.step": {
       "declared_units": "metres",
       "original_path": "hardware/STEP/U_parts.step",
-      "role": "B-rep audit/reference; the official STL export drives meshes",
+      "role": "B-rep source; base.step is tessellated by convert_step_example.py; official STL remains a validation reference",
       "sha256": "099ea2c65bb806e280d8e2a06b30f002be026a2dc6f72785559c794e6248c056"
     },
     "base.step": {
       "declared_units": "metres",
       "original_path": "hardware/STEP/base.step",
-      "role": "B-rep audit/reference; the official STL export drives meshes",
+      "role": "B-rep source; base.step is tessellated by convert_step_example.py; official STL remains a validation reference",
       "sha256": "c6f222b8cb2bd227412fad26ee7f5eeb8a1c56c1555b45d4d3072bd74c164e5a"
     },
     "lateral_parts.step": {
       "declared_units": "metres",
       "original_path": "hardware/STEP/lateral_parts.step",
-      "role": "B-rep audit/reference; the official STL export drives meshes",
+      "role": "B-rep source; base.step is tessellated by convert_step_example.py; official STL remains a validation reference",
       "sha256": "f4a3494e56e9543655446a23b73b3e583146f86940e4dd88ba044188f36d28ed"
     },
     "tools/gripper.step": {
       "declared_units": "metres",
       "original_path": "hardware/STEP/tools/gripper.step",
-      "role": "B-rep audit/reference; the official STL export drives meshes",
+      "role": "B-rep source; base.step is tessellated by convert_step_example.py; official STL remains a validation reference",
       "sha256": "f67540cef54d364f57d19afdf3019e4fe453319d8034a073f4e73564e3c8e9ee"
     }
   },

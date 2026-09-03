@@ -227,3 +227,51 @@ source install/setup.bash
 **Corrección:** aplique una matriz explícita en script, no una rotación manual sin registro.
 
 **Cómo validar:** bounds y landmarks deben coincidir en los tres entornos.
+
+## Incidencias observadas al cerrar la ruta STEP → mesh
+
+### Gmsh no estaba instalado como herramienta del sistema
+
+**Síntoma:** `scripts/cad/check_cad_dependencies.py` informa que `gmsh` no está en `PATH`.
+
+**Causa observada:** Gmsh no es una dependencia transitiva de ROS ni de `rosdep`; es una herramienta CAD opcional para la ruta 2.
+
+**Corrección reproducible:** `sudo apt update && sudo apt install gmsh`. El preflight mantiene NumPy/SciPy como obligatorios para los scripts actuales y marca Gmsh como requerido solo al convertir STEP.
+
+### El STEP AP214 declara metros, pero Gmsh 4.12.1 expuso coordenadas con magnitud de mm
+
+**Síntoma:** `base.step` produce bounds cercanos a 150 unidades, cuando el ensamblaje físico mide cerca de 0.15 m.
+
+**Causa observada:** diferencia de interpretación/unidades entre este archivo AP214 y Gmsh 4.12.1.
+
+**Corrección:** `convert_step_example.py` tessella primero y aplica escala explícita `0.001` al STL de salida; registra esa decisión, bounds y tolerancias en `summary.json`. No copie esta escala a otro STEP sin comprobar una cota conocida.
+
+### Tessellation coarse no cumple la tolerancia geométrica
+
+**Síntoma:** con `-clscale 1.0`, la mayor diferencia de extensión frente al STL de referencia es 1.52 mm.
+
+**Corrección:** para este ejemplo se usa `-clscale 0.5`, que produce 26 330 triángulos y una diferencia máxima de 0.000000017 m. La variante coarse se conserva como demostración de la decisión de resolución, no como mesh de runtime.
+
+### Warnings de elementos inválidos al tessellar
+
+**Síntoma:** Gmsh informó 12 elementos inválidos en dos superficies, aunque finalizó con `0 errors`.
+
+**Corrección y validación:** no se ocultó el warning: queda en el reporte. El mesh fine fue watertight, conservó bounds/orientación y pasó volumen/tolerancias. En otro CAD, warnings o un mesh no watertight deben investigarse antes de integrarlo.
+
+## Problemas comunes adicionales no observados en este cierre
+
+### FreeCAD o su módulo Python no está disponible
+
+Instale `freecad` si su distribución lo ofrece o prefiera el flujo Gmsh documentado. `import FreeCAD` desde el Python del sistema puede fallar aunque la GUI exista, porque FreeCAD usa su propio intérprete/módulos; ejecute su CLI o documente `PYTHONPATH` en vez de mezclar intérpretes silenciosamente.
+
+### STEP no abre o contiene múltiples sólidos
+
+Compruebe la versión AP, unidades y reparación del B-rep en una herramienta CAD. Para múltiples sólidos, exporte cada link rígido o el ensamblaje elegido de manera explícita; no deje que el exportador combine piezas que deben moverse con joints distintos.
+
+### Tessellation demasiado densa o demasiado gruesa
+
+Una malla densa aumenta disco, carga y coste de collision; una gruesa pierde curvatura/bordes. Genere al menos dos resoluciones, compare triángulos, tamaño y bounds frente a cotas conocidas, y mantenga el visual y collision como decisiones separadas.
+
+### Mesh desplazado, eje distinto o rutas rotas tras instalar
+
+Ponga el frame del link sobre el eje de joint y registre la matriz de corrección. Tras `colcon build --symlink-install`, inspeccione el share instalado y pruebe las URI Xacro/Gazebo; los CAD de `source/` no se instalan por diseño, pero visual/collision, manifest y atribución sí.

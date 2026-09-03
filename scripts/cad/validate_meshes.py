@@ -49,6 +49,35 @@ def main() -> None:
             f'STEP source checksum changed: {relative}',
         )
 
+    step_results_path = root / 'results/verified/cad_step_conversion/summary.json'
+    require(step_results_path.is_file(), 'missing STEP conversion summary; run convert_step_example.py')
+    step_results = json.loads(step_results_path.read_text(encoding='utf-8'))
+    require(step_results.get('status') == 'PASS', 'STEP conversion summary is not PASS')
+    require(
+        step_results.get('official_stl_role') == 'validation reference only; never passed to Gmsh',
+        'STEP conversion must not use official STL as conversion input',
+    )
+    selected = step_results.get('selected_for_teaching')
+    variant = step_results.get('variants', {}).get(selected)
+    require(variant is not None, 'STEP conversion selected variant is missing')
+    require(variant.get('status') == 'PASS', 'selected STEP tessellation failed comparison')
+    converted_path = asset_root / variant['mesh_path']
+    require(converted_path.is_file(), f'missing STEP-derived mesh: {converted_path}')
+    converted = mesh_summary(read_stl(converted_path))
+    require(
+        converted['triangles'] == variant['step_mesh']['triangles'],
+        'STEP-derived mesh triangle count differs from summary',
+    )
+    require(
+        0.005 < max(converted['extents']) < 0.20,
+        'STEP-derived mesh has implausible scale; verify source units and 0.001 conversion',
+    )
+    require(variant['orientation_consistent'], 'STEP-derived mesh orientation differs from STL reference')
+    require(
+        variant['max_extent_error_m'] <= variant['tolerances']['bounds_and_extents_m'],
+        'STEP-derived mesh dimensions exceed declared tolerance',
+    )
+
     for category in ('visual', 'collision'):
         for name, expected in manifest[category].items():
             path = asset_root / category / name
@@ -77,6 +106,13 @@ def main() -> None:
 
     xacro = root / 'src/mobile_manipulator/urdf/mobile_manipulator.urdf.xacro'
     tree = ET.parse(xacro)
+    collision_kinds = [
+        list(geometry)[0].tag
+        for geometry in tree.findall('.//collision/geometry')
+        if list(geometry)
+    ]
+    require('box' in collision_kinds, 'collision strategy regression: no primitive boxes')
+    require('mesh' in collision_kinds, 'collision strategy regression: no convex mesh')
     xacro_prefix = 'file://$(find mobile_manipulator)/'
     package_prefix = 'package://mobile_manipulator/'
     for mesh in tree.findall('.//mesh'):

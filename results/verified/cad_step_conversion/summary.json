@@ -1,0 +1,165 @@
+{
+  "applied_output_scale_to_metres": 0.001,
+  "case": "B: STEP/B-rep without a prepared mesh",
+  "conversion_input_only": "source/hardware/STEP/base.step",
+  "explanation": "Lower characteristic-length factor yields more triangles and more accurate bounds, at greater meshing/runtime cost.",
+  "format": "binary STL",
+  "observed_gmsh_coordinate_scale": "millimetre-like numeric coordinates",
+  "official_stl_role": "validation reference only; never passed to Gmsh",
+  "selected_for_teaching": "fine",
+  "source_step_declared_unit": "metre (AP214 SI_UNIT in source)",
+  "source_step_sha256": "c6f222b8cb2bd227412fad26ee7f5eeb8a1c56c1555b45d4d3072bd74c164e5a",
+  "status": "PASS",
+  "tool": {
+    "name": "Gmsh with OpenCASCADE",
+    "version": "4.12.1"
+  },
+  "variants": {
+    "coarse": {
+      "gmsh_characteristic_length_factor": 1.0,
+      "gmsh_warnings": [
+        "Warning : 12 elements remain invalid in surface 50",
+        "Warning : 12 elements remain invalid in surface 272",
+        "Warning : ------------------------------",
+        "Warning : Mesh generation error summary",
+        "Warning :     2 warnings",
+        "Warning :     0 errors",
+        "Warning : Check the full log for details",
+        "Warning : ------------------------------"
+      ],
+      "max_bounds_error_m": 0.00075836,
+      "max_extent_error_m": 0.001516719,
+      "mesh_bytes": 1174184,
+      "mesh_path": "source/derived_step/base_step_gmsh_coarse.stl",
+      "mesh_sha256": "99bdec5105490e0e0980d8740a5217318c1a16bfeb3e09f9248a4f1a385a2879",
+      "official_stl_reference": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          0.075,
+          0.112881584,
+          0.03
+        ],
+        "bounds_min": [
+          -0.075,
+          -0.037118412,
+          -0.0042
+        ],
+        "extents": [
+          0.15,
+          0.149999996,
+          0.0342
+        ],
+        "nonmanifold_edges": 120,
+        "signed_volume": 4.4606756e-05,
+        "surface_area": 0.045483924268,
+        "triangles": 156324,
+        "vertices": 77888,
+        "watertight": false
+      },
+      "orientation_consistent": true,
+      "status": "FAIL",
+      "step_mesh": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          0.074999992,
+          0.112123225,
+          0.03
+        ],
+        "bounds_min": [
+          -0.074999992,
+          -0.036360052,
+          -0.0042
+        ],
+        "extents": [
+          0.149999983,
+          0.148483277,
+          0.0342
+        ],
+        "nonmanifold_edges": 0,
+        "signed_volume": 4.4378407e-05,
+        "surface_area": 0.045099260872,
+        "triangles": 23482,
+        "vertices": 11605,
+        "watertight": true
+      },
+      "tolerances": {
+        "bounds_and_extents_m": 0.001,
+        "volume_relative": 0.02
+      },
+      "volume_relative_error": 0.005119153
+    },
+    "fine": {
+      "gmsh_characteristic_length_factor": 0.5,
+      "gmsh_warnings": [
+        "Warning : 12 elements remain invalid in surface 50",
+        "Warning : 12 elements remain invalid in surface 272",
+        "Warning : ------------------------------",
+        "Warning : Mesh generation error summary",
+        "Warning :     2 warnings",
+        "Warning :     0 errors",
+        "Warning : Check the full log for details",
+        "Warning : ------------------------------"
+      ],
+      "max_bounds_error_m": 8e-09,
+      "max_extent_error_m": 1.7e-08,
+      "mesh_bytes": 1316584,
+      "mesh_path": "source/derived_step/base_step_gmsh_fine.stl",
+      "mesh_sha256": "a6593677bcb825c44892a77bf4397b42b7d3f796d39b223a10865e9f289b4690",
+      "official_stl_reference": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          0.075,
+          0.112881584,
+          0.03
+        ],
+        "bounds_min": [
+          -0.075,
+          -0.037118412,
+          -0.0042
+        ],
+        "extents": [
+          0.15,
+          0.149999996,
+          0.0342
+        ],
+        "nonmanifold_edges": 120,
+        "signed_volume": 4.4606756e-05,
+        "surface_area": 0.045483924268,
+        "triangles": 156324,
+        "vertices": 77888,
+        "watertight": false
+      },
+      "orientation_consistent": true,
+      "status": "PASS",
+      "step_mesh": {
+        "boundary_edges": 0,
+        "bounds_max": [
+          0.074999992,
+          0.112881578,
+          0.03
+        ],
+        "bounds_min": [
+          -0.074999992,
+          -0.037118405,
+          -0.0042
+        ],
+        "extents": [
+          0.149999983,
+          0.149999983,
+          0.0342
+        ],
+        "nonmanifold_edges": 0,
+        "signed_volume": 4.4746408e-05,
+        "surface_area": 0.045441531597,
+        "triangles": 26330,
+        "vertices": 13029,
+        "watertight": true
+      },
+      "tolerances": {
+        "bounds_and_extents_m": 0.001,
+        "volume_relative": 0.02
+      },
+      "volume_relative_error": 0.003130743
+    }
+  }
+}

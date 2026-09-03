@@ -103,7 +103,7 @@ def main() -> None:
             'sha256': actual,
             'original_path': f'hardware/STEP/{relative}',
             'declared_units': 'metres',
-            'role': 'B-rep audit/reference; the official STL export drives meshes',
+            'role': 'B-rep source; base.step is tessellated by convert_step_example.py; official STL remains a validation reference',
         }
 
     base = transform_triangles(source_meshes['base.stl'], scale=0.001)
@@ -253,6 +253,16 @@ def main() -> None:
         },
         'source': source_report,
         'step_reference': step_report,
+        'step_conversion_example': {
+            'script': 'scripts/cad/convert_step_example.py',
+            'input': 'source/hardware/STEP/base.step',
+            'outputs': [
+                'source/derived_step/base_step_gmsh_coarse.stl',
+                'source/derived_step/base_step_gmsh_fine.stl',
+            ],
+            'tool': 'Gmsh/OpenCASCADE (install with: sudo apt install gmsh)',
+            'reference_policy': 'official STL files are validation references only; never passed to Gmsh',
+        },
         'transformations': transformations,
         'visual': {
             name: rounded_summary(triangles)

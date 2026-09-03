@@ -5,17 +5,24 @@ from setuptools import setup
 
 
 package_name = 'mobile_manipulator'
-mesh_data_files = []
-mesh_root = Path('meshes')
-for directory in sorted(
-    {path.parent for path in mesh_root.rglob('*') if path.is_file()}
-):
-    mesh_data_files.append(
+
+asset_root = Path('meshes/poppy_ergo_jr')
+runtime_mesh_data_files = []
+for category in ('visual', 'collision'):
+    directory = asset_root / category
+    runtime_mesh_data_files.append(
         (
             'share/' + package_name + '/' + directory.as_posix(),
-            [str(path) for path in sorted(directory.iterdir()) if path.is_file()],
+            [str(path) for path in sorted(directory.glob('*.stl'))],
         )
     )
+
+# Source STEP/STL files stay in Git for reproducibility; Gazebo needs only runtime meshes.
+runtime_asset_files = [
+    str(asset_root / 'asset_manifest.json'),
+    str(asset_root / 'source/hardware/LICENSE.md'),
+    str(asset_root / 'source/hardware/README.md'),
+]
 
 setup(
     name=package_name,
@@ -31,7 +38,9 @@ setup(
         ('share/' + package_name + '/config', glob('config/*.yaml')),
         ('share/' + package_name + '/worlds', glob('worlds/*.sdf')),
         ('share/' + package_name + '/launch', glob('launch/*.launch.py')),
-        *mesh_data_files,
+        ('share/' + package_name + '/meshes/poppy_ergo_jr', runtime_asset_files[:1]),
+        ('share/' + package_name + '/meshes/poppy_ergo_jr/licenses', runtime_asset_files[1:]),
+        *runtime_mesh_data_files,
     ],
     install_requires=['setuptools'],
     tests_require=['pytest'],
