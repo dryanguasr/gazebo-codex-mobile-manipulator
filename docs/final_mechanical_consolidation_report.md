@@ -195,7 +195,7 @@ funcionales, y las limitaciones se hacen explícitas. El failure case previo se
 conserva como material pedagógico. El hito queda apto para iniciar un
 pick-and-place de nivel A sin reabrir el ensamblaje.
 
-## Handoff para actualización del tutorial ChatGPT
+## Handoff para ChatGPT y tutorial de estudiantes
 
 Orden recomendado de lectura:
 

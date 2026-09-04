@@ -22,6 +22,12 @@ La cadena anterior pasaba `check_urdf`, ros2_control, `joint_states` y una FK
 interna. Aun así, brackets, cuerpos de motor, horns y caras de montaje no
 coincidían. El falso positivo ocurrió porque se medían bounds, existencia de
 meshes y seguimiento de consignas, pero no superficies de unión.
+El Xacro exacto mostrado por este failure case permanece recuperable en el
+baseline `d5c18317df4e86b80c4dd9a8478b531cc8e82059`; no se mantiene una copia
+duplicada que pueda divergir. La captura no contiene metadatos de joints y su
+vector articular exacto no puede inferirse con fiabilidad a partir de una sola
+proyección 2D. Se registra por ello como **pose desconocida**, sin inventar una
+consigna.
 
 Historia conservada:
 
