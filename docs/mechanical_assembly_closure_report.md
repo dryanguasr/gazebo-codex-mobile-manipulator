@@ -4,6 +4,8 @@
 
 Baseline recibido: 70c5d6fc30ea60e6a96166c816fa8106855000c7. El pipeline CAD → tessellation → visual/collision → URDF/Gazebo construido en ese commit se preservó. Este hito modifica frames, composición geométrica, física de la plataforma y validación integrada; Poppy continúa en metros reales a escala 1:1.
 
+Commit técnico validado: a9292f8faae9ca843e5464c22a99acd297edced6.
+
 Entorno: ROS 2 Jazzy, Gazebo Sim 8 y Gmsh 4.12.1/OpenCASCADE. Código del repositorio: Apache-2.0. CAD, hardware y derivados Poppy: CC BY-SA 4.0.
 
 ## Problema inicial y causa raíz
