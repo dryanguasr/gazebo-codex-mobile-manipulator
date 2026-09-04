@@ -12,6 +12,7 @@ root Link: base_footprint has 1 child(ren)
                         child(1):  poppy_link_4
                             child(1):  poppy_link_5
                                 child(1):  poppy_fixed_tip
+                                    child(1):  poppy_tool_frame
                                 child(2):  poppy_link_6
                                     child(1):  poppy_moving_tip
         child(5):  rear_left_link

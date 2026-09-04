@@ -186,6 +186,7 @@ def main():
     )
     base_to_mount = fixed_base_to_mount_offset(results / 'robot.urdf')
     tip_fk_tf_results = {}
+    tool_fk_tf_results = {}
     for label in POSES:
         expected_fk = mechanical['fk'][label]
         expected_xyz = [
@@ -219,6 +220,38 @@ def main():
             'observed_quaternion_xyzw': observed_quaternion,
             'quaternion_l2_error_sign_invariant': quaternion_error,
         }
+        expected_tool_xyz = [
+            value + offset
+            for value, offset in zip(
+                expected_fk['tool_xyz_m_from_poppy_mount'],
+                base_to_mount,
+            )
+        ]
+        observed_tool_xyz, observed_tool_quaternion = tf_pose(
+            results / f'tool_tf_{label}.txt'
+        )
+        tool_xyz_error = math.dist(expected_tool_xyz, observed_tool_xyz)
+        tool_quaternion_error = quaternion_distance(
+            expected_fk['tool_quaternion_xyzw'],
+            observed_tool_quaternion,
+        )
+        require(
+            tool_xyz_error < 0.002,
+            f'{label} tool FK/TF position mismatch: {tool_xyz_error} m',
+        )
+        require(
+            tool_quaternion_error < 0.003,
+            f'{label} tool FK/TF orientation mismatch: {tool_quaternion_error}',
+        )
+        tool_fk_tf_results[label] = {
+            'frame': 'poppy_tool_frame',
+            'expected_xyz_m': expected_tool_xyz,
+            'observed_xyz_m': observed_tool_xyz,
+            'position_error_m': tool_xyz_error,
+            'expected_quaternion_xyzw': expected_fk['tool_quaternion_xyzw'],
+            'observed_quaternion_xyzw': observed_tool_quaternion,
+            'quaternion_l2_error_sign_invariant': tool_quaternion_error,
+        }
 
     summary = {
         'status': 'passed',
@@ -232,6 +265,7 @@ def main():
         'initial_estimated_ball_distance_m': estimated_distance_m,
         'arm_joint_names': JOINTS,
         'arm_tolerance_rad': TOLERANCE_RAD,
+        'tool_fk_tf_validation': tool_fk_tf_results,
         'tip_fk_tf_validation': tip_fk_tf_results,
         'arm_pose_results': pose_results,
     }

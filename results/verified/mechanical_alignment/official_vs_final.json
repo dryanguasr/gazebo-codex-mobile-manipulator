@@ -1,0 +1,569 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "model": "src/mobile_manipulator/urdf/mobile_manipulator.urdf.xacro",
+  "reference": "src/mobile_manipulator/meshes/poppy_ergo_jr/source/official_description/urdf/poppy_ergo_jr.urdf.xacro",
+  "tolerances": {
+    "position_m": 1e-09,
+    "orientation_rad": 1e-07
+  },
+  "decision_gate_status": "PASS",
+  "joint_comparison": [
+    {
+      "element": "poppy_m1_joint",
+      "official": "m1",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "axis_error_deg": 0.0,
+      "status": "PASS"
+    },
+    {
+      "element": "poppy_m2_joint",
+      "official": "m2",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "axis_error_deg": 0.0,
+      "status": "PASS"
+    },
+    {
+      "element": "poppy_m3_joint",
+      "official": "m3",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "axis_error_deg": 0.0,
+      "status": "PASS"
+    },
+    {
+      "element": "poppy_m4_joint",
+      "official": "m4",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "axis_error_deg": 0.0,
+      "status": "PASS"
+    },
+    {
+      "element": "poppy_m5_joint",
+      "official": "m5",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "axis_error_deg": 0.0,
+      "status": "PASS"
+    },
+    {
+      "element": "poppy_m6_joint",
+      "official": "m6",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "axis_error_deg": 0.0,
+      "status": "PASS"
+    }
+  ],
+  "visual_comparison": [
+    {
+      "element": "poppy_mount_link",
+      "official": "base_link",
+      "mesh": "base.dae",
+      "final_uri": "file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/base.dae",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "element": "poppy_link_1",
+      "official": "long_U",
+      "mesh": "long_U.dae",
+      "final_uri": "file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/long_U.dae",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "element": "poppy_link_2",
+      "official": "section_1",
+      "mesh": "section_1.dae",
+      "final_uri": "file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/section_1.dae",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "element": "poppy_link_3",
+      "official": "section_2",
+      "mesh": "section_2.dae",
+      "final_uri": "file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/section_2.dae",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "element": "poppy_link_4",
+      "official": "section_3",
+      "mesh": "section_3.dae",
+      "final_uri": "file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/section_3.dae",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "element": "poppy_link_5",
+      "official": "section_4",
+      "mesh": "section_4.dae",
+      "final_uri": "file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/section_4.dae",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "element": "poppy_link_6",
+      "official": "section_5",
+      "mesh": "gripper.dae",
+      "final_uri": "file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/gripper.dae",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    }
+  ],
+  "fk_comparison": [
+    {
+      "pose": "home",
+      "element": "poppy_link_1",
+      "official": "long_U",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "home",
+      "element": "poppy_link_2",
+      "official": "section_1",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "home",
+      "element": "poppy_link_3",
+      "official": "section_2",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "home",
+      "element": "poppy_link_4",
+      "official": "section_3",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "home",
+      "element": "poppy_link_5",
+      "official": "section_4",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "home",
+      "element": "poppy_link_6",
+      "official": "section_5",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "home",
+      "element": "poppy_tool_frame",
+      "official": "fixed_tip",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "xyz_m_from_mount": [
+        -0.0,
+        -0.158,
+        0.1558
+      ],
+      "transform_from_mount": [
+        [
+          0.0,
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          -0.158
+        ],
+        [
+          -1.0,
+          -0.0,
+          -0.0,
+          0.1558
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_1",
+      "element": "poppy_link_1",
+      "official": "long_U",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_1",
+      "element": "poppy_link_2",
+      "official": "section_1",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_1",
+      "element": "poppy_link_3",
+      "official": "section_2",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_1",
+      "element": "poppy_link_4",
+      "official": "section_3",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_1",
+      "element": "poppy_link_5",
+      "official": "section_4",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.1073424255447017e-08,
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_1",
+      "element": "poppy_link_6",
+      "official": "section_5",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.9802322387695312e-08,
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_1",
+      "element": "poppy_tool_frame",
+      "official": "fixed_tip",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.1073424255447017e-08,
+      "xyz_m_from_mount": [
+        -0.008421062,
+        -0.131510763,
+        0.130444885
+      ],
+      "transform_from_mount": [
+        [
+          0.0167045695,
+          -0.999853057,
+          -0.0038499088,
+          -0.0084210625
+        ],
+        [
+          0.201641588,
+          -0.0004025522,
+          0.9794592937,
+          -0.1315107633
+        ],
+        [
+          -0.9793169187,
+          -0.0171377476,
+          0.2016052337,
+          0.1304448848
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_2",
+      "element": "poppy_link_1",
+      "official": "long_U",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_2",
+      "element": "poppy_link_2",
+      "official": "section_1",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_2",
+      "element": "poppy_link_3",
+      "official": "section_2",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.1073424255447017e-08,
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_2",
+      "element": "poppy_link_4",
+      "official": "section_3",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.9802322387695312e-08,
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_2",
+      "element": "poppy_link_5",
+      "official": "section_4",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.9802322387695312e-08,
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_2",
+      "element": "poppy_link_6",
+      "official": "section_5",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.9802322387695312e-08,
+      "status": "PASS"
+    },
+    {
+      "pose": "pose_2",
+      "element": "poppy_tool_frame",
+      "official": "fixed_tip",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.9802322387695312e-08,
+      "xyz_m_from_mount": [
+        -0.009778199,
+        -0.171573409,
+        0.183331069
+      ],
+      "transform_from_mount": [
+        [
+          0.0205890671,
+          -0.9997635555,
+          0.0069945279,
+          -0.0097781992
+        ],
+        [
+          -0.3002751987,
+          0.0004894773,
+          0.9538524862,
+          -0.1715734094
+        ],
+        [
+          -0.9536303767,
+          -0.0217392161,
+          -0.3001941224,
+          0.183331069
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_open",
+      "element": "poppy_link_1",
+      "official": "long_U",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_open",
+      "element": "poppy_link_2",
+      "official": "section_1",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_open",
+      "element": "poppy_link_3",
+      "official": "section_2",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_open",
+      "element": "poppy_link_4",
+      "official": "section_3",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_open",
+      "element": "poppy_link_5",
+      "official": "section_4",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.1073424255447017e-08,
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_open",
+      "element": "poppy_link_6",
+      "official": "section_5",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.9802322387695312e-08,
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_open",
+      "element": "poppy_tool_frame",
+      "official": "fixed_tip",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.1073424255447017e-08,
+      "xyz_m_from_mount": [
+        -0.008421062,
+        -0.131510763,
+        0.130444885
+      ],
+      "transform_from_mount": [
+        [
+          0.0167045695,
+          -0.999853057,
+          -0.0038499088,
+          -0.0084210625
+        ],
+        [
+          0.201641588,
+          -0.0004025522,
+          0.9794592937,
+          -0.1315107633
+        ],
+        [
+          -0.9793169187,
+          -0.0171377476,
+          0.2016052337,
+          0.1304448848
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_closed",
+      "element": "poppy_link_1",
+      "official": "long_U",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_closed",
+      "element": "poppy_link_2",
+      "official": "section_1",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_closed",
+      "element": "poppy_link_3",
+      "official": "section_2",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_closed",
+      "element": "poppy_link_4",
+      "official": "section_3",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 0.0,
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_closed",
+      "element": "poppy_link_5",
+      "official": "section_4",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.1073424255447017e-08,
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_closed",
+      "element": "poppy_link_6",
+      "official": "section_5",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.9802322387695312e-08,
+      "status": "PASS"
+    },
+    {
+      "pose": "gripper_closed",
+      "element": "poppy_tool_frame",
+      "official": "fixed_tip",
+      "position_error_m": 0.0,
+      "orientation_error_rad": 2.1073424255447017e-08,
+      "xyz_m_from_mount": [
+        -0.008421062,
+        -0.131510763,
+        0.130444885
+      ],
+      "transform_from_mount": [
+        [
+          0.0167045695,
+          -0.999853057,
+          -0.0038499088,
+          -0.0084210625
+        ],
+        [
+          0.201641588,
+          -0.0004025522,
+          0.9794592937,
+          -0.1315107633
+        ],
+        [
+          -0.9793169187,
+          -0.0171377476,
+          0.2016052337,
+          0.1304448848
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "status": "PASS"
+    }
+  ],
+  "tool_frame": {
+    "name": "poppy_tool_frame",
+    "fixed_to": "poppy_link_5 via poppy_fixed_tip",
+    "does_not_move_with_gripper": true
+  },
+  "failures": []
+}

@@ -1,148 +1,147 @@
-[INFO] [launch]: All log files can be found below /home/dryanguasr/.ros/log/2026-09-04-09-45-50-048353-LAPTOP-C6UQO8L3-26367
+[INFO] [launch]: All log files can be found below /home/dryanguasr/.ros/log/2026-09-04-12-26-33-612883-LAPTOP-C6UQO8L3-451221
 [INFO] [launch]: Default logging verbosity is set to INFO
-[INFO] [gazebo-1]: process started with pid [26372]
-[INFO] [robot_state_publisher-2]: process started with pid [26374]
-[INFO] [create-3]: process started with pid [26375]
-[robot_state_publisher-2] [INFO] [1788533150.423933521] [robot_state_publisher]: Robot initialized
-[create-3] [INFO] [1788533150.875296673] [ros_gz_sim]: Entity creation successful.
-[INFO] [create-3]: process has finished cleanly [pid 26375]
-[INFO] [parameter_bridge-4]: process started with pid [26418]
-[INFO] [spawner-5]: process started with pid [26419]
-[INFO] [spawner-6]: process started with pid [26420]
-[INFO] [spawner-7]: process started with pid [26421]
-[INFO] [ball_detector-8]: process started with pid [26422]
-[INFO] [target_trajectory-9]: process started with pid [26423]
-[INFO] [metrics_logger-10]: process started with pid [26424]
-[parameter_bridge-4] [INFO] [1788533151.039733841] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
-[parameter_bridge-4] [INFO] [1788533151.040792317] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/camera/image_raw (gz.msgs.Image) -> /camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
-[parameter_bridge-4] [INFO] [1788533151.042537728] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/camera/camera_info (gz.msgs.CameraInfo) -> /camera/camera_info (sensor_msgs/msg/CameraInfo)] (Lazy 0)
-[parameter_bridge-4] [INFO] [1788533151.043037632] [ros_gz_bridge]: Creating ROS->GZ service bridge [/world/ball_arena/set_pose (ros_gz_interfaces/srv/SetEntityPose -> /)]
-[spawner-6] [INFO] [1788533151.361006509] [spawner_base_controller]: waiting for service /controller_manager/list_controllers to become available...
-[gazebo-1] [INFO] [1788533152.664926270] [gz_ros_control]: Loading controller_manager
-[gazebo-1] [INFO] [1788533152.680835836] [controller_manager]: Using ROS clock for triggering controller manager cycles.
-[gazebo-1] [INFO] [1788533152.686107559] [controller_manager]: Subscribing to '/robot_description' topic for robot description.
-[gazebo-1] [WARN] [1788533152.689441597] [gz_ros_control]: Waiting RM to load and initialize hardware...
-[gazebo-1] [WARN] [1788533153.684937398] [controller_manager]: Waiting for data on 'robot_description' topic to finish initialization
-[gazebo-1] [INFO] [1788533153.849503613] [controller_manager]: Received robot description from topic.
-[gazebo-1] [INFO] [1788533153.849575726] [controller_manager]: Enforcing command limits is disabled. Command limits from URDF will be ignored.
-[gazebo-1] [INFO] [1788533153.853173339] [gz_ros_control]: The position_proportional_gain has been set to: 0.1
-[gazebo-1] [INFO] [1788533153.853238200] [gz_ros_control]: Loading joint: front_left_joint
-[gazebo-1] [INFO] [1788533153.853244216] [gz_ros_control]: 	State:
-[gazebo-1] [INFO] [1788533153.853248554] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853251417] [gz_ros_control]: 		 velocity
-[gazebo-1] [INFO] [1788533153.853257971] [gz_ros_control]: 	Command:
-[gazebo-1] [INFO] [1788533153.853260095] [gz_ros_control]: 		 velocity
-[gazebo-1] [INFO] [1788533153.853269149] [gz_ros_control]: Loading joint: rear_left_joint
-[gazebo-1] [INFO] [1788533153.853273888] [gz_ros_control]: 	State:
-[gazebo-1] [INFO] [1788533153.853275823] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853278086] [gz_ros_control]: 		 velocity
-[gazebo-1] [INFO] [1788533153.853280052] [gz_ros_control]: 	Command:
-[gazebo-1] [INFO] [1788533153.853281880] [gz_ros_control]: 		 velocity
-[gazebo-1] [INFO] [1788533153.853288406] [gz_ros_control]: Loading joint: front_right_joint
-[gazebo-1] [INFO] [1788533153.853290539] [gz_ros_control]: 	State:
-[gazebo-1] [INFO] [1788533153.853292532] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853294901] [gz_ros_control]: 		 velocity
-[gazebo-1] [INFO] [1788533153.853296778] [gz_ros_control]: 	Command:
-[gazebo-1] [INFO] [1788533153.853298535] [gz_ros_control]: 		 velocity
-[gazebo-1] [INFO] [1788533153.853304259] [gz_ros_control]: Loading joint: rear_right_joint
-[gazebo-1] [INFO] [1788533153.853306357] [gz_ros_control]: 	State:
-[gazebo-1] [INFO] [1788533153.853308258] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853310103] [gz_ros_control]: 		 velocity
-[gazebo-1] [INFO] [1788533153.853312035] [gz_ros_control]: 	Command:
-[gazebo-1] [INFO] [1788533153.853313674] [gz_ros_control]: 		 velocity
-[gazebo-1] [INFO] [1788533153.853318602] [gz_ros_control]: Loading joint: poppy_m1_joint
-[gazebo-1] [INFO] [1788533153.853320756] [gz_ros_control]: 	State:
-[gazebo-1] [INFO] [1788533153.853322522] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853325030] [gz_ros_control]: 	Command:
-[gazebo-1] [INFO] [1788533153.853326822] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853331678] [gz_ros_control]: Loading joint: poppy_m2_joint
-[gazebo-1] [INFO] [1788533153.853333745] [gz_ros_control]: 	State:
-[gazebo-1] [INFO] [1788533153.853335463] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853337307] [gz_ros_control]: 	Command:
-[gazebo-1] [INFO] [1788533153.853338936] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853342834] [gz_ros_control]: Loading joint: poppy_m3_joint
-[gazebo-1] [INFO] [1788533153.853344810] [gz_ros_control]: 	State:
-[gazebo-1] [INFO] [1788533153.853346541] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853348228] [gz_ros_control]: 	Command:
-[gazebo-1] [INFO] [1788533153.853349906] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853353759] [gz_ros_control]: Loading joint: poppy_m4_joint
-[gazebo-1] [INFO] [1788533153.853355708] [gz_ros_control]: 	State:
-[gazebo-1] [INFO] [1788533153.853357426] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853360403] [gz_ros_control]: 	Command:
-[gazebo-1] [INFO] [1788533153.853362066] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853365946] [gz_ros_control]: Loading joint: poppy_m5_joint
-[gazebo-1] [INFO] [1788533153.853367884] [gz_ros_control]: 	State:
-[gazebo-1] [INFO] [1788533153.853369548] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853371238] [gz_ros_control]: 	Command:
-[gazebo-1] [INFO] [1788533153.853372860] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853377541] [gz_ros_control]: Loading joint: poppy_m6_joint
-[gazebo-1] [INFO] [1788533153.853379441] [gz_ros_control]: 	State:
-[gazebo-1] [INFO] [1788533153.853381248] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853382968] [gz_ros_control]: 	Command:
-[gazebo-1] [INFO] [1788533153.853405847] [gz_ros_control]: 		 position
-[gazebo-1] [INFO] [1788533153.853522693] [controller_manager]: Initialize hardware 'GazeboSimSystem'
-[gazebo-1] [WARN] [1788533153.853536882] [controller_manager.hardware_component.system.GazeboSimSystem]: Executor is not available during hardware component initialization for 'GazeboSimSystem'. Skipping node creation!
-[gazebo-1] [INFO] [1788533153.853582726] [controller_manager]: Successful initialization of hardware 'GazeboSimSystem'
-[gazebo-1] [INFO] [1788533153.853683569] [controller_manager]: Activating component 'GazeboSimSystem'.
-[gazebo-1] [INFO] [1788533153.853691380] [resource_manager]: 'configure' hardware 'GazeboSimSystem'
-[gazebo-1] [INFO] [1788533153.853694986] [gz_ros_control]: System Successfully configured!
-[gazebo-1] [INFO] [1788533153.853698741] [resource_manager]: Successful 'configure' of hardware 'GazeboSimSystem'
-[gazebo-1] [INFO] [1788533153.853704420] [resource_manager]: 'activate' hardware 'GazeboSimSystem'
-[gazebo-1] [INFO] [1788533153.853715483] [resource_manager]: Successful 'activate' of hardware 'GazeboSimSystem'
-[gazebo-1] [WARN] [1788533153.853771520] [controller_manager]: Component 'GazeboSimSystem' does not have read or write statistics initialized, skipping registration.
-[gazebo-1] [INFO] [1788533153.853776452] [controller_manager]: Resource Manager has been successfully initialized. Starting Controller Manager services...
-[gazebo-1] [INFO] [1788533153.865621982] [controller_manager]: Loading controller : 'base_controller' of type 'diff_drive_controller/DiffDriveController'
-[gazebo-1] [INFO] [1788533153.865686396] [controller_manager]: Loading controller 'base_controller'
-[gazebo-1] [INFO] [1788533153.869212412] [controller_manager]: Controller 'base_controller' node arguments: --ros-args --params-file /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true
-[spawner-6] [INFO] [1788533153.885455926] [spawner_base_controller]: Loaded base_controller
-[gazebo-1] [INFO] [1788533153.886783743] [controller_manager]: Configuring controller: 'base_controller'
-[gazebo-1] [INFO] [1788533153.895455119] [controller_manager]: Activating controllers: [ base_controller ]
-[gazebo-1] [WARN] [1788533154.714044042] [gz_ros_control]:  Desired controller update period (0.01 s) is slower than the gazebo simulation period (0.001 s).
-[ball_detector-8] [INFO] [1788533155.344517788] [ball_detector]: Using CameraInfo focal length fx=554.383 px
-[gazebo-1] [INFO] [1788533155.438127978] [controller_manager]: Successfully switched controllers!
-[spawner-6] [INFO] [1788533155.549666403] [spawner_base_controller]: Configured and activated base_controller
-[spawner-5] [INFO] [1788533155.681366883] [spawner_joint_state_broadcaster]: waiting for service /controller_manager/list_controllers to become available...
-[INFO] [spawner-6]: process has finished cleanly [pid 26420]
-[gazebo-1] [INFO] [1788533155.934100521] [controller_manager]: Loading controller : 'joint_state_broadcaster' of type 'joint_state_broadcaster/JointStateBroadcaster'
-[gazebo-1] [INFO] [1788533155.934148499] [controller_manager]: Loading controller 'joint_state_broadcaster'
-[gazebo-1] [INFO] [1788533155.937795723] [controller_manager]: Controller 'joint_state_broadcaster' node arguments: --ros-args --params-file /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true
-[spawner-5] [INFO] [1788533155.957950106] [spawner_joint_state_broadcaster]: Loaded joint_state_broadcaster
-[gazebo-1] [INFO] [1788533155.959542085] [controller_manager]: Configuring controller: 'joint_state_broadcaster'
-[gazebo-1] [INFO] [1788533155.959635566] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
-[gazebo-1] [INFO] [1788533155.979353532] [controller_manager]: Activating controllers: [ joint_state_broadcaster ]
-[gazebo-1] [INFO] [1788533155.987918032] [controller_manager]: Successfully switched controllers!
-[spawner-5] [INFO] [1788533155.999014640] [spawner_joint_state_broadcaster]: Configured and activated joint_state_broadcaster
-[spawner-7] [INFO] [1788533156.141855295] [spawner_arm_controller]: waiting for service /controller_manager/list_controllers to become available...
-[INFO] [spawner-5]: process has finished cleanly [pid 26419]
-[gazebo-1] [INFO] [1788533156.394212784] [controller_manager]: Loading controller : 'arm_controller' of type 'joint_trajectory_controller/JointTrajectoryController'
-[gazebo-1] [INFO] [1788533156.394259011] [controller_manager]: Loading controller 'arm_controller'
-[gazebo-1] [INFO] [1788533156.399344862] [controller_manager]: Controller 'arm_controller' node arguments: --ros-args --params-file /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true
-[spawner-7] [INFO] [1788533156.439578675] [spawner_arm_controller]: Loaded arm_controller
-[gazebo-1] [INFO] [1788533156.441315401] [controller_manager]: Configuring controller: 'arm_controller'
-[gazebo-1] [INFO] [1788533156.441652272] [arm_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
-[gazebo-1] [INFO] [1788533156.441746893] [arm_controller]: Command interfaces are [position] and state interfaces are [position].
-[gazebo-1] [INFO] [1788533156.441778546] [arm_controller]: Using 'splines' interpolation method.
-[gazebo-1] [INFO] [1788533156.444514682] [arm_controller]: Action status changes will be monitored at 20.00 Hz.
-[gazebo-1] [INFO] [1788533156.460832242] [arm_controller]: Setting initial scaling factor to 1.000000
-[gazebo-1] [INFO] [1788533156.460871900] [arm_controller]: No scaling interface set. This controller will not read speed scaling from the hardware.
-[gazebo-1] [INFO] [1788533156.471996041] [controller_manager]: Activating controllers: [ arm_controller ]
-[gazebo-1] [INFO] [1788533156.480443852] [controller_manager]: Successfully switched controllers!
-[spawner-7] [INFO] [1788533156.491742491] [spawner_arm_controller]: Configured and activated arm_controller
-[INFO] [spawner-7]: process has finished cleanly [pid 26421]
-[metrics_logger-10] [INFO] [1788533187.000450803] [metrics_logger]: Metrics written to /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/results/verified/experiments
-[INFO] [metrics_logger-10]: process has finished cleanly [pid 26424]
+[INFO] [gazebo-1]: process started with pid [451226]
+[INFO] [robot_state_publisher-2]: process started with pid [451227]
+[INFO] [create-3]: process started with pid [451229]
+[robot_state_publisher-2] [INFO] [1788542794.029225648] [robot_state_publisher]: Robot initialized
+[create-3] [INFO] [1788542794.496082649] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-3]: process has finished cleanly [pid 451229]
+[INFO] [parameter_bridge-4]: process started with pid [451272]
+[INFO] [spawner-5]: process started with pid [451273]
+[INFO] [spawner-6]: process started with pid [451274]
+[INFO] [spawner-7]: process started with pid [451275]
+[INFO] [ball_detector-8]: process started with pid [451276]
+[INFO] [target_trajectory-9]: process started with pid [451277]
+[INFO] [metrics_logger-10]: process started with pid [451278]
+[parameter_bridge-4] [INFO] [1788542794.676316094] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1788542794.678761146] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/camera/image_raw (gz.msgs.Image) -> /camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1788542794.682096850] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/camera/camera_info (gz.msgs.CameraInfo) -> /camera/camera_info (sensor_msgs/msg/CameraInfo)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1788542794.683398094] [ros_gz_bridge]: Creating ROS->GZ service bridge [/world/ball_arena/set_pose (ros_gz_interfaces/srv/SetEntityPose -> /)]
+[spawner-7] [INFO] [1788542795.028946713] [spawner_arm_controller]: waiting for service /controller_manager/list_controllers to become available...
+[gazebo-1] [INFO] [1788542796.265764780] [gz_ros_control]: Loading controller_manager
+[gazebo-1] [INFO] [1788542796.275614094] [controller_manager]: Using ROS clock for triggering controller manager cycles.
+[gazebo-1] [INFO] [1788542796.279517067] [controller_manager]: Subscribing to '/robot_description' topic for robot description.
+[gazebo-1] [WARN] [1788542796.282000390] [gz_ros_control]: Waiting RM to load and initialize hardware...
+[gazebo-1] [WARN] [1788542797.279716953] [controller_manager]: Waiting for data on 'robot_description' topic to finish initialization
+[gazebo-1] [INFO] [1788542797.780036988] [controller_manager]: Received robot description from topic.
+[gazebo-1] [INFO] [1788542797.780177529] [controller_manager]: Enforcing command limits is disabled. Command limits from URDF will be ignored.
+[gazebo-1] [INFO] [1788542797.785170873] [gz_ros_control]: The position_proportional_gain has been set to: 0.1
+[gazebo-1] [INFO] [1788542797.785415139] [gz_ros_control]: Loading joint: front_left_joint
+[gazebo-1] [INFO] [1788542797.785430342] [gz_ros_control]: 	State:
+[gazebo-1] [INFO] [1788542797.785448362] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785454872] [gz_ros_control]: 		 velocity
+[gazebo-1] [INFO] [1788542797.785473100] [gz_ros_control]: 	Command:
+[gazebo-1] [INFO] [1788542797.785478352] [gz_ros_control]: 		 velocity
+[gazebo-1] [INFO] [1788542797.785495190] [gz_ros_control]: Loading joint: rear_left_joint
+[gazebo-1] [INFO] [1788542797.785498455] [gz_ros_control]: 	State:
+[gazebo-1] [INFO] [1788542797.785500946] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785504364] [gz_ros_control]: 		 velocity
+[gazebo-1] [INFO] [1788542797.785506523] [gz_ros_control]: 	Command:
+[gazebo-1] [INFO] [1788542797.785508284] [gz_ros_control]: 		 velocity
+[gazebo-1] [INFO] [1788542797.785518010] [gz_ros_control]: Loading joint: front_right_joint
+[gazebo-1] [INFO] [1788542797.785520775] [gz_ros_control]: 	State:
+[gazebo-1] [INFO] [1788542797.785523057] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785526008] [gz_ros_control]: 		 velocity
+[gazebo-1] [INFO] [1788542797.785528152] [gz_ros_control]: 	Command:
+[gazebo-1] [INFO] [1788542797.785529881] [gz_ros_control]: 		 velocity
+[gazebo-1] [INFO] [1788542797.785538208] [gz_ros_control]: Loading joint: rear_right_joint
+[gazebo-1] [INFO] [1788542797.785540106] [gz_ros_control]: 	State:
+[gazebo-1] [INFO] [1788542797.785542324] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785545349] [gz_ros_control]: 		 velocity
+[gazebo-1] [INFO] [1788542797.785548165] [gz_ros_control]: 	Command:
+[gazebo-1] [INFO] [1788542797.785550573] [gz_ros_control]: 		 velocity
+[gazebo-1] [INFO] [1788542797.785556806] [gz_ros_control]: Loading joint: poppy_m1_joint
+[gazebo-1] [INFO] [1788542797.785559229] [gz_ros_control]: 	State:
+[gazebo-1] [INFO] [1788542797.785561150] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785563878] [gz_ros_control]: 	Command:
+[gazebo-1] [INFO] [1788542797.785565805] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785571182] [gz_ros_control]: Loading joint: poppy_m2_joint
+[gazebo-1] [INFO] [1788542797.785573246] [gz_ros_control]: 	State:
+[gazebo-1] [INFO] [1788542797.785575108] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785576930] [gz_ros_control]: 	Command:
+[gazebo-1] [INFO] [1788542797.785578664] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785583973] [gz_ros_control]: Loading joint: poppy_m3_joint
+[gazebo-1] [INFO] [1788542797.785598781] [gz_ros_control]: 	State:
+[gazebo-1] [INFO] [1788542797.785601005] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785603005] [gz_ros_control]: 	Command:
+[gazebo-1] [INFO] [1788542797.785604889] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785625927] [gz_ros_control]: Loading joint: poppy_m4_joint
+[gazebo-1] [INFO] [1788542797.785630983] [gz_ros_control]: 	State:
+[gazebo-1] [INFO] [1788542797.785634047] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785636760] [gz_ros_control]: 	Command:
+[gazebo-1] [INFO] [1788542797.785639004] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785644215] [gz_ros_control]: Loading joint: poppy_m5_joint
+[gazebo-1] [INFO] [1788542797.785646605] [gz_ros_control]: 	State:
+[gazebo-1] [INFO] [1788542797.785648412] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785650642] [gz_ros_control]: 	Command:
+[gazebo-1] [INFO] [1788542797.785652361] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785657886] [gz_ros_control]: Loading joint: poppy_m6_joint
+[gazebo-1] [INFO] [1788542797.785660162] [gz_ros_control]: 	State:
+[gazebo-1] [INFO] [1788542797.785662013] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.785663708] [gz_ros_control]: 	Command:
+[gazebo-1] [INFO] [1788542797.785706578] [gz_ros_control]: 		 position
+[gazebo-1] [INFO] [1788542797.786010401] [controller_manager]: Initialize hardware 'GazeboSimSystem'
+[gazebo-1] [WARN] [1788542797.786069579] [controller_manager.hardware_component.system.GazeboSimSystem]: Executor is not available during hardware component initialization for 'GazeboSimSystem'. Skipping node creation!
+[gazebo-1] [INFO] [1788542797.786175548] [controller_manager]: Successful initialization of hardware 'GazeboSimSystem'
+[gazebo-1] [INFO] [1788542797.786357076] [controller_manager]: Activating component 'GazeboSimSystem'.
+[gazebo-1] [INFO] [1788542797.786379657] [resource_manager]: 'configure' hardware 'GazeboSimSystem'
+[gazebo-1] [INFO] [1788542797.786391804] [gz_ros_control]: System Successfully configured!
+[gazebo-1] [INFO] [1788542797.786398723] [resource_manager]: Successful 'configure' of hardware 'GazeboSimSystem'
+[gazebo-1] [INFO] [1788542797.786405704] [resource_manager]: 'activate' hardware 'GazeboSimSystem'
+[gazebo-1] [INFO] [1788542797.786426975] [resource_manager]: Successful 'activate' of hardware 'GazeboSimSystem'
+[gazebo-1] [WARN] [1788542797.786544207] [controller_manager]: Component 'GazeboSimSystem' does not have read or write statistics initialized, skipping registration.
+[gazebo-1] [INFO] [1788542797.786570571] [controller_manager]: Resource Manager has been successfully initialized. Starting Controller Manager services...
+[gazebo-1] [WARN] [1788542798.316623107] [gz_ros_control]:  Desired controller update period (0.01 s) is slower than the gazebo simulation period (0.001 s).
+[gazebo-1] [INFO] [1788542798.928346556] [controller_manager]: Loading controller : 'arm_controller' of type 'joint_trajectory_controller/JointTrajectoryController'
+[gazebo-1] [INFO] [1788542798.928422047] [controller_manager]: Loading controller 'arm_controller'
+[gazebo-1] [INFO] [1788542798.935264959] [controller_manager]: Controller 'arm_controller' node arguments: --ros-args --params-file /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true
+[spawner-7] [INFO] [1788542798.958909990] [spawner_arm_controller]: Loaded arm_controller
+[gazebo-1] [INFO] [1788542798.960352492] [controller_manager]: Configuring controller: 'arm_controller'
+[gazebo-1] [INFO] [1788542798.960678994] [arm_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[gazebo-1] [INFO] [1788542798.960714651] [arm_controller]: Command interfaces are [position] and state interfaces are [position].
+[gazebo-1] [INFO] [1788542798.960737046] [arm_controller]: Using 'splines' interpolation method.
+[gazebo-1] [INFO] [1788542798.968323941] [arm_controller]: Action status changes will be monitored at 20.00 Hz.
+[gazebo-1] [INFO] [1788542798.975743427] [arm_controller]: Setting initial scaling factor to 1.000000
+[gazebo-1] [INFO] [1788542798.975789662] [arm_controller]: No scaling interface set. This controller will not read speed scaling from the hardware.
+[gazebo-1] [INFO] [1788542798.978953091] [controller_manager]: Activating controllers: [ arm_controller ]
+[ball_detector-8] [INFO] [1788542799.041633678] [ball_detector]: Using CameraInfo focal length fx=554.383 px
+[gazebo-1] [INFO] [1788542799.141768110] [controller_manager]: Successfully switched controllers!
+[spawner-7] [INFO] [1788542799.252839949] [spawner_arm_controller]: Configured and activated arm_controller
+[spawner-5] [INFO] [1788542799.414693161] [spawner_joint_state_broadcaster]: waiting for service /controller_manager/list_controllers to become available...
+[INFO] [spawner-7]: process has finished cleanly [pid 451275]
+[gazebo-1] [INFO] [1788542799.670157800] [controller_manager]: Loading controller : 'joint_state_broadcaster' of type 'joint_state_broadcaster/JointStateBroadcaster'
+[gazebo-1] [INFO] [1788542799.670235740] [controller_manager]: Loading controller 'joint_state_broadcaster'
+[gazebo-1] [INFO] [1788542799.674884556] [controller_manager]: Controller 'joint_state_broadcaster' node arguments: --ros-args --params-file /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true
+[spawner-5] [INFO] [1788542799.690557569] [spawner_joint_state_broadcaster]: Loaded joint_state_broadcaster
+[gazebo-1] [INFO] [1788542799.691877834] [controller_manager]: Configuring controller: 'joint_state_broadcaster'
+[gazebo-1] [INFO] [1788542799.692093327] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[gazebo-1] [INFO] [1788542799.703765379] [controller_manager]: Activating controllers: [ joint_state_broadcaster ]
+[gazebo-1] [INFO] [1788542799.711814994] [controller_manager]: Successfully switched controllers!
+[spawner-5] [INFO] [1788542799.722160911] [spawner_joint_state_broadcaster]: Configured and activated joint_state_broadcaster
+[spawner-6] [INFO] [1788542799.852632050] [spawner_base_controller]: waiting for service /controller_manager/list_controllers to become available...
+[INFO] [spawner-5]: process has finished cleanly [pid 451273]
+[gazebo-1] [INFO] [1788542803.107576869] [controller_manager]: Loading controller : 'base_controller' of type 'diff_drive_controller/DiffDriveController'
+[gazebo-1] [INFO] [1788542803.107621937] [controller_manager]: Loading controller 'base_controller'
+[gazebo-1] [INFO] [1788542803.110918600] [controller_manager]: Controller 'base_controller' node arguments: --ros-args --params-file /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true
+[spawner-6] [INFO] [1788542803.133262507] [spawner_base_controller]: Loaded base_controller
+[gazebo-1] [INFO] [1788542803.135104232] [controller_manager]: Configuring controller: 'base_controller'
+[gazebo-1] [INFO] [1788542803.153267975] [controller_manager]: Activating controllers: [ base_controller ]
+[gazebo-1] [INFO] [1788542803.163077277] [controller_manager]: Successfully switched controllers!
+[spawner-6] [INFO] [1788542803.174216580] [spawner_base_controller]: Configured and activated base_controller
+[INFO] [spawner-6]: process has finished cleanly [pid 451274]
+[metrics_logger-10] [INFO] [1788542830.572257665] [metrics_logger]: Metrics written to /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/results/verified/experiments
+[INFO] [metrics_logger-10]: process has finished cleanly [pid 451278]
 [INFO] [target_trajectory-9]: sending signal 'SIGINT' to process[target_trajectory-9]
 [INFO] [ball_detector-8]: sending signal 'SIGINT' to process[ball_detector-8]
-[INFO] [pkill-11]: process started with pid [26674]
+[INFO] [pkill-11]: process started with pid [451532]
 [INFO] [parameter_bridge-4]: sending signal 'SIGINT' to process[parameter_bridge-4]
 [INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
 [INFO] [gazebo-1]: sending signal 'SIGINT' to process[gazebo-1]
-child process pid 26372 exit status already read:  will report returncode 255
-[ERROR] [gazebo-1]: process has died [pid 26372, exit code 255, cmd 'ruby /opt/ros/jazzy/opt/gz_tools_vendor/bin/gz sim -r -s /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/worlds/ball_arena.sdf --force-version 8'].
-[INFO] [pkill-11]: process has finished cleanly [pid 26674]
-[parameter_bridge-4] [INFO] [1788533187.183155381] [rclcpp]: signal_handler(SIGINT/SIGTERM)
-[robot_state_publisher-2] [INFO] [1788533187.184275224] [rclcpp]: signal_handler(SIGINT/SIGTERM)
-[INFO] [parameter_bridge-4]: process has finished cleanly [pid 26418]
-[INFO] [robot_state_publisher-2]: process has finished cleanly [pid 26374]
-[INFO] [target_trajectory-9]: process has finished cleanly [pid 26423]
-[INFO] [ball_detector-8]: process has finished cleanly [pid 26422]
+[parameter_bridge-4] [INFO] [1788542830.727533372] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ERROR] [gazebo-1]: process has died [pid 451226, exit code -9, cmd 'ruby /opt/ros/jazzy/opt/gz_tools_vendor/bin/gz sim -r -s /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/worlds/ball_arena.sdf --force-version 8'].
+[INFO] [pkill-11]: process has finished cleanly [pid 451532]
+[robot_state_publisher-2] [INFO] [1788542830.729204343] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [parameter_bridge-4]: process has finished cleanly [pid 451272]
+[INFO] [robot_state_publisher-2]: process has finished cleanly [pid 451227]
+[INFO] [target_trajectory-9]: process has finished cleanly [pid 451277]
+[INFO] [ball_detector-8]: process has finished cleanly [pid 451276]

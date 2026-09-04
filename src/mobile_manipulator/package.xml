@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>mobile_manipulator</name>
-  <version>0.3.0</version>
-  <description>Reproducible ROS 2 Jazzy and Gazebo visual tracking example.</description>
+  <version>0.4.0</version>
+  <description>ROS 2 Jazzy mobile manipulator with reproducible CAD import and mechanically consolidated Poppy Ergo Jr visuals.</description>
   <maintainer email="dryanguasr@users.noreply.github.com">dryanguasr</maintainer>
   <license>Apache-2.0</license>
+  <!-- The exact official Poppy runtime DAE set is separately attributed. -->
+  <license>GPL-3.0-only</license>
   <buildtool_depend>ament_python</buildtool_depend>
 
   <exec_depend>ament_index_python</exec_depend>
@@ -12,15 +14,18 @@
   <exec_depend>cv_bridge</exec_depend>
   <exec_depend>diff_drive_controller</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>gmsh</exec_depend>
   <exec_depend>gz_ros2_control</exec_depend>
   <exec_depend>joint_state_broadcaster</exec_depend>
   <exec_depend>joint_trajectory_controller</exec_depend>
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>
   <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>python3-matplotlib</exec_depend>
   <exec_depend>python3-numpy</exec_depend>
-  <exec_depend>python3-scipy</exec_depend>
   <exec_depend>python3-opencv</exec_depend>
+  <exec_depend>python3-pil</exec_depend>
+  <exec_depend>python3-scipy</exec_depend>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
   <exec_depend>ros_gz_bridge</exec_depend>

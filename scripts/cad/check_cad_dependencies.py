@@ -12,10 +12,13 @@ def main() -> None:
     for module, package in (
         ("numpy", "python3-numpy"),
         ("scipy", "python3-scipy"),
+        ("matplotlib", "python3-matplotlib"),
+        ("PIL", "python3-pil"),
     ):
         try:
             loaded = importlib.import_module(module)
-            print(f"PASS  Python module {module} {loaded.__version__}")
+            version = getattr(loaded, "__version__", "version unavailable")
+            print(f"PASS  Python module {module} {version}")
         except ImportError:
             missing.append(package)
             print(f"MISSING  Python module {module}; install: sudo apt install {package}")

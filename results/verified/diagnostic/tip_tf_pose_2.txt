@@ -1,5 +1,5 @@
-[INFO] [1788533109.705191411] [tf2_echo]: Waiting for transform base_footprint ->  poppy_moving_tip: Invalid frame ID "base_footprint" passed to canTransform argument target_frame - frame does not exist
-At time 59.670000000
+[INFO] [1788542722.226423671] [tf2_echo]: Waiting for transform base_footprint ->  poppy_moving_tip: Invalid frame ID "base_footprint" passed to canTransform argument target_frame - frame does not exist
+At time 61.360000000
 - Translation: [-0.075, -0.158, 0.298]
 - Rotation: in Quaternion (xyzw) [-0.747, 0.211, -0.304, 0.553]
 - Rotation: in RPY (radian) [-1.782, -0.222, -0.730]
@@ -9,7 +9,7 @@ At time 59.670000000
  -0.651 -0.300  0.698 -0.158
   0.221 -0.954 -0.205  0.298
   0.000  0.000  0.000  1.000
-At time 60.630000000
+At time 62.310000000
 - Translation: [-0.075, -0.158, 0.298]
 - Rotation: in Quaternion (xyzw) [-0.747, 0.211, -0.304, 0.553]
 - Rotation: in RPY (radian) [-1.782, -0.222, -0.730]
@@ -19,7 +19,7 @@ At time 60.630000000
  -0.651 -0.300  0.698 -0.158
   0.221 -0.954 -0.205  0.298
   0.000  0.000  0.000  1.000
-At time 61.600000000
+At time 63.280000000
 - Translation: [-0.075, -0.158, 0.298]
 - Rotation: in Quaternion (xyzw) [-0.747, 0.211, -0.304, 0.553]
 - Rotation: in RPY (radian) [-1.782, -0.222, -0.730]
@@ -29,4 +29,4 @@ At time 61.600000000
  -0.651 -0.300  0.698 -0.158
   0.221 -0.954 -0.205  0.298
   0.000  0.000  0.000  1.000
-[INFO] [1788533113.467157840] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1788542726.027141991] [rclcpp]: signal_handler(SIGINT/SIGTERM)

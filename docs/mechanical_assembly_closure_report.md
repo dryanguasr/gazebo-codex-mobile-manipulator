@@ -1,160 +1,142 @@
-# Informe de cierre: ensamblaje mecánico y escala del manipulador móvil
+# Informe de cierre anterior y consolidación posterior
 
-## Estado validado
+## Estado de este documento
 
-Baseline recibido: 70c5d6fc30ea60e6a96166c816fa8106855000c7. El pipeline CAD → tessellation → visual/collision → URDF/Gazebo construido en ese commit se preservó. Este hito modifica frames, composición geométrica, física de la plataforma y validación integrada; Poppy continúa en metros reales a escala 1:1.
+Este archivo conserva el cierre del hito iniciado en
+`70c5d6fc30ea60e6a96166c816fa8106855000c7`, cuyo commit técnico fue
+`a9292f8faae9ca843e5464c22a99acd297edced6`.
 
-Commit técnico validado: a9292f8faae9ca843e5464c22a99acd297edced6.
+La conclusión “ensamblaje CAD-derived final aprobado” quedó **supersedida** por
+la inspección humana posterior y por el último gate automatizado. El informe
+autoritativo actual es
+[final_mechanical_consolidation_report.md](final_mechanical_consolidation_report.md).
 
-Entorno: ROS 2 Jazzy, Gazebo Sim 8 y Gmsh 4.12.1/OpenCASCADE. Código del repositorio: Apache-2.0. CAD, hardware y derivados Poppy: CC BY-SA 4.0.
+## Qué corrigió correctamente el hito anterior
 
-## Problema inicial y causa raíz
+Se mantienen válidos:
 
-La inspección humana mostró dos fallos que los gates anteriores no podían detectar:
+- joint origins/axes oficiales m1–m6;
+- pertenencia rígida de mordaza fija a link 5 y móvil a link 6;
+- Poppy a escala 1:1;
+- base compacta 0,40 × 0,30 × 0,10 m;
+- ruedas de radio 0,070 m y separación 0,345 m;
+- masa/inercia de plataforma;
+- cámara, odometría, TF, detector, tracker y experimento A/B;
+- pipeline STEP/STL y separación visual/collision.
 
-- un Ergo Jr 1:1 visualmente diminuto sobre una base de .72 x .52 m;
-- brackets y servos aparentemente desensamblados aunque los seis joints respondían.
+La corrección anterior resolvió el árbol cinemático casi vertical y la
+desproporción del carro. Es un paso histórico útil, no trabajo descartado.
 
-La causa mecánica fue encadenar m2–m6 casi exclusivamente con offsets sobre Z y asignar ejes locales aproximados. Esas transformaciones formaban un árbol URDF válido, pero no reproducían los cambios de frame de 90°, los desplazamientos X/Y ni la pertenencia rígida de la pinza. Además, varios meshes CAD se habían dejado en el frame de exportación en vez de reexpresarlos en el frame físico del link.
+## Qué seguía sin demostrarse
 
-## Evidencia utilizada
+Los visuales CAD-derived se habían reexpresado con transforms heurísticos y
+cajas aproximadas de servo. Aunque bounds, joints, FK y poses eran plausibles,
+una vista cercana seguía mostrando dudas en:
 
-Se triangularon:
+- contacto bracket–motor;
+- horn–eje;
+- caras y orificios de montaje;
+- duplicación/aproximación del cuerpo del servo.
 
-- los STEP/STL oficiales versionados, commit de hardware 97ce599be8c717843c45ebf48341f2ebf8f250b3;
-- la [guía mecánica oficial](https://docs.poppy-project.org/en/assembly-guides/ergo-jr/mechanical-construction);
-- el [URDF oficial](https://github.com/poppy-project/poppy_ergo_jr_description), commit 7eb32bd385afa11dea5e6a6b6a4a86a0243aaa2b.
+El CAD propio no incluye sólidos completos de XL-320, horn y tornillería. Por
+eso no era posible convertir una alineación de brackets en una prueba completa
+del ensamblaje.
 
-Del modelo oficial se portaron únicamente transforms verificados. Los meshes visuales y collision siguen siendo los derivados propios del CAD; no se reemplazaron por assets del paquete ROS oficial. Las cotas entre ejes se confirmaron en centros de horns/CAD y el orden y orientación se contrastaron con la guía.
+## Último intento y decisión
 
-## Joints y frames corregidos
-
-| Joint | Parent → child | origin xyz (m) | origin rpy (rad) | axis |
-|---|---|---|---|---|
-| m1 | mount → link1 | 0 0 .0327993216 | 0 0 0 | 0 0 1 |
-| m2 | link1 → link2 | 0 0 .0240006784 | 0 -pi/2 0 | 0 0 -1 |
-| m3 | link2 → link3 | .054 0 0 | 0 0 0 | 0 0 -1 |
-| m4 | link3 → link4 | .045 0 0 | 0 -pi/2 0 | 0 0 -1 |
-| m5 | link4 → link5 | 0 -.048 0 | 0 -pi/2 0 | 0 0 1 |
-| m6 | link5 → link6 | 0 -.058 0 | 0 -pi/2 0 | 0 0 -1 |
-
-Los links 2–6 se reexpresaron mediante matrices documentadas en prepare_poppy_assets.py y asset_manifest.json. La mordaza fija pertenece a link 5 junto al cuerpo m6; la móvil pertenece a link 6. Se añadieron landmarks fijos poppy_fixed_tip y poppy_moving_tip para validar FK/TF.
-
-## Plataforma elegida y física
-
-Se evaluaron .36 x .28 m con rueda .065 m, .40 x .30 con .070 m y .44 x .32 con .075 m. Se eligió .40 x .30 m porque conserva margen de ruedas, cámara y mount sin hacer que la plataforma domine visualmente al brazo.
-
-| Elemento | Configuración final |
-|---|---|
-| base | .40 x .30 x .10 m, 6.0 kg |
-| inercia base | Ixx .050, Iyy .085, Izz .125 kg·m² |
-| ruedas | radio .070 m, ancho .045 m, masa .45 kg |
-| inercia rueda | axial .000627, radial .001103 kg·m² |
-| posición ruedas | x ±.140 m, y ±.1725 m |
-| diff-drive | radio .070 m, separación .345 m |
-| mount brazo | x −.030, z .050 m sobre base |
-| cámara | x .225, z .050 m; 640x480 y FOV preservados |
-
-Visual, collision, masa, tensor, posición de ruedas, parámetros de odometría, mount y altura se cambiaron de forma conjunta. No se modificaron las ganancias del tracker ni el detector HSV.
-
-## Validación geométrica y cinemática
-
-El nuevo scripts/cad/validate_mechanical_assembly.py comprueba:
-
-- los seis parent/child, origins y axes contra la referencia auditada;
-- ausencia de escala de mesh distinta de 1:1;
-- URI existentes, masas positivas e inercias válidas;
-- collision simplificada frente al visual;
-- FK independiente para home y dos poses.
-
-FK desde poppy_mount_link:
-
-| Pose | XYZ de poppy_moving_tip (m) | FK vs TF posición | FK vs TF orientación |
-|---|---|---:|---:|
-| home | 0, -.158, .1558 | gate estático | gate estático |
-| pose 1 | -.016193, -.130942, .130429 | .000474 m | .000781 |
-| pose 2 | -.045117, -.158248, .178372 | .000462 m | .000562 |
-
-Los gates son 2 mm y 0.003 de distancia cuaternión. El validador mecánico produjo PASS con seis joints, tres poses y cero fallos. El resultado queda en results/verified/mechanical_assembly/summary.json; la comparación ROS queda en results/verified/diagnostic/summary.json.
-
-## Evidencia visual
-
-El detalle completo, incluida la captura preservada del fallo, está en [mechanical_assembly_validation.md](mechanical_assembly_validation.md).
-
-Evidencias principales:
-
-- home, dos poses y close-up del brazo 1:1 en captures/mechanical_assembly/arm_1to1_*.png;
-- robot compacto en home y dos poses en compact_robot_*.png;
-- comparación visual/collision, detalle de gripper y collision-only en collision_*_alternative_offscreen.png.
-
-Las cámaras de evidencia se ejecutaron dentro de Gazebo. Visualmente, los brackets son continuos, los servos permanecen dentro de sus soportes, los pivotes coinciden y la pinza abre/cambia de posición sin piezas flotantes ni interpenetraciones groseras.
-
-Gazebo GUI pudo abrir bajo WSLg, pero la automatización de Windows no pudo capturar ni activar de forma verificable el overlay nativo: falló con helper_unknown_error: setup refresh had errors y una captura X11 fue negra. Por ello las collisions se mostraron con un URDF estático reproducible creado por generate_collision_preview.py; es evidencia geométrica válida, pero no se afirma que sea un screenshot del overlay nativo.
-
-## Collision y autocolisión
-
-Se preservan tres estrategias: primitivas para links intermedios, convex hull para mount/link 6 y mesh detallado solo para visual. La mordaza móvil conserva 32 168 triángulos visuales y 92 de collision. Los previews confirman alineación; la autocolisión continúa deshabilitada. No se alejaron links para evitar solapes deliberados de uniones vecinas.
-
-## Regresión ROS/Gazebo
-
-Orden final:
+El hito final partió de
+`d5c18317df4e86b80c4dd9a8478b531cc8e82059` y ejecutó:
 
 ~~~bash
-python3 scripts/cad/check_cad_dependencies.py
-python3 scripts/cad/prepare_poppy_assets.py
-python3 scripts/cad/convert_step_example.py
-python3 scripts/cad/validate_meshes.py
-python3 scripts/cad/validate_mechanical_assembly.py
-
-source /opt/ros/jazzy/setup.bash
-colcon build --symlink-install
-source install/setup.bash
-colcon test --event-handlers console_direct+
-colcon test-result --verbose
-bash scripts/run_diagnostic.sh
-bash scripts/run_experiments.sh
+python3 scripts/cad/align_poppy_to_official.py
 ~~~
 
-Resultados observados:
+Diez componentes impresos quedaron en PASS, con RMS Chamfer de 0,086–0,505 mm
+y residual de landmarks máximo de 0,067 mm. El gate global quedó en **FAIL**
+porque faltaba geometría autoritativa de contacto.
 
-- dependencias NumPy/SciPy y herramientas CAD: PASS; Gmsh se ejecutó desde una distribución local explícita en esta sesión;
-- conversión STEP real y comparación STL: PASS;
-- CAD meshes, escala, URI, masas, inercias y simplificación: PASS;
-- build y 7 tests: 0 errores, fallos o skips;
-- diagnóstico: PASS; seis joints y dos poses; movimiento base .244 m con odom/TF coherentes; cámara 640x480, fx 554.383; detector activo;
-- experimento A: detección 100 %, MAE objetivo .52891048 m, desplazamiento aproximadamente cero;
-- experimento B: detección 100 %, MAE objetivo .14932676 m, RMS horizontal .02497811, desplazamiento .74575067 m y comandos activos 99.14 %;
-- mejora A→B: 71.7671 %, comparador PASS.
+`decision.json` fijó:
 
-## Problemas reales encontrados
+- `autonomous_attempt_status=FAIL`;
+- `method_final=official_reference_consolidation`;
+- `fallback_stage=B3`.
 
-1. Los validadores anteriores daban falso positivo porque no tenían landmarks ni FK independiente.
-2. La primera inferencia de frames trataba offsets de CAD como una cadena sobre Z; la guía y el URDF oficial mostraron los cambios de frame ausentes.
-3. Los meshes repetidos debían rotarse al frame de cada cuerpo rígido, no solo desplazar los joints.
-4. La plataforma antigua ocultaba visualmente la escala real del Poppy.
-5. El cierre normal del servidor Gazebo dejó un proceso huérfano en la primera corrida A/B; se añadió espera acotada, detección explícita y SIGKILL solo para el proceso estrechamente identificado.
-6. WSLg permitió lanzar GUI, pero el helper de automatización/captura no pudo inicializarse.
-7. La base rosdep del host no estaba inicializada y sudo exigió contraseña; se verificaron las declaraciones package.xml y los módulos instalados, pero no se declara una instalación rosdep limpia en esta sesión.
+No se hizo una segunda iteración de offsets ni se maquilló el FAIL.
 
-## Limitaciones restantes
+## Modelo final
 
-- No hubo medición metrológica sobre un robot físico ni identificación dinámica.
-- Las cajas de los XL-320 siguen siendo aproximaciones basadas en dimensiones y masa del fabricante.
-- No existe captura verificable del overlay nativo de collision de la GUI; se conserva el render alternativo reproducible y se documenta la diferencia.
-- La autocolisión queda fuera de alcance y permanece deshabilitada.
-- No se añadieron MoveIt, IK de usuario, Nav2, SLAM ni pick-and-place.
+El Xacro usa los siete DAE exactos del repositorio oficial fijado en
+`7eb32bd385afa11dea5e6a6b6a4a86a0243aaa2b`. Se conservan por separado:
+
+- código: Apache-2.0;
+- CAD/derivados hardware: CC BY-SA 4.0;
+- DAE/Xacro oficial incorporado: GPL-3.0-only.
+
+Los CAD-derived propios siguen versionados e instalados como material docente;
+no se presentan como visual runtime final.
+
+La comparación oficial/final produce PASS en:
+
+- 6 joints;
+- 7 visuales;
+- 35 filas FK;
+- home, dos poses, abierto y cerrado;
+- `poppy_tool_frame` frente a `fixed_tip`.
+
+Error de posición máximo: 0 m dentro de la precisión del comparador. Residual
+angular máximo: 2,98e-8 rad por redondeo numérico.
+
+## Collisions y plataforma
+
+Se mantuvo visual de alta fidelidad separado de collision simplificada:
+cilindros en mount/links 1–4, boxes en link 5 y hull convexo de 92 triángulos en
+link 6. La autocolisión sigue deshabilitada.
+
+La base compacta del hito anterior permanece sin variantes ambiguas:
+
+| Parámetro | Valor |
+|---|---:|
+| base | 0,40 × 0,30 × 0,10 m |
+| masa | 6,0 kg |
+| inercia | 0,050 / 0,085 / 0,125 kg·m² |
+| ruedas | 0,070 × 0,045 m |
+| wheel separation | 0,345 m |
+| cámara | X 0,225; Z 0,050 m |
+| mount | X −0,030; Z 0,050 m |
+
+## Regresión actual
+
+- CAD/STEP: PASS;
+- build: 1 paquete;
+- tests: 7/7 PASS;
+- diagnóstico: PASS;
+- tool FK/TF: error de posición máximo 0,784 mm;
+- odometría/TF: PASS, desplazamiento 0,680 m;
+- cámara/detector: PASS;
+- A/B: PASS, 100 % detección y 77,2323 % de mejora del MAE;
+- limpieza de procesos: PASS.
+
+Las cifras completas viven en `results/verified/`; este documento no debe
+usarse para recuperar métricas del hito anterior.
+
+## Evidencia
+
+La captura incorrecta histórica permanece en
+`captures/cad_import/robot_pose_a_isometric.png`.
+
+La evidencia final está en `captures/mechanical_assembly_final/` e incluye
+referencia/final para tres poses, gripper abierto/cerrado, seis close-ups,
+overlay oficial/final y collision overlay. Son renders técnicos reproducibles,
+no una captura GUI nativa; Gazebo real se validó por diagnóstico headless.
 
 ## Handoff para actualización del tutorial ChatGPT
 
-Orden recomendado:
+Leer en este orden:
 
-1. docs/mechanical_assembly_closure_report.md;
-2. docs/mechanical_assembly_validation.md;
-3. results/verified/mechanical_assembly/summary.json y results/verified/diagnostic/summary.json;
-4. src/mobile_manipulator/urdf/mobile_manipulator.urdf.xacro y src/mobile_manipulator/config/controllers.yaml;
-5. scripts/cad/prepare_poppy_assets.py, validate_mechanical_assembly.py y generate_collision_preview.py;
-6. docs/cad_import_tutorial.md y docs/cad_import_troubleshooting.md;
-7. docs/cad_import_pipeline_closure_report.md y results/verified/cad_step_conversion/summary.json;
-8. results/verified/experiments/comparison.json y captures/mechanical_assembly/.
-
-La actualización docente debe conservar la secuencia: CAD/B-rep → tessellation → visual/collision → frames físicos/cuerpos rígidos → masa/inercia → Xacro/instalación → Gazebo → sintaxis + control + geometría mecánica + física.
+1. `docs/final_mechanical_consolidation_report.md`;
+2. `docs/mechanical_alignment_method.md`;
+3. `results/verified/mechanical_alignment/decision.json`;
+4. `results/verified/mechanical_alignment/alignment_manifest.json`;
+5. `docs/mechanical_assembly_validation.md`;
+6. este archivo, únicamente como historia de la primera corrección;
+7. `docs/cad_import_tutorial.md` y troubleshooting.

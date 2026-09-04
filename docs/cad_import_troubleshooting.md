@@ -74,9 +74,14 @@ source install/setup.bash
 
 **Diagnóstico:** audite joint por joint y cuerpo rígido por cuerpo rígido usando simultáneamente CAD, guía de montaje y URDF oficial. Compare centros de horns, ejes, landmarks, FK y una vista cercana en varias poses.
 
-**Corrección aplicada:** se portaron y verificaron los transforms oficiales m1–m6; los meshes se reexpresaron en sus frames; la mordaza fija quedó en link 5 y la móvil en link 6.
+**Corrección final:** el registro autónomo alineó las piezas impresas, pero no
+pudo demostrar contacto motor/horn porque esos sólidos no existen en el CAD
+propio. El gate quedó en FAIL y se activó B3: joints, visual origins, tip frames
+y siete DAE exactos del commit oficial fijado.
 
-**Validación:** validate_mechanical_assembly.py compara transforms/FK; run_diagnostic.sh compara FK independiente con TF; inspección visual confirma continuidad. La captura del fallo se conserva en captures/cad_import/robot_pose_a_isometric.png.
+**Validación:** `validate_official_consolidation.py` compara 6 joints, 7
+visuales y 35 FK; el diagnóstico compara tip/tool con TF. La captura del fallo
+permanece en `captures/cad_import/robot_pose_a_isometric.png`.
 
 **Lección:** un URDF válido y joints funcionales pueden representar un ensamblaje mecánicamente falso.
 
@@ -96,7 +101,13 @@ source install/setup.bash
 
 **Causa:** Gmsh no es dependencia transitiva de ROS; solo lo requiere la ruta STEP.
 
-**Corrección reproducible:** sudo apt update && sudo apt install gmsh. En la sesión de cierre se usó una distribución local explícita de Gmsh 4.12.1, sin ocultarla como dependencia.
+**Corrección reproducible:** `sudo apt update && sudo apt install gmsh`.
+`package.xml` declara ahora `gmsh`. En esta sesión se reutilizó una
+distribución local explícita 4.12.1.
+
+**Incidencia adicional observada:** el binario local se encontró, pero falló con
+`libgmsh.so.4.12: cannot open shared object file`. Se declaró explícitamente
+su directorio en `LD_LIBRARY_PATH`; una instalación apt no requiere ese paso.
 
 ### STEP en metros, salida Gmsh con magnitud mm
 
@@ -112,7 +123,9 @@ source install/setup.bash
 
 **Causa observada:** la base rosdep del host WSL no había sido inicializada; sudo no disponía de credencial no interactiva en esta sesión.
 
-**Tratamiento:** no se presentó el comando como PASS. package.xml declara python3-numpy, python3-scipy y python3-opencv; el preflight ejecutado confirmó NumPy 1.26.4 y SciPy 1.11.4. En un host nuevo, inicialice rosdep una vez y repita la instalación antes de preparar assets.
+**Tratamiento:** no se presentó el comando como PASS. `package.xml` declara
+NumPy, SciPy, OpenCV, Matplotlib, Pillow y Gmsh. En un host nuevo, inicialice
+`rosdep` una vez y repita la instalación antes de preparar assets.
 
 **Limitación:** esta sesión verificó claves y módulos presentes, pero no una instalación rosdep desde cero.
 
@@ -143,11 +156,68 @@ source install/setup.bash
 
 **Síntoma:** WSLg mostró Gazebo, pero el helper de automatización falló con helper_unknown_error: setup refresh had errors; una captura X11 resultó negra.
 
-**Corrección alternativa:** generate_collision_preview.py crea un URDF estático con collisions duplicadas como visual cian o collision-only. Se renderizó desde Gazebo y se guardó en captures/mechanical_assembly/.
+**Corrección alternativa final:** `render_mechanical_assembly.py` lee los DAE
+y transforms exactos, añade collisions cian y genera 17 vistas offscreen.
 
 **Limitación:** esta evidencia comprueba alineación geométrica, pero no se presenta como captura del overlay interactivo nativo.
 
 ## Problemas comunes adicionales no observados
+
+### Piezas impresas alinean, pero el ensamblaje autónomo sigue en FAIL
+
+**Síntoma:** diez registros tienen residuales de landmarks < 0,067 mm, pero el
+gate global no pasa.
+
+**Causa observada:** el CAD propio contiene brackets y pinza, no sólidos
+autoritativos completos de XL-320, horns y tornillería. Una caja aproximada no
+prueba el contacto entre superficies.
+
+**Diagnóstico:** separar “componente disponible alineado” de “ensamblaje
+completo demostrado”. Revisar `decision.json`, no solo la tabla de piezas.
+
+**Corrección:** activar B3 y usar los visuales oficiales fijados, conservando
+CAD-derived y manifest como material docente.
+
+**Validación:** comparación oficial/final con error posicional 0 y residual
+angular máximo numérico de 2,98e-8 rad.
+
+### Dos README colisionan durante la instalación
+
+**Síntoma:** `colcon build --symlink-install` falla con `Errno 17 File exists`
+al instalar `README.md`.
+
+**Causa observada:** README de hardware y README oficial se aplanaban en un
+mismo directorio `licenses/`.
+
+**Corrección:** instalar por separado en `licenses/hardware/` y
+`licenses/official/`.
+
+**Validación:** build PASS; los dos conjuntos y sus licencias quedan instalados,
+mientras `source/` no se copia.
+
+### Las etiquetas open/closed estaban invertidas
+
+**Síntoma:** las capturas nominales no correspondían al movimiento físico de la
+mordaza.
+
+**Causa observada:** se asumió la semántica del valor articular sin medir las
+caras del DAE.
+
+**Corrección:** fijar `m6=0 rad` como cerrado (gap ≈ 2,1 mm) y
+`m6=1,20 rad` como abierto; regenerar tabla, FK y capturas.
+
+**Lección:** nombres y límites no sustituyen una inspección geométrica.
+
+### Evidencia offscreen no es una captura GUI
+
+**Síntoma:** el helper `view_image`/automatización de ventana falló sobre WSL
+con `helper_unknown_error`.
+
+**Tratamiento:** se inspeccionaron montajes temporales de los PNG y se conservó
+un render reproducible que consume los assets/runtime transforms exactos.
+
+**Limitación:** esta evidencia demuestra geometría evaluada, no interacción con
+el overlay nativo de la GUI. Gazebo se validó aparte mediante el diagnóstico.
 
 ### FreeCAD o su módulo Python no está disponible
 

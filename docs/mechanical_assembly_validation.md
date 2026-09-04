@@ -1,147 +1,219 @@
-# Validación mecánica del Poppy Ergo Jr sobre base móvil
+# Validación mecánica final del Poppy Ergo Jr sobre base móvil
 
-Este documento registra una corrección importante: un URDF sintácticamente válido, con controladores activos y joints que alcanzan sus consignas, todavía puede representar un robot físicamente mal ensamblado. El criterio final combina sintaxis, cinemática/control, geometría mecánica y física/simulación.
+## Estado
 
-## Fallo original y por qué pasó inadvertido
+Este documento reemplaza las conclusiones de la primera corrección parcial. El
+baseline de este último hito fue
+`d5c18317df4e86b80c4dd9a8478b531cc8e82059`.
+
+Resultado final:
+
+- intento autónomo: **FAIL** por geometría autoritativa incompleta;
+- método final: **official_reference_consolidation**, fallback **B3**;
+- escala Poppy: 1:1;
+- referencia oficial/final: PASS;
+- Gazebo/TF/control/cámara/tracking: PASS.
+
+## Failure case preservado
 
 ![Ensamblaje incorrecto original](../captures/cad_import/robot_pose_a_isometric.png)
 
-La captura anterior conserva el caso pedagógico. El modelo anterior pasaba `check_urdf`, publicaba seis joints y alcanzaba dos poses, pero encadenaba casi todos los motores mediante desplazamientos sobre Z. Los validadores comprobaban existencia, escala, bounds, masa, inercia y seguimiento de consignas; no comprobaban que los ejes coincidieran con horns y brackets reales ni que la cadena tuviera la topología espacial del mecanismo.
+La cadena anterior pasaba `check_urdf`, ros2_control, `joint_states` y una FK
+interna. Aun así, brackets, cuerpos de motor, horns y caras de montaje no
+coincidían. El falso positivo ocurrió porque se medían bounds, existencia de
+meshes y seguimiento de consignas, pero no superficies de unión.
 
-Síntoma: brackets separados, piezas aparentemente flotantes y movimientos alrededor de pivotes no físicos. Causa raíz: frames y `origin` matemáticamente consistentes, pero incompatibles con el montaje CAD.
+Historia conservada:
+
+1. primer modelo geométricamente incorrecto;
+2. primera corrección de joints/base, aún con meshes reexpresados heurísticamente;
+3. último registro automático de cada componente impreso;
+4. consolidación B3 con el gold standard oficial.
 
 ## Fuentes de autoridad
 
-La auditoría cruzó tres fuentes independientes:
+1. CAD STEP/STL Poppy en `source/hardware/`,
+   `poppy-project/poppy-ergo-jr@97ce599be8c717843c45ebf48341f2ebf8f250b3`;
+2. guía oficial de construcción mecánica;
+3. URDF/Xacro y DAE de
+   `poppy-project/poppy_ergo_jr_description@7eb32bd385afa11dea5e6a6b6a4a86a0243aaa2b`.
 
-1. CAD oficial Poppy Ergo Jr versionado en `meshes/poppy_ergo_jr/source/`, commit de hardware `97ce599be8c717843c45ebf48341f2ebf8f250b3`.
-2. [Guía oficial de construcción mecánica](https://docs.poppy-project.org/en/assembly-guides/ergo-jr/mechanical-construction), que fija orden de piezas, lado de los horns y orientación de las marcas de cero.
-3. [URDF oficial Poppy Ergo Jr](https://github.com/poppy-project/poppy_ergo_jr_description), auditado en el commit `7eb32bd385afa11dea5e6a6b6a4a86a0243aaa2b`.
-
-El URDF oficial se usó como referencia de transforms; no se copiaron sus meshes. Toda la geometría visual y collision continúa procediendo del pipeline CAD de este repositorio.
+El intento autónomo usó la fuente 3 como objetivo de evaluación. Tras el FAIL,
+B3 la usó como hoja de respuestas. Esta transición está explícita en
+`results/verified/mechanical_alignment/decision.json`.
 
 ## Auditoría joint por joint
 
-Los valores están expresados como `xyz [m] / rpy [rad] / axis`. “Anterior” corresponde al modelo que produjo la captura de fallo.
+| Joint | Transform previo defectuoso | Oficial/final xyz; rpy; axis | Evidencia/decisión |
+|---|---|---|---|
+| m1 | casi correcto | `0 0 .0327993; 0 0 0; 0 0 1` | eje vertical de base; oficial |
+| m2 | Z sin cambio de frame | `0 0 .0240007; 0 -pi/2 0; 0 0 -1` | long U cambia 90°; oficial |
+| m3 | `0 0 .054` | `.054 0 0; 0 0 0; 0 0 -1` | laterales separan ejes 54 mm en X |
+| m4 | `0 0 .045` | `.045 0 0; 0 -pi/2 0; 0 0 -1` | short U y pivote perpendicular |
+| m5 | `0 0 .048` | `0 -.048 0; 0 -pi/2 0; 0 0 1` | segundo lateral desplaza en Y |
+| m6 | `0 0 .058` | `0 -.058 0; 0 -pi/2 0; 0 0 -1` | centro físico de mordaza rotativa |
 
-| Joint | Actual anterior | Oficial | Evidencia CAD/guía | Corrección final | Justificación |
-|---|---|---|---|---|---|
-| m1 | `0 0 .0328 / 0 0 0 / 0 0 1` | `0 0 .0327993 / 0 0 0 / 0 0 1` | eje vertical del primer horn sobre la base | oficial | ya era coherente; se conservó el eje y se usó la cota exacta |
-| m2 | `0 0 .024 / 0 0 0 / 0 1 0` | `0 0 .0240007 / 0 -pi/2 0 / 0 0 -1` | `long_U` coloca el siguiente eje perpendicular a m1 | oficial | el cambio de frame de 90° convierte la cadena vertical en el pivote físico lateral |
-| m3 | `0 0 .054 / 0 0 0 / 1 0 0` | `.054 0 0 / 0 0 0 / 0 0 -1` | laterales horn-to-horn unen ejes paralelos separados 54 mm | oficial | la distancia pertenece a X del frame hijo, no a Z global |
-| m4 | `0 0 .045 / 0 0 0 / 0 1 0` | `.045 0 0 / 0 -pi/2 0 / 0 0 -1` | `short_U` introduce otro cambio perpendicular a 45 mm | oficial | alinea el servo dentro del bracket y su horn con el siguiente cuerpo rígido |
-| m5 | `0 0 .048 / 0 0 0 / 1 0 0` | `0 -.048 0 / 0 -pi/2 0 / 0 0 1` | el par lateral desplaza el eje 48 mm sobre el lado del soporte | oficial | corrige tanto el eje como el lado físico del desplazamiento |
-| m6 | `0 0 .058 / 0 0 0 / 0 1 0` | `0 -.058 0 / 0 -pi/2 0 / 0 0 -1` | fijación y pivote de la mordaza están separados 58 mm | oficial | coloca el pivote en el centro real de la pinza y conserva su sentido de cierre |
+El comparador final exige parent/child, traslación, orientación y eje exactos.
+No deduce corrección mecánica de que el joint responda.
 
-La coincidencia final con el URDF oficial no se aceptó de forma ciega: las distancias aparecen en centros de horns y caras de unión del CAD; la guía confirma qué bracket se monta después de cada motor y hacia qué lado mira.
+## Cuerpos rígidos
 
-## Links como cuerpos rígidos
-
-La regla aplicada fue: cada link contiene todo lo que permanece rígidamente unido cuando gira su joint padre.
-
-| Link | Cuerpo rígido |
+| Link | Elementos que permanecen unidos |
 |---|---|
-| `poppy_mount_link` | base impresa y estator de m1 |
-| `poppy_link_1` | `long_U` y cuerpo de m2 |
-| `poppy_link_2` | laterales horn-to-horn/side-to-side y cuerpo de m3 |
-| `poppy_link_3` | `short_U` y cuerpo de m4 |
-| `poppy_link_4` | segundo par lateral y cuerpo de m5 |
-| `poppy_link_5` | fijación de gripper, cuerpo de m6 y mordaza fija |
-| `poppy_link_6` | mordaza rotativa, único elemento que gira con m6 |
+| mount | base impresa y motor m1 |
+| link 1 | long U y motor m2 |
+| link 2 | laterales y motor m3 |
+| link 3 | short U y motor m4 |
+| link 4 | segundo par lateral y motor m5 |
+| link 5 | fijación, motor m6 y mordaza fija |
+| link 6 | mordaza móvil |
 
-Para expresar el CAD en estos frames se hornearon transformaciones reproducibles en `prepare_poppy_assets.py`: links 2 y 3 usan `Ry(+90°)`, link 4 usa `Rx(+90°)`, la fijación y mordaza fija de link 5 usan `Ry(-90°) @ Rz(180°)` con traslación al pivote de m6, y la mordaza móvil usa `Rz(180°)`. Los `origin` visuales quedan en cero y las matrices se registran en `asset_manifest.json`.
+En el visual B3 esta composición viene ya consolidada en los siete DAE
+oficiales. El Xacro no añade cajas de servo duplicadas. La mordaza fija sigue
+link 5; la móvil gira con m6.
 
-## Comparación referencia vs. modelo corregido
+## Último intento autónomo
 
-La referencia oficial y nuestro modelo coinciden razonablemente en topología: base, `long_U`, dos secciones laterales, `short_U`, segunda sección lateral, fijación y pinza. Los ejes alternan orientación como exige el montaje, los servos quedan dentro de los soportes y la mordaza fija permanece con link 5 mientras la móvil gira con m6. Las diferencias deliberadas son materiales/colores, cajas aproximadas para los XL-320 y la ausencia de cableado y tornillería.
+`scripts/cad/align_poppy_to_official.py` evaluó 24 rotaciones propias, centros
+AABB, ICP recortado y Chamfer/landmarks. Usó una sola iteración global de las dos
+permitidas.
 
-## Evidencia visual 1:1 y poses
+Los diez componentes impresos pasaron; RMS entre 0,086 y 0,505 mm y máximo
+residual de landmarks 0,067 mm. El conjunto completo falló porque el CAD propio
+no incluye sólidos completos de motores, horns y fasteners. Sin ellos no puede
+verificarse contacto mecánico aunque un bracket registre muy bien.
 
-Poppy permanece a escala métrica 1:1; el Xacro no aplica `scale` a sus meshes.
+Por tanto, el gate global es honestamente FAIL. Detalles y matrices 4x4:
+[mechanical_alignment_method.md](mechanical_alignment_method.md).
 
-![Home 1:1](../captures/mechanical_assembly/arm_1to1_home_offscreen.png)
+## Consolidación oficial B3
 
-![Detalle de tres joints consecutivos](../captures/mechanical_assembly/arm_1to1_home_close_offscreen.png)
+Los visuales finales son copias geométricamente inalteradas de:
 
-![Pose no trivial 1](../captures/mechanical_assembly/arm_1to1_pose_1_offscreen.png)
+`base.dae`, `long_U.dae`, `section_1.dae`, `section_2.dae`,
+`section_3.dae`, `section_4.dae` y `gripper.dae`.
 
-![Pose no trivial 2](../captures/mechanical_assembly/arm_1to1_pose_2_offscreen.png)
+Se conservaron hashes, upstream `package.xml` y GPL-3.0-only. Las mallas
+CAD-derived propias siguen en Git y se instalan como material docente, pero no
+son el visual runtime referenciado por el Xacro.
 
-Las imágenes se obtuvieron de una cámara Gazebo durante simulaciones reales. En home y ambas poses se observa continuidad entre brackets, servos contenidos en los soportes, ejes sobre pivotes plausibles y ausencia de gaps o interpenetraciones groseras. Las dos posiciones de m6 incluidas en home/poses verifican la mordaza abierta y en otra posición.
+`validate_official_consolidation.py` compara:
 
-## Plataforma compacta
+| Elemento | Filas | Error posición máx. | Error orientación máx. | Estado |
+|---|---:|---:|---:|---|
+| joints | 6 | 0 m | 0 rad | PASS |
+| visual origins/assets | 7 | 0 m | 0 rad | PASS |
+| FK links/tool, 5 poses | 35 | 0 m | 2,98e-8 rad | PASS |
 
-Poppy se corrigió primero a 1:1. Después se evaluaron tres bases, sin escalar el brazo:
+El residual angular no nulo es redondeo de `acos`, no una diferencia de frame.
 
-| Candidato | Base L x W (m) | Rueda (m) | Evaluación |
-|---|---:|---:|---|
-| compacto mínimo | .36 x .28 | .065 | huella y cámara demasiado ajustadas |
-| compacto equilibrado | .40 x .30 | .070 | proporción, estabilidad y espacio de montaje equilibrados; elegido |
-| compacto estable | .44 x .32 | .075 | más estable, pero vuelve a dominar visualmente al Ergo Jr |
+## Tool frame y gripper
 
-| Parámetro | Anterior | Final |
-|---|---:|---:|
-| base L x W x H | .72 x .52 x .16 m | .40 x .30 x .10 m |
-| masa de base | 18.0 kg | 6.0 kg |
-| rueda radio x ancho | .115 x .070 m | .070 x .045 m |
-| separación de ruedas | .600 m | .345 m |
-| posición longitudinal rueda | .270 m | .140 m |
-| cámara `x,z` sobre base | `.38,.10` m | `.225,.050` m |
-| mount Poppy `x,z` | `-.05,.08` m | `-.030,.050` m |
+`poppy_tool_frame` está fijo a `poppy_fixed_tip` en link 5. No gira con m6 y
+coincide con `fixed_tip` oficial en home, pose 1, pose 2, abierto y cerrado.
 
-Las dimensiones son propiedades Xacro (`base_length`, `base_width`, `base_height`, `wheel_radius`, `wheel_width`, `wheel_x`, `wheel_y`, `camera_x`, `camera_z`, `arm_mount_x`, `arm_mount_z`). Para una caja homogénea de 6 kg se recalcularon `Ixx=0.050`, `Iyy=0.085` e `Izz=0.125 kg·m²`. Cada rueda de .45 kg usa `Iaxial=0.000627` e `Iradial=0.001103 kg·m²`. `controllers.yaml` usa exactamente radio `.070` y separación `.345`.
+Convención medida:
 
-![Robot compacto home](../captures/mechanical_assembly/compact_robot_home_offscreen.png)
+- cerrado: m6 = 0 rad, gap aproximado entre caras internas 2,1 mm;
+- abierto: m6 = 1,20 rad;
+- la mordaza es rotativa, no paralela.
 
-![Robot compacto pose 1](../captures/mechanical_assembly/compact_robot_pose_1_offscreen.png)
+![Gripper abierto](../captures/mechanical_assembly_final/final_gripper_open.png)
 
-![Robot compacto pose 2](../captures/mechanical_assembly/compact_robot_pose_2_offscreen.png)
+![Gripper cerrado](../captures/mechanical_assembly_final/final_gripper_closed.png)
+
+## Evidencia visual
+
+El manifest de 17 capturas registra renderer, pose, bounds y flags. Son renders
+técnicos offscreen de los triángulos DAE y transforms exactos, no screenshots
+de GUI.
+
+![Referencia oficial home](../captures/mechanical_assembly_final/official_home.png)
+
+![Modelo final home](../captures/mechanical_assembly_final/final_home.png)
+
+![Detalle home](../captures/mechanical_assembly_final/final_home_close.png)
+
+![Pose 1 final](../captures/mechanical_assembly_final/final_pose_1.png)
+
+![Pose 2 final](../captures/mechanical_assembly_final/final_pose_2.png)
+
+Los close-ups `close_m1_m2.png` … `close_m5_m6.png` y
+`close_gripper.png` permiten inspeccionar seis uniones consecutivas.
+
+![Overlay oficial/final](../captures/mechanical_assembly_final/official_vs_final_overlay.png)
 
 ## Collision geometry
 
-No se sustituyeron collisions por visuales. Los links intermedios usan primitivas `box`; mount y link 6 usan convex hull; los visuales conservan mesh detallado. La mordaza sigue comparando 32 168 triángulos visuales con 92 de collision.
+Las collisions se realinearon sin sustituirlas por visuales:
 
-![Overlay visual/collision alternativo](../captures/mechanical_assembly/collision_overlay_alternative_offscreen.png)
+- cilindros para mount y links 1–4;
+- dos boxes para motor/fijación y dedo fijo de link 5;
+- hull convexo propio de 92 triángulos para link 6.
 
-![Detalle collision del gripper](../captures/mechanical_assembly/collision_gripper_detail_alternative_offscreen.png)
+![Visual y collision](../captures/mechanical_assembly_final/final_collision_overlay.png)
 
-![Solo collisions](../captures/mechanical_assembly/collision_only_alternative_offscreen.png)
+El overlay es offscreen y reproducible. La inspección GUI directa no pudo
+automatizarse por `helper_unknown_error` en WSL; no se inventó evidencia. Gazebo
+real cargó todos los meshes sin `[Err]`. La autocolisión permanece deshabilitada
+y no se alejaron piezas para evitar solapes de uniones vecinas.
 
-`generate_collision_preview.py` genera un URDF estático reproducible que duplica cada collision como visual cian translúcido o muestra solo collisions. Las imágenes verifican alineación y ausencia de colliders flotantes. No equivalen al overlay nativo de la GUI: Gazebo GUI sí pudo lanzarse bajo WSLg, pero la automatización/captura de la ventana falló por `windows sandbox failed: helper_unknown_error: setup refresh had errors`; una captura X11 resultó negra. Esta limitación se declara, no se presenta como inspección GUI directa.
+## Plataforma compacta
 
-La autocolisión permanece deshabilitada. Solapes modestos entre colliders de links vecinos se aceptan para representar uniones físicas; no se separaron piezas artificialmente para evitarlos.
+Poppy permanece 1:1. De tres candidatos se conserva el equilibrado:
 
-## Validación transform/FK independiente
+| Parámetro | Final |
+|---|---:|
+| base | 0,40 × 0,30 × 0,10 m |
+| masa base | 6,0 kg |
+| inercia | 0,050 / 0,085 / 0,125 kg·m² |
+| ruedas | radio 0,070; ancho 0,045 m |
+| wheel separation | 0,345 m |
+| posición ruedas | X ±0,140; Y ±0,1725 m |
+| mount brazo | X −0,030; Z 0,050 m sobre base |
+| cámara | X 0,225; Z 0,050 m sobre base |
 
-`validate_mechanical_assembly.py` comprueba transforms exactos, ejes, masas, inercias, URI, escala 1:1 y collisions simplificadas, y calcula FK sin usar TF de ROS. `run_diagnostic.sh` captura a su vez `base_footprint -> poppy_moving_tip`; `validate_diagnostic.py` compara ambos cálculos.
+`controllers.yaml` usa el mismo radio/separación. No existen variantes
+ambiguas en el launch por defecto.
 
-| Pose | q m1..m6 (rad) | Punta esperada desde mount XYZ (m) | Error FK vs TF posición | Error cuaternión |
-|---|---|---|---:|---:|
-| home | `0,0,0,0,0,0` | `0,-.158,.1558` | validación estática | — |
-| pose 1 | `.35,-.45,.40,-.35,.25,.15` | `-.016193,-.130942,.130429` | .000474 m | .000781 |
-| pose 2 | `-.45,.35,-.30,.45,-.35,.75` | `-.045117,-.158248,.178372` | .000462 m | .000562 |
+## FK/TF y regresión Gazebo
 
-Los errores incluyen el redondeo a tres decimales de `tf2_echo` y quedan bajo gates de 2 mm y 0.003 en cuaternión. El alcance home desde mount es .221896 m. Esta prueba detecta cambios de frame que `/joint_states` por sí solo no revela.
+Diagnóstico final:
 
-## Regresión final
+| Verificación | Resultado |
+|---|---|
+| seis joints, dos poses | PASS; error máx. 2,04e-10 rad |
+| tip FK/TF | error posición máx. 0,474 mm |
+| tool FK/TF | error posición máx. 0,784 mm |
+| orientación tip/tool | distancia cuaternión máx. 0,000781 |
+| base | desplazamiento 0,680 m |
+| odom vs TF | coherente |
+| cámara | fx 554,383 px; imagen/CameraInfo activos |
+| esfera | distancia inicial estimada 1,7919 m |
+| carga Gazebo | sin errores de mesh |
+| procesos residuales | ninguno |
 
-- pipeline CAD y conversión STEP: PASS;
-- validador mecánico: 6 joints, 3 poses FK, 0 fallos;
-- build y tests: 7 tests, 0 errores, fallos ni skips;
-- diagnóstico: PASS; base .244 m con odom y TF coherentes, cámara 640x480/fx 554.383 y detector activo;
-- experimento A: detección 100 %, MAE objetivo .528910 m, desplazamiento ~0;
-- experimento B: detección 100 %, MAE objetivo .149327 m, RMS horizontal .024978, desplazamiento .745751 m, comandos activos 99.14 %;
-- mejora A→B: 71.77 %, comparador PASS.
+Build: 1 paquete. Tests: 7/7 PASS.
 
-La cámara conserva resolución, FOV y `CameraInfo`; su mount cambió para la base compacta. La esfera conserva centro a .12 m de altura, coherente con su radio y el nuevo plano de rodadura.
+Experimento final:
+
+| Métrica | A sin tracking | B con tracking |
+|---|---:|---:|
+| detección | 100 % | 100 % |
+| MAE distancia objetivo | 0,526848 m | 0,119951 m |
+| RMS horizontal | 0,474685 | 0,025141 |
+| desplazamiento robot | ≈0 m | 0,405552 m |
+| comandos activos | 0 % | 99,0 % |
+
+Mejora A→B: 77,2323 %, comparador PASS.
 
 ## Lección generalizable
 
-La validación de un robot importado debe ocurrir en cuatro niveles:
+La aceptación requiere cuatro niveles simultáneos:
 
-1. sintaxis: Xacro/URDF y URI válidas;
-2. cinemática/control: cadena, joints, comandos y estados;
-3. geometría mecánica: cuerpos rígidos, pivotes, frames, orientación y ensamblaje visual;
-4. física/simulación: masa, inercia, collision, odometría, sensores y comportamiento integrado.
+1. sintaxis/URI;
+2. cinemática y control;
+3. geometría mecánica, superficies y cuerpos rígidos;
+4. física/simulación e integración.
 
-Solo el acuerdo de los cuatro niveles permite declarar el modelo válido.
+Un PASS de los dos primeros no compensa un FAIL del tercero.

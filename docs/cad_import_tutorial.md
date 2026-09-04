@@ -11,7 +11,11 @@ Ambas convergen en la misma cadena:
 
 CAD/B-rep → tessellation → mesh visual → collision simplificada → cuerpos rígidos y frames → masa/inercia → URDF/Xacro → instalación ROS → Gazebo → validación.
 
-El Poppy Ergo Jr integrado aquí es el caso de estudio. Sus meshes proceden del CAD oficial, permanecen a escala física 1:1 y se montan sobre una base 4WD compacta. No se implementan MoveIt, IK, pick-and-place, Nav2 ni SLAM.
+El Poppy Ergo Jr integrado aquí es el caso de estudio y permanece a escala
+física 1:1 sobre una base 4WD compacta. Los CAD-derived propios siguen siendo el
+ejercicio de importación; el último gate demostró que no contenían geometría
+completa de motores/horns y el visual runtime final usa, de forma explícita, los
+DAE oficiales mediante fallback B3. No se implementa todavía pick-and-place.
 
 ## 1. Fijar y atribuir la fuente
 
@@ -25,7 +29,9 @@ git -C /tmp/poppy-ergo-jr lfs pull --include="hardware/STEP/**,hardware/STL/**"
 
 Si Git LFS no está disponible, descargue cada objeto por su ruta en media.githubusercontent.com y verifique SHA-256 contra el OID. No trabaje con el pequeño puntero textual como si fuera un STL.
 
-El código del repositorio es Apache-2.0. El hardware Poppy y sus derivados CAD conservan CC BY-SA 4.0. La licencia y atribución acompañan a los assets instalados.
+El código del repositorio es Apache-2.0. El hardware Poppy y sus derivados CAD
+conservan CC BY-SA 4.0. Los DAE/Xacro oficiales incorporados para B3 permanecen
+GPL-3.0-only. Las tres procedencias están separadas y acompañan la instalación.
 
 ## 2. Preflight reproducible
 
@@ -37,7 +43,8 @@ rosdep install --from-paths src --ignore-src -r -y
 python3 scripts/cad/check_cad_dependencies.py
 ~~~
 
-package.xml declara python3-numpy y python3-scipy, requeridos por preparación y validación. La ruta STEP usa además Gmsh/OpenCASCADE:
+`package.xml` declara NumPy, SciPy, Matplotlib, Pillow y Gmsh. NumPy/SciPy
+preparan y registran geometría; Matplotlib/Pillow producen evidencia; Gmsh tessella STEP.
 
 ~~~bash
 sudo apt update
@@ -157,11 +164,17 @@ En Poppy:
 
 Un mesh bien orientado asignado al link incorrecto sigue siendo un fallo.
 
-Los STL Poppy se reexpresan en los frames de link: Ry(+90°) para links 2/3, Rx(+90°) para link 4, Ry(-90°) @ Rz(180°) y traslación al pivote para link 5, y Rz(180°) para link 6. Estas decisiones quedan en el manifest.
+Los STL Poppy se reexpresan como assets docentes. El último registro recuperó,
+entre otras correcciones, −23,972 mm para `short_U` y +6,000 mm para el
+segundo conjunto lateral. Las matrices completas están en
+`results/verified/mechanical_alignment/alignment_manifest.json`.
 
 ## 6. Auditar frames y joints
 
-Use conjuntamente CAD, guía mecánica y una referencia cinemática autoritativa. Para Poppy se auditó el URDF oficial commit 7eb32bd385afa11dea5e6a6b6a4a86a0243aaa2b, sin copiar sus meshes.
+Use conjuntamente CAD, guía mecánica y una referencia cinemática autoritativa.
+Para Poppy se auditó el URDF oficial commit
+`7eb32bd385afa11dea5e6a6b6a4a86a0243aaa2b`. El intento autónomo fue FAIL y
+el fallback B3 copió los siete DAE oficiales sin modificación geométrica.
 
 | Joint | origin xyz (m) | origin rpy (rad) | axis |
 |---|---|---|---|
@@ -184,7 +197,8 @@ Iyy = m (x² + z²) / 12
 Izz = m (x² + y²) / 12
 ~~~
 
-Los links Poppy combinan volumen PLA aproximado con 16.7 g por XL-320. Es una hipótesis docente, no identificación dinámica. Las cajas de servo son aproximaciones visuales basadas en dimensiones del fabricante.
+Los links Poppy combinan volumen PLA aproximado con 16,7 g por XL-320. Es una
+hipótesis docente de inercia, no identificación dinámica ni geometría de contacto.
 
 ## 8. Integración Xacro e instalación ROS
 
@@ -202,8 +216,9 @@ Las URI usan file://$(find mobile_manipulator)/meshes/... porque Gazebo Sim 8 no
 
 SOURCE ASSETS y RUNTIME ASSETS tienen propósitos distintos:
 
-- source/ conserva STEP, STL oficial y derivados didácticos en Git;
-- visual/, collision/, asset_manifest.json y atribución son lo que Gazebo necesita.
+- `source/` conserva STEP, STL y la referencia Xacro en Git, pero no se instala;
+- `official/*.dae`, `collision/`, manifest y licencias son runtime;
+- `visual/` CAD-derived se instala como material docente, no lo usa el Xacro final.
 
 setup.py instala solo los recursos de runtime y licencia, no los STEP pesados.
 
@@ -228,23 +243,29 @@ python3 scripts/cad/validate_mechanical_assembly.py
 bash scripts/run_diagnostic.sh
 ~~~
 
-Para las dos poses, FK y TF de poppy_moving_tip concuerdan dentro de 0.48 mm y 0.00079 de distancia cuaternión.
+En la corrida final, tip y tool coincidieron con FK independiente: error máximo
+de posición 0,784 mm y distancia cuaternión 0,000781. El tool frame también
+coincide con el `fixed_tip` oficial en cinco poses.
 
 ### 9.3 Geometría mecánica
 
 Inspeccione home, dos poses, tres joints consecutivos y gripper en dos posiciones. Compruebe brackets unidos, servos dentro de soportes, horns/ejes plausibles, continuidad, ausencia de gaps y ausencia de interpenetraciones groseras. Compare la topología con CAD y guía oficial.
 
-Las capturas están en captures/mechanical_assembly/. El fallo anterior se conserva en captures/cad_import/robot_pose_a_isometric.png como ejemplo de falso positivo.
+La evidencia final está en `captures/mechanical_assembly_final/`: referencia y
+final en home/pose 1/pose 2, gripper abierto/cerrado, seis close-ups y overlay.
+El fallo anterior permanece en `captures/cad_import/robot_pose_a_isometric.png`.
 
 ### 9.4 Física y simulación
 
-Active collisions o genere el preview reproducible:
+Active collisions en Gazebo cuando la GUI lo permita y genere además el render
+técnico reproducible:
 
 ~~~bash
-python3 scripts/cad/generate_collision_preview.py --mode overlay
-python3 scripts/cad/generate_collision_preview.py --mode collision-only
+python3 scripts/cad/render_mechanical_assembly.py
 ~~~
 
+`final_collision_overlay.png` usa las mismas primitivas/hull locales del Xacro.
+Es evidencia offscreen, no una captura del overlay nativo.
 Compruebe alineación, masa/inercia, movimiento sin bloqueo, odom/TF, cámara, detector y experimento completo. La autocolisión permanece deshabilitada; no aleje artificialmente piezas reales para evitar contacto entre vecinos.
 
 ## 10. Regresión completa
@@ -257,6 +278,9 @@ python3 scripts/cad/prepare_poppy_assets.py
 python3 scripts/cad/convert_step_example.py
 python3 scripts/cad/validate_meshes.py
 python3 scripts/cad/validate_mechanical_assembly.py
+python3 scripts/cad/align_poppy_to_official.py
+python3 scripts/cad/validate_official_consolidation.py
+python3 scripts/cad/render_mechanical_assembly.py
 
 source /opt/ros/jazzy/setup.bash
 colcon build --symlink-install
@@ -267,11 +291,17 @@ bash scripts/run_diagnostic.sh
 bash scripts/run_experiments.sh
 ~~~
 
-Estado validado: 7 tests sin fallos; CAD/STEP/mecánica PASS; diagnóstico PASS; odometría y TF coherentes; cámara 640x480; detector activo. El experimento A/B mantuvo 100 % de detección y el tracking redujo el MAE objetivo de 0.528910 m a 0.149327 m, mejora 71.77 %.
+Estado validado: 7/7 tests; STEP/meshes/mecánica y consolidación oficial PASS;
+diagnóstico Gazebo PASS; cámara/detector/odom/TF activos. A/B mantuvo 100 % de
+detección y redujo el MAE objetivo de 0,526848 m a 0,119951 m, una mejora de
+77,2323 %.
 
 ## 11. Evidencia y límites
 
-Las capturas de poses proceden de cámaras reales de Gazebo. Gazebo GUI abrió bajo WSLg, pero el helper de automatización no pudo capturar de forma verificable el overlay nativo; se generó una representación alternativa estática, reproducible y explícitamente etiquetada. No equivale a interacción GUI directa.
+Las nuevas capturas mecánicas proceden de un renderer Matplotlib Agg que evalúa
+los triángulos DAE y transforms exactos del Xacro. No equivalen a una inspección
+GUI directa. Gazebo real se valida headless mediante spawn, ausencia de errores
+de mesh, controladores, TF/FK, odometría, cámara, detector y A/B.
 
 No hubo metrología física ni identificación dinámica. No se modelan cables/tornillería y la autocolisión está fuera de alcance. Estas limitaciones no invalidan la cadena geométrica, pero delimitan lo demostrado.
 

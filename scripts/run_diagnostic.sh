@@ -19,6 +19,8 @@ xacro src/mobile_manipulator/urdf/mobile_manipulator.urdf.xacro \
 check_urdf "$RESULTS/robot.urdf" >"$RESULTS/check_urdf.txt" 2>&1
 python3 scripts/cad/validate_mechanical_assembly.py \
   --output "$RESULTS/mechanical_assembly.json"
+python3 scripts/cad/validate_official_consolidation.py \
+  >"$RESULTS/official_vs_final.log"
 
 ros2 launch mobile_manipulator sim.launch.py \
   tracking_enabled:=false \
@@ -159,6 +161,14 @@ elif [[ $? -ne 124 ]]; then
   exit 1
 fi
 grep -q 'Translation:' "$RESULTS/tip_tf_pose_1.txt"
+if timeout 4 ros2 run tf2_ros tf2_echo base_footprint poppy_tool_frame \
+  >"$RESULTS/tool_tf_pose_1.txt" 2>&1; then
+  :
+elif [[ $? -ne 124 ]]; then
+  exit 1
+fi
+grep -q 'Translation:' "$RESULTS/tool_tf_pose_1.txt"
+
 
 
 timeout 10 ros2 topic pub --once \
@@ -176,6 +186,14 @@ elif [[ $? -ne 124 ]]; then
   exit 1
 fi
 grep -q 'Translation:' "$RESULTS/tip_tf_pose_2.txt"
+
+if timeout 4 ros2 run tf2_ros tf2_echo base_footprint poppy_tool_frame \
+  >"$RESULTS/tool_tf_pose_2.txt" 2>&1; then
+  :
+elif [[ $? -ne 124 ]]; then
+  exit 1
+fi
+grep -q 'Translation:' "$RESULTS/tool_tf_pose_2.txt"
 
 
 timeout 12 ros2 run mobile_manipulator evidence_capture \

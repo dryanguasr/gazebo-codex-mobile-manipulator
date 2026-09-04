@@ -91,7 +91,11 @@
   <xacro:wheel name="front_right" x="${wheel_x}" y="-${wheel_y}"/>
   <xacro:wheel name="rear_right" x="-${wheel_x}" y="-${wheel_y}"/>
 
-  <!-- The printed Poppy base and motor m1 body remain fixed to the vehicle. -->
+  <!--
+    Final B3 consolidation: exact visual assembly from the pinned official
+    description. CAD-derived teaching meshes remain under visual/ and are
+    registered in results/verified/mechanical_alignment/alignment_manifest.json.
+  -->
   <link name="poppy_mount_link">
     <inertial>
       <origin xyz="0 0 0.019"/>
@@ -99,20 +103,14 @@
       <inertia ixx="1.4e-5" iyy="1.3e-5" izz="1.7e-5" ixy="0" ixz="0" iyz="0"/>
     </inertial>
     <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/visual/poppy_mount.stl"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/base.dae"/>
       </geometry>
-      <material name="PoppyOrange"/>
-    </visual>
-    <visual>
-      <origin xyz="0 0 0.027"/>
-      <geometry><box size="0.024 0.027 0.036"/></geometry>
-      <material name="ServoGray"/>
     </visual>
     <collision>
-      <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/collision/poppy_mount_convex.stl"/>
-      </geometry>
+      <origin xyz="0 0.038 0.015" rpy="0 0 0"/>
+      <geometry><cylinder length="0.03" radius="0.08"/></geometry>
     </collision>
   </link>
   <joint name="poppy_mount_joint" type="fixed">
@@ -128,19 +126,14 @@
       <inertia ixx="8.6e-6" iyy="9.8e-6" izz="7.0e-6" ixy="0" ixz="0" iyz="0"/>
     </inertial>
     <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/visual/poppy_link_1.stl"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/long_U.dae"/>
       </geometry>
-      <material name="PoppyOrange"/>
-    </visual>
-    <visual>
-      <origin xyz="0 0 0.024"/>
-      <geometry><box size="0.024 0.027 0.036"/></geometry>
-      <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0.027"/>
-      <geometry><box size="0.042 0.034 0.054"/></geometry>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <geometry><cylinder length="0.02" radius="0.02"/></geometry>
     </collision>
   </link>
   <joint name="poppy_m1_joint" type="revolute">
@@ -158,19 +151,14 @@
       <inertia ixx="5.0e-6" iyy="9.0e-6" izz="8.0e-6" ixy="0" ixz="0" iyz="0"/>
     </inertial>
     <visual>
+      <origin xyz="0 0 0" rpy="0 1.5707963267949 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/visual/poppy_link_2.stl"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/section_1.dae"/>
       </geometry>
-      <material name="PoppyOrange"/>
-    </visual>
-    <visual>
-      <origin xyz="0.054 0 0" rpy="0 1.5707963267949 0"/>
-      <geometry><box size="0.027 0.024 0.036"/></geometry>
-      <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0.0415 0 0"/>
-      <geometry><box size="0.050 0.030 0.040"/></geometry>
+      <origin xyz="0.025 0 0" rpy="0 1.5707963267949 0"/>
+      <geometry><cylinder length="0.05" radius="0.02"/></geometry>
     </collision>
   </link>
   <joint name="poppy_m2_joint" type="revolute">
@@ -188,19 +176,14 @@
       <inertia ixx="4.2e-6" iyy="5.0e-6" izz="4.5e-6" ixy="0" ixz="0" iyz="0"/>
     </inertial>
     <visual>
+      <origin xyz="0 0 0" rpy="0 1.5707963267949 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/visual/poppy_link_3.stl"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/section_2.dae"/>
       </geometry>
-      <material name="PoppyOrange"/>
-    </visual>
-    <visual>
-      <origin xyz="0.045 0 0" rpy="0 1.5707963267949 0"/>
-      <geometry><box size="0.024 0.027 0.036"/></geometry>
-      <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0.045 0 0"/>
-      <geometry><box size="0.040 0.032 0.036"/></geometry>
+      <origin xyz="0.025 0 0" rpy="0 1.5707963267949 0"/>
+      <geometry><cylinder length="0.05" radius="0.02"/></geometry>
     </collision>
   </link>
   <joint name="poppy_m3_joint" type="revolute">
@@ -218,19 +201,14 @@
       <inertia ixx="9.0e-6" iyy="5.0e-6" izz="8.0e-6" ixy="0" ixz="0" iyz="0"/>
     </inertial>
     <visual>
+      <origin xyz="0 0 0" rpy="0 3.14159268 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/visual/poppy_link_4.stl"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/section_3.dae"/>
       </geometry>
-      <material name="PoppyOrange"/>
-    </visual>
-    <visual>
-      <origin xyz="0 -0.048 0" rpy="1.5707963267949 0 0"/>
-      <geometry><box size="0.027 0.024 0.036"/></geometry>
-      <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0 -0.0415 0"/>
-      <geometry><box size="0.040 0.050 0.030"/></geometry>
+      <origin xyz="0 -0.025 0" rpy="1.5707963267949 0 0"/>
+      <geometry><cylinder length="0.05" radius="0.02"/></geometry>
     </collision>
   </link>
   <joint name="poppy_m4_joint" type="revolute">
@@ -248,15 +226,10 @@
       <inertia ixx="4.7e-5" iyy="8.0e-6" izz="4.8e-5" ixy="0" ixz="0" iyz="0"/>
     </inertial>
     <visual>
-      <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/visual/poppy_link_5.stl"/>
-      </geometry>
-      <material name="PoppyOrange"/>
-    </visual>
-    <visual>
       <origin xyz="0 -0.058 0" rpy="0 -1.5707963267949 0"/>
-      <geometry><box size="0.024 0.027 0.036"/></geometry>
-      <material name="ServoGray"/>
+      <geometry>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/section_4.dae"/>
+      </geometry>
     </visual>
     <collision>
       <origin xyz="0 -0.058 0"/>
@@ -282,10 +255,10 @@
       <inertia ixx="3.87e-6" iyy="9.72e-7" izz="3.65e-6" ixy="0" ixz="0" iyz="0"/>
     </inertial>
     <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/visual/poppy_link_6.stl"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/gripper.dae"/>
       </geometry>
-      <material name="PoppyOrange"/>
     </visual>
     <collision>
       <geometry>
@@ -306,6 +279,12 @@
     <parent link="poppy_link_5"/>
     <child link="poppy_fixed_tip"/>
     <origin xyz="0 -0.11 0" rpy="-1.5707963267949 0 0"/>
+  </joint>
+  <link name="poppy_tool_frame"/>
+  <joint name="poppy_tool_frame_joint" type="fixed">
+    <parent link="poppy_fixed_tip"/>
+    <child link="poppy_tool_frame"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
   <link name="poppy_moving_tip"/>
   <joint name="poppy_moving_tip_joint" type="fixed">

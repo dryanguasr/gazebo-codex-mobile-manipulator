@@ -279,6 +279,28 @@
   ],
   "checks": [
     {
+      "name": "official_visual_fallback_and_cad_teaching_assets_coexist",
+      "runtime_meshes": [
+        "base.dae",
+        "long_U.dae",
+        "section_1.dae",
+        "section_2.dae",
+        "section_3.dae",
+        "section_4.dae",
+        "gripper.dae"
+      ],
+      "teaching_meshes": [
+        "poppy_link_1.stl",
+        "poppy_link_2.stl",
+        "poppy_link_3.stl",
+        "poppy_link_4.stl",
+        "poppy_link_5.stl",
+        "poppy_link_6.stl",
+        "poppy_mount.stl"
+      ],
+      "status": "PASS"
+    },
+    {
       "name": "fk_poses_are_distinct",
       "minimum_pairwise_tip_distance_m": 0.040472384747612805,
       "status": "PASS"
@@ -315,6 +337,17 @@
         -0.158,
         0.1558
       ],
+      "tool_xyz_m_from_poppy_mount": [
+        -0.0,
+        -0.158,
+        0.1558
+      ],
+      "tool_quaternion_xyzw": [
+        -0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
       "quaternion_xyzw": [
         -0.707106781,
         -0.0,
@@ -336,6 +369,17 @@
         -0.130941981,
         0.130429429
       ],
+      "tool_xyz_m_from_poppy_mount": [
+        -0.008421062,
+        -0.131510763,
+        0.130444885
+      ],
+      "tool_quaternion_xyzw": [
+        -0.451525716,
+        0.441952386,
+        0.544358158,
+        0.551794176
+      ],
       "quaternion_xyzw": [
         -0.629614379,
         0.051327436,
@@ -356,6 +400,17 @@
         -0.045117445,
         -0.158247739,
         0.178372156
+      ],
+      "tool_xyz_m_from_poppy_mount": [
+        -0.009778199,
+        -0.171573409,
+        0.183331069
+      ],
+      "tool_quaternion_xyzw": [
+        0.574520172,
+        -0.565706314,
+        -0.411924548,
+        -0.424524564
       ],
       "quaternion_xyzw": [
         -0.746969499,

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "baseline_sha": "d5c18317df4e86b80c4dd9a8478b531cc8e82059",
+  "autonomous_attempt_status": "FAIL",
+  "criteria_evaluated": {
+    "printed_component_landmarks_le_1_5_mm": {
+      "status": "PASS",
+      "threshold_mm": 1.5
+    },
+    "horn_axis_to_joint_axis_le_1_0_mm": {
+      "status": "PASS",
+      "threshold_mm": 1.0,
+      "basis": "official joint frame retained exactly"
+    },
+    "joint_axis_error_le_1_deg": {
+      "status": "PASS",
+      "threshold_deg": 1.0,
+      "basis": "official joint axes retained exactly"
+    },
+    "authoritative_servo_horn_contact_geometry_available": {
+      "status": "FAIL",
+      "reason": "The own source set contains printed brackets and gripper parts but not the XL-320 body, horn and fastener solids. Approximate boxes cannot prove mounting-surface contact."
+    },
+    "independent_model_matches_official_visual_gold_standard": {
+      "status": "FAIL",
+      "reason": "The independent model substitutes approximate servo boxes and therefore cannot meet the required surface-level equivalence."
+    }
+  },
+  "failed_parts": [],
+  "failed_links_or_joints": [
+    "poppy_mount_link through poppy_link_5"
+  ],
+  "failed_criteria": [
+    "authoritative_servo_horn_contact_geometry_available",
+    "independent_model_matches_official_visual_gold_standard"
+  ],
+  "evidence": {
+    "alignment_manifest": "results/verified/mechanical_alignment/alignment_manifest.json",
+    "missing_geometry": "own CAD sources omit exact XL-320 bodies, horns and fasteners"
+  },
+  "method_final": "official_reference_consolidation",
+  "fallback_stage": "B3",
+  "reason": "Printed parts can be registered, but the independent asset set cannot verify motor/horn mounting surfaces. The bounded gate therefore activates the exact pinned official visual meshes."
+}

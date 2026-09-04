@@ -1,0 +1,483 @@
+{
+  "status": "PASS",
+  "renderer": "Matplotlib Agg offscreen technical mesh renderer",
+  "equivalence_note": "The renderer evaluates the exact pinned DAE scene triangles and official URDF transforms used by the final Xacro. It is not a Gazebo GUI screenshot; Gazebo runtime loading is validated separately.",
+  "captures": [
+    {
+      "file": "captures/mechanical_assembly_final/official_home.png",
+      "pose_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "official_only": true,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.18,
+          0.24
+        ],
+        [
+          -0.24,
+          0.18
+        ],
+        [
+          -0.05,
+          0.3
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/final_home.png",
+      "pose_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.24,
+          0.78
+        ],
+        [
+          -0.34,
+          0.34
+        ],
+        [
+          -0.02,
+          0.48
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/official_pose_1.png",
+      "pose_rad": [
+        0.35,
+        -0.45,
+        0.4,
+        -0.35,
+        0.25,
+        0.15
+      ],
+      "official_only": true,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.18,
+          0.24
+        ],
+        [
+          -0.24,
+          0.18
+        ],
+        [
+          -0.05,
+          0.3
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/final_pose_1.png",
+      "pose_rad": [
+        0.35,
+        -0.45,
+        0.4,
+        -0.35,
+        0.25,
+        0.15
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.24,
+          0.78
+        ],
+        [
+          -0.34,
+          0.34
+        ],
+        [
+          -0.02,
+          0.48
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/official_pose_2.png",
+      "pose_rad": [
+        -0.45,
+        0.35,
+        -0.3,
+        0.45,
+        -0.35,
+        0.75
+      ],
+      "official_only": true,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.18,
+          0.24
+        ],
+        [
+          -0.24,
+          0.18
+        ],
+        [
+          -0.05,
+          0.3
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/final_pose_2.png",
+      "pose_rad": [
+        -0.45,
+        0.35,
+        -0.3,
+        0.45,
+        -0.35,
+        0.75
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.24,
+          0.78
+        ],
+        [
+          -0.34,
+          0.34
+        ],
+        [
+          -0.02,
+          0.48
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/final_home_close.png",
+      "pose_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.16,
+          0.18
+        ],
+        [
+          -0.24,
+          0.12
+        ],
+        [
+          0.07,
+          0.34
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/final_gripper_open.png",
+      "pose_rad": [
+        0.35,
+        -0.45,
+        0.4,
+        -0.35,
+        0.25,
+        1.2
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.1514866872094297,
+          0.020375897845510235
+        ],
+        [
+          -0.16737941923868438,
+          0.004483165816255533
+        ],
+        [
+          0.17536099433642555,
+          0.34722357939136544
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/final_gripper_closed.png",
+      "pose_rad": [
+        0.35,
+        -0.45,
+        0.4,
+        -0.35,
+        0.25,
+        0.0
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.12437492409047492,
+          0.047521230990627564
+        ],
+        [
+          -0.167412989264847,
+          0.004483165816255505
+        ],
+        [
+          0.17512388107972648,
+          0.34702003616082894
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/final_collision_overlay.png",
+      "pose_rad": [
+        0.35,
+        -0.45,
+        0.4,
+        -0.35,
+        0.25,
+        0.15
+      ],
+      "official_only": false,
+      "collision_overlay": true,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.17,
+          0.18
+        ],
+        [
+          -0.24,
+          0.13
+        ],
+        [
+          0.06,
+          0.36
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/official_vs_final_overlay.png",
+      "pose_rad": [
+        0.35,
+        -0.45,
+        0.4,
+        -0.35,
+        0.25,
+        0.15
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": true,
+      "bounds_m": [
+        [
+          -0.17,
+          0.18
+        ],
+        [
+          -0.24,
+          0.13
+        ],
+        [
+          0.06,
+          0.36
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/close_m1_m2.png",
+      "pose_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.095,
+          0.035
+        ],
+        [
+          -0.065,
+          0.065
+        ],
+        [
+          0.07139966080604834,
+          0.20139966080604835
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/close_m2_m3.png",
+      "pose_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.095,
+          0.035
+        ],
+        [
+          -0.065,
+          0.065
+        ],
+        [
+          0.09979966080604835,
+          0.22979966080604836
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/close_m3_m4.png",
+      "pose_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.0970000000000001,
+          0.03699999999999991
+        ],
+        [
+          -0.067,
+          0.067
+        ],
+        [
+          0.1368,
+          0.27080000000000004
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/close_m4_m5.png",
+      "pose_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.09500000000000026,
+          0.03499999999999974
+        ],
+        [
+          -0.065,
+          0.065
+        ],
+        [
+          0.18829999999999997,
+          0.31829999999999997
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/close_m5_m6.png",
+      "pose_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.09500000000000035,
+          0.034999999999999656
+        ],
+        [
+          -0.089,
+          0.041
+        ],
+        [
+          0.2108,
+          0.3408
+        ]
+      ]
+    },
+    {
+      "file": "captures/mechanical_assembly_final/close_gripper.png",
+      "pose_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "official_only": false,
+      "collision_overlay": false,
+      "official_final_overlay": false,
+      "bounds_m": [
+        [
+          -0.09900000000000035,
+          0.03899999999999966
+        ],
+        [
+          -0.14600000000000002,
+          -0.008000000000000007
+        ],
+        [
+          0.20679999999999998,
+          0.3448
+        ]
+      ]
+    }
+  ]
+}

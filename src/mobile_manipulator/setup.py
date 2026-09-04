@@ -8,25 +8,35 @@ package_name = 'mobile_manipulator'
 
 asset_root = Path('meshes/poppy_ergo_jr')
 runtime_mesh_data_files = []
-for category in ('visual', 'collision'):
+for category, pattern in (
+    ('visual', '*.stl'),
+    ('collision', '*.stl'),
+    ('official', '*.dae'),
+):
     directory = asset_root / category
     runtime_mesh_data_files.append(
         (
             'share/' + package_name + '/' + directory.as_posix(),
-            [str(path) for path in sorted(directory.glob('*.stl'))],
+            [str(path) for path in sorted(directory.glob(pattern))],
         )
     )
 
 # Source STEP/STL files stay in Git for reproducibility; Gazebo needs only runtime meshes.
-runtime_asset_files = [
+runtime_manifest_files = [
     str(asset_root / 'asset_manifest.json'),
+]
+hardware_license_files = [
     str(asset_root / 'source/hardware/LICENSE.md'),
     str(asset_root / 'source/hardware/README.md'),
+]
+official_license_files = [
+    str(asset_root / 'official/README.md'),
+    str(asset_root / 'official/LICENSE_GPL-3.0.txt'),
 ]
 
 setup(
     name=package_name,
-    version='0.3.0',
+    version='0.4.0',
     packages=[package_name],
     data_files=[
         (
@@ -38,8 +48,18 @@ setup(
         ('share/' + package_name + '/config', glob('config/*.yaml')),
         ('share/' + package_name + '/worlds', glob('worlds/*.sdf')),
         ('share/' + package_name + '/launch', glob('launch/*.launch.py')),
-        ('share/' + package_name + '/meshes/poppy_ergo_jr', runtime_asset_files[:1]),
-        ('share/' + package_name + '/meshes/poppy_ergo_jr/licenses', runtime_asset_files[1:]),
+        (
+            'share/' + package_name + '/meshes/poppy_ergo_jr',
+            runtime_manifest_files,
+        ),
+        (
+            'share/' + package_name + '/meshes/poppy_ergo_jr/licenses/hardware',
+            hardware_license_files,
+        ),
+        (
+            'share/' + package_name + '/meshes/poppy_ergo_jr/licenses/official',
+            official_license_files,
+        ),
         *runtime_mesh_data_files,
     ],
     install_requires=['setuptools'],
@@ -47,7 +67,10 @@ setup(
     zip_safe=True,
     maintainer='dryanguasr',
     maintainer_email='dryanguasr@users.noreply.github.com',
-    description='ROS 2 mobile manipulator with a CAD-derived Poppy Ergo Jr arm.',
+    description=(
+        'ROS 2 mobile manipulator with a reproducible CAD pipeline and '
+        'mechanically consolidated Poppy Ergo Jr arm.'
+    ),
     license='Apache-2.0',
     entry_points={
         'console_scripts': [

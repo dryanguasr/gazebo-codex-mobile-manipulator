@@ -205,6 +205,35 @@ def fk(joints: dict[str, ET.Element], positions: list[float]) -> np.ndarray:
     )
 
 
+def fixed_tool_fk(
+    joints: dict[str, ET.Element], positions: list[float]
+) -> np.ndarray:
+    """Compute FK to the fixed grasp frame; m6 only opens the moving jaw."""
+    transform = np.eye(4)
+    for (joint_name, expected), position in zip(
+        list(EXPECTED_JOINTS.items())[:5], positions[:5]
+    ):
+        joint = joints[joint_name]
+        origin = joint.find('origin')
+        transform = (
+            transform
+            @ origin_transform(
+                values(origin, 'xyz', [0.0, 0.0, 0.0]),
+                values(origin, 'rpy', [0.0, 0.0, 0.0]),
+            )
+            @ axis_rotation(
+                values(joint.find('axis'), 'xyz', expected['axis']), position
+            )
+        )
+    for name in ('poppy_fixed_tip_joint', 'poppy_tool_frame_joint'):
+        origin = joints[name].find('origin')
+        transform = transform @ origin_transform(
+            values(origin, 'xyz', [0.0, 0.0, 0.0]),
+            values(origin, 'rpy', [0.0, 0.0, 0.0]),
+        )
+    return transform
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('--xacro', type=Path, default=XACRO_PATH)
@@ -253,18 +282,43 @@ def main() -> int:
             }
         )
 
-    expected_meshes = [
+    runtime_meshes = [
+        'base.dae',
+        'long_U.dae',
+        'section_1.dae',
+        'section_2.dae',
+        'section_3.dae',
+        'section_4.dae',
+        'gripper.dae',
+    ]
+    teaching_meshes = [
         f'poppy_link_{index}.stl' for index in range(1, 7)
     ] + ['poppy_mount.stl']
     source_text = args.xacro.read_text(encoding='utf-8')
-    for mesh_name in expected_meshes:
-        token = f'/visual/{mesh_name}'
+    for mesh_name in runtime_meshes:
+        token = f'/official/{mesh_name}'
         if token not in source_text:
-            failures.append(f'{mesh_name}: visual mesh URI missing')
-    if 'scale=' in '\n'.join(
-        line for line in source_text.splitlines() if 'poppy_ergo_jr/visual/' in line
-    ):
+            failures.append(f'{mesh_name}: consolidated runtime visual URI missing')
+    teaching_root = (
+        REPO_ROOT / 'src' / 'mobile_manipulator' / 'meshes'
+        / 'poppy_ergo_jr' / 'visual'
+    )
+    for mesh_name in teaching_meshes:
+        if not (teaching_root / mesh_name).is_file():
+            failures.append(f'{mesh_name}: CAD-derived teaching mesh missing')
+    poppy_mesh_lines = [
+        line for line in source_text.splitlines() if 'poppy_ergo_jr/' in line
+    ]
+    if 'scale=' in '\n'.join(poppy_mesh_lines):
         failures.append('Poppy visual mesh has a URDF scale; physical 1:1 is required')
+    checks.append(
+        {
+            'name': 'official_visual_fallback_and_cad_teaching_assets_coexist',
+            'runtime_meshes': runtime_meshes,
+            'teaching_meshes': teaching_meshes,
+            'status': 'PASS',
+        }
+    )
 
     broken_uris = []
     for mesh in root.findall('.//mesh'):
@@ -306,9 +360,12 @@ def main() -> int:
     if all(name in joints for name in EXPECTED_JOINTS) and 'poppy_moving_tip_joint' in joints:
         for pose_name, positions in POSES.items():
             transform = fk(joints, positions)
+            tool_transform = fixed_tool_fk(joints, positions)
             pose_results[pose_name] = {
                 'joint_positions_rad': positions,
                 'xyz_m_from_poppy_mount': transform[:3, 3].round(9).tolist(),
+                'tool_xyz_m_from_poppy_mount': tool_transform[:3, 3].round(9).tolist(),
+                'tool_quaternion_xyzw': quaternion_xyzw(tool_transform[:3, :3]),
                 'quaternion_xyzw': quaternion_xyzw(transform[:3, :3]),
             }
         pose_points = np.array(
