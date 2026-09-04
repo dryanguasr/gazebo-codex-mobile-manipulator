@@ -1,277 +1,211 @@
-# Troubleshooting de importación CAD
+# Troubleshooting de importación CAD y ensamblaje mecánico
 
-Los primeros casos son incidencias observadas durante este hito. La segunda sección reúne fallos previsibles que no se observaron aquí.
+Este documento separa hechos observados durante la integración de Poppy de problemas comunes que no aparecieron en esta máquina. Cada incidencia incluye síntoma, causa, diagnóstico, corrección y gate de cierre.
 
 ## Incidencias observadas
 
-### El archivo STL mide solo unos cientos de bytes
+### STL descargado como puntero Git LFS
 
-**Síntoma:** `head pieza.stl` muestra `version https://git-lfs.github.com/spec/v1`.
+**Síntoma:** el supuesto STL pesa pocos cientos de bytes y comienza con version https://git-lfs.github.com/spec/v1.
 
-**Posibles causas:** el clone descargó el puntero Git LFS y no el objeto.
+**Causa:** el clone obtuvo el puntero, no el objeto LFS.
 
-**Cómo inspeccionar:** compare `wc -c`, `git show HEAD:ruta` y el campo `size` del puntero.
+**Diagnóstico:** compare wc -c, el campo size y el OID del puntero.
 
-**Corrección:** ejecute `git lfs pull` o descargue la ruta desde `media.githubusercontent.com/media/<repo>/<commit>/<ruta>`.
+**Corrección:** ejecute git lfs pull o descargue la ruta desde media.githubusercontent.com/media/repo/commit/ruta.
 
-**Cómo validar:** `sha256sum` debe coincidir con el OID LFS; `inspect_poppy_meshes.py` debe leer triángulos.
+**Validación:** SHA-256 igual al OID y el inspector debe leer triángulos.
 
 ### El mesh aparece 1000 veces mayor
 
-**Síntoma:** un bracket de centímetros reporta extensiones 34 x 20 x 45 en URDF/Gazebo.
+**Síntoma:** un bracket de centímetros mide 34 x 20 x 45 en Gazebo.
 
-**Posibles causas:** el STL usa milímetros aunque el STEP usa metros.
+**Causa observada:** los STL oficiales usan magnitudes de milímetros aunque los STEP declaran metros.
 
-**Cómo inspeccionar:** revise `CARTESIAN_POINT` y `LENGTH_UNIT` del STEP; compare con bounds del STL.
+**Diagnóstico:** contraste LENGTH_UNIT/CARTESIAN_POINT del STEP, bounds STL y una cota conocida.
 
-**Corrección:** aplique 0.001 solo al STL. No aplique otra escala al derivado ya escrito en metros.
+**Corrección:** aplique 0.001 solo a esos STL; no vuelva a escalar el derivado ya escrito en metros.
 
-**Cómo validar:** `validate_meshes.py` exige extensiones entre 5 mm y 200 mm.
+**Validación:** bounds físicos en metros y ausencia de scale distinto de 1:1 en Xacro.
 
-### Un mesh derivado parece no manifold aunque el original era watertight
+### El auditor informó non-manifold por redondeo
 
-**Síntoma:** el primer auditor informó aristas nonmanifold en la base convertida.
+**Síntoma:** un mesh originalmente cerrado parecía tener aristas inválidas.
 
-**Posibles causas:** redondear coordenadas en metros a 1e-6 fusionó detalles distintos de una micra.
+**Causa:** redondear coordenadas métricas a 1e-6 fusionó detalles geométricos distintos.
 
-**Cómo inspeccionar:** ejecute el auditor con distintas precisiones y compare número de vértices.
+**Corrección:** use 1e-9 para identidad topológica y una tolerancia distinta para generar hulls.
 
-**Corrección:** use 1e-9 para identidad topológica en metros y una tolerancia separada para convex hull.
+**Validación:** el hull es watertight y no contiene boundary edges.
 
-**Cómo validar:** el hull debe ser watertight y no tener boundary edges.
+### Xacro no encuentra ROS o el paquete
 
-### Xacro falla con PackageNotFoundError
+**Síntoma:** PackageNotFoundError al expandir.
 
-**Síntoma:** `xacro` no encuentra sus metadatos o `mobile_manipulator`.
-
-**Posibles causas:** no se cargó ROS o el workspace instalado.
-
-**Cómo inspeccionar:** examine `PYTHONPATH`, `AMENT_PREFIX_PATH` y `ros2 pkg prefix mobile_manipulator`.
+**Causa:** no se cargó /opt/ros/jazzy/setup.bash o install/setup.bash.
 
 **Corrección:**
 
-```bash
+~~~bash
 source /opt/ros/jazzy/setup.bash
 colcon build --symlink-install
 source install/setup.bash
-```
+~~~
 
-**Cómo validar:** `xacro ... | check_urdf /dev/stdin` o genere un archivo intermedio.
+**Validación:** xacro y check_urdf pasan, y ros2 pkg prefix localiza mobile_manipulator.
 
-### Xacro y spawn pasan, pero no se ve el CAD
+### Spawn y control pasan, pero Gazebo no carga CAD
 
-**Síntoma:** controladores y joint states funcionan; el log dice `Unable to find file with URI model://...` y `Failed to load geometry`.
+**Síntoma:** joint_states funciona y el log contiene Unable to find file with URI model:// o Failed to load geometry.
 
-**Posibles causas:** Gazebo convirtió `package://` a `model://` sin un resource path compatible.
+**Causa:** Gazebo Sim 8 reinterpretó package:// sin un resource path compatible.
 
-**Cómo inspeccionar:** busque `[Err]`, `SystemPaths`, `MeshManager` y `SceneManager` en `launch.log`.
+**Corrección:** use file://$(find mobile_manipulator)/meshes/... y asegure que setup.py instala visual/collision.
 
-**Corrección:** use `file://$(find mobile_manipulator)/meshes/...` y asegure que `setup.py` instala los archivos.
+**Validación:** el URDF expandido apunta a archivos existentes y el diagnóstico rechaza cualquier [Err] de carga.
 
-**Cómo validar:** el URDF expandido debe contener una ruta absoluta existente y `run_diagnostic.sh` debe pasar su gate de log.
+### Joints responden, pero el robot parece desarmado
 
-### El joint gira, pero el eje no coincide con la mecánica
+**Síntoma:** los seis joints alcanzan consignas, pero brackets no coinciden, hay piezas flotantes o las articulaciones giran fuera del horn.
 
-**Síntoma:** el primer ensamblaje tenía offsets plausibles y control correcto, pero los centros no coincidían con horns.
+**Causa observada:** origins/ejes formaban una cadena matemática válida, pero encadenaban m2–m6 casi solo sobre Z e ignoraban rotaciones de 90° y desplazamientos X/Y de la mecánica. Además, varios meshes seguían en el frame CAD equivocado.
 
-**Posibles causas:** se usó el tamaño total del bracket como distancia entre ejes; el origen STL era de ensamblaje.
+**Por qué pasó:** check_urdf valida sintaxis/topología; ros2_control y joint_states validan interfaces/estado. Ninguno demuestra que el frame corresponda al pivote físico.
 
-**Cómo inspeccionar:** compare extremos STEP/STL, centros circulares, guía de montaje y transform acumulado.
+**Diagnóstico:** audite joint por joint y cuerpo rígido por cuerpo rígido usando simultáneamente CAD, guía de montaje y URDF oficial. Compare centros de horns, ejes, landmarks, FK y una vista cercana en varias poses.
 
-**Corrección:** vuelva a medir el centro del eje. En este modelo se corrigieron a 32.8, 24, 54, 45, 48 y 58 mm.
+**Corrección aplicada:** se portaron y verificaron los transforms oficiales m1–m6; los meshes se reexpresaron en sus frames; la mordaza fija quedó en link 5 y la móvil en link 6.
 
-**Cómo validar:** dos poses con signos opuestos deben llegar numéricamente y los TF deben formar una cadena continua.
+**Validación:** validate_mechanical_assembly.py compara transforms/FK; run_diagnostic.sh compara FK independiente con TF; inspección visual confirma continuidad. La captura del fallo se conserva en captures/cad_import/robot_pose_a_isometric.png.
+
+**Lección:** un URDF válido y joints funcionales pueden representar un ensamblaje mecánicamente falso.
+
+### La base hacía parecer diminuto al brazo 1:1
+
+**Síntoma:** Poppy parecía un microbrazo sobre un vehículo sobredimensionado.
+
+**Causa:** base .72 x .52 m y ruedas de .115 m frente a un Ergo Jr real de unos decímetros.
+
+**Corrección:** se mantuvo Poppy 1:1 y se eligió base .40 x .30 x .10 m, rueda .070 x .045 m y separación .345 m; se actualizaron masa, inercias, ruedas, odometría, cámara y mount como conjunto.
+
+**Validación:** capturas del robot compacto, movimiento lineal, odom/TF y experimento A/B.
+
+### Gmsh no estaba en PATH
+
+**Síntoma:** check_cad_dependencies.py marca gmsh ausente.
+
+**Causa:** Gmsh no es dependencia transitiva de ROS; solo lo requiere la ruta STEP.
+
+**Corrección reproducible:** sudo apt update && sudo apt install gmsh. En la sesión de cierre se usó una distribución local explícita de Gmsh 4.12.1, sin ocultarla como dependencia.
+
+### STEP en metros, salida Gmsh con magnitud mm
+
+**Síntoma:** base.step produce bounds cercanos a 150 en vez de .150 m.
+
+**Causa observada:** interpretación de unidades de este AP214 por Gmsh 4.12.1.
+
+**Corrección:** convert_step_example.py tessella primero y aplica 0.001 al output, registrándolo en summary.json. No replique esa escala sin medir otro STEP.
+
+### rosdep local no estaba inicializado
+
+**Síntoma:** rosdep install informa que primero deben ejecutarse sudo rosdep init y rosdep update.
+
+**Causa observada:** la base rosdep del host WSL no había sido inicializada; sudo no disponía de credencial no interactiva en esta sesión.
+
+**Tratamiento:** no se presentó el comando como PASS. package.xml declara python3-numpy, python3-scipy y python3-opencv; el preflight ejecutado confirmó NumPy 1.26.4 y SciPy 1.11.4. En un host nuevo, inicialice rosdep una vez y repita la instalación antes de preparar assets.
+
+**Limitación:** esta sesión verificó claves y módulos presentes, pero no una instalación rosdep desde cero.
+
+
+### Tessellation coarse incumple tolerancia
+
+**Síntoma:** clscale 1.0 difiere 1.516719 mm de la referencia.
+
+**Corrección:** clscale 0.5 produce 26 330 triángulos y error máximo de extensión de 0.000017 mm. Coarse se conserva como ejemplo docente; fine es la variante aceptada.
+
+### Gmsh avisó elementos inválidos
+
+**Síntoma:** 12 elementos inválidos en dos superficies, con finalización de 0 errores.
+
+**Tratamiento:** el warning no se ocultó. Se exigieron watertightness, bounds, orientación y volumen; fine pasó. En otro STEP, un warning combinado con geometría abierta o fuera de tolerancia debe ser FAIL.
+
+### Gazebo quedó huérfano al cerrar una corrida A/B
+
+**Síntoma:** la siguiente corrida detectó un servidor Gazebo previo pese a que el launcher había terminado.
+
+**Causa:** el proceso hijo ignoró TERM/INT durante el shutdown.
+
+**Corrección:** el runner espera un intervalo acotado, vuelve a comprobar un patrón estrecho del world_file y usa KILL solo sobre ese servidor si persiste.
+
+**Validación:** corrida A/B completa posterior sin procesos residuales y comparador PASS.
+
+### GUI abre, pero no se pudo capturar el overlay nativo
+
+**Síntoma:** WSLg mostró Gazebo, pero el helper de automatización falló con helper_unknown_error: setup refresh had errors; una captura X11 resultó negra.
+
+**Corrección alternativa:** generate_collision_preview.py crea un URDF estático con collisions duplicadas como visual cian o collision-only. Se renderizó desde Gazebo y se guardó en captures/mechanical_assembly/.
+
+**Limitación:** esta evidencia comprueba alineación geométrica, pero no se presenta como captura del overlay interactivo nativo.
 
 ## Problemas comunes adicionales no observados
 
+### FreeCAD o su módulo Python no está disponible
+
+La GUI puede existir aunque import FreeCAD falle desde Python del sistema. Use FreeCAD CLI/su intérprete o el flujo Gmsh documentado; registre versión y PYTHONPATH, sin mezclar entornos silenciosamente.
+
+### STEP no abre o contiene múltiples solids
+
+Revise versión AP, unidades y reparación del B-rep. Exporte explícitamente cada sólido/cuerpo rígido que corresponda a un link; no fusione piezas que deban moverse entre sí.
+
+### Tessellation excesivamente densa o gruesa
+
+Una malla densa aumenta disco y coste; una gruesa pierde curvas, agujeros y bounds. Genere al menos dos resoluciones y compare triángulos, tamaño, cotas y apariencia. La resolución de visual y la de collision son decisiones distintas.
+
 ### Mesh no encontrado después de instalar
 
-**Síntoma:** la ruta existe en `src/` pero no bajo `install/.../share/<paquete>`.
-
-**Posibles causas:** `setup.py` o CMake no incluye subdirectorios; se añadió el archivo después del build.
-
-**Cómo inspeccionar:** `find install/<paquete>/share/<paquete>/meshes -type f -o -type l`.
-
-**Corrección:** instale cada directorio de assets y reconstruya.
-
-**Cómo validar:** resuelva la URI del URDF expandido y ejecute `test -e`.
-
-### Formato no soportado
-
-**Síntoma:** CAD abre en el modelador, pero Gazebo no carga STEP.
-
-**Posibles causas:** URDF/Gazebo espera una malla, no un B-rep STEP.
-
-**Cómo inspeccionar:** revise extensión y log de MeshManager.
-
-**Corrección:** triangule a STL/DAE/OBJ con tolerancia documentada.
-
-**Cómo validar:** registre bounds y conteo de triángulos antes de integrar.
+La ruta puede existir en src pero faltar en install/share. Revise setup.py/CMake, reconstruya y resuelva la URI desde el URDF expandido. source/ no se instala por diseño; visual/, collision/, manifest y licencia sí.
 
 ### Normales invertidas
 
-**Síntoma:** caras desaparecen o la iluminación parece interior.
-
-**Posibles causas:** winding inconsistente tras rotar o combinar triángulos.
-
-**Cómo inspeccionar:** calcule `cross(v1-v0, v2-v0)` y volumen firmado.
-
-**Corrección:** oriente faces hacia fuera y regenere normales.
-
-**Cómo validar:** render desde ambos lados y compruebe volumen firmado consistente.
+Caras que desaparecen o iluminación interior indican winding inconsistente. Calcule normales y volumen firmado, corrija el orden de vértices y renderice desde ambos lados.
 
 ### Materiales o texturas ausentes
 
-**Síntoma:** DAE/OBJ aparece blanco.
+En DAE/OBJ, revise rutas relativas, MTL y archivos instalados. Pruebe desde install, no solo desde src.
 
-**Posibles causas:** URI de textura relativa rota, MTL no instalado o material URDF sobrescrito.
+### Collision demasiado compleja
 
-**Cómo inspeccionar:** abra DAE/MTL como texto y resuelva cada ruta desde el share instalado.
+Un visual de decenas de miles de triángulos usado como collider reduce el real-time factor. Use primitivas, hulls o descomposición/simplificación. Compare ratio; Poppy link 6 usa 92/32168.
 
-**Corrección:** instale texturas conservando jerarquía o use material uniforme explícito.
+### Collider flotante o joint bloqueado
 
-**Cómo validar:** pruebe desde `install/`, no solo desde `src/`.
+Active collisions, revise origin y cuerpo rígido. Un collider puede estar alineado en el mesh local y mal ubicado por el joint. Pruebe joints de uno en uno y no habilite autocolisión hasta entender solapes vecinos.
 
-### Collision mesh demasiado complejo y Gazebo lento
+### Pieza desplazada o flotante
 
-**Síntoma:** baja el real-time factor al mover el brazo.
-
-**Posibles causas:** se reutilizó el visual de decenas de miles de triángulos como collider.
-
-**Cómo inspeccionar:** compare conteos en manifest y active visualización de colisiones.
-
-**Corrección:** use primitivas, hull voxelizado o varios hulls convexos.
-
-**Cómo validar:** mida el ratio; link 6 usa 92/32168.
-
-### Autocolisiones o contactos espurios
-
-**Síntoma:** el brazo vibra o no alcanza una pose.
-
-**Posibles causas:** colliders adyacentes se solapan, origen equivocado o autocolisión habilitada.
-
-**Cómo inspeccionar:** muestre collisions, consulte contactos y pruebe joints uno por uno.
-
-**Corrección:** reduzca envelopes, separe colliders vecinos y defina política de self-collision explícita.
-
-**Cómo validar:** ejecute dos poses y compruebe error final, velocidad y contactos.
-
-### Link desplazado o pieza flotante
-
-**Síntoma:** una pieza está separada aunque el joint state es correcto.
-
-**Posibles causas:** translation aplicada en el mesh y otra vez en `<visual><origin>`.
-
-**Cómo inspeccionar:** compute bounds en frame local y TF acumulado.
-
-**Corrección:** elija un solo lugar para cada corrección; este pipeline hornea escala/reframe y deja origin visual cero.
-
-**Cómo validar:** compare min/max del asset con origen del joint hijo.
+Busque una transformación aplicada tanto durante export como en visual/origin, o una pieza asignada al link incorrecto. Mantenga una sola fuente de verdad para cada reframe y valide landmarks.
 
 ### Joint invertido
 
-**Síntoma:** llega al valor negativo cuando se ordena positivo.
+Ordene una variación pequeña positiva y observe TF, no solo joint_states. Corrija el signo del axis o el frame completo según la mecánica; documente la convención.
 
-**Posibles causas:** axis con signo contrario o frame rotado.
+### Masa o inercia inválida
 
-**Cómo inspeccionar:** ordene una pose pequeña y compare `/joint_states`.
+Masa cero, unidades kg·mm² o tensor no positivo definido pueden desestabilizar Gazebo. Calcule en SI, verifique eigenvalores/desigualdades triangulares y ubique el centro de masa dentro de una envolvente plausible.
 
-**Corrección:** cambie el signo de `axis` o redefina el frame, documentando la convención.
+### Diferencias de ejes entre CAD y Gazebo
 
-**Cómo validar:** use poses con signos alternos; no basta que el controller esté activo.
+Z-up/Y-up y transforms de exportación pueden rotar el modelo. Use un cubo o landmarks de referencia y una matriz explícita; compare bounds y ejes en todas las herramientas.
 
-### Piezas flotantes en un link compuesto
+## Checklist de diagnóstico
 
-**Síntoma:** una mitad del bracket se mueve con el link equivocado.
-
-**Posibles causas:** clasificación rígida incorrecta.
-
-**Cómo inspeccionar:** pregunte qué piezas están unidas al rotor y cuáles al estator de cada servo.
-
-**Corrección:** mueva cada mesh al link del cuerpo rígido correcto. La mordaza fija pertenece a link 5 y la rotativa a link 6.
-
-**Cómo validar:** anime solo m6.
-
-### Inercia inválida o masa irreal
-
-**Síntoma:** Gazebo ignora el link, lanza warnings o la dinámica explota.
-
-**Posibles causas:** masa cero, tensor negativo o unidades kg·mm² usadas como kg·m².
-
-**Cómo inspeccionar:** eigenvalores, desigualdades triangulares y centro de masa.
-
-**Corrección:** recalcule en SI con una envolvente simple.
-
-**Cómo validar:** `validate_meshes.py` y log sin warnings críticos.
-
-### Xacro válido, robot visualmente incorrecto
-
-**Síntoma:** XML y árbol pasan, pero escala/orientación es absurda.
-
-**Posibles causas:** los validadores sintácticos no interpretan apariencia.
-
-**Cómo inspeccionar:** bounds, TF, ejes y log de carga; use GUI cuando esté disponible.
-
-**Corrección:** valide cada link aislado antes del ensamblaje.
-
-**Cómo validar:** combine inspección visual con dos poses numéricas.
-
-### Diferencias Blender/CAD/Gazebo
-
-**Síntoma:** la pieza cambia de eje vertical o escala entre herramientas.
-
-**Posibles causas:** Z-up/Y-up, unidades de escena y export transforms.
-
-**Cómo inspeccionar:** exporte un cubo de referencia y registre matriz de transformación.
-
-**Corrección:** aplique una matriz explícita en script, no una rotación manual sin registro.
-
-**Cómo validar:** bounds y landmarks deben coincidir en los tres entornos.
-
-## Incidencias observadas al cerrar la ruta STEP → mesh
-
-### Gmsh no estaba instalado como herramienta del sistema
-
-**Síntoma:** `scripts/cad/check_cad_dependencies.py` informa que `gmsh` no está en `PATH`.
-
-**Causa observada:** Gmsh no es una dependencia transitiva de ROS ni de `rosdep`; es una herramienta CAD opcional para la ruta 2.
-
-**Corrección reproducible:** `sudo apt update && sudo apt install gmsh`. El preflight mantiene NumPy/SciPy como obligatorios para los scripts actuales y marca Gmsh como requerido solo al convertir STEP.
-
-### El STEP AP214 declara metros, pero Gmsh 4.12.1 expuso coordenadas con magnitud de mm
-
-**Síntoma:** `base.step` produce bounds cercanos a 150 unidades, cuando el ensamblaje físico mide cerca de 0.15 m.
-
-**Causa observada:** diferencia de interpretación/unidades entre este archivo AP214 y Gmsh 4.12.1.
-
-**Corrección:** `convert_step_example.py` tessella primero y aplica escala explícita `0.001` al STL de salida; registra esa decisión, bounds y tolerancias en `summary.json`. No copie esta escala a otro STEP sin comprobar una cota conocida.
-
-### Tessellation coarse no cumple la tolerancia geométrica
-
-**Síntoma:** con `-clscale 1.0`, la mayor diferencia de extensión frente al STL de referencia es 1.52 mm.
-
-**Corrección:** para este ejemplo se usa `-clscale 0.5`, que produce 26 330 triángulos y una diferencia máxima de 0.000000017 m. La variante coarse se conserva como demostración de la decisión de resolución, no como mesh de runtime.
-
-### Warnings de elementos inválidos al tessellar
-
-**Síntoma:** Gmsh informó 12 elementos inválidos en dos superficies, aunque finalizó con `0 errors`.
-
-**Corrección y validación:** no se ocultó el warning: queda en el reporte. El mesh fine fue watertight, conservó bounds/orientación y pasó volumen/tolerancias. En otro CAD, warnings o un mesh no watertight deben investigarse antes de integrarlo.
-
-## Problemas comunes adicionales no observados en este cierre
-
-### FreeCAD o su módulo Python no está disponible
-
-Instale `freecad` si su distribución lo ofrece o prefiera el flujo Gmsh documentado. `import FreeCAD` desde el Python del sistema puede fallar aunque la GUI exista, porque FreeCAD usa su propio intérprete/módulos; ejecute su CLI o documente `PYTHONPATH` en vez de mezclar intérpretes silenciosamente.
-
-### STEP no abre o contiene múltiples sólidos
-
-Compruebe la versión AP, unidades y reparación del B-rep en una herramienta CAD. Para múltiples sólidos, exporte cada link rígido o el ensamblaje elegido de manera explícita; no deje que el exportador combine piezas que deben moverse con joints distintos.
-
-### Tessellation demasiado densa o demasiado gruesa
-
-Una malla densa aumenta disco, carga y coste de collision; una gruesa pierde curvatura/bordes. Genere al menos dos resoluciones, compare triángulos, tamaño y bounds frente a cotas conocidas, y mantenga el visual y collision como decisiones separadas.
-
-### Mesh desplazado, eje distinto o rutas rotas tras instalar
-
-Ponga el frame del link sobre el eje de joint y registre la matriz de corrección. Tras `colcon build --symlink-install`, inspeccione el share instalado y pruebe las URI Xacro/Gazebo; los CAD de `source/` no se instalan por diseño, pero visual/collision, manifest y atribución sí.
+1. ¿El archivo es el objeto real y su hash coincide?
+2. ¿Las dimensiones corresponden a una cota conocida en metros?
+3. ¿Visual y collision están separados?
+4. ¿Cada pieza pertenece al cuerpo rígido correcto?
+5. ¿Cada joint coincide con el centro y eje físico del horn?
+6. ¿FK independiente coincide con TF para varias poses?
+7. ¿Home y dos poses se ven ensamblados?
+8. ¿Collisions están alineadas y no flotan?
+9. ¿Masa/inercia y odometría usan la misma geometría?
+10. ¿Cámara, detector, tracking y A/B siguen pasando?

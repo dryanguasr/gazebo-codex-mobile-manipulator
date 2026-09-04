@@ -2,6 +2,8 @@
 
 ## Estado validado
 
+
+> Actualización: el pipeline CAD de este documento permanece válido, pero la geometría y las métricas fueron superadas por el cierre mecánico basado en el baseline 70c5d6fc30ea60e6a96166c816fa8106855000c7.
 El baseline técnico preservado es `d146b36586c0b73a5892290b56d6d9c7b532da9d`; `aa1ef71901b46f2b4caf2a6cc17db494b88a9be7` solo documentaba ese SHA. Este cierre se valida sobre ROS 2 Jazzy y Gazebo Sim 8 sin rediseñar la base 4WD, el brazo Poppy de seis joints, percepción HSV, `visual_tracker` ni el experimento A/B.
 
 Código del repositorio: Apache-2.0. Hardware Poppy, CAD oficiales y derivados: CC BY-SA 4.0; la licencia y README de hardware siguen instalándose junto a los assets de runtime.
@@ -48,49 +50,28 @@ Las tres estrategias están presentes y documentadas: primitivas `box` para link
 
 ## Evidencia visual
 
-WSLg expone `DISPLAY=:0` y `WAYLAND_DISPLAY=wayland-0`, pero el helper Windows de automatización falló antes de inicializar con `windows sandbox failed: helper_unknown_error: setup refresh had errors`. No se declara por tanto una inspección GUI directa ni se inventan capturas de collision overlay.
+Este informe documentó el cierre inicial del pipeline. La auditoría humana posterior descubrió un ensamblaje mecánico incorrecto pese a los PASS sintácticos y de control. Ese fallo se corrigió y su evidencia autoritativa está en [mechanical_assembly_validation.md](mechanical_assembly_validation.md).
 
-Como alternativa limitada y reproducible se extrajeron frames de las corridas Gazebo headless ya validadas:
-
-- `captures/cad_import/robot_pose_a_isometric.png` (t=5 s)
-- `captures/cad_import/robot_pose_b_isometric.png` (t=35 s)
-- `captures/cad_import/robot_close_tracking.png` (t=18 s)
-
-Proceden de los vídeos de cámara isométrica/perspectiva de 60 fps. Complementan, pero no reemplazan, la inspección GUI. La evidencia de collision disponible es numérica y exportable: los STL de `collision/`, sus bounds/triángulos en el manifest y las comprobaciones de `validate_meshes.py`; queda pendiente una captura de overlay de colisiones en una sesión con GUI funcional.
+Las nuevas capturas Gazebo de home, dos poses, detalle del brazo 1:1 y robot compacto están en captures/mechanical_assembly/. También se generaron vistas overlay/collision-only reproducibles. Gazebo GUI abrió bajo WSLg, pero la automatización no logró capturar el overlay nativo; la alternativa está etiquetada y no se equipara con inspección GUI interactiva.
 
 ## Regresión ROS/Gazebo
 
-Orden ejecutado:
+El pipeline STEP de este informe sigue pasando sin cambios conceptuales. Tras la corrección mecánica se repitieron build, 7 tests, diagnóstico y A/B. El diagnóstico actual añade FK independiente contra TF y pasa con errores menores a 0.48 mm. La base compacta desplazó .244 m con odom/TF coherentes; cámara y detector permanecen operativos.
 
-```bash
-source /opt/ros/jazzy/setup.bash
-colcon build --symlink-install
-source install/setup.bash
-colcon test --event-handlers console_direct+
-colcon test-result --verbose
-python3 scripts/cad/prepare_poppy_assets.py
-python3 scripts/cad/convert_step_example.py
-python3 scripts/cad/validate_meshes.py
-bash scripts/run_diagnostic.sh
-bash scripts/run_experiments.sh
-```
-
-Resultados: build correcto; 7 tests, 0 errores/fallos/skips; conversión STEP PASS; CAD validator PASS. Diagnóstico PASS: spawn y carga de meshes, seis joints, dos poses (error máximo `3.326416919691155e-11` rad), base/odom/TF con 0.676 m, cámara fx 554.383 px, detector y tracking activos.
-
-Experimento final PASS: A obtuvo 100 % de detección y MAE de distancia objetivo 0.5283678 m; B obtuvo 100 %, MAE 0.0425082 m, desplazamiento 0.3122548 m y mejora 91.9548 %. Los criterios del comparador siguen satisfechos.
+El experimento posterior obtuvo 100 % de detección en A y B; el MAE objetivo cambió de .528910 m a .149327 m, mejora 71.77 %, con desplazamiento B de .745751 m. El comparador sigue en PASS. Los valores de este párrafo sustituyen las métricas históricas del cierre inicial.
 
 ## Problemas reales y límites restantes
 
-Se observaron Gmsh ausente de PATH en la instalación base, interpretación mm-like del STEP por Gmsh y warnings de elementos inválidos sin error final; están separados de problemas comunes adicionales en el troubleshooting. La única limitación abierta es visual: faltó un overlay GUI de collision porque el helper de captura falló; el procedimiento y evidencia alternativa quedan explícitos, sin equipararlos a una auditoría GUI.
+Los problemas de Gmsh, unidades AP214 y warnings de tessellation aquí descritos siguen siendo reales. La limitación visual quedó parcialmente cerrada mediante cámaras Gazebo y un preview collision reproducible; continúa faltando una captura verificable del overlay nativo de la GUI. La auditoría posterior también documentó el falso positivo geométrico y un proceso Gazebo huérfano durante shutdown. Consulte el informe mecánico para causa, corrección y límites actuales.
 
 ## Handoff para actualización del tutorial ChatGPT
 
-Orden recomendado de lectura:
+Este informe debe leerse como base del pipeline CAD, seguido por:
 
-1. `docs/cad_import_pipeline_closure_report.md`
-2. `results/verified/cad_step_conversion/summary.json`
-3. `scripts/cad/convert_step_example.py` y `scripts/cad/check_cad_dependencies.py`
-4. `scripts/cad/validate_meshes.py`, `scripts/cad/prepare_poppy_assets.py` y `asset_manifest.json`
-5. `docs/cad_import_tutorial.md` y `docs/cad_import_troubleshooting.md`
-6. `src/mobile_manipulator/setup.py`, `package.xml`, Xacro y `results/verified/diagnostic/summary.json`
-7. `results/verified/experiments/comparison.json` y `captures/cad_import/`
+1. docs/mechanical_assembly_closure_report.md;
+2. docs/mechanical_assembly_validation.md;
+3. docs/cad_import_tutorial.md y docs/cad_import_troubleshooting.md;
+4. results/verified/cad_step_conversion/summary.json y results/verified/mechanical_assembly/summary.json;
+5. results/verified/diagnostic/summary.json y results/verified/experiments/comparison.json.
+
+El informe mecánico posterior es la autoridad para frames, base, evidencia visual y métricas de regresión actuales.

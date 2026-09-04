@@ -4,6 +4,7 @@ import math
 import re
 import sys
 from pathlib import Path
+import xml.etree.ElementTree as ET
 
 
 JOINTS = [
@@ -15,8 +16,8 @@ JOINTS = [
     'poppy_m6_joint',
 ]
 POSES = {
-    'pose_1': dict(zip(JOINTS, [0.25, -0.35, 0.30, -0.25, 0.20, 0.45])),
-    'pose_2': dict(zip(JOINTS, [-0.20, 0.30, -0.25, 0.35, -0.30, 0.85])),
+    'pose_1': dict(zip(JOINTS, [0.35, -0.45, 0.40, -0.35, 0.25, 0.15])),
+    'pose_2': dict(zip(JOINTS, [-0.45, 0.35, -0.30, 0.45, -0.35, 0.75])),
 }
 TOLERANCE_RAD = 0.03
 
@@ -86,6 +87,50 @@ def validate_pose(results, label, expected):
     return observed, errors
 
 
+def tf_pose(path):
+    text = path.read_text(encoding='utf-8')
+    translation_match = re.search(
+        r'Translation: \[([-+0-9.eE]+), ([-+0-9.eE]+), ([-+0-9.eE]+)\]',
+        text,
+    )
+    quaternion_match = re.search(
+        r'Quaternion \(xyzw\) \[([-+0-9.eE]+), ([-+0-9.eE]+), '
+        r'([-+0-9.eE]+), ([-+0-9.eE]+)\]',
+        text,
+    )
+    require(translation_match is not None, f'Could not parse TF XYZ: {path}')
+    require(quaternion_match is not None, f'Could not parse TF quaternion: {path}')
+    return (
+        [float(value) for value in translation_match.groups()],
+        [float(value) for value in quaternion_match.groups()],
+    )
+
+
+def fixed_base_to_mount_offset(robot_urdf):
+    root = ET.parse(robot_urdf).getroot()
+    joints = {joint.attrib['name']: joint for joint in root.findall('joint')}
+    offset = [0.0, 0.0, 0.0]
+    for name in ('base_fixed', 'poppy_mount_joint'):
+        origin = joints[name].find('origin')
+        rpy = [
+            float(value)
+            for value in origin.attrib.get('rpy', '0 0 0').split()
+        ]
+        require(
+            max(abs(value) for value in rpy) < 1.0e-12,
+            f'{name} rotation requires full matrix composition',
+        )
+        xyz = [float(value) for value in origin.attrib['xyz'].split()]
+        offset = [current + delta for current, delta in zip(offset, xyz)]
+    return offset
+
+
+def quaternion_distance(first, second):
+    direct = math.sqrt(sum((a - b) ** 2 for a, b in zip(first, second)))
+    antipodal = math.sqrt(sum((a + b) ** 2 for a, b in zip(first, second)))
+    return min(direct, antipodal)
+
+
 def main():
     results = Path(sys.argv[1])
     initial_positions = joint_positions(results / 'joint_states.txt')
@@ -136,6 +181,45 @@ def main():
         )
         require(delta > 0.15, f'{joint} appears blocked across the two poses')
 
+    mechanical = json.loads(
+        (results / 'mechanical_assembly.json').read_text(encoding='utf-8')
+    )
+    base_to_mount = fixed_base_to_mount_offset(results / 'robot.urdf')
+    tip_fk_tf_results = {}
+    for label in POSES:
+        expected_fk = mechanical['fk'][label]
+        expected_xyz = [
+            value + offset
+            for value, offset in zip(
+                expected_fk['xyz_m_from_poppy_mount'],
+                base_to_mount,
+            )
+        ]
+        observed_xyz, observed_quaternion = tf_pose(
+            results / f'tip_tf_{label}.txt'
+        )
+        xyz_error = math.dist(expected_xyz, observed_xyz)
+        quaternion_error = quaternion_distance(
+            expected_fk['quaternion_xyzw'],
+            observed_quaternion,
+        )
+        require(
+            xyz_error < 0.002,
+            f'{label} FK/TF position mismatch: {xyz_error} m',
+        )
+        require(
+            quaternion_error < 0.003,
+            f'{label} FK/TF orientation mismatch: {quaternion_error}',
+        )
+        tip_fk_tf_results[label] = {
+            'expected_xyz_m': expected_xyz,
+            'observed_xyz_m': observed_xyz,
+            'position_error_m': xyz_error,
+            'expected_quaternion_xyzw': expected_fk['quaternion_xyzw'],
+            'observed_quaternion_xyzw': observed_quaternion,
+            'quaternion_l2_error_sign_invariant': quaternion_error,
+        }
+
     summary = {
         'status': 'passed',
         'odometry_topic': '/base_controller/odom',
@@ -148,6 +232,7 @@ def main():
         'initial_estimated_ball_distance_m': estimated_distance_m,
         'arm_joint_names': JOINTS,
         'arm_tolerance_rad': TOLERANCE_RAD,
+        'tip_fk_tf_validation': tip_fk_tf_results,
         'arm_pose_results': pose_results,
     }
     (results / 'summary.json').write_text(

@@ -1,22 +1,19 @@
-A message was lost!!!
-	total count change:1
-	total count: 1---
 header:
   stamp:
-    sec: 29
-    nanosec: 830000000
+    sec: 38
+    nanosec: 390000000
   frame_id: odom
 child_frame_id: base_footprint
 pose:
   pose:
     position:
-      x: 0.6759999999995993
-      y: 6.409454903835507e-13
+      x: 0.243999999994654
+      y: -1.4060201043805724e-14
       z: 0.0
     orientation:
       x: 0.0
       y: 0.0
-      z: 1.2304976653441722e-14
+      z: -7.522422431247128e-15
       w: 1.0
   covariance:
   - 0.0
@@ -58,13 +55,13 @@ pose:
 twist:
   twist:
     linear:
-      x: 4.2743586371667413e-16
+      x: 1.8041124379604478e-16
       y: 0.0
       z: 0.0
     angular:
       x: 0.0
       y: 0.0
-      z: 7.371116298385134e-28
+      z: 4.0389678347315807e-29
   covariance:
   - 0.0
   - 0.0

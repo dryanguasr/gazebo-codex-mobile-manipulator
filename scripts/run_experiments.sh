@@ -34,9 +34,15 @@ run_case() {
   fi
   test -s "$OUTPUT_DIR/${label}.csv"
   test -s "$OUTPUT_DIR/${label}_summary.json"
+  for _ in $(seq 1 40); do
+    if ! pgrep -f "gz sim.*ball_arena.sdf" >/dev/null; then
+      break
+    fi
+    sleep 0.25
+  done
   if pgrep -f "gz sim.*ball_arena.sdf" >/dev/null; then
     pkill -f "gz sim.*ball_arena.sdf" || true
-    echo "Gazebo server remained after case $label" >&2
+    echo "Gazebo server remained 10 s after case $label" >&2
     return 1
   fi
 }

@@ -29,3 +29,7 @@ def main() -> None:
     if missing:
         raise SystemExit("CAD preflight failed: install the missing required packages above")
     print("CAD preflight passed. Case B additionally requires gmsh.")
+
+
+if __name__ == "__main__":
+    main()

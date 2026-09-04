@@ -40,12 +40,19 @@ STEP_FILES = {
     'lateral_parts.step': 'f4a3494e56e9543655446a23b73b3e583146f86940e4dd88ba044188f36d28ed',
     'tools/gripper.step': 'f67540cef54d364f57d19afdf3019e4fe453319d8034a073f4e73564e3c8e9ee',
 }
-RX_MINUS_90 = np.array(
-    [[1.0, 0.0, 0.0], [0.0, 0.0, 1.0], [0.0, -1.0, 0.0]]
+RX_PLUS_90 = np.array(
+    [[1.0, 0.0, 0.0], [0.0, 0.0, -1.0], [0.0, 1.0, 0.0]]
 )
-RZ_MINUS_90 = np.array(
-    [[0.0, 1.0, 0.0], [-1.0, 0.0, 0.0], [0.0, 0.0, 1.0]]
+RY_PLUS_90 = np.array(
+    [[0.0, 0.0, 1.0], [0.0, 1.0, 0.0], [-1.0, 0.0, 0.0]]
 )
+RY_MINUS_90 = np.array(
+    [[0.0, 0.0, -1.0], [0.0, 1.0, 0.0], [1.0, 0.0, 0.0]]
+)
+RZ_180 = np.array(
+    [[-1.0, 0.0, 0.0], [0.0, -1.0, 0.0], [0.0, 0.0, 1.0]]
+)
+M6_CAD_TO_M5_LINK = RY_MINUS_90 @ RZ_180
 
 
 def sha256(path: Path) -> str:
@@ -118,31 +125,41 @@ def main() -> None:
     base += base_shift
 
     link_1 = transform_triangles(source_meshes['long_U.stl'], scale=0.001)
-    link_2 = np.concatenate(
-        [
-            transform_triangles(source_meshes['horn2horn.stl'], scale=0.001),
-            transform_triangles(source_meshes['side2side.stl'], scale=0.001),
-        ]
+    link_2 = transform_triangles(
+        np.concatenate(
+            [source_meshes['horn2horn.stl'], source_meshes['side2side.stl']]
+        ),
+        scale=0.001,
+        rotation=RY_PLUS_90,
     )
-    link_3 = transform_triangles(source_meshes['short_U.stl'], scale=0.001)
-    link_4 = link_2.copy()
+    link_3 = transform_triangles(
+        source_meshes['short_U.stl'], scale=0.001, rotation=RY_PLUS_90
+    )
+    link_4 = transform_triangles(
+        np.concatenate(
+            [source_meshes['horn2horn.stl'], source_meshes['side2side.stl']]
+        ),
+        scale=0.001,
+        rotation=RX_PLUS_90,
+    )
 
     fixation = transform_triangles(
         source_meshes['tools/gripper-fixation.stl'],
         scale=0.001,
-        rotation=RX_MINUS_90,
+        rotation=M6_CAD_TO_M5_LINK,
+        translation=np.array([0.0, -0.058, 0.0]),
     )
     fixed_jaw = transform_triangles(
         source_meshes['tools/gripper-fixed_part.stl'],
         scale=0.001,
-        rotation=RZ_MINUS_90,
-        translation=np.array([0.0, 0.0, 0.058]),
+        rotation=M6_CAD_TO_M5_LINK,
+        translation=np.array([0.0, -0.058, 0.0]),
     )
     link_5 = np.concatenate([fixation, fixed_jaw])
     link_6 = transform_triangles(
         source_meshes['tools/gripper-rotative_part.stl'],
         scale=0.001,
-        rotation=RZ_MINUS_90,
+        rotation=RZ_180,
     )
     camera_support = transform_triangles(
         source_meshes['support_camera.stl'], scale=0.001
@@ -191,38 +208,33 @@ def main() -> None:
         'poppy_link_2.stl': {
             'inputs': ['horn2horn.stl', 'side2side.stl'],
             'scale': 0.001,
-            'reason': 'paired bracket halves share the official assembly frame',
+            'rotation': 'Ry(+90 deg): CAD +Z becomes link +X',
+            'reason': 'express the paired bracket in the official section_1 frame',
         },
         'poppy_link_3.stl': {
             'inputs': ['short_U.stl'],
             'scale': 0.001,
-            'reason': 'preserve the measured 44-54 mm offset from its parent axis',
+            'rotation': 'Ry(+90 deg): CAD +Z becomes link +X',
+            'reason': 'express the short U in the official section_2 frame',
         },
         'poppy_link_4.stl': {
             'inputs': ['horn2horn.stl', 'side2side.stl'],
             'scale': 0.001,
-            'reason': 'same repeated paired bracket as link 2',
+            'rotation': 'Rx(+90 deg): CAD +Z becomes link -Y',
+            'reason': 'express the repeated bracket in the official section_3 frame',
         },
         'poppy_link_5.stl': {
-            'inputs': [
-                'tools/gripper-fixation.stl',
-                'tools/gripper-fixed_part.stl',
-            ],
+            'inputs': ['tools/gripper-fixation.stl', 'tools/gripper-fixed_part.stl'],
             'scale': 0.001,
-            'rotations': {
-                'gripper-fixation.stl': 'Rx(-90 deg): CAD -Y becomes link +Z',
-                'gripper-fixed_part.stl': 'Rz(-90 deg): CAD +Y becomes tool +X',
-            },
-            'translation_m': {
-                'gripper-fixed_part.stl': [0.0, 0.0, 0.058]
-            },
-            'reason': 'place the fixed jaw on the parent side of motor m6',
+            'rotation': 'Ry(-90 deg) @ Rz(180 deg)',
+            'translation_m': [0.0, -0.058, 0.0],
+            'reason': 'fixed jaw stays on the m5 body and is placed about the m6 axis',
         },
         'poppy_link_6.stl': {
             'inputs': ['tools/gripper-rotative_part.stl'],
             'scale': 0.001,
-            'rotation': 'Rz(-90 deg): CAD +Y becomes tool +X',
-            'reason': 'make the original motor-axis pivot the link frame',
+            'rotation': 'Rz(180 deg): preserve the official gripper pivot frame',
+            'reason': 'moving jaw stays on the rotating m6 child body',
         },
         'poppy_camera_support.stl': {
             'inputs': ['support_camera.stl'],

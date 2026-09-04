@@ -1,5 +1,7 @@
 # Informe final: importación CAD de Poppy Ergo Jr
 
+> **Documento histórico:** conserva el primer cierre CAD y el ensamblaje que después resultó geométricamente incorrecto. No use sus frames, dimensiones de base ni métricas como estado actual; consulte [mechanical_assembly_closure_report.md](mechanical_assembly_closure_report.md).
+
 ## Resultado
 
 El brazo genérico de cuatro GDL y la pinza prismática fueron reemplazados por una cadena de seis motores basada en los STEP/STL oficiales de Poppy Ergo Jr. Los originales, derivados visuales y colisiones están físicamente separados, sus hashes y transformaciones quedan registrados y Gazebo carga todas las geometrías sin errores.

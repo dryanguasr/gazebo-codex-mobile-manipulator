@@ -17,6 +17,8 @@ set -u
 xacro src/mobile_manipulator/urdf/mobile_manipulator.urdf.xacro \
   >"$RESULTS/robot.urdf"
 check_urdf "$RESULTS/robot.urdf" >"$RESULTS/check_urdf.txt" 2>&1
+python3 scripts/cad/validate_mechanical_assembly.py \
+  --output "$RESULTS/mechanical_assembly.json"
 
 ros2 launch mobile_manipulator sim.launch.py \
   tracking_enabled:=false \
@@ -28,7 +30,7 @@ LAUNCH_PID=$!
 cleanup() {
   kill -TERM "$LAUNCH_PID" 2>/dev/null || true
   wait "$LAUNCH_PID" 2>/dev/null || true
-  pkill -f "gz sim.*ball_arena.sdf" 2>/dev/null || true
+  pkill -KILL -f "gz sim.*ball_arena.sdf" 2>/dev/null || true
 }
 trap cleanup EXIT
 
@@ -59,6 +61,20 @@ wait_for_service() {
   return 1
 }
 
+wait_for_controller() {
+  local controller=$1
+  local response
+  for _ in $(seq 1 120); do
+    response="$(ros2 service call /controller_manager/list_controllers controller_manager_msgs/srv/ListControllers '{}' 2>/dev/null || true)"
+    if grep -Eq "name='$controller'.*state='active'" <<<"$response"; then
+      return 0
+    fi
+    sleep 0.25
+  done
+  echo "Required controller is not active: $controller" >&2
+  return 1
+}
+
 wait_for_service /controller_manager/list_controllers
 for topic in \
   /clock \
@@ -70,6 +86,10 @@ for topic in \
   /tf; do
   wait_for_publisher "$topic"
 done
+for controller in joint_state_broadcaster base_controller arm_controller; do
+  wait_for_controller "$controller"
+done
+
 
 ros2 topic list -t >"$RESULTS/topics.txt"
 ros2 service call \
@@ -127,20 +147,36 @@ grep -q 'Translation:' "$RESULTS/tf_after.txt"
 timeout 10 ros2 topic pub --once \
   /arm_controller/joint_trajectory \
   trajectory_msgs/msg/JointTrajectory \
-  '{joint_names: [poppy_m1_joint, poppy_m2_joint, poppy_m3_joint, poppy_m4_joint, poppy_m5_joint, poppy_m6_joint], points: [{positions: [0.25, -0.35, 0.30, -0.25, 0.20, 0.45], time_from_start: {sec: 2}}]}' \
+  '{joint_names: [poppy_m1_joint, poppy_m2_joint, poppy_m3_joint, poppy_m4_joint, poppy_m5_joint, poppy_m6_joint], points: [{positions: [0.35, -0.45, 0.40, -0.35, 0.25, 0.15], time_from_start: {sec: 2}}]}' \
   >"$RESULTS/arm_command_pose_1.txt" 2>&1
 sleep 3
 timeout 10 ros2 topic echo --once /joint_states \
   >"$RESULTS/joint_states_after_pose_1.txt"
+if timeout 4 ros2 run tf2_ros tf2_echo base_footprint poppy_moving_tip \
+  >"$RESULTS/tip_tf_pose_1.txt" 2>&1; then
+  :
+elif [[ $? -ne 124 ]]; then
+  exit 1
+fi
+grep -q 'Translation:' "$RESULTS/tip_tf_pose_1.txt"
+
 
 timeout 10 ros2 topic pub --once \
   /arm_controller/joint_trajectory \
   trajectory_msgs/msg/JointTrajectory \
-  '{joint_names: [poppy_m1_joint, poppy_m2_joint, poppy_m3_joint, poppy_m4_joint, poppy_m5_joint, poppy_m6_joint], points: [{positions: [-0.20, 0.30, -0.25, 0.35, -0.30, 0.85], time_from_start: {sec: 2}}]}' \
+  '{joint_names: [poppy_m1_joint, poppy_m2_joint, poppy_m3_joint, poppy_m4_joint, poppy_m5_joint, poppy_m6_joint], points: [{positions: [-0.45, 0.35, -0.30, 0.45, -0.35, 0.75], time_from_start: {sec: 2}}]}' \
   >"$RESULTS/arm_command_pose_2.txt" 2>&1
 sleep 3
 timeout 10 ros2 topic echo --once /joint_states \
   >"$RESULTS/joint_states_after_pose_2.txt"
+if timeout 4 ros2 run tf2_ros tf2_echo base_footprint poppy_moving_tip \
+  >"$RESULTS/tip_tf_pose_2.txt" 2>&1; then
+  :
+elif [[ $? -ne 124 ]]; then
+  exit 1
+fi
+grep -q 'Translation:' "$RESULTS/tip_tf_pose_2.txt"
+
 
 timeout 12 ros2 run mobile_manipulator evidence_capture \
   --ros-args -p output_dir:="$CAPTURES" \

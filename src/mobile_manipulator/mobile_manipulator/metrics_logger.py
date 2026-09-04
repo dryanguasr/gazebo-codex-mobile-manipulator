@@ -275,7 +275,9 @@ class MetricsLogger(Node):
         text_path = output_dir / f'{run_label}_summary.txt'
 
         with csv_path.open('w', newline='', encoding='utf-8') as handle:
-            writer = csv.DictWriter(handle, fieldnames=CSV_FIELDS)
+            writer = csv.DictWriter(
+                handle, fieldnames=CSV_FIELDS, lineterminator='\n'
+            )
             writer.writeheader()
             writer.writerows(self.rows)
 

@@ -1,6 +1,6 @@
 # Informe final del hito de seguimiento visual
 
-> **Documento histórico:** este informe cierra el hito perceptivo anterior. El estado actual del brazo CAD está en [cad_import_final_report.md](cad_import_final_report.md).
+> **Documento histórico:** este informe cierra el hito perceptivo anterior. El estado mecánico y las métricas actuales están en [mechanical_assembly_closure_report.md](mechanical_assembly_closure_report.md).
 
 
 ## Resultado

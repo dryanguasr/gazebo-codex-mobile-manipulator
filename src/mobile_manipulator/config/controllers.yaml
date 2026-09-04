@@ -8,8 +8,8 @@ base_controller:
   ros__parameters:
     left_wheel_names: [front_left_joint, rear_left_joint]
     right_wheel_names: [front_right_joint, rear_right_joint]
-    wheel_separation: 0.60
-    wheel_radius: 0.115
+    wheel_separation: 0.345
+    wheel_radius: 0.070
     publish_rate: 50.0
     base_frame_id: base_footprint
     odom_frame_id: odom

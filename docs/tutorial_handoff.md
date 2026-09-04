@@ -1,6 +1,6 @@
 # Transferencia para generar un tutorial
 
-> **Documento histórico:** este handoff describe el hito perceptivo previo. Para el flujo CAD→Gazebo actual, empezar por [cad_import_tutorial.md](cad_import_tutorial.md).
+> **Documento histórico:** este handoff describe el hito perceptivo previo. Para el estado actual, empezar por [mechanical_assembly_closure_report.md](mechanical_assembly_closure_report.md) y después [cad_import_tutorial.md](cad_import_tutorial.md).
 
 
 ## Uso previsto

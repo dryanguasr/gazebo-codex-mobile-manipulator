@@ -3,18 +3,18 @@
     "poppy_link_6_convex.stl": {
       "boundary_edges": 0,
       "bounds_max": [
-        0.07,
+        0.01,
         0.01,
         0.017
       ],
       "bounds_min": [
-        -0.01,
         -0.017,
+        -0.07,
         -0.017
       ],
       "extents": [
-        0.08,
         0.027,
+        0.08,
         0.034
       ],
       "nonmanifold_edges": 0,
@@ -408,14 +408,16 @@
         "horn2horn.stl",
         "side2side.stl"
       ],
-      "reason": "paired bracket halves share the official assembly frame",
+      "reason": "express the paired bracket in the official section_1 frame",
+      "rotation": "Ry(+90 deg): CAD +Z becomes link +X",
       "scale": 0.001
     },
     "poppy_link_3.stl": {
       "inputs": [
         "short_U.stl"
       ],
-      "reason": "preserve the measured 44-54 mm offset from its parent axis",
+      "reason": "express the short U in the official section_2 frame",
+      "rotation": "Ry(+90 deg): CAD +Z becomes link +X",
       "scale": 0.001
     },
     "poppy_link_4.stl": {
@@ -423,7 +425,8 @@
         "horn2horn.stl",
         "side2side.stl"
       ],
-      "reason": "same repeated paired bracket as link 2",
+      "reason": "express the repeated bracket in the official section_3 frame",
+      "rotation": "Rx(+90 deg): CAD +Z becomes link -Y",
       "scale": 0.001
     },
     "poppy_link_5.stl": {
@@ -431,26 +434,21 @@
         "tools/gripper-fixation.stl",
         "tools/gripper-fixed_part.stl"
       ],
-      "reason": "place the fixed jaw on the parent side of motor m6",
-      "rotations": {
-        "gripper-fixation.stl": "Rx(-90 deg): CAD -Y becomes link +Z",
-        "gripper-fixed_part.stl": "Rz(-90 deg): CAD +Y becomes tool +X"
-      },
+      "reason": "fixed jaw stays on the m5 body and is placed about the m6 axis",
+      "rotation": "Ry(-90 deg) @ Rz(180 deg)",
       "scale": 0.001,
-      "translation_m": {
-        "gripper-fixed_part.stl": [
-          0.0,
-          0.0,
-          0.058
-        ]
-      }
+      "translation_m": [
+        0.0,
+        -0.058,
+        0.0
+      ]
     },
     "poppy_link_6.stl": {
       "inputs": [
         "tools/gripper-rotative_part.stl"
       ],
-      "reason": "make the original motor-axis pivot the link frame",
-      "rotation": "Rz(-90 deg): CAD +Y becomes tool +X",
+      "reason": "moving jaw stays on the rotating m6 child body",
+      "rotation": "Rz(180 deg): preserve the official gripper pivot frame",
       "scale": 0.001
     },
     "poppy_link_6_convex.stl": {
@@ -526,19 +524,19 @@
     "poppy_link_2.stl": {
       "boundary_edges": 0,
       "bounds_max": [
-        0.0171,
+        0.0639,
         0.0099,
-        0.0639
+        0.0171
       ],
       "bounds_min": [
-        -0.0171,
+        0.019,
         -0.0099,
-        0.019
+        -0.0171
       ],
       "extents": [
-        0.0342,
+        0.0449,
         0.0198,
-        0.0449
+        0.0342
       ],
       "nonmanifold_edges": 0,
       "signed_volume": 3.942438e-06,
@@ -550,19 +548,19 @@
     "poppy_link_3.stl": {
       "boundary_edges": 0,
       "bounds_max": [
-        0.0141,
+        0.054,
         0.01,
-        0.054
+        0.0141
       ],
       "bounds_min": [
-        -0.0141,
+        0.044,
         -0.01,
-        0.044
+        -0.0141
       ],
       "extents": [
-        0.0282,
+        0.01,
         0.02,
-        0.01
+        0.0282
       ],
       "nonmanifold_edges": 0,
       "signed_volume": 1.504684e-06,
@@ -575,18 +573,18 @@
       "boundary_edges": 0,
       "bounds_max": [
         0.0171,
-        0.0099,
-        0.0639
+        -0.019,
+        0.0099
       ],
       "bounds_min": [
         -0.0171,
-        -0.0099,
-        0.019
+        -0.0639,
+        -0.0099
       ],
       "extents": [
         0.0342,
-        0.0198,
-        0.0449
+        0.0449,
+        0.0198
       ],
       "nonmanifold_edges": 0,
       "signed_volume": 3.942438e-06,
@@ -598,19 +596,19 @@
     "poppy_link_5.stl": {
       "boundary_edges": 0,
       "bounds_max": [
-        0.07,
-        0.0171,
-        0.07
+        0.0141,
+        -0.014,
+        0.0171
       ],
       "bounds_min": [
-        -0.022,
         -0.0141,
-        0.02
+        -0.128,
+        -0.01
       ],
       "extents": [
-        0.092,
-        0.0312,
-        0.05
+        0.0282,
+        0.114,
+        0.0271
       ],
       "nonmanifold_edges": 0,
       "signed_volume": 6.18969e-06,
@@ -622,18 +620,18 @@
     "poppy_link_6.stl": {
       "boundary_edges": 0,
       "bounds_max": [
-        0.07,
         0.0098999,
+        0.0099,
         0.0171
       ],
       "bounds_min": [
-        -0.0099,
         -0.0171,
+        -0.07,
         -0.0171
       ],
       "extents": [
-        0.0799,
         0.0269999,
+        0.0799,
         0.0342
       ],
       "nonmanifold_edges": 0,

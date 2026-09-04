@@ -21,20 +21,20 @@
   </material>
   <link name="base_link">
     <inertial>
-      <mass value="18"/>
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      <mass value="6.0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.085" iyz="0" izz="0.125"/>
     </inertial>
     <visual>
       <origin xyz="0 0 0"/>
       <geometry>
-        <box size="0.72 0.52 0.16"/>
+        <box size="0.4 0.3 0.1"/>
       </geometry>
       <material name="SlateGray"/>
     </visual>
     <collision>
       <origin xyz="0 0 0"/>
       <geometry>
-        <box size="0.72 0.52 0.16"/>
+        <box size="0.4 0.3 0.1"/>
       </geometry>
     </collision>
   </link>
@@ -42,118 +42,118 @@
   <joint name="base_fixed" type="fixed">
     <parent link="base_footprint"/>
     <child link="base_link"/>
-    <origin xyz="0 0 0.16"/>
+    <origin xyz="0 0 0.07"/>
   </joint>
   <link name="front_left_link">
     <inertial>
-      <mass value="1.2"/>
-      <inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.01"/>
+      <mass value="0.45"/>
+      <inertia ixx="0.000627" ixy="0" ixz="0" iyy="0.001103" iyz="0" izz="0.000627"/>
     </inertial>
     <visual>
-      <origin rpy="1.5708 0 0"/>
+      <origin rpy="1.5707963267949 0 0"/>
       <geometry>
-        <cylinder length="0.07" radius="0.115"/>
+        <cylinder length="0.045" radius="0.07"/>
       </geometry>
       <material name="Black"/>
     </visual>
     <collision>
-      <origin rpy="1.5708 0 0"/>
+      <origin rpy="1.5707963267949 0 0"/>
       <geometry>
-        <cylinder length="0.07" radius="0.115"/>
+        <cylinder length="0.045" radius="0.07"/>
       </geometry>
     </collision>
   </link>
   <joint name="front_left_joint" type="continuous">
     <parent link="base_link"/>
     <child link="front_left_link"/>
-    <origin xyz="0.25 0.3 0"/>
+    <origin xyz="0.14 0.1725 0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="40" velocity="12.0"/>
+    <limit effort="20" velocity="12.0"/>
   </joint>
   <link name="rear_left_link">
     <inertial>
-      <mass value="1.2"/>
-      <inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.01"/>
+      <mass value="0.45"/>
+      <inertia ixx="0.000627" ixy="0" ixz="0" iyy="0.001103" iyz="0" izz="0.000627"/>
     </inertial>
     <visual>
-      <origin rpy="1.5708 0 0"/>
+      <origin rpy="1.5707963267949 0 0"/>
       <geometry>
-        <cylinder length="0.07" radius="0.115"/>
+        <cylinder length="0.045" radius="0.07"/>
       </geometry>
       <material name="Black"/>
     </visual>
     <collision>
-      <origin rpy="1.5708 0 0"/>
+      <origin rpy="1.5707963267949 0 0"/>
       <geometry>
-        <cylinder length="0.07" radius="0.115"/>
+        <cylinder length="0.045" radius="0.07"/>
       </geometry>
     </collision>
   </link>
   <joint name="rear_left_joint" type="continuous">
     <parent link="base_link"/>
     <child link="rear_left_link"/>
-    <origin xyz="-0.25 0.3 0"/>
+    <origin xyz="-0.14 0.1725 0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="40" velocity="12.0"/>
+    <limit effort="20" velocity="12.0"/>
   </joint>
   <link name="front_right_link">
     <inertial>
-      <mass value="1.2"/>
-      <inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.01"/>
+      <mass value="0.45"/>
+      <inertia ixx="0.000627" ixy="0" ixz="0" iyy="0.001103" iyz="0" izz="0.000627"/>
     </inertial>
     <visual>
-      <origin rpy="1.5708 0 0"/>
+      <origin rpy="1.5707963267949 0 0"/>
       <geometry>
-        <cylinder length="0.07" radius="0.115"/>
+        <cylinder length="0.045" radius="0.07"/>
       </geometry>
       <material name="Black"/>
     </visual>
     <collision>
-      <origin rpy="1.5708 0 0"/>
+      <origin rpy="1.5707963267949 0 0"/>
       <geometry>
-        <cylinder length="0.07" radius="0.115"/>
+        <cylinder length="0.045" radius="0.07"/>
       </geometry>
     </collision>
   </link>
   <joint name="front_right_joint" type="continuous">
     <parent link="base_link"/>
     <child link="front_right_link"/>
-    <origin xyz="0.25 -0.3 0"/>
+    <origin xyz="0.14 -0.1725 0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="40" velocity="12.0"/>
+    <limit effort="20" velocity="12.0"/>
   </joint>
   <link name="rear_right_link">
     <inertial>
-      <mass value="1.2"/>
-      <inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.01"/>
+      <mass value="0.45"/>
+      <inertia ixx="0.000627" ixy="0" ixz="0" iyy="0.001103" iyz="0" izz="0.000627"/>
     </inertial>
     <visual>
-      <origin rpy="1.5708 0 0"/>
+      <origin rpy="1.5707963267949 0 0"/>
       <geometry>
-        <cylinder length="0.07" radius="0.115"/>
+        <cylinder length="0.045" radius="0.07"/>
       </geometry>
       <material name="Black"/>
     </visual>
     <collision>
-      <origin rpy="1.5708 0 0"/>
+      <origin rpy="1.5707963267949 0 0"/>
       <geometry>
-        <cylinder length="0.07" radius="0.115"/>
+        <cylinder length="0.045" radius="0.07"/>
       </geometry>
     </collision>
   </link>
   <joint name="rear_right_joint" type="continuous">
     <parent link="base_link"/>
     <child link="rear_right_link"/>
-    <origin xyz="-0.25 -0.3 0"/>
+    <origin xyz="-0.14 -0.1725 0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="40" velocity="12.0"/>
+    <limit effort="20" velocity="12.0"/>
   </joint>
   <!-- The printed Poppy base and motor m1 body remain fixed to the vehicle. -->
   <link name="poppy_mount_link">
     <inertial>
-      <origin xyz="0 0 0.025"/>
-      <mass value="0.0283"/>
-      <inertia ixx="1.36e-5" ixy="0" ixz="0" iyy="1.36e-5" iyz="0" izz="1.53e-5"/>
+      <origin xyz="0 0 0.019"/>
+      <mass value="0.0450"/>
+      <inertia ixx="1.4e-5" ixy="0" ixz="0" iyy="1.3e-5" iyz="0" izz="1.7e-5"/>
     </inertial>
     <visual>
       <geometry>
@@ -177,13 +177,13 @@
   <joint name="poppy_mount_joint" type="fixed">
     <parent link="base_link"/>
     <child link="poppy_mount_link"/>
-    <origin xyz="-0.05 0 0.08"/>
+    <origin xyz="-0.03 0 0.05"/>
   </joint>
   <link name="poppy_link_1">
     <inertial>
-      <origin xyz="0 0 0.025"/>
-      <mass value="0.0223"/>
-      <inertia ixx="6.32e-6" ixy="0" ixz="0" iyy="7.62e-6" iyz="0" izz="4.65e-6"/>
+      <origin xyz="0 0 0.024"/>
+      <mass value="0.0390"/>
+      <inertia ixx="8.6e-6" ixy="0" ixz="0" iyy="9.8e-6" iyz="0" izz="7.0e-6"/>
     </inertial>
     <visual>
       <geometry>
@@ -199,24 +199,24 @@
       <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0.031"/>
+      <origin xyz="0 0 0.027"/>
       <geometry>
-        <box size="0.040 0.032 0.062"/>
+        <box size="0.042 0.034 0.054"/>
       </geometry>
     </collision>
   </link>
   <joint name="poppy_m1_joint" type="revolute">
     <parent link="poppy_mount_link"/>
     <child link="poppy_link_1"/>
-    <origin xyz="0 0 0.0328"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0327993216120967"/>
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="-2.61799" upper="2.61799" velocity="2.0"/>
   </joint>
   <link name="poppy_link_2">
     <inertial>
-      <origin xyz="0 0 0.041"/>
-      <mass value="0.0216"/>
-      <inertia ixx="8.99e-6" ixy="0" ixz="0" iyy="1.03e-5" iyz="0" izz="4.50e-6"/>
+      <origin xyz="0.042 0 0"/>
+      <mass value="0.0383"/>
+      <inertia ixx="5.0e-6" ixy="0" ixz="0" iyy="9.0e-6" iyz="0" izz="8.0e-6"/>
     </inertial>
     <visual>
       <geometry>
@@ -225,31 +225,31 @@
       <material name="PoppyOrange"/>
     </visual>
     <visual>
-      <origin xyz="0 0 0.054"/>
+      <origin rpy="0 1.5707963267949 0" xyz="0.054 0 0"/>
       <geometry>
         <box size="0.027 0.024 0.036"/>
       </geometry>
       <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0.0415"/>
+      <origin xyz="0.0415 0 0"/>
       <geometry>
-        <box size="0.040 0.030 0.050"/>
+        <box size="0.050 0.030 0.040"/>
       </geometry>
     </collision>
   </link>
   <joint name="poppy_m2_joint" type="revolute">
     <parent link="poppy_link_1"/>
     <child link="poppy_link_2"/>
-    <origin xyz="0 0 0.024"/>
-    <axis xyz="0 1 0"/>
+    <origin rpy="0 -1.5707963267949 0" xyz="0 0 0.0240006783879033"/>
+    <axis xyz="0 0 -1"/>
     <limit effort="0.39" lower="-1.5708" upper="1.5708" velocity="2.0"/>
   </joint>
   <link name="poppy_link_3">
     <inertial>
-      <origin xyz="0 0 0.030"/>
-      <mass value="0.0186"/>
-      <inertia ixx="6.98e-6" ixy="0" ixz="0" iyy="7.48e-6" iyz="0" izz="3.29e-6"/>
+      <origin xyz="0.047 0 0"/>
+      <mass value="0.0353"/>
+      <inertia ixx="4.2e-6" ixy="0" ixz="0" iyy="5.0e-6" iyz="0" izz="4.5e-6"/>
     </inertial>
     <visual>
       <geometry>
@@ -258,31 +258,31 @@
       <material name="PoppyOrange"/>
     </visual>
     <visual>
-      <origin xyz="0 0 0.045"/>
+      <origin rpy="0 1.5707963267949 0" xyz="0.045 0 0"/>
       <geometry>
         <box size="0.024 0.027 0.036"/>
       </geometry>
       <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0.030"/>
+      <origin xyz="0.045 0 0"/>
       <geometry>
-        <box size="0.036 0.032 0.060"/>
+        <box size="0.040 0.032 0.036"/>
       </geometry>
     </collision>
   </link>
   <joint name="poppy_m3_joint" type="revolute">
     <parent link="poppy_link_2"/>
     <child link="poppy_link_3"/>
-    <origin xyz="0 0 0.054"/>
-    <axis xyz="1 0 0"/>
+    <origin rpy="0 0 0" xyz="0.054 0 0"/>
+    <axis xyz="0 0 -1"/>
     <limit effort="0.39" lower="-1.5708" upper="1.5708" velocity="2.0"/>
   </joint>
   <link name="poppy_link_4">
     <inertial>
-      <origin xyz="0 0 0.041"/>
-      <mass value="0.0216"/>
-      <inertia ixx="8.99e-6" ixy="0" ixz="0" iyy="1.03e-5" iyz="0" izz="4.50e-6"/>
+      <origin xyz="0 -0.042 0"/>
+      <mass value="0.0383"/>
+      <inertia ixx="9.0e-6" ixy="0" ixz="0" iyy="5.0e-6" iyz="0" izz="8.0e-6"/>
     </inertial>
     <visual>
       <geometry>
@@ -291,31 +291,31 @@
       <material name="PoppyOrange"/>
     </visual>
     <visual>
-      <origin xyz="0 0 0.048"/>
+      <origin rpy="1.5707963267949 0 0" xyz="0 -0.048 0"/>
       <geometry>
         <box size="0.027 0.024 0.036"/>
       </geometry>
       <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0.0415"/>
+      <origin xyz="0 -0.0415 0"/>
       <geometry>
-        <box size="0.040 0.030 0.050"/>
+        <box size="0.040 0.050 0.030"/>
       </geometry>
     </collision>
   </link>
   <joint name="poppy_m4_joint" type="revolute">
     <parent link="poppy_link_3"/>
     <child link="poppy_link_4"/>
-    <origin xyz="0 0 0.045"/>
-    <axis xyz="0 1 0"/>
+    <origin rpy="0 -1.5707963267949 0" xyz="0.045 0 0"/>
+    <axis xyz="0 0 -1"/>
     <limit effort="0.39" lower="-1.5708" upper="1.5708" velocity="2.0"/>
   </joint>
   <link name="poppy_link_5">
     <inertial>
-      <origin xyz="0.025 0 0.045"/>
-      <mass value="0.0244"/>
-      <inertia ixx="1.06e-5" ixy="0" ixz="0" iyy="2.77e-5" iyz="0" izz="2.36e-5"/>
+      <origin xyz="0 -0.070 0.005"/>
+      <mass value="0.0411"/>
+      <inertia ixx="4.7e-5" ixy="0" ixz="0" iyy="8.0e-6" iyz="0" izz="4.8e-5"/>
     </inertial>
     <visual>
       <geometry>
@@ -324,37 +324,37 @@
       <material name="PoppyOrange"/>
     </visual>
     <visual>
-      <origin xyz="0 0 0.058"/>
+      <origin rpy="0 -1.5707963267949 0" xyz="0 -0.058 0"/>
       <geometry>
         <box size="0.024 0.027 0.036"/>
       </geometry>
       <material name="ServoGray"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0.032"/>
+      <origin xyz="0 -0.058 0"/>
       <geometry>
-        <box size="0.024 0.032 0.028"/>
+        <box size="0.036 0.032 0.030"/>
       </geometry>
     </collision>
     <collision>
-      <origin xyz="0.025 0.0145 0.058"/>
+      <origin xyz="0 -0.082 0.0145"/>
       <geometry>
-        <box size="0.092 0.008 0.024"/>
+        <box size="0.024 0.092 0.006"/>
       </geometry>
     </collision>
   </link>
   <joint name="poppy_m5_joint" type="revolute">
     <parent link="poppy_link_4"/>
     <child link="poppy_link_5"/>
-    <origin xyz="0 0 0.048"/>
-    <axis xyz="1 0 0"/>
+    <origin rpy="0 -1.5707963267949 0" xyz="0 -0.048 0"/>
+    <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="-1.5708" upper="1.5708" velocity="2.0"/>
   </joint>
   <link name="poppy_link_6">
     <inertial>
-      <origin xyz="0.030 -0.0035 0"/>
+      <origin xyz="-0.0035 -0.030 0"/>
       <mass value="0.00614"/>
-      <inertia ixx="9.72e-7" ixy="0" ixz="0" iyy="3.87e-6" iyz="0" izz="3.65e-6"/>
+      <inertia ixx="3.87e-6" ixy="0" ixz="0" iyy="9.72e-7" iyz="0" izz="3.65e-6"/>
     </inertial>
     <visual>
       <geometry>
@@ -371,9 +371,21 @@
   <joint name="poppy_m6_joint" type="revolute">
     <parent link="poppy_link_5"/>
     <child link="poppy_link_6"/>
-    <origin xyz="0 0 0.058"/>
-    <axis xyz="0 1 0"/>
+    <origin rpy="0 -1.5707963267949 0" xyz="0 -0.058 0"/>
+    <axis xyz="0 0 -1"/>
     <limit effort="0.39" lower="0.0" upper="1.20" velocity="2.0"/>
+  </joint>
+  <link name="poppy_fixed_tip"/>
+  <joint name="poppy_fixed_tip_joint" type="fixed">
+    <parent link="poppy_link_5"/>
+    <child link="poppy_fixed_tip"/>
+    <origin rpy="-1.5707963267949 0 0" xyz="0 -0.11 0"/>
+  </joint>
+  <link name="poppy_moving_tip"/>
+  <joint name="poppy_moving_tip_joint" type="fixed">
+    <parent link="poppy_link_6"/>
+    <child link="poppy_moving_tip"/>
+    <origin rpy="-1.5707963267949 0 0" xyz="0 -0.052 0"/>
   </joint>
   <!-- The tracking camera stays on the vehicle front to preserve the A/B task. -->
   <link name="camera_link">
@@ -387,7 +399,7 @@
   <joint name="camera_fixed" type="fixed">
     <parent link="base_link"/>
     <child link="camera_link"/>
-    <origin rpy="0 0 0" xyz="0.38 0 0.10"/>
+    <origin rpy="0 0 0" xyz="0.225 0 0.05"/>
   </joint>
   <ros2_control name="GazeboSimSystem" type="system">
     <hardware>

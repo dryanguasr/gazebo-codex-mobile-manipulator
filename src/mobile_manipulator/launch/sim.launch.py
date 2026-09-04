@@ -67,7 +67,7 @@ def generate_launch_description():
             '-y',
             '0',
             '-z',
-            '0.25',
+            '0.02',
         ],
     )
     bridge = Node(
@@ -159,6 +159,7 @@ def generate_launch_description():
                     cmd=[
                         'pkill',
                         '-f',
+                        '-KILL',
                         f'gz sim.*{world_file}',
                     ]
                 )

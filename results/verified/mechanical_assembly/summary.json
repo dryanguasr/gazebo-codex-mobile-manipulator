@@ -1,0 +1,501 @@
+{
+  "status": "PASS",
+  "validator": "scripts/cad/validate_mechanical_assembly.py",
+  "model_scale": "Poppy CAD geometry is 1:1 in metres",
+  "reference": {
+    "official_urdf_repository": "https://github.com/poppy-project/poppy_ergo_jr_description",
+    "official_urdf_commit": "7eb32bd385afa11dea5e6a6b6a4a86a0243aaa2b",
+    "official_assembly_guide": "https://docs.poppy-project.org/en/assembly-guides/ergo-jr/mechanical-construction"
+  },
+  "tolerance": {
+    "joint_transform_absolute": 1e-09,
+    "units": "SI (metres, radians)"
+  },
+  "joint_audit": [
+    {
+      "joint": "m1",
+      "name": "poppy_m1_joint",
+      "actual": {
+        "parent": "poppy_mount_link",
+        "child": "poppy_link_1",
+        "xyz": [
+          0.0,
+          0.0,
+          0.0327993216120967
+        ],
+        "rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "official": {
+        "parent": "poppy_mount_link",
+        "child": "poppy_link_1",
+        "xyz": [
+          0.0,
+          0.0,
+          0.0327993216120967
+        ],
+        "rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "distance_to_next_axis_m": 0.032799321612,
+      "status": "PASS"
+    },
+    {
+      "joint": "m2",
+      "name": "poppy_m2_joint",
+      "actual": {
+        "parent": "poppy_link_1",
+        "child": "poppy_link_2",
+        "xyz": [
+          0.0,
+          0.0,
+          0.0240006783879033
+        ],
+        "rpy": [
+          0.0,
+          -1.5707963267949,
+          0.0
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      },
+      "official": {
+        "parent": "poppy_link_1",
+        "child": "poppy_link_2",
+        "xyz": [
+          0.0,
+          0.0,
+          0.0240006783879033
+        ],
+        "rpy": [
+          0.0,
+          -1.5707963267948966,
+          0.0
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      },
+      "distance_to_next_axis_m": 0.024000678388,
+      "status": "PASS"
+    },
+    {
+      "joint": "m3",
+      "name": "poppy_m3_joint",
+      "actual": {
+        "parent": "poppy_link_2",
+        "child": "poppy_link_3",
+        "xyz": [
+          0.054,
+          0.0,
+          0.0
+        ],
+        "rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      },
+      "official": {
+        "parent": "poppy_link_2",
+        "child": "poppy_link_3",
+        "xyz": [
+          0.054,
+          0.0,
+          0.0
+        ],
+        "rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      },
+      "distance_to_next_axis_m": 0.054,
+      "status": "PASS"
+    },
+    {
+      "joint": "m4",
+      "name": "poppy_m4_joint",
+      "actual": {
+        "parent": "poppy_link_3",
+        "child": "poppy_link_4",
+        "xyz": [
+          0.045,
+          0.0,
+          0.0
+        ],
+        "rpy": [
+          0.0,
+          -1.5707963267949,
+          0.0
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      },
+      "official": {
+        "parent": "poppy_link_3",
+        "child": "poppy_link_4",
+        "xyz": [
+          0.045,
+          0.0,
+          0.0
+        ],
+        "rpy": [
+          0.0,
+          -1.5707963267948966,
+          0.0
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      },
+      "distance_to_next_axis_m": 0.045,
+      "status": "PASS"
+    },
+    {
+      "joint": "m5",
+      "name": "poppy_m5_joint",
+      "actual": {
+        "parent": "poppy_link_4",
+        "child": "poppy_link_5",
+        "xyz": [
+          0.0,
+          -0.048,
+          0.0
+        ],
+        "rpy": [
+          0.0,
+          -1.5707963267949,
+          0.0
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "official": {
+        "parent": "poppy_link_4",
+        "child": "poppy_link_5",
+        "xyz": [
+          0.0,
+          -0.048,
+          0.0
+        ],
+        "rpy": [
+          0.0,
+          -1.5707963267948966,
+          0.0
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "distance_to_next_axis_m": 0.048,
+      "status": "PASS"
+    },
+    {
+      "joint": "m6",
+      "name": "poppy_m6_joint",
+      "actual": {
+        "parent": "poppy_link_5",
+        "child": "poppy_link_6",
+        "xyz": [
+          0.0,
+          -0.058,
+          0.0
+        ],
+        "rpy": [
+          0.0,
+          -1.5707963267949,
+          0.0
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      },
+      "official": {
+        "parent": "poppy_link_5",
+        "child": "poppy_link_6",
+        "xyz": [
+          0.0,
+          -0.058,
+          0.0
+        ],
+        "rpy": [
+          0.0,
+          -1.5707963267948966,
+          0.0
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      },
+      "distance_to_next_axis_m": 0.058,
+      "status": "PASS"
+    }
+  ],
+  "checks": [
+    {
+      "name": "fk_poses_are_distinct",
+      "minimum_pairwise_tip_distance_m": 0.040472384747612805,
+      "status": "PASS"
+    },
+    {
+      "name": "home_reach_is_plausible",
+      "reach_m": 0.2218955610191425,
+      "accepted_range_m": [
+        0.15,
+        0.35
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "link_6_collision_is_simplified",
+      "visual_triangles": 32168,
+      "collision_triangles": 92,
+      "ratio": 0.0028599850783387216,
+      "status": "PASS"
+    }
+  ],
+  "fk": {
+    "home": {
+      "joint_positions_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "xyz_m_from_poppy_mount": [
+        -0.0,
+        -0.158,
+        0.1558
+      ],
+      "quaternion_xyzw": [
+        -0.707106781,
+        -0.0,
+        -0.0,
+        0.707106781
+      ]
+    },
+    "pose_1": {
+      "joint_positions_rad": [
+        0.35,
+        -0.45,
+        0.4,
+        -0.35,
+        0.25,
+        0.15
+      ],
+      "xyz_m_from_poppy_mount": [
+        -0.016192951,
+        -0.130941981,
+        0.130429429
+      ],
+      "quaternion_xyzw": [
+        -0.629614379,
+        0.051327436,
+        -0.052582699,
+        0.773425037
+      ]
+    },
+    "pose_2": {
+      "joint_positions_rad": [
+        -0.45,
+        0.35,
+        -0.3,
+        0.45,
+        -0.35,
+        0.75
+      ],
+      "xyz_m_from_poppy_mount": [
+        -0.045117445,
+        -0.158247739,
+        0.178372156
+      ],
+      "quaternion_xyzw": [
+        -0.746969499,
+        0.210835886,
+        -0.303601988,
+        0.552639693
+      ]
+    }
+  },
+  "inertias": [
+    {
+      "link": "poppy_mount_link",
+      "mass_kg": 0.045,
+      "inertia_eigenvalues": [
+        1.3e-05,
+        1.4e-05,
+        1.7e-05
+      ],
+      "status": "PASS"
+    },
+    {
+      "link": "poppy_link_1",
+      "mass_kg": 0.039,
+      "inertia_eigenvalues": [
+        7e-06,
+        8.6e-06,
+        9.8e-06
+      ],
+      "status": "PASS"
+    },
+    {
+      "link": "poppy_link_2",
+      "mass_kg": 0.0383,
+      "inertia_eigenvalues": [
+        5e-06,
+        8e-06,
+        9e-06
+      ],
+      "status": "PASS"
+    },
+    {
+      "link": "poppy_link_3",
+      "mass_kg": 0.0353,
+      "inertia_eigenvalues": [
+        4.2e-06,
+        4.5e-06,
+        5e-06
+      ],
+      "status": "PASS"
+    },
+    {
+      "link": "poppy_link_4",
+      "mass_kg": 0.0383,
+      "inertia_eigenvalues": [
+        5e-06,
+        8e-06,
+        9e-06
+      ],
+      "status": "PASS"
+    },
+    {
+      "link": "poppy_link_5",
+      "mass_kg": 0.0411,
+      "inertia_eigenvalues": [
+        8e-06,
+        4.7e-05,
+        4.8e-05
+      ],
+      "status": "PASS"
+    },
+    {
+      "link": "poppy_link_6",
+      "mass_kg": 0.00614,
+      "inertia_eigenvalues": [
+        9.72e-07,
+        3.65e-06,
+        3.87e-06
+      ],
+      "status": "PASS"
+    }
+  ],
+  "platform_audit": {
+    "properties": {
+      "base_length": 0.4,
+      "base_width": 0.3,
+      "base_height": 0.1,
+      "base_mass": 6.0,
+      "base_ixx": 0.05,
+      "base_iyy": 0.085,
+      "base_izz": 0.125,
+      "wheel_radius": 0.07,
+      "wheel_width": 0.045,
+      "wheel_mass": 0.45,
+      "wheel_ixx": 0.000627,
+      "wheel_iyy": 0.001103,
+      "wheel_izz": 0.000627,
+      "wheel_x": 0.14,
+      "wheel_y": 0.1725,
+      "camera_x": 0.225,
+      "camera_z": 0.05,
+      "arm_mount_x": -0.03,
+      "arm_mount_z": 0.05
+    },
+    "expected": {
+      "base_length": 0.4,
+      "base_width": 0.3,
+      "base_height": 0.1,
+      "base_mass": 6.0,
+      "base_ixx": 0.05,
+      "base_iyy": 0.085,
+      "base_izz": 0.125,
+      "wheel_radius": 0.07,
+      "wheel_width": 0.045,
+      "wheel_mass": 0.45,
+      "wheel_ixx": 0.000627,
+      "wheel_iyy": 0.001103,
+      "wheel_izz": 0.000627,
+      "wheel_x": 0.14,
+      "wheel_y": 0.1725,
+      "camera_x": 0.225,
+      "camera_z": 0.05,
+      "arm_mount_x": -0.03,
+      "arm_mount_z": 0.05
+    },
+    "base_inertia_formula_values": {
+      "base_ixx": 0.05000000000000001,
+      "base_iyy": 0.08500000000000002,
+      "base_izz": 0.125
+    },
+    "base_inertia_status": "PASS",
+    "controller_values": {
+      "wheel_radius": 0.07,
+      "wheel_separation": 0.345
+    },
+    "expected_wheel_separation_m": 0.345,
+    "controller_geometry_status": "PASS",
+    "status": "PASS"
+  },
+  "broken_mesh_uris": [],
+  "failures": [],
+  "visual_inspection_required": true,
+  "note": "PASS proves audited transforms, assets, inertias and FK landmarks; it does not replace human inspection of the rendered assembly."
+}

@@ -18,13 +18,16 @@ El flujo completo fue validado en ROS 2 Jazzy y Gazebo Sim 8:
 - detector HSV y estimación monocular sin usar pose privilegiada de Gazebo;
 - controlador visual proporcional parametrizado;
 - brazo Poppy CAD-first con visuales y colisiones separadas;
-- seis joints que alcanzan dos poses con validación numérica;
+- seis joints auditados contra CAD, guía y URDF oficial;
+- ensamblaje 1:1 validado visualmente en home y dos poses;
+- FK independiente de la punta comparada contra TF;
+- base compacta con ruedas, inercia, odometría y cámara coherentes;
 - diagnóstico estricto y experimento A/B reproducibles;
 - siete pruebas unitarias.
 
 En la corrida A/B verificada, el seguimiento redujo el MAE de distancia objetivo
-de **0.528 m** a **0.043 m** (mejora de **92.0%**), con 100% de detección, RMS
-horizontal de 0.022 y error estacionario de 0.051 m. Los archivos fuente están
+de **0.529 m** a **0.149 m** (mejora de **71.8%**), con 100% de detección y RMS
+horizontal de 0.025. Los archivos fuente están
 en [`results/verified/`](results/verified/).
 
 ## Arquitectura resumida
@@ -57,8 +60,9 @@ para evaluar las métricas. La descripción completa está en
 - `diff_drive_controller` 4.40.1;
 - Python 3.12.3.
 
-No es necesario usar GUI: el mundo se lanza en modo servidor y las evidencias
-se obtienen desde topics ROS 2.
+La regresión automatizada funciona headless. La aceptación geométrica añade
+capturas Gazebo y revisión visual; el overlay nativo de collision no pudo
+capturarse bajo WSLg y se conserva una alternativa reproducible etiquetada.
 
 ## Instalación
 
@@ -147,7 +151,9 @@ bash scripts/run_diagnostic.sh
 Este comando recompila y falla si no puede demostrar una condición obligatoria.
 Verifica controladores, joint states, carga de meshes sin errores, cámara,
 intrínsecos, detector, `/clock`, `/base_controller/odom`, TF, desplazamiento
-de la base y dos poses de los seis joints Poppy con tolerancia numérica. La evidencia queda en
+de la base y dos poses de los seis joints Poppy con tolerancia numérica. También
+valida transforms oficiales, escala 1:1, landmarks de punta y acuerdo entre FK
+independiente y TF. La evidencia queda en
 [`results/verified/diagnostic/`](results/verified/diagnostic/).
 
 ## Experimento A/B
@@ -177,7 +183,7 @@ src/mobile_manipulator/
   urdf/mobile_manipulator.urdf.xacro
   worlds/ball_arena.sdf
 scripts/
-  cad/                            preparación y validación de meshes
+  cad/                            CAD, validación mecánica y previews collision
   run_diagnostic.sh              aceptación de integración
   run_experiments.sh             comparación A/B
   validate_diagnostic.py
@@ -186,6 +192,8 @@ docs/
   cad_import_tutorial.md
   cad_import_troubleshooting.md
   cad_import_final_report.md
+  mechanical_assembly_validation.md
+  mechanical_assembly_closure_report.md
   architecture.md
   tutorial_handoff.md
   experiment_log.md
@@ -201,13 +209,14 @@ results/verified/                evidencia textual, CSV e imágenes
 - El detector presupone una esfera roja de radio conocido y una cámara pinhole.
 - La odometría se usa como pose del robot en la evaluación; no se incorpora
   localización global ni ruido de sensores.
-- El brazo y la pinza se validan por control articular, pero no hay IK, MoveIt
-  ni pick-and-place autónomo.
+- El brazo y la pinza se validan por control articular, FK/TF, geometría y
+  evidencia visual, pero no hay IK, MoveIt ni pick-and-place autónomo.
 - Navegación, manipulación, múltiples objetos, calibración real y control
   avanzado quedan deliberadamente fuera de este corte.
 
-Para estudiar el flujo CAD→Gazebo, empezar por
-[`docs/cad_import_tutorial.md`](docs/cad_import_tutorial.md) y
-[`docs/cad_import_final_report.md`](docs/cad_import_final_report.md).
+Para estudiar el estado actual, empezar por
+[`docs/mechanical_assembly_closure_report.md`](docs/mechanical_assembly_closure_report.md),
+seguir con [`docs/mechanical_assembly_validation.md`](docs/mechanical_assembly_validation.md)
+y [`docs/cad_import_tutorial.md`](docs/cad_import_tutorial.md).
 Para el sistema perceptivo previo, continuar con
 [`docs/tutorial_handoff.md`](docs/tutorial_handoff.md).
