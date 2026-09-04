@@ -1,4 +1,5 @@
 import math
+from types import SimpleNamespace
 
 import pytest
 
@@ -7,7 +8,12 @@ from mobile_manipulator.ball_detector import (
     estimate_sphere_distance,
     focal_length_from_fov,
 )
-from mobile_manipulator.metrics_logger import summarize_rows
+from mobile_manipulator.metrics_logger import (
+    ReferenceUnavailable,
+    reference_range_from_transform,
+    select_fresh_sample,
+    summarize_rows,
+)
 from mobile_manipulator.target_trajectory import target_position
 from mobile_manipulator.visual_tracker import clamp
 
@@ -88,6 +94,81 @@ def test_clamp():
     assert clamp(2.0, -1.0, 1.0) == 1.0
     assert clamp(-2.0, -1.0, 1.0) == -1.0
     assert clamp(0.25, -1.0, 1.0) == 0.25
+
+
+def tracking_transform(stamp_ns, translation):
+    return SimpleNamespace(
+        header=SimpleNamespace(
+            stamp=SimpleNamespace(
+                sec=stamp_ns // 1_000_000_000,
+                nanosec=stamp_ns % 1_000_000_000,
+            )
+        ),
+        transform=SimpleNamespace(
+            translation=SimpleNamespace(
+                x=translation[0],
+                y=translation[1],
+                z=translation[2],
+            ),
+            rotation=SimpleNamespace(x=0.0, y=0.0, z=0.0, w=1.0),
+        ),
+    )
+
+
+def test_tracking_reference_follows_tf_when_camera_extrinsic_changes():
+    query_ns = 10_000_000_000
+    target_xyz = (2.0, 0.0, 0.12)
+    original, _ = reference_range_from_transform(
+        target_xyz,
+        tracking_transform(query_ns, (-0.225, 0.0, -0.12)),
+        query_ns,
+        max_transform_age_s=0.1,
+    )
+    changed, _ = reference_range_from_transform(
+        target_xyz,
+        tracking_transform(query_ns, (-0.325, 0.0, -0.12)),
+        query_ns,
+        max_transform_age_s=0.1,
+    )
+    assert original == pytest.approx(1.775)
+    assert changed == pytest.approx(1.675)
+    assert changed != pytest.approx(original)
+
+
+def test_tracking_reference_rejects_missing_transform():
+    with pytest.raises(ReferenceUnavailable, match='transform_unavailable'):
+        reference_range_from_transform(
+            (2.0, 0.0, 0.12),
+            None,
+            query_ns=10_000_000_000,
+            max_transform_age_s=0.1,
+        )
+
+
+def test_tracking_reference_rejects_stale_transform():
+    with pytest.raises(ReferenceUnavailable, match='transform_stale'):
+        reference_range_from_transform(
+            (2.0, 0.0, 0.12),
+            tracking_transform(9_000_000_000, (-0.225, 0.0, -0.12)),
+            query_ns=10_000_000_000,
+            max_transform_age_s=0.1,
+        )
+
+
+def test_tracking_reference_rejects_stale_or_future_target_data():
+    samples = [(9_000_000_000, 'old')]
+    with pytest.raises(ReferenceUnavailable, match='target_pose_stale'):
+        select_fresh_sample(
+            samples,
+            query_ns=10_000_000_000,
+            max_age_s=0.25,
+        )
+    with pytest.raises(ReferenceUnavailable, match='target_pose_from_future'):
+        select_fresh_sample(
+            [(11_000_000_000, 'future')],
+            query_ns=10_000_000_000,
+            max_age_s=0.25,
+        )
 
 
 def test_metric_summary_counts_valid_samples():

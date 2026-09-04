@@ -1,0 +1,22 @@
+samples_total: 526
+samples_after_warmup: 438
+valid_detections: 438
+detection_rate_percent: 100.0
+distance_estimation_mae_m: None
+distance_estimation_rmse_m: None
+horizontal_error_rms: 0.024874825631946738
+target_distance_error_mae_m: None
+steady_state_target_error_mae_m: None
+command_active_percent: 99.08675799086758
+target_x_span_m: None
+target_y_span_m: None
+robot_displacement_m: 0.3961578822022882
+reference_valid_samples: 0
+reference_valid_rate_percent: 0.0
+reference_failure_counts: {'transform_unavailable': 438}
+time_to_first_detection_s: 5.042
+settling_time_s: None
+target_tolerance_m: 0.2
+run_label: tracking_B
+duration_s: 30.0
+tracking_reference: {'geometry_source': 'tf', 'camera_frame': 'camera_link', 'target_pose_source': 'accepted_set_pose_command', 'target_pose_frame': 'from_message', 'measurement_timestamp_source': '/ball/measurement.header.stamp', 'uses_odometry_tf': True, 'independent_simulator_ground_truth': False, 'ground_truth_used_for_control': False, 'max_target_age_s': 0.25, 'max_transform_age_s': 0.1}

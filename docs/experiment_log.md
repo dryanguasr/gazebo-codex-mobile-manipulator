@@ -88,7 +88,11 @@ La auditoría se realizó antes de cambiar odometría:
 | Error estacionario | 0.568 m | 0.083 m |
 | Desplazamiento | ~0 m | 0.368 m |
 
-Mejora del MAE de distancia objetivo: 83.6%. El comparador terminó con PASS.
+Mejora histórica publicada: 83.6%. Esta distancia quedó **AFECTADA** por una
+extrínseca de cámara obsoleta en el logger; el PASS se conserva como historia,
+no como aceptación física vigente. La campaña corregida y aprobada está en
+`results/verified/tracking_metric_reference_v2_20260904_retry1/` y obtiene
+92.43%.
 
 ## Decisiones de alcance
 

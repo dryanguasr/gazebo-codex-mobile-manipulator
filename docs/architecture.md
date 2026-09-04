@@ -153,9 +153,19 @@ la medición es inválida o caduca, el nodo publica una orden nula.
 
 Por cada imagen, `metrics_logger` registra timestamp, detección, error horizontal,
 rango estimado, referencia, comando, odometría, objetivo aceptado y error frente
-a ground truth. El ground truth combina la pose objetivo aceptada por Gazebo con
-la odometría y el offset conocido de cámara. Nunca se publica hacia
-`visual_tracker`.
+a la referencia de evaluación. La geometría procede exclusivamente de TF:
+transforma la pose objetivo expresada en `odom` a `camera_link` con el TF más
+reciente disponible y comprueba su edad contra el sello de
+`/ball/measurement`. No mantiene offsets numéricos duplicados de
+la cámara.
+
+La referencia se invalida si la pose del objetivo o el TF faltan, pertenecen al
+futuro o superan sus ventanas de frescura; nunca se reemplaza con cero ni con
+la extrínseca histórica. Su procedencia queda explícita: combina la pose
+aceptada por `SetEntityPose` con el TF odométrico de la cámara, por lo que
+`uses_odometry_tf=true` e `independent_simulator_ground_truth=false`. Esta
+referencia nunca se publica hacia `visual_tracker` y
+`ground_truth_used_for_control=false`.
 
 El resumen calcula:
 

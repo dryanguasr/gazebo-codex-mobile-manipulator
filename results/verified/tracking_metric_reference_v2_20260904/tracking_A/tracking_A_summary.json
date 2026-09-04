@@ -1,0 +1,37 @@
+{
+  "samples_total": 525,
+  "samples_after_warmup": 434,
+  "valid_detections": 434,
+  "detection_rate_percent": 100.0,
+  "distance_estimation_mae_m": null,
+  "distance_estimation_rmse_m": null,
+  "horizontal_error_rms": 0.475180020616576,
+  "target_distance_error_mae_m": null,
+  "steady_state_target_error_mae_m": null,
+  "command_active_percent": 0.0,
+  "target_x_span_m": null,
+  "target_y_span_m": null,
+  "robot_displacement_m": 2.3856777759631442e-18,
+  "reference_valid_samples": 0,
+  "reference_valid_rate_percent": 0.0,
+  "reference_failure_counts": {
+    "transform_unavailable": 434
+  },
+  "time_to_first_detection_s": 5.001,
+  "settling_time_s": null,
+  "target_tolerance_m": 0.2,
+  "run_label": "tracking_A",
+  "duration_s": 30.0,
+  "tracking_reference": {
+    "geometry_source": "tf",
+    "camera_frame": "camera_link",
+    "target_pose_source": "accepted_set_pose_command",
+    "target_pose_frame": "from_message",
+    "measurement_timestamp_source": "/ball/measurement.header.stamp",
+    "uses_odometry_tf": true,
+    "independent_simulator_ground_truth": false,
+    "ground_truth_used_for_control": false,
+    "max_target_age_s": 0.25,
+    "max_transform_age_s": 0.1
+  }
+}

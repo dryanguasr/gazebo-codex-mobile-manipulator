@@ -1,0 +1,4 @@
+clock:
+  sec: 24
+  nanosec: 484000000
+---

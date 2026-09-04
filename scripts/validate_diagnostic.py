@@ -106,11 +106,12 @@ def tf_pose(path):
     )
 
 
-def fixed_base_to_mount_offset(robot_urdf):
+def fixed_chain_offset(robot_urdf, joint_names):
     root = ET.parse(robot_urdf).getroot()
     joints = {joint.attrib['name']: joint for joint in root.findall('joint')}
     offset = [0.0, 0.0, 0.0]
-    for name in ('base_fixed', 'poppy_mount_joint'):
+    for name in joint_names:
+        require(name in joints, f'Fixed joint missing from URDF: {name}')
         origin = joints[name].find('origin')
         rpy = [
             float(value)
@@ -123,6 +124,13 @@ def fixed_base_to_mount_offset(robot_urdf):
         xyz = [float(value) for value in origin.attrib['xyz'].split()]
         offset = [current + delta for current, delta in zip(offset, xyz)]
     return offset
+
+
+def fixed_base_to_mount_offset(robot_urdf):
+    return fixed_chain_offset(
+        robot_urdf,
+        ('base_fixed', 'poppy_mount_joint'),
+    )
 
 
 def quaternion_distance(first, second):
@@ -162,6 +170,32 @@ def main():
     require(
         1.0 < estimated_distance_m < 2.5,
         f'Unexpected ball distance: {estimated_distance_m}',
+    )
+
+    expected_camera_xyz = fixed_chain_offset(
+        results / 'robot.urdf',
+        ('base_fixed', 'camera_fixed'),
+    )
+    observed_camera_xyz, observed_camera_quaternion = tf_pose(
+        results / 'camera_tf.txt'
+    )
+    camera_tf_position_error = math.dist(
+        expected_camera_xyz,
+        observed_camera_xyz,
+    )
+    camera_tf_orientation_error = quaternion_distance(
+        [0.0, 0.0, 0.0, 1.0],
+        observed_camera_quaternion,
+    )
+    require(
+        camera_tf_position_error < 0.001,
+        'camera_link TF does not match current URDF extrinsic: '
+        f'{camera_tf_position_error} m',
+    )
+    require(
+        camera_tf_orientation_error < 0.001,
+        'camera_link TF orientation does not match current URDF: '
+        f'{camera_tf_orientation_error}',
     )
 
     pose_results = {}
@@ -262,6 +296,17 @@ def main():
         'final_tf_translation_m': {'x': tf_after_x, 'y': tf_after_y},
         'base_displacement_m': displacement,
         'camera_focal_length_px': focal_length_px,
+        'camera_tf_validation': {
+            'frame': 'camera_link',
+            'parent_frame': 'base_footprint',
+            'geometry_source': 'robot.urdf',
+            'expected_xyz_m': expected_camera_xyz,
+            'observed_xyz_m': observed_camera_xyz,
+            'position_error_m': camera_tf_position_error,
+            'expected_quaternion_xyzw': [0.0, 0.0, 0.0, 1.0],
+            'observed_quaternion_xyzw': observed_camera_quaternion,
+            'quaternion_l2_error_sign_invariant': camera_tf_orientation_error,
+        },
         'initial_estimated_ball_distance_m': estimated_distance_m,
         'arm_joint_names': JOINTS,
         'arm_tolerance_rad': TOLERANCE_RAD,

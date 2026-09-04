@@ -158,8 +158,11 @@ Condiciones de 30 s, warmup de 5 s, misma trayectoria:
 | Desplazamiento robot | ~0 m | 0.368 m |
 | Comando activo | 0% | 100% |
 
-La mejora B frente a A en MAE de distancia objetivo fue 83.6%. A no es un
-benchmark de control alternativo: es la línea base causal con tracking
+La mejora histórica de 83.6% quedó **AFECTADA** por una extrínseca de cámara
+obsoleta en el evaluador. La campaña sustitutiva
+`tracking_metric_reference_v2_20260904_retry1` obtuvo 92.43% con 100% de
+referencias válidas. A no es un benchmark de control alternativo: es la línea
+base causal con tracking
 desactivado. Su error de estimación mayor se debe a que la esfera visita regiones
 más oblicuas de la imagen; aun así queda por debajo del umbral de 0.15 m.
 

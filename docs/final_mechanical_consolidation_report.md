@@ -163,7 +163,12 @@ Experimento A/B:
 | desplazamiento robot | ~0 m | 0.40555 m |
 | settling | n/a | 5.032 s |
 
-Mejora del error de distancia: **77.23 %**. El comparador A/B pasa.
+Mejora histórica publicada: **77.23 %**. Esta cifra quedó **AFECTADA** al
+descubrirse que el evaluador conservaba una extrínseca anterior al chasis
+compacto; los artefactos originales no se reescriben. La validación sustitutiva
+está documentada en
+`results/verified/tracking_metric_reference_v2_20260904_retry1/` y obtiene
+92.43% con referencia TF corregida.
 
 ## Problemas reales encontrados
 

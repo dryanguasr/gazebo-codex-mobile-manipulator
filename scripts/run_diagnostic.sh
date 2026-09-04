@@ -2,8 +2,13 @@
 set -Eeo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-RESULTS="${1:-$ROOT/results/verified/diagnostic}"
+RUN_ID="${RUN_ID:-diagnostic_$(date -u +%Y%m%dT%H%M%SZ)}"
+RESULTS="${1:-$ROOT/results/verified/$RUN_ID}"
 CAPTURES="$RESULTS/captures"
+if [[ -e "$RESULTS" ]]; then
+  echo "Refusing to overwrite diagnostic directory: $RESULTS" >&2
+  exit 1
+fi
 mkdir -p "$RESULTS" "$CAPTURES"
 
 source /opt/ros/jazzy/setup.bash
@@ -125,6 +130,14 @@ elif [[ $? -ne 124 ]]; then
   exit 1
 fi
 grep -q 'Translation:' "$RESULTS/tf.txt"
+
+if timeout 4 ros2 run tf2_ros tf2_echo base_footprint camera_link \
+  >"$RESULTS/camera_tf.txt" 2>&1; then
+  :
+elif [[ $? -ne 124 ]]; then
+  exit 1
+fi
+grep -q 'Translation:' "$RESULTS/camera_tf.txt"
 
 if timeout 4 ros2 topic pub -r 20 \
   /base_controller/cmd_vel \

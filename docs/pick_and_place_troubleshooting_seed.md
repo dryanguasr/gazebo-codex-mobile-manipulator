@@ -187,3 +187,58 @@ Limitación:
 ~~~
 
 No mover una previsión a “observado” sin una corrida y evidencia reales.
+
+## Incidencias observadas
+
+### Referencia métrica de tracking con extrínseca anterior al chasis compacto
+
+Estado: **OBSERVADO**
+
+Corrida/SHA: los artefactos de `results/verified/experiments/` producidos antes
+de esta corrección, auditados sobre `00c60529268c1786451893119e4bb150777eb701`.
+
+Síntoma: `metrics_logger.py` reconstruía la posición de cámara con
+`camera_offset_x_m=0.38` y `camera_height_m=0.51`, mientras el Xacro
+consolidado sitúa `camera_link` mediante la cadena
+`base_footprint -> base_link -> camera_link`. El PASS A/B y el porcentaje de
+mejora histórico no certifican distancias físicas.
+
+Evidencia: comparación directa del logger auditado con
+`mobile_manipulator.urdf.xacro`. Los CSV y resúmenes originales se conservan
+sin reescritura y están marcados en
+`results/verified/experiments/INCIDENT.md`.
+
+Causa comprobada: geometría duplicada como números mágicos en el evaluador,
+sin enlazarla al TF publicado por `robot_state_publisher`.
+
+Corrección: la referencia transforma la pose aceptada del objetivo desde su
+`frame_id` a `camera_link` usando el TF más reciente y valida su edad contra el
+timestamp de la medición. Pose y TF tienen
+gates de frescura; una ausencia produce una muestra de referencia inválida, no
+un fallback. El diagnóstico compara además el TF de cámara observado con la
+cadena fija del URDF.
+
+Validación posterior: **PASS**. Las 11 pruebas unitarias pasan; el diagnóstico
+`diagnostic_metric_reference_v2_retry1` midió
+`base_footprint -> camera_link = [0.225, 0.0, 0.120] m` con error numérico
+menor que 1.4e-17 m; y la campaña
+`tracking_metric_reference_v2_20260904_retry1` obtuvo 100% de referencias
+válidas en A y B y una mejora B/A de 92.43%. No se modificaron ganancias ni
+umbrales del controlador/comparador para compensar el cambio.
+
+Limitación: la pose publicada por `target_trajectory` es la consigna aceptada
+por `SetEntityPose`; la referencia usa TF odométrico y no constituye ground
+truth independiente leído del estado real de Gazebo.
+
+### Consulta TF en el sello exacto sin historia disponible
+
+Estado: **OBSERVADO Y CORREGIDO**
+
+La primera campaña corregida,
+`tracking_metric_reference_v2_20260904`, produjo cero referencias válidas:
+el logger pedía una transformación en el sello exacto de la imagen dentro del
+mismo executor, antes de disponer de historia TF suficiente. El intento se
+conserva como inválido. La corrección consulta el TF más reciente y calcula su
+edad contra el sello de la medición; conserva el gate estricto de 0.10 s, sin
+extrapolar ni reutilizar transforms obsoletos. El retry posterior pasó con
+100% de referencias válidas.

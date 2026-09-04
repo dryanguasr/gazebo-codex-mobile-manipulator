@@ -83,9 +83,11 @@ Definición del A/B:
 | Desplazamiento del robot | ~0 m | 0.368 m |
 | Span objetivo X/Y | 0.900/1.011 m | 0.900/1.011 m |
 
-B redujo el MAE de distancia objetivo en **83.6%** frente a A. El comparador
-aprobó todos los umbrales de detección, geometría, trayectoria, actividad,
-movimiento, error horizontal y error estacionario.
+La cifra histórica de **83.6%** quedó **AFECTADA** por una extrínseca de cámara
+obsoleta en el evaluador. Los artefactos originales se conservan, pero ya no
+aceptan distancia física. La campaña sustitutiva
+`tracking_metric_reference_v2_20260904_retry1` aprobó los mismos umbrales, sin
+cambiar ganancias, con 100% de referencias válidas y mejora de 92.43%.
 
 ## Validez de la estimación
 
@@ -203,7 +205,7 @@ bash scripts/run_experiments.sh
 - RMS horizontal B: 0.034.
 - MAE distancia objetivo B: 0.088 m.
 - Error estacionario B: 0.083 m.
-- Mejora B/A: 83.6%.
+- Mejora B/A histórica afectada: 83.6%; reemplazo corregido: 92.43%.
 - Diagnóstico de base: 0.666 m de movimiento con odom/TF coherentes.
 
 ### Evidencias

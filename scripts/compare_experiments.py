@@ -10,14 +10,14 @@ def require(condition, message):
 
 
 def load_summary(output_dir, label):
-    path = output_dir / f'{label}_summary.json'
+    path = output_dir / label / f'{label}_summary.json'
     return json.loads(path.read_text(encoding='utf-8'))
 
 
 def main():
     output_dir = Path(sys.argv[1])
-    baseline = load_summary(output_dir, 'A')
-    tracking = load_summary(output_dir, 'B')
+    baseline = load_summary(output_dir, 'tracking_A')
+    tracking = load_summary(output_dir, 'tracking_B')
 
     for label, summary in (('A', baseline), ('B', tracking)):
         require(
@@ -39,6 +39,25 @@ def main():
         require(
             summary['distance_estimation_mae_m'] <= 0.15,
             f'{label}: camera distance MAE exceeds 0.15 m',
+        )
+        require(
+            summary['reference_valid_rate_percent'] >= 99.0,
+            f'{label}: fewer than 99% of reference samples are valid',
+        )
+        reference = summary['tracking_reference']
+        require(
+            reference['geometry_source'] == 'tf'
+            and reference['camera_frame'] == 'camera_link',
+            f'{label}: tracking reference is not sourced from camera TF',
+        )
+        require(
+            reference['uses_odometry_tf']
+            and not reference['independent_simulator_ground_truth'],
+            f'{label}: tracking reference provenance is ambiguous',
+        )
+        require(
+            not reference['ground_truth_used_for_control'],
+            f'{label}: evaluation reference leaked into control',
         )
 
     require(

@@ -23,12 +23,15 @@ El flujo completo fue validado en ROS 2 Jazzy y Gazebo Sim 8:
 - FK independiente de la punta comparada contra TF;
 - base compacta con ruedas, inercia, odometría y cámara coherentes;
 - diagnóstico estricto y experimento A/B reproducibles;
-- siete pruebas unitarias.
+- once pruebas unitarias.
 
-En la corrida A/B verificada, el seguimiento redujo el MAE de distancia objetivo
-de **0.529 m** a **0.149 m** (mejora de **71.8%**), con 100% de detección y RMS
-horizontal de 0.025. Los archivos fuente están
-en [`results/verified/`](results/verified/).
+En la campaña A/B corregida, el seguimiento redujo el MAE de distancia objetivo
+de **0.632 m** a **0.048 m** (mejora de **92.43%**), con 100% de detección,
+100% de referencias geométricas válidas y RMS horizontal B de 0.025. La
+referencia usa la pose aceptada del objetivo y TF odométrico hasta
+`camera_link`; no es ground truth independiente del simulador. La evidencia
+está en
+[`results/verified/tracking_metric_reference_v2_20260904_retry1/`](results/verified/tracking_metric_reference_v2_20260904_retry1/).
 
 ## Arquitectura resumida
 
@@ -93,7 +96,7 @@ colcon test --event-handlers console_direct+
 colcon test-result --verbose
 ```
 
-El resultado esperado es `7 tests, 0 errors, 0 failures`.
+El resultado esperado es `11 tests, 0 errors, 0 failures`.
 
 ## Lanzamiento interactivo
 
@@ -152,9 +155,10 @@ Este comando recompila y falla si no puede demostrar una condición obligatoria.
 Verifica controladores, joint states, carga de meshes sin errores, cámara,
 intrínsecos, detector, `/clock`, `/base_controller/odom`, TF, desplazamiento
 de la base y dos poses de los seis joints Poppy con tolerancia numérica. También
-valida transforms oficiales, escala 1:1, landmarks de punta y acuerdo entre FK
-independiente y TF. La evidencia queda en
-[`results/verified/diagnostic/`](results/verified/diagnostic/).
+valida transforms oficiales, escala 1:1, landmarks de punta, acuerdo entre FK
+independiente y TF y la extrínseca efectiva de `camera_link` derivada del
+URDF. La evidencia vigente queda en
+[`results/verified/diagnostic_metric_reference_v2_retry1/`](results/verified/diagnostic_metric_reference_v2_retry1/).
 
 ## Experimento A/B
 
@@ -169,7 +173,11 @@ Cada condición dura 30 s y produce CSV, JSON, resumen legible y log. El
 comparador falla si la trayectoria no se mueve en ambos ejes, la detección cae
 por debajo de 90%, B no mueve el robot, el error estacionario supera 0.20 m o
 B no reduce a la mitad el error de A. Resultados:
-[`results/verified/experiments/comparison.json`](results/verified/experiments/comparison.json).
+[`results/verified/tracking_metric_reference_v2_20260904_retry1/comparison.json`](results/verified/tracking_metric_reference_v2_20260904_retry1/comparison.json).
+
+La campaña histórica de `results/verified/experiments/` se conserva sin
+reescribir, pero su distancia física está marcada como afectada en
+[`INCIDENT.md`](results/verified/experiments/INCIDENT.md).
 
 ## Estructura
 
