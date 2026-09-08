@@ -13,6 +13,24 @@ from sensor_msgs.msg import Image
 from std_msgs.msg import String
 
 
+NANOSECONDS_PER_SECOND = 1_000_000_000
+
+
+def output_frame_index(stamp_ns, start_ns, fps):
+    """Map a simulation timestamp to the nearest constant-rate frame."""
+    if fps <= 0.0:
+        raise ValueError('fps must be positive')
+    elapsed_ns = max(0, stamp_ns - start_ns)
+    return int(round(elapsed_ns * fps / NANOSECONDS_PER_SECOND))
+
+
+def image_stamp_ns(message):
+    return (
+        message.header.stamp.sec * NANOSECONDS_PER_SECOND
+        + message.header.stamp.nanosec
+    )
+
+
 PHASE_BY_DESTINATION = {
     'APPROACH': 'pregrasp',
     'HOLD': 'lift',
@@ -28,7 +46,7 @@ class PickPlaceRecorder(Node):
     def __init__(self):
         super().__init__('pick_place_recorder')
         self.declare_parameter('output_dir', '/tmp/pick_place_a1')
-        self.declare_parameter('fps', 15.0)
+        self.declare_parameter('fps', 60.0)
         self.output = Path(str(self.get_parameter('output_dir').value)) / 'media'
         self.raw_output = self.output / 'raw'
         self.output.mkdir(parents=True, exist_ok=True)
@@ -38,6 +56,10 @@ class PickPlaceRecorder(Node):
         self.last_frame = None
         self.writer = None
         self.frame_count = 0
+        self.source_frame_count = 0
+        self.start_stamp_ns = None
+        self.last_stamp_ns = None
+        self.last_encoded_frame = None
         self.captured = {}
         self.closed = False
         self.started_wall = time.time()
@@ -87,11 +109,28 @@ class PickPlaceRecorder(Node):
         if self.closed:
             return
         frame = self.bridge.imgmsg_to_cv2(message, desired_encoding='bgr8')
+        self.source_frame_count += 1
         self.last_frame = frame
         annotated = self.annotated(frame)
         self.ensure_writer(annotated)
-        self.writer.write(annotated)
-        self.frame_count += 1
+
+        stamp_ns = image_stamp_ns(message)
+        if self.start_stamp_ns is None:
+            self.start_stamp_ns = stamp_ns
+        target_index = output_frame_index(
+            stamp_ns,
+            self.start_stamp_ns,
+            float(self.get_parameter('fps').value),
+        )
+        if self.last_encoded_frame is not None:
+            while self.frame_count < target_index:
+                self.writer.write(self.last_encoded_frame)
+                self.frame_count += 1
+        if self.frame_count <= target_index:
+            self.writer.write(annotated)
+            self.frame_count += 1
+        self.last_encoded_frame = annotated
+        self.last_stamp_ns = stamp_ns
 
     def capture(self, phase):
         if phase in self.captured or self.last_frame is None:
@@ -142,7 +181,19 @@ class PickPlaceRecorder(Node):
             'source': '/pick_place/evidence/image (Gazebo camera)',
             'video': 'pick_and_place_a1.mp4',
             'frame_count': self.frame_count,
+            'source_frame_count': self.source_frame_count,
             'fps': float(self.get_parameter('fps').value),
+            'timing_source': 'Gazebo image header stamp',
+            'simulated_duration_s': (
+                None
+                if self.start_stamp_ns is None or self.last_stamp_ns is None
+                else (self.last_stamp_ns - self.start_stamp_ns)
+                / NANOSECONDS_PER_SECOND
+            ),
+            'encoded_duration_s': (
+                self.frame_count
+                / float(self.get_parameter('fps').value)
+            ),
             'started_wall_time_s': self.started_wall,
             'completed_wall_time_s': time.time(),
             'captured_phases': self.captured,

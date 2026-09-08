@@ -21,6 +21,7 @@ from mobile_manipulator.pick_place_evaluator import (
     update_spatial_stability,
 )
 from mobile_manipulator.pick_place_initializer import reset_ready
+from mobile_manipulator.pick_place_recorder import output_frame_index
 from mobile_manipulator.pick_place_supervisor import (
     may_retry_goal_rejection,
     NOMINAL_STATE_SEQUENCE,
@@ -104,6 +105,14 @@ def test_five_lobe_clover_completes_two_fast_laps_per_minute():
     assert max(x_values) - min(x_values) > 1.8
     assert max(y_values) - min(y_values) > 1.8
     assert path_length_m > 11.0
+
+
+def test_video_frame_index_uses_simulation_time_at_60_fps():
+    assert output_frame_index(2_000_000_000, 2_000_000_000, 60.0) == 0
+    assert output_frame_index(2_500_000_000, 2_000_000_000, 60.0) == 30
+    assert output_frame_index(3_000_000_000, 2_000_000_000, 60.0) == 60
+    with pytest.raises(ValueError):
+        output_frame_index(0, 0, 0.0)
 
 
 def test_clamp():

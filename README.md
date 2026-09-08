@@ -101,7 +101,7 @@ colcon test --event-handlers console_direct+
 colcon test-result --verbose
 ```
 
-El resultado esperado es `34 tests, 0 errors, 0 failures`.
+El resultado esperado es `35 tests, 0 errors, 0 failures`.
 
 ## Lanzamiento interactivo
 

@@ -48,7 +48,7 @@ de forma reproducible.
 - exactamente siete DAE en el directorio oficial;
 - método final CAD `official_reference_consolidation`;
 - `poppy_tool_frame` para FK y `poppy_grasp_frame` para el gate;
-- diagnóstico, 34 tests y experimento A/B.
+- diagnóstico, 35 tests y experimento A/B.
 
 ## Gate propuesto para un futuro A2
 

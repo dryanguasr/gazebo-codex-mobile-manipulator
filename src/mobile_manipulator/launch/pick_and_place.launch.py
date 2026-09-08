@@ -32,6 +32,7 @@ def generate_launch_description():
     source_dirty = LaunchConfiguration('source_dirty')
     seed = LaunchConfiguration('seed')
     capture_evidence = LaunchConfiguration('capture_evidence')
+    evidence_fps = LaunchConfiguration('evidence_fps')
     attach_enabled = LaunchConfiguration('attach_enabled')
     grasp_mode = LaunchConfiguration('grasp_mode')
     spawn_object = LaunchConfiguration('spawn_object')
@@ -132,7 +133,10 @@ def generate_launch_description():
     recorder = Node(
         package='mobile_manipulator',
         executable='pick_place_recorder',
-        parameters=[{'output_dir': output_dir}],
+        parameters=[{
+            'output_dir': output_dir,
+            'fps': ParameterValue(evidence_fps, value_type=float),
+        }],
         condition=IfCondition(capture_evidence),
         output='screen',
     )
@@ -305,6 +309,7 @@ def generate_launch_description():
         DeclareLaunchArgument('source_dirty', default_value='false'),
         DeclareLaunchArgument('seed', default_value='1'),
         DeclareLaunchArgument('capture_evidence', default_value='false'),
+        DeclareLaunchArgument('evidence_fps', default_value='60.0'),
         DeclareLaunchArgument('attach_enabled', default_value='true'),
         DeclareLaunchArgument('grasp_mode', default_value='attach_conditioned'),
         DeclareLaunchArgument('spawn_object', default_value='true'),
