@@ -1,0 +1,1 @@
+[INFO] [1788900068.071917661] [evidence_capture]: Camera evidence written to /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/results/verified/diagnostic_pick_A1_20260908_retry1/captures

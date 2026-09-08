@@ -1,0 +1,224 @@
+{
+  "status": "passed",
+  "odometry_topic": "/base_controller/odom",
+  "tf": "odom -> base_footprint",
+  "initial_position_m": {
+    "x": -7.018054849939014e-18,
+    "y": 9.586684810393529e-36
+  },
+  "final_position_m": {
+    "x": 0.491999999995546,
+    "y": -3.5687058459102743e-14
+  },
+  "final_tf_translation_m": {
+    "x": 0.492,
+    "y": -0.0
+  },
+  "base_displacement_m": 0.491999999995546,
+  "camera_focal_length_px": 554.3827056884766,
+  "camera_tf_validation": {
+    "frame": "camera_link",
+    "parent_frame": "base_footprint",
+    "geometry_source": "robot.urdf",
+    "expected_xyz_m": [
+      0.225,
+      0.0,
+      0.12000000000000001
+    ],
+    "observed_xyz_m": [
+      0.225,
+      0.0,
+      0.12
+    ],
+    "position_error_m": 1.3877787807814457e-17,
+    "expected_quaternion_xyzw": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "observed_quaternion_xyzw": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "quaternion_l2_error_sign_invariant": 0.0
+  },
+  "initial_estimated_ball_distance_m": 1.7918932963578327,
+  "arm_joint_names": [
+    "poppy_m1_joint",
+    "poppy_m2_joint",
+    "poppy_m3_joint",
+    "poppy_m4_joint",
+    "poppy_m5_joint",
+    "poppy_m6_joint"
+  ],
+  "arm_tolerance_rad": 0.03,
+  "tool_fk_tf_validation": {
+    "pose_1": {
+      "frame": "poppy_tool_frame",
+      "expected_xyz_m": [
+        -0.038421062,
+        -0.131510763,
+        0.250444885
+      ],
+      "observed_xyz_m": [
+        -0.038,
+        -0.132,
+        0.25
+      ],
+      "position_error_m": 0.000783944330445733,
+      "expected_quaternion_xyzw": [
+        -0.451525716,
+        0.441952386,
+        0.544358158,
+        0.551794176
+      ],
+      "observed_quaternion_xyzw": [
+        -0.452,
+        0.442,
+        0.544,
+        0.552
+      ],
+      "quaternion_l2_error_sign_invariant": 0.0006307559572385834
+    },
+    "pose_2": {
+      "frame": "poppy_tool_frame",
+      "expected_xyz_m": [
+        -0.039778199,
+        -0.171573409,
+        0.303331069
+      ],
+      "observed_xyz_m": [
+        -0.04,
+        -0.172,
+        0.303
+      ],
+      "position_error_m": 0.0005837655759318044,
+      "expected_quaternion_xyzw": [
+        0.574520172,
+        -0.565706314,
+        -0.411924548,
+        -0.424524564
+      ],
+      "observed_quaternion_xyzw": [
+        0.575,
+        -0.566,
+        -0.412,
+        -0.425
+      ],
+      "quaternion_l2_error_sign_invariant": 0.000740417970189706
+    }
+  },
+  "tip_fk_tf_validation": {
+    "pose_1": {
+      "expected_xyz_m": [
+        -0.046192950999999996,
+        -0.130941981,
+        0.25042942900000004
+      ],
+      "observed_xyz_m": [
+        -0.046,
+        -0.131,
+        0.25
+      ],
+      "position_error_m": 0.00047434750848194553,
+      "expected_quaternion_xyzw": [
+        -0.629614379,
+        0.051327436,
+        -0.052582699,
+        0.773425037
+      ],
+      "observed_quaternion_xyzw": [
+        -0.63,
+        0.051,
+        -0.053,
+        0.773
+      ],
+      "quaternion_l2_error_sign_invariant": 0.0007814822235387149
+    },
+    "pose_2": {
+      "expected_xyz_m": [
+        -0.075117445,
+        -0.158247739,
+        0.298372156
+      ],
+      "observed_xyz_m": [
+        -0.075,
+        -0.158,
+        0.298
+      ],
+      "position_error_m": 0.0004622423914809301,
+      "expected_quaternion_xyzw": [
+        -0.746969499,
+        0.210835886,
+        -0.303601988,
+        0.552639693
+      ],
+      "observed_quaternion_xyzw": [
+        -0.747,
+        0.211,
+        -0.304,
+        0.553
+      ],
+      "quaternion_l2_error_sign_invariant": 0.000562226291087498
+    }
+  },
+  "arm_pose_results": {
+    "pose_1": {
+      "commanded_rad": {
+        "poppy_m1_joint": 0.35,
+        "poppy_m2_joint": -0.45,
+        "poppy_m3_joint": 0.4,
+        "poppy_m4_joint": -0.35,
+        "poppy_m5_joint": 0.25,
+        "poppy_m6_joint": 0.15
+      },
+      "observed_rad": {
+        "poppy_m1_joint": 0.3499999999999479,
+        "poppy_m2_joint": -0.44999999998692003,
+        "poppy_m3_joint": 0.40000000008923925,
+        "poppy_m4_joint": -0.3500000000011357,
+        "poppy_m5_joint": 0.2500000000460297,
+        "poppy_m6_joint": 0.14999999999916874
+      },
+      "absolute_error_rad": {
+        "poppy_m1_joint": 5.206945985491984e-14,
+        "poppy_m2_joint": 1.307998154231882e-11,
+        "poppy_m3_joint": 8.9239227119009e-11,
+        "poppy_m4_joint": 1.1357026430403039e-12,
+        "poppy_m5_joint": 4.6029680067505296e-11,
+        "poppy_m6_joint": 8.312517341124703e-13
+      },
+      "max_absolute_error_rad": 8.9239227119009e-11
+    },
+    "pose_2": {
+      "commanded_rad": {
+        "poppy_m1_joint": -0.45,
+        "poppy_m2_joint": 0.35,
+        "poppy_m3_joint": -0.3,
+        "poppy_m4_joint": 0.45,
+        "poppy_m5_joint": -0.35,
+        "poppy_m6_joint": 0.75
+      },
+      "observed_rad": {
+        "poppy_m1_joint": -0.44999999999817575,
+        "poppy_m2_joint": 0.3500000000693368,
+        "poppy_m3_joint": -0.29999999979418585,
+        "poppy_m4_joint": 0.44999999999350454,
+        "poppy_m5_joint": -0.34999999993439296,
+        "poppy_m6_joint": 0.7500000000038274
+      },
+      "absolute_error_rad": {
+        "poppy_m1_joint": 1.824262962912826e-12,
+        "poppy_m2_joint": 6.933681406806613e-11,
+        "poppy_m3_joint": 2.0581414350573368e-10,
+        "poppy_m4_joint": 6.495470827871941e-12,
+        "poppy_m5_joint": 6.560701981683792e-11,
+        "poppy_m6_joint": 3.827382855092765e-12
+      },
+      "max_absolute_error_rad": 2.0581414350573368e-10
+    }
+  }
+}

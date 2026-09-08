@@ -1,0 +1,22 @@
+[INFO] [1788900019.400729355] [tf2_echo]: Waiting for transform odom ->  base_footprint: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+At time 27.439000000
+- Translation: [-0.000, 0.000, 0.000]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, -0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, 0.000, -0.000]
+- Rotation: in RPY (degree) [0.000, 0.000, -0.000]
+- Matrix:
+  1.000  0.000  0.000 -0.000
+ -0.000  1.000 -0.000  0.000
+ -0.000  0.000  1.000  0.000
+  0.000  0.000  0.000  1.000
+At time 28.360000000
+- Translation: [-0.000, 0.000, 0.000]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, -0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, 0.000, -0.000]
+- Rotation: in RPY (degree) [0.000, 0.000, -0.000]
+- Matrix:
+  1.000  0.000  0.000 -0.000
+ -0.000  1.000 -0.000  0.000
+ -0.000  0.000  1.000  0.000
+  0.000  0.000  0.000  1.000
+[INFO] [1788900023.044499786] [rclcpp]: signal_handler(SIGINT/SIGTERM)
