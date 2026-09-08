@@ -1,0 +1,6 @@
+A/B visual tracking experiment: PASS
+Distance-error improvement: 91.4%
+A target-distance MAE: 0.6323 m
+B target-distance MAE: 0.0546 m
+B steady-state MAE: 0.0234 m
+B horizontal RMS: 0.0249
