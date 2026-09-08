@@ -1,0 +1,53 @@
+A message was lost!!!
+	total count change:1
+	total count: 1---
+header:
+  stamp:
+    sec: 15
+    nanosec: 360000000
+  frame_id: base_link
+name:
+- front_left_joint
+- front_right_joint
+- poppy_m1_joint
+- poppy_m2_joint
+- poppy_m3_joint
+- poppy_m4_joint
+- poppy_m5_joint
+- poppy_m6_joint
+- rear_left_joint
+- rear_right_joint
+position:
+- -5.94954180623369e-17
+- -3.6946319550587894e-17
+- -6.797931205479768e-20
+- 4.167673667349575e-11
+- 1.598566280942536e-10
+- -4.869682837324617e-19
+- 6.644503072835247e-11
+- 4.168910596425448e-18
+- -2.4865664745775212e-17
+- -4.8608234450275505e-17
+velocity:
+- -1.3152583401400368e-17
+- -7.338913406153692e-18
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- -6.380349601649645e-18
+- -9.497985075340635e-18
+effort:
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+- .nan
+---

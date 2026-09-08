@@ -82,6 +82,26 @@ wait_for_controller() {
   return 1
 }
 
+capture_tf() {
+  local target_frame=$1
+  local source_frame=$2
+  local output=$3
+  for attempt in 1 2 3; do
+    if timeout 4 ros2 run tf2_ros tf2_echo \
+      "$target_frame" "$source_frame" >"$output" 2>&1; then
+      :
+    elif [[ $? -ne 124 ]]; then
+      continue
+    fi
+    if grep -q 'Translation:' "$output"; then
+      return 0
+    fi
+    sleep 0.25
+  done
+  echo "TF unavailable after 3 attempts: $target_frame -> $source_frame" >&2
+  return 1
+}
+
 wait_for_service /controller_manager/list_controllers
 for topic in \
   /clock \
@@ -96,7 +116,6 @@ done
 for controller in joint_state_broadcaster base_controller arm_controller; do
   wait_for_controller "$controller"
 done
-
 
 ros2 topic list -t >"$RESULTS/topics.txt"
 ros2 service call \
@@ -123,21 +142,9 @@ timeout 10 ros2 topic echo --once /ball/measurement \
 timeout 10 ros2 topic echo --once /base_controller/odom \
   >"$RESULTS/odom_before.txt"
 
-if timeout 6 ros2 run tf2_ros tf2_echo odom base_footprint \
-  >"$RESULTS/tf.txt" 2>&1; then
-  :
-elif [[ $? -ne 124 ]]; then
-  exit 1
-fi
-grep -q 'Translation:' "$RESULTS/tf.txt"
+capture_tf odom base_footprint "$RESULTS/tf.txt"
 
-if timeout 4 ros2 run tf2_ros tf2_echo base_footprint camera_link \
-  >"$RESULTS/camera_tf.txt" 2>&1; then
-  :
-elif [[ $? -ne 124 ]]; then
-  exit 1
-fi
-grep -q 'Translation:' "$RESULTS/camera_tf.txt"
+capture_tf base_footprint camera_link "$RESULTS/camera_tf.txt"
 
 if timeout 4 ros2 topic pub -r 20 \
   /base_controller/cmd_vel \
@@ -151,13 +158,7 @@ fi
 sleep 1
 timeout 10 ros2 topic echo --once /base_controller/odom \
   >"$RESULTS/odom_after.txt"
-if timeout 4 ros2 run tf2_ros tf2_echo odom base_footprint \
-  >"$RESULTS/tf_after.txt" 2>&1; then
-  :
-elif [[ $? -ne 124 ]]; then
-  exit 1
-fi
-grep -q 'Translation:' "$RESULTS/tf_after.txt"
+capture_tf odom base_footprint "$RESULTS/tf_after.txt"
 
 timeout 10 ros2 topic pub --once \
   /arm_controller/joint_trajectory \
@@ -167,22 +168,10 @@ timeout 10 ros2 topic pub --once \
 sleep 3
 timeout 10 ros2 topic echo --once /joint_states \
   >"$RESULTS/joint_states_after_pose_1.txt"
-if timeout 4 ros2 run tf2_ros tf2_echo base_footprint poppy_moving_tip \
-  >"$RESULTS/tip_tf_pose_1.txt" 2>&1; then
-  :
-elif [[ $? -ne 124 ]]; then
-  exit 1
-fi
-grep -q 'Translation:' "$RESULTS/tip_tf_pose_1.txt"
-if timeout 4 ros2 run tf2_ros tf2_echo base_footprint poppy_tool_frame \
-  >"$RESULTS/tool_tf_pose_1.txt" 2>&1; then
-  :
-elif [[ $? -ne 124 ]]; then
-  exit 1
-fi
-grep -q 'Translation:' "$RESULTS/tool_tf_pose_1.txt"
-
-
+capture_tf \
+  base_footprint poppy_moving_tip "$RESULTS/tip_tf_pose_1.txt"
+capture_tf \
+  base_footprint poppy_tool_frame "$RESULTS/tool_tf_pose_1.txt"
 
 timeout 10 ros2 topic pub --once \
   /arm_controller/joint_trajectory \
@@ -192,22 +181,10 @@ timeout 10 ros2 topic pub --once \
 sleep 3
 timeout 10 ros2 topic echo --once /joint_states \
   >"$RESULTS/joint_states_after_pose_2.txt"
-if timeout 4 ros2 run tf2_ros tf2_echo base_footprint poppy_moving_tip \
-  >"$RESULTS/tip_tf_pose_2.txt" 2>&1; then
-  :
-elif [[ $? -ne 124 ]]; then
-  exit 1
-fi
-grep -q 'Translation:' "$RESULTS/tip_tf_pose_2.txt"
-
-if timeout 4 ros2 run tf2_ros tf2_echo base_footprint poppy_tool_frame \
-  >"$RESULTS/tool_tf_pose_2.txt" 2>&1; then
-  :
-elif [[ $? -ne 124 ]]; then
-  exit 1
-fi
-grep -q 'Translation:' "$RESULTS/tool_tf_pose_2.txt"
-
+capture_tf \
+  base_footprint poppy_moving_tip "$RESULTS/tip_tf_pose_2.txt"
+capture_tf \
+  base_footprint poppy_tool_frame "$RESULTS/tool_tf_pose_2.txt"
 
 timeout 12 ros2 run mobile_manipulator evidence_capture \
   --ros-args -p output_dir:="$CAPTURES" \

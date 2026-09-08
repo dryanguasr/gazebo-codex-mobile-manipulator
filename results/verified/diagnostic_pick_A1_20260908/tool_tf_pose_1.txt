@@ -1,0 +1,3 @@
+[INFO] [1788899383.396419764] [tf2_echo]: Waiting for transform base_footprint ->  poppy_tool_frame: Invalid frame ID "base_footprint" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1788899385.382467447] [tf2_echo]: Waiting for transform base_footprint ->  poppy_tool_frame: Invalid frame ID "base_footprint" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1788899387.205551747] [rclcpp]: signal_handler(SIGINT/SIGTERM)
