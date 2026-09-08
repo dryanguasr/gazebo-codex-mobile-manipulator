@@ -27,12 +27,12 @@ class StreamWriter:
         self.label = label
         self.writer = cv2.VideoWriter(
             str(path),
-            cv2.VideoWriter_fourcc(*"mp4v"),
+            cv2.VideoWriter_fourcc(*'mp4v'),
             FPS,
             size,
         )
         if not self.writer.isOpened():
-            raise RuntimeError(f"Could not open video writer for {path}")
+            raise RuntimeError(f'Could not open video writer for {path}')
         self.frames_written = 0
         self.last_frame = None
 
@@ -71,7 +71,7 @@ class StreamWriter:
             2,
             cv2.LINE_AA,
         )
-        status = f"{elapsed_s:05.2f} s | VUELTA {lap}/2 | 60 fps"
+        status = f'{elapsed_s:05.2f} s | VUELTA {lap}/2 | 60 fps'
         (text_width, _), _ = cv2.getTextSize(
             status, cv2.FONT_HERSHEY_SIMPLEX, 0.58, 2
         )
@@ -106,21 +106,21 @@ class StreamWriter:
 
 class TrackingVideoRecorder(Node):
     def __init__(self, output_dir, duration_s):
-        super().__init__("tracking_video_recorder")
+        super().__init__('tracking_video_recorder')
         self.bridge = CvBridge()
         self.total_frames = int(round(duration_s * FPS))
         self.writers = {
-            "eagle": StreamWriter(
-                output_dir / "isometric_source.mp4",
+            'eagle': StreamWriter(
+                output_dir / 'isometric_source.mp4',
                 (1280, 720),
                 self.total_frames,
-                "VISTA ISOMETRICA | POPPY ERGO JR | RUTA DE 5 LOBULOS",
+                'VISTA ISOMETRICA | POPPY ERGO JR | RUTA DE 5 LOBULOS',
             ),
-            "robot": StreamWriter(
-                output_dir / "robot_source.mp4",
+            'robot': StreamWriter(
+                output_dir / 'robot_source.mp4',
                 (960, 720),
                 self.total_frames,
-                "CAMARA DEL ROBOT | POPPY ERGO JR | CONTROL VISUAL",
+                'CAMARA DEL ROBOT | POPPY ERGO JR | CONTROL VISUAL',
             ),
         }
         self.latest = {}
@@ -128,38 +128,38 @@ class TrackingVideoRecorder(Node):
         self.finished = False
         self.create_subscription(
             Image,
-            "/eagle/image_raw",
-            lambda message: self.handle_image("eagle", message),
+            '/eagle/image_raw',
+            lambda message: self.handle_image('eagle', message),
             qos_profile_sensor_data,
         )
         self.create_subscription(
             Image,
-            "/ball/debug",
-            lambda message: self.handle_image("robot", message),
+            '/ball/debug',
+            lambda message: self.handle_image('robot', message),
             qos_profile_sensor_data,
         )
         self.get_logger().info(
-            f"Waiting for both views; recording {duration_s:.1f} s at 60 fps"
+            f'Waiting for both views; recording {duration_s:.1f} s at 60 fps'
         )
 
     def handle_image(self, stream, message):
         if self.finished:
             return
         timestamp = stamp_ns(message)
-        frame = self.bridge.imgmsg_to_cv2(message, desired_encoding="bgr8")
+        frame = self.bridge.imgmsg_to_cv2(message, desired_encoding='bgr8')
         self.latest[stream] = (timestamp, frame)
         if self.start_ns is None:
             if len(self.latest) < 2:
                 return
             self.start_ns = max(item[0] for item in self.latest.values())
             self.get_logger().info(
-                "Both views ready; synchronized recording started"
+                'Both views ready; synchronized recording started'
             )
         self.writers[stream].add(frame, timestamp, self.start_ns)
         if all(writer.done for writer in self.writers.values()):
             self.finished = True
             self.get_logger().info(
-                "Requested frame count captured in both views"
+                'Requested frame count captured in both views'
             )
             rclpy.shutdown()
 
@@ -167,14 +167,14 @@ class TrackingVideoRecorder(Node):
         for writer in self.writers.values():
             writer.finish()
             self.get_logger().info(
-                f"{writer.path}: {writer.frames_written} frames"
+                f'{writer.path}: {writer.frames_written} frames'
             )
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", type=Path, required=True)
-    parser.add_argument("--duration", type=float, default=60.0)
+    parser.add_argument('--output-dir', type=Path, required=True)
+    parser.add_argument('--duration', type=float, default=60.0)
     args = parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -189,5 +189,5 @@ def main():
             rclpy.shutdown()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
