@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-09-08T22:14:48Z",
+  "source": {
+    "type": "real_gazebo_camera",
+    "topic": "/pick_place/evidence/image",
+    "world": "pick_and_place.sdf",
+    "run_id": "capture_a1_60fps",
+    "seed": 911,
+    "source_sha": "7a083fad9a27fada89f697c33cf886dc4c57df15",
+    "source_dirty": false,
+    "simulator_assisted": true,
+    "ground_truth_used_for_control": false
+  },
+  "capture": {
+    "width": 960,
+    "height": 720,
+    "camera_update_rate_hz": 60.0,
+    "encoded_frame_rate_fps": 60.0,
+    "timing_source": "Gazebo image header stamp",
+    "source_frame_count": 1704,
+    "encoded_frame_count": 1886,
+    "simulated_duration_s": 31.424,
+    "encoded_duration_s": 31.433333333333334,
+    "constant_frame_rate": true,
+    "motion_interpolation": false,
+    "delivery_gap_policy": "repeat_last_real_gazebo_frame"
+  },
+  "run_result": {
+    "status": "passed",
+    "terminal_state": "DONE",
+    "lift_m": 0.055333440857355864,
+    "placement_error_xy_m": 0.0026093357159444937,
+    "stable_duration_s": 4.672000000000001,
+    "attach_count": 1,
+    "detach_count": 1
+  },
+  "videos": [
+    {
+      "file": "ciclo_completo_60fps.mp4",
+      "operation": "nominal full A1 cycle",
+      "source_window_s": [0.0, 31.433333],
+      "codec": "mpeg4",
+      "fps": 60.0,
+      "frames": 1886,
+      "duration_s": 31.433333,
+      "size_bytes": 5921011,
+      "sha256": "182f34b1e5427f41a9bf6c51062a4909f9833fb5cecdf83c3e4416cc45838958"
+    },
+    {
+      "file": "agarre_y_elevacion_60fps.mp4",
+      "operation": "pregrasp, approach, bilateral contact, close and lift",
+      "source_window_s": [8.5, 17.5],
+      "codec": "h264",
+      "fps": 60.0,
+      "frames": 540,
+      "duration_s": 9.0,
+      "size_bytes": 155157,
+      "sha256": "cfdaf4d47129f4c9f1967c077015dbbbd13c243931a95400dd0ed57f64a66c3d"
+    },
+    {
+      "file": "transferencia_60fps.mp4",
+      "operation": "hold, transfer and start of lowering",
+      "source_window_s": [16.5, 24.0],
+      "codec": "h264",
+      "fps": 60.0,
+      "frames": 450,
+      "duration_s": 7.5,
+      "size_bytes": 122016,
+      "sha256": "2059e77cfdfece8644066ba3dd488a65a8dd75d77b606ed5d1d49b4f94d6e358"
+    },
+    {
+      "file": "deposito_y_liberacion_60fps.mp4",
+      "operation": "lowering, deposit, release and retreat",
+      "source_window_s": [22.5, 31.4],
+      "codec": "h264",
+      "fps": 60.0,
+      "frames": 534,
+      "duration_s": 8.9,
+      "size_bytes": 137248,
+      "sha256": "f1b7e8aecb456f69b81ec6221d5d8cd2f87aa00e1edc988f2b9eefc824eb26b9"
+    }
+  ],
+  "reference_frames": [
+    {
+      "file": "contacto_60fps.png",
+      "phase": "VERIFY_GRASP",
+      "sha256": "64b3a413db52fd87ace8cf01a5f26c31edd8a851abc643bd98e9d076930850f3"
+    },
+    {
+      "file": "liberacion_60fps.png",
+      "phase": "RETREAT",
+      "sha256": "91fd510a8f5446cb7a858eec0fe203ccb712084dd1a6288e4a9cb21b0c3234c7"
+    }
+  ]
+}

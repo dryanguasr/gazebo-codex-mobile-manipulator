@@ -175,6 +175,9 @@ Para reproducir la campaña y las siete negativas, consulte
 [`negativas`](results/verified/pick_A1_negative_20260908/) y
 [`A2`](results/verified/pick_A2_20260908/).
 
+Videos representativos del ciclo completo y sus operaciones, grabados desde
+Gazebo a 60 fps: [`captures/pick_and_place/`](captures/pick_and_place/).
+
 ## Diagnóstico reproducible
 
 ```bash
