@@ -1,0 +1,256 @@
+[INFO] [launch]: All log files can be found below /home/dryanguasr/.ros/log/2026-09-08-15-07-38-363171-LAPTOP-C6UQO8L3-48662
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [managed_gazebo-1]: process started with pid [48667]
+[INFO] [robot_state_publisher-2]: process started with pid [48668]
+[INFO] [create-3]: process started with pid [48669]
+[robot_state_publisher-2] [INFO] [1788898058.597219528] [robot_state_publisher]: Robot initialized
+[managed_gazebo-1] managed_gazebo child_pid=48705 seed=704 world=/home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/worlds/pick_and_place.sdf
+[create-3] [INFO] [1788898059.049822962] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-3]: process has finished cleanly [pid 48669]
+[INFO] [parameter_bridge-4]: process started with pid [48713]
+[parameter_bridge-4] [INFO] [1788898059.198154705] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1788898059.199126288] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/pick_object/contacts (gz.msgs.Contacts) -> /pick_object/contacts (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1788898059.200865337] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/model/pick_object/pose (gz.msgs.Pose_V) -> /model/pick_object/pose (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1788898059.201851143] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/pick_place/evidence/image (gz.msgs.Image) -> /pick_place/evidence/image (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1788898059.202763954] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/pick_object/attach (std_msgs/msg/Empty) -> /pick_object/attach (gz.msgs.Empty)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1788898059.203339464] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/pick_object/detach (std_msgs/msg/Empty) -> /pick_object/detach (gz.msgs.Empty)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1788898059.203612140] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/pick_object/joint_state (gz.msgs.StringMsg) -> /pick_object/joint_state (std_msgs/msg/String)] (Lazy 0)
+[managed_gazebo-1] [INFO] [1788898060.832523455] [gz_ros_control]: Loading controller_manager
+[managed_gazebo-1] [INFO] [1788898060.841707615] [controller_manager]: Using ROS clock for triggering controller manager cycles.
+[managed_gazebo-1] [INFO] [1788898060.844611048] [controller_manager]: Subscribing to '/robot_description' topic for robot description.
+[managed_gazebo-1] [WARN] [1788898060.846889259] [gz_ros_control]: Waiting RM to load and initialize hardware...
+[managed_gazebo-1] [INFO] [1788898060.999780571] [controller_manager]: Received robot description from topic.
+[managed_gazebo-1] [INFO] [1788898060.999861753] [controller_manager]: Enforcing command limits is disabled. Command limits from URDF will be ignored.
+[managed_gazebo-1] [INFO] [1788898061.003176954] [gz_ros_control]: The position_proportional_gain has been set to: 2
+[managed_gazebo-1] [INFO] [1788898061.003260911] [gz_ros_control]: Loading joint: front_left_joint
+[managed_gazebo-1] [INFO] [1788898061.003266514] [gz_ros_control]: 	State:
+[managed_gazebo-1] [INFO] [1788898061.003270868] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003273420] [gz_ros_control]: 		 velocity
+[managed_gazebo-1] [INFO] [1788898061.003279920] [gz_ros_control]: 	Command:
+[managed_gazebo-1] [INFO] [1788898061.003281961] [gz_ros_control]: 		 velocity
+[managed_gazebo-1] [INFO] [1788898061.003291769] [gz_ros_control]: Loading joint: rear_left_joint
+[managed_gazebo-1] [INFO] [1788898061.003294042] [gz_ros_control]: 	State:
+[managed_gazebo-1] [INFO] [1788898061.003295891] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003298140] [gz_ros_control]: 		 velocity
+[managed_gazebo-1] [INFO] [1788898061.003302120] [gz_ros_control]: 	Command:
+[managed_gazebo-1] [INFO] [1788898061.003304005] [gz_ros_control]: 		 velocity
+[managed_gazebo-1] [INFO] [1788898061.003309894] [gz_ros_control]: Loading joint: front_right_joint
+[managed_gazebo-1] [INFO] [1788898061.003312237] [gz_ros_control]: 	State:
+[managed_gazebo-1] [INFO] [1788898061.003314107] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003316371] [gz_ros_control]: 		 velocity
+[managed_gazebo-1] [INFO] [1788898061.003318252] [gz_ros_control]: 	Command:
+[managed_gazebo-1] [INFO] [1788898061.003320100] [gz_ros_control]: 		 velocity
+[managed_gazebo-1] [INFO] [1788898061.003326064] [gz_ros_control]: Loading joint: rear_right_joint
+[managed_gazebo-1] [INFO] [1788898061.003328207] [gz_ros_control]: 	State:
+[managed_gazebo-1] [INFO] [1788898061.003329990] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003331936] [gz_ros_control]: 		 velocity
+[managed_gazebo-1] [INFO] [1788898061.003333740] [gz_ros_control]: 	Command:
+[managed_gazebo-1] [INFO] [1788898061.003335425] [gz_ros_control]: 		 velocity
+[managed_gazebo-1] [INFO] [1788898061.003340136] [gz_ros_control]: Loading joint: poppy_m1_joint
+[managed_gazebo-1] [INFO] [1788898061.003342461] [gz_ros_control]: 	State:
+[managed_gazebo-1] [INFO] [1788898061.003344238] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003346777] [gz_ros_control]: 	Command:
+[managed_gazebo-1] [INFO] [1788898061.003348636] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003353144] [gz_ros_control]: Loading joint: poppy_m2_joint
+[managed_gazebo-1] [INFO] [1788898061.003355132] [gz_ros_control]: 	State:
+[managed_gazebo-1] [INFO] [1788898061.003356925] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003358772] [gz_ros_control]: 	Command:
+[managed_gazebo-1] [INFO] [1788898061.003360476] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003364637] [gz_ros_control]: Loading joint: poppy_m3_joint
+[managed_gazebo-1] [INFO] [1788898061.003366588] [gz_ros_control]: 	State:
+[managed_gazebo-1] [INFO] [1788898061.003368313] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003370072] [gz_ros_control]: 	Command:
+[managed_gazebo-1] [INFO] [1788898061.003371787] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003375792] [gz_ros_control]: Loading joint: poppy_m4_joint
+[managed_gazebo-1] [INFO] [1788898061.003377716] [gz_ros_control]: 	State:
+[managed_gazebo-1] [INFO] [1788898061.003379477] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003381277] [gz_ros_control]: 	Command:
+[managed_gazebo-1] [INFO] [1788898061.003382941] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003387029] [gz_ros_control]: Loading joint: poppy_m5_joint
+[managed_gazebo-1] [INFO] [1788898061.003390359] [gz_ros_control]: 	State:
+[managed_gazebo-1] [INFO] [1788898061.003392229] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003394011] [gz_ros_control]: 	Command:
+[managed_gazebo-1] [INFO] [1788898061.003395749] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003400405] [gz_ros_control]: Loading joint: poppy_m6_joint
+[managed_gazebo-1] [INFO] [1788898061.003402386] [gz_ros_control]: 	State:
+[managed_gazebo-1] [INFO] [1788898061.003404191] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003405969] [gz_ros_control]: 	Command:
+[managed_gazebo-1] [INFO] [1788898061.003407662] [gz_ros_control]: 		 position
+[managed_gazebo-1] [INFO] [1788898061.003503824] [controller_manager]: Initialize hardware 'GazeboSimSystem' 
+[managed_gazebo-1] [WARN] [1788898061.003546617] [controller_manager.hardware_component.system.GazeboSimSystem]: Executor is not available during hardware component initialization for 'GazeboSimSystem'. Skipping node creation!
+[managed_gazebo-1] [INFO] [1788898061.003594784] [controller_manager]: Successful initialization of hardware 'GazeboSimSystem'
+[managed_gazebo-1] [INFO] [1788898061.003702210] [controller_manager]: Activating component 'GazeboSimSystem'.
+[managed_gazebo-1] [INFO] [1788898061.003709645] [resource_manager]: 'configure' hardware 'GazeboSimSystem' 
+[managed_gazebo-1] [INFO] [1788898061.003713414] [gz_ros_control]: System Successfully configured!
+[managed_gazebo-1] [INFO] [1788898061.003716563] [resource_manager]: Successful 'configure' of hardware 'GazeboSimSystem'
+[managed_gazebo-1] [INFO] [1788898061.003722576] [resource_manager]: 'activate' hardware 'GazeboSimSystem' 
+[managed_gazebo-1] [INFO] [1788898061.003733231] [resource_manager]: Successful 'activate' of hardware 'GazeboSimSystem'
+[managed_gazebo-1] [WARN] [1788898061.003792359] [controller_manager]: Component 'GazeboSimSystem' does not have read or write statistics initialized, skipping registration.
+[managed_gazebo-1] [INFO] [1788898061.003797355] [controller_manager]: Resource Manager has been successfully initialized. Starting Controller Manager services...
+[INFO] [create-5]: process started with pid [48769]
+[create-5] [INFO] [1788898061.391093413] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-5]: process has finished cleanly [pid 48769]
+[INFO] [pick_place_initializer-6]: process started with pid [48790]
+[managed_gazebo-1] [WARN] [1788898062.898040454] [gz_ros_control]:  Desired controller update period (0.01 s) is slower than the gazebo simulation period (0.001 s).
+[parameter_bridge-4] [INFO] [1788898063.028421062] [ros_gz_bridge]: Passing message from ROS std_msgs/msg/Empty to Gazebo gz.msgs.Empty (showing msg only once per type)
+[INFO] [spawner-7]: process started with pid [48897]
+[spawner-7] [INFO] [1788898063.506338030] [spawner_joint_state_broadcaster]: waiting for service /controller_manager/list_controllers to become available...
+[pick_place_initializer-6] [INFO] [1788898063.699659255] [pick_place_initializer]: {"completed_wall_time_s": 1788898063.6880596, "detach_command_count": 5, "detachable_joint_enabled": true, "excluded_from_measured_run": true, "final_joint_state": "detached", "ground_truth_source": "/model/pick_object/pose (actual Gazebo model Pose_V)", "initial_joint_state": "attached", "object_motion_during_reset_m": null, "object_pose_fresh": true, "object_pose_m": [-0.04399996458184099, -0.22500149365551708, 0.1624756380369738], "observed_joint_states": ["attached", "detached"], "phase": "INITIALIZE_RESET", "reason": "detached_feedback_and_fresh_pose", "run_id": "negative_invalid_tf_frame", "seed": 704, "source_dirty": false, "source_sha": "165fb6cde69c1e74619cf54b811deb5c6c1c6324", "started_wall_time_s": 1788898062.7558415, "status": "passed", "verified_free": true}
+[INFO] [pick_place_initializer-6]: process has finished cleanly [pid 48790]
+[managed_gazebo-1] [INFO] [1788898063.963717650] [controller_manager]: Loading controller : 'joint_state_broadcaster' of type 'joint_state_broadcaster/JointStateBroadcaster'
+[managed_gazebo-1] [INFO] [1788898063.963790214] [controller_manager]: Loading controller 'joint_state_broadcaster'
+[managed_gazebo-1] [INFO] [1788898063.968526422] [controller_manager]: Controller 'joint_state_broadcaster' node arguments: --ros-args --params-file /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true 
+[spawner-7] [INFO] [1788898063.994564927] [spawner_joint_state_broadcaster]: Loaded joint_state_broadcaster
+[managed_gazebo-1] [INFO] [1788898063.995699129] [controller_manager]: Configuring controller: 'joint_state_broadcaster'
+[managed_gazebo-1] [INFO] [1788898063.995916884] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[managed_gazebo-1] [INFO] [1788898064.015260437] [controller_manager]: Activating controllers: [ joint_state_broadcaster ]
+[managed_gazebo-1] [INFO] [1788898064.049904124] [controller_manager]: Successfully switched controllers!
+[spawner-7] [INFO] [1788898064.060991744] [spawner_joint_state_broadcaster]: Configured and activated joint_state_broadcaster
+[INFO] [spawner-7]: process has finished cleanly [pid 48897]
+[INFO] [spawner-8]: process started with pid [48915]
+[INFO] [pick_place_attach_gate-9]: process started with pid [48918]
+[INFO] [pick_place_evaluator-10]: process started with pid [48919]
+[INFO] [pick_place_supervisor-11]: process started with pid [48920]
+[spawner-8] [INFO] [1788898064.633999712] [spawner_base_controller]: waiting for service /controller_manager/list_controllers to become available...
+[pick_place_supervisor-11] [INFO] [1788898065.141168637] [pick_place_supervisor]: {"action_endpoint": "/arm_controller/follow_joint_trajectory", "action_type": "control_msgs/action/FollowJointTrajectory", "attached": false, "control_source": "predefined_joint_trajectories", "event": "supervisor_started", "ground_truth_used_for_control": false, "sim_time_s": 0.0, "source": "supervisor", "state": "IDLE", "states": ["IDLE", "FREEZE_BASE", "OPEN", "PREGRASP", "APPROACH", "CLOSE", "VERIFY_GRASP", "LIFT", "HOLD", "TRANSFER", "LOWER", "RELEASE", "RETREAT", "DONE", "RECOVER", "FAILED", "CANCELLED"], "wall_time_s": 1788898065.1270385}
+[pick_place_supervisor-11] [INFO] [1788898065.148266301] [pick_place_supervisor]: {"attached": false, "event": "transition", "from_state": "IDLE", "reason": "condition_met", "sim_time_s": 0.855, "source": "supervisor", "state": "FREEZE_BASE", "to_state": "FREEZE_BASE", "wall_time_s": 1788898065.1477711}
+[managed_gazebo-1] [INFO] [1788898065.190278073] [controller_manager]: Loading controller : 'base_controller' of type 'diff_drive_controller/DiffDriveController'
+[managed_gazebo-1] [INFO] [1788898065.190326043] [controller_manager]: Loading controller 'base_controller'
+[managed_gazebo-1] [INFO] [1788898065.194569454] [controller_manager]: Controller 'base_controller' node arguments: --ros-args --params-file /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true 
+[spawner-8] [INFO] [1788898065.242409660] [spawner_base_controller]: Loaded base_controller
+[managed_gazebo-1] [INFO] [1788898065.243845748] [controller_manager]: Configuring controller: 'base_controller'
+[managed_gazebo-1] [WARN] [1788898065.247958878] [base_controller]: Can't accept new commands. subscriber is inactive
+[managed_gazebo-1] [INFO] [1788898065.267463946] [controller_manager]: Activating controllers: [ base_controller ]
+[managed_gazebo-1] [WARN] [1788898065.267647792] [base_controller]: Can't accept new commands. subscriber is inactive
+[managed_gazebo-1] [WARN] [1788898065.287789384] [base_controller]: Can't accept new commands. subscriber is inactive
+[managed_gazebo-1] [INFO] [1788898065.295964089] [controller_manager]: Successfully switched controllers!
+[spawner-8] [INFO] [1788898065.306561519] [spawner_base_controller]: Configured and activated base_controller
+[INFO] [spawner-8]: process has finished cleanly [pid 48915]
+[INFO] [spawner-12]: process started with pid [48979]
+[spawner-12] [INFO] [1788898065.894916099] [spawner_arm_controller]: waiting for service /controller_manager/list_controllers to become available...
+[managed_gazebo-1] [INFO] [1788898067.157549117] [controller_manager]: Loading controller : 'arm_controller' of type 'joint_trajectory_controller/JointTrajectoryController'
+[managed_gazebo-1] [INFO] [1788898067.157623689] [controller_manager]: Loading controller 'arm_controller'
+[managed_gazebo-1] [INFO] [1788898067.162313591] [controller_manager]: Controller 'arm_controller' node arguments: --ros-args --params-file /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator/share/mobile_manipulator/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true 
+[spawner-12] [INFO] [1788898067.209857396] [spawner_arm_controller]: Loaded arm_controller
+[managed_gazebo-1] [INFO] [1788898067.211304259] [controller_manager]: Configuring controller: 'arm_controller'
+[managed_gazebo-1] [INFO] [1788898067.211506513] [arm_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[managed_gazebo-1] [INFO] [1788898067.211547289] [arm_controller]: Command interfaces are [position] and state interfaces are [position].
+[managed_gazebo-1] [INFO] [1788898067.211576504] [arm_controller]: Using 'splines' interpolation method.
+[managed_gazebo-1] [INFO] [1788898067.214813602] [arm_controller]: Action status changes will be monitored at 20.00 Hz.
+[managed_gazebo-1] [INFO] [1788898067.225506881] [arm_controller]: Setting initial scaling factor to 1.000000
+[managed_gazebo-1] [INFO] [1788898067.225557808] [arm_controller]: No scaling interface set. This controller will not read speed scaling from the hardware.
+[managed_gazebo-1] [INFO] [1788898067.230169877] [controller_manager]: Activating controllers: [ arm_controller ]
+[managed_gazebo-1] [INFO] [1788898067.265100492] [controller_manager]: Successfully switched controllers!
+[spawner-12] [INFO] [1788898067.275980773] [spawner_arm_controller]: Configured and activated arm_controller
+[INFO] [spawner-12]: process has finished cleanly [pid 48979]
+[pick_place_supervisor-11] [INFO] [1788898067.808142195] [pick_place_supervisor]: {"attached": false, "event": "transition", "from_state": "FREEZE_BASE", "reason": "condition_met", "sim_time_s": 2.37, "source": "supervisor", "state": "OPEN", "to_state": "OPEN", "wall_time_s": 1788898067.8076658}
+[pick_place_supervisor-11] [INFO] [1788898067.828238869] [pick_place_supervisor]: {"attached": false, "attempt": 1, "duration_s": 2.5, "event": "trajectory_sent", "pose": "home", "sim_time_s": 2.377, "source": "supervisor", "state": "OPEN", "wall_time_s": 1788898067.827689, "waypoints": [[0.0, 0.0, 0.0, 0.0, 0.0, 1.2]]}
+[managed_gazebo-1] [INFO] [1788898067.832430019] [arm_controller]: Received new action goal
+[managed_gazebo-1] [INFO] [1788898067.832511282] [arm_controller]: Accepted new action goal
+[pick_place_supervisor-11] [INFO] [1788898067.884349562] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0033599999807681566, "sim_time_s": 2.41, "source": "supervisor", "state": "OPEN", "wall_time_s": 1788898067.883773}
+[pick_place_supervisor-11] [INFO] [1788898068.434492776] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.007199999948417829, "sim_time_s": 2.735, "source": "supervisor", "state": "OPEN", "wall_time_s": 1788898068.4337454}
+[pick_place_supervisor-11] [INFO] [1788898068.983792781] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.000479999928177155, "sim_time_s": 3.053, "source": "supervisor", "state": "OPEN", "wall_time_s": 1788898068.9833896}
+[pick_place_supervisor-11] [INFO] [1788898069.484029974] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0014399999464755897, "sim_time_s": 3.334, "source": "supervisor", "state": "OPEN", "wall_time_s": 1788898069.4835858}
+[pick_place_supervisor-11] [INFO] [1788898070.034515669] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0014400000588287165, "sim_time_s": 3.63, "source": "supervisor", "state": "OPEN", "wall_time_s": 1788898070.0338092}
+[pick_place_supervisor-11] [INFO] [1788898070.584049449] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.006240000010253599, "sim_time_s": 3.928, "source": "supervisor", "state": "OPEN", "wall_time_s": 1788898070.5836227}
+[pick_place_supervisor-11] [INFO] [1788898071.134659133] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0033599999437413652, "sim_time_s": 4.254, "source": "supervisor", "state": "OPEN", "wall_time_s": 1788898071.1338453}
+[pick_place_supervisor-11] [INFO] [1788898071.684342911] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0004800000060163345, "sim_time_s": 4.556, "source": "supervisor", "state": "OPEN", "wall_time_s": 1788898071.6839333}
+[managed_gazebo-1] [INFO] [1788898072.225433703] [arm_controller]: Goal reached, success!
+[pick_place_supervisor-11] [INFO] [1788898072.233779994] [pick_place_supervisor]: {"attached": false, "event": "trajectory_result", "observed_positions": {"front_left_joint": 6.635270559614898e-13, "front_right_joint": 1.4485468229958069e-11, "poppy_m1_joint": 3.0232071568212576e-11, "poppy_m2_joint": 2.9811828686932355e-06, "poppy_m3_joint": -4.418093938672481e-06, "poppy_m4_joint": 3.0917533629100414e-11, "poppy_m5_joint": 2.2498535526266e-06, "poppy_m6_joint": 1.2000000000002027, "rear_left_joint": -1.8333717906604197e-11, "rear_right_joint": 3.1902831125024038e-12}, "sim_time_s": 4.878, "source": "supervisor", "state": "OPEN", "wall_time_s": 1788898072.233318}
+[pick_place_supervisor-11] [INFO] [1788898072.247980496] [pick_place_supervisor]: {"attached": false, "event": "transition", "from_state": "OPEN", "reason": "condition_met", "sim_time_s": 4.885, "source": "supervisor", "state": "PREGRASP", "to_state": "PREGRASP", "wall_time_s": 1788898072.2476056}
+[pick_place_supervisor-11] [INFO] [1788898072.268246317] [pick_place_supervisor]: {"attached": false, "attempt": 1, "duration_s": 5.5, "event": "trajectory_sent", "pose": "pregrasp", "sim_time_s": 4.885, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898072.2678382, "waypoints": [[-1.0, 0.0, 0.0, 0.0, 0.0, 1.2], [-1.0, 1.3835, -0.822123, 0.045428, -0.742069, 1.2], [-0.0208, 1.3835, -0.822123, 0.045428, -0.742069, 1.2]]}
+[managed_gazebo-1] [INFO] [1788898072.268684275] [arm_controller]: Received new action goal
+[managed_gazebo-1] [INFO] [1788898072.268761672] [arm_controller]: Accepted new action goal
+[pick_place_supervisor-11] [INFO] [1788898072.323091685] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.001913693766325466, "sim_time_s": 4.918, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898072.322447}
+[pick_place_supervisor-11] [INFO] [1788898072.869984000] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.002449606760765527, "sim_time_s": 5.227, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898072.869528}
+[pick_place_supervisor-11] [INFO] [1788898073.370149470] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.003078258185284788, "sim_time_s": 5.492, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898073.369626}
+[pick_place_supervisor-11] [INFO] [1788898073.920196575] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.00553484970025564, "sim_time_s": 5.785, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898073.9195597}
+[pick_place_supervisor-11] [INFO] [1788898074.420102739] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.005532961541296677, "sim_time_s": 6.073, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898074.4196138}
+[pick_place_supervisor-11] [INFO] [1788898074.921836147] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0021318988722418553, "sim_time_s": 6.37, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898074.9211752}
+[pick_place_supervisor-11] [INFO] [1788898075.470035019] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0020021714049935357, "sim_time_s": 6.689, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898075.4694877}
+[pick_place_supervisor-11] [INFO] [1788898075.970013579] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.004526512507704417, "sim_time_s": 6.964, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898075.9695106}
+[pick_place_supervisor-11] [INFO] [1788898076.473530392] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.006336822706585199, "sim_time_s": 7.228, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898076.4719143}
+[pick_place_supervisor-11] [INFO] [1788898077.020201615] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.00620149877569065, "sim_time_s": 7.556, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898077.0195198}
+[pick_place_supervisor-11] [INFO] [1788898077.520547103] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0033800072864695885, "sim_time_s": 7.852, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898077.5197408}
+[pick_place_supervisor-11] [INFO] [1788898078.072491136] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0017017479475561759, "sim_time_s": 8.152, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898078.0718296}
+[pick_place_supervisor-11] [INFO] [1788898078.620423094] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0027355218957330063, "sim_time_s": 8.449, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898078.6199563}
+[pick_place_supervisor-11] [INFO] [1788898079.170371979] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0023802391866000194, "sim_time_s": 8.733, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898079.169779}
+[pick_place_supervisor-11] [INFO] [1788898079.720279248] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0023799686625955996, "sim_time_s": 9.01, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898079.7198596}
+[pick_place_supervisor-11] [INFO] [1788898080.271097116] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.002418688106849143, "sim_time_s": 9.296, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898080.2706838}
+[pick_place_supervisor-11] [INFO] [1788898080.820050343] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.002006135114569374, "sim_time_s": 9.571, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898080.819655}
+[pick_place_supervisor-11] [INFO] [1788898081.370030244] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0026468259416330964, "sim_time_s": 9.835, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898081.3694777}
+[pick_place_supervisor-11] [INFO] [1788898081.870097304] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.002111498201767703, "sim_time_s": 10.099, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898081.8696158}
+[managed_gazebo-1] [INFO] [1788898082.374490745] [arm_controller]: Goal reached, success!
+[pick_place_supervisor-11] [INFO] [1788898082.420958110] [pick_place_supervisor]: {"attached": false, "event": "trajectory_result", "observed_positions": {"front_left_joint": 5.905440349706231e-13, "front_right_joint": 1.4402868365183545e-11, "poppy_m1_joint": -0.019076212161634448, "poppy_m2_joint": 1.3837833362440546, "poppy_m3_joint": -0.8226712163454827, "poppy_m4_joint": 0.04476172339949599, "poppy_m5_joint": -0.7418206828560682, "poppy_m6_joint": 1.1996393955770517, "rear_left_joint": -1.8406707293336433e-11, "rear_right_joint": 3.107673604483161e-12}, "sim_time_s": 10.396, "source": "supervisor", "state": "PREGRASP", "wall_time_s": 1788898082.4205096}
+[pick_place_supervisor-11] [INFO] [1788898082.427981067] [pick_place_supervisor]: {"attached": false, "event": "transition", "from_state": "PREGRASP", "reason": "condition_met", "sim_time_s": 10.402, "source": "supervisor", "state": "APPROACH", "to_state": "APPROACH", "wall_time_s": 1788898082.427551}
+[pick_place_supervisor-11] [INFO] [1788898082.448675620] [pick_place_supervisor]: {"attached": false, "attempt": 1, "duration_s": 2.5, "event": "trajectory_sent", "pose": "grasp", "sim_time_s": 10.421, "source": "supervisor", "state": "APPROACH", "wall_time_s": 1788898082.4481668, "waypoints": [[0.026497, 1.45, -0.580578, 1.3e-05, -0.753151, 1.2]]}
+[managed_gazebo-1] [INFO] [1788898082.449207199] [arm_controller]: Received new action goal
+[managed_gazebo-1] [INFO] [1788898082.449277104] [arm_controller]: Accepted new action goal
+[pick_place_supervisor-11] [INFO] [1788898082.500890958] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0008715355952835235, "sim_time_s": 10.446, "source": "supervisor", "state": "APPROACH", "wall_time_s": 1788898082.500244}
+[pick_place_supervisor-11] [INFO] [1788898083.000729113] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0008715356074202596, "sim_time_s": 10.693, "source": "supervisor", "state": "APPROACH", "wall_time_s": 1788898083.0002978}
+[pick_place_supervisor-11] [INFO] [1788898083.551053505] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0001464214094395455, "sim_time_s": 10.99, "source": "supervisor", "state": "APPROACH", "wall_time_s": 1788898083.5506234}
+[pick_place_supervisor-11] [INFO] [1788898084.100838393] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.000677860940105135, "sim_time_s": 11.287, "source": "supervisor", "state": "APPROACH", "wall_time_s": 1788898084.1003761}
+[pick_place_supervisor-11] [INFO] [1788898084.601648288] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.001065210076648171, "sim_time_s": 11.551, "source": "supervisor", "state": "APPROACH", "wall_time_s": 1788898084.6011832}
+[pick_place_supervisor-11] [INFO] [1788898085.150606466] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0002932352630660162, "sim_time_s": 11.848, "source": "supervisor", "state": "APPROACH", "wall_time_s": 1788898085.150211}
+[pick_place_supervisor-11] [INFO] [1788898085.651168167] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0010652100622343674, "sim_time_s": 12.134, "source": "supervisor", "state": "APPROACH", "wall_time_s": 1788898085.650469}
+[pick_place_supervisor-11] [INFO] [1788898086.200906767] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0014525592936239784, "sim_time_s": 12.409, "source": "supervisor", "state": "APPROACH", "wall_time_s": 1788898086.2004466}
+[pick_place_supervisor-11] [INFO] [1788898086.750864140] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0010161392406489167, "sim_time_s": 12.716, "source": "supervisor", "state": "APPROACH", "wall_time_s": 1788898086.75046}
+[managed_gazebo-1] [INFO] [1788898087.117254709] [arm_controller]: Goal reached, success!
+[pick_place_supervisor-11] [INFO] [1788898087.153363545] [pick_place_supervisor]: {"attached": false, "event": "trajectory_result", "observed_positions": {"front_left_joint": 6.742209017589933e-13, "front_right_joint": 1.4497434822454318e-11, "poppy_m1_joint": 0.02619795288129834, "poppy_m2_joint": 1.4511030975083108, "poppy_m3_joint": -0.58212739627091, "poppy_m4_joint": 0.00029939184423519714, "poppy_m5_joint": -0.7530784858722319, "poppy_m6_joint": 1.1999928346243454, "rear_left_joint": -1.832302848485614e-11, "rear_right_joint": 3.202242330500301e-12}, "sim_time_s": 12.937, "source": "supervisor", "state": "APPROACH", "wall_time_s": 1788898087.1527247}
+[pick_place_supervisor-11] [INFO] [1788898087.167830830] [pick_place_supervisor]: {"attached": false, "event": "transition", "from_state": "APPROACH", "reason": "condition_met", "sim_time_s": 12.946, "source": "supervisor", "state": "CLOSE", "to_state": "CLOSE", "wall_time_s": 1788898087.1674864}
+[pick_place_supervisor-11] [INFO] [1788898087.187877658] [pick_place_supervisor]: {"attached": false, "attempt": 1, "duration_s": 3.0, "event": "trajectory_sent", "pose": "close", "sim_time_s": 12.966, "source": "supervisor", "state": "CLOSE", "wall_time_s": 1788898087.1874797, "waypoints": [[0.026497, 1.45, -0.580578, 1.3e-05, -0.753151, 0.0]]}
+[managed_gazebo-1] [INFO] [1788898087.188378350] [arm_controller]: Received new action goal
+[managed_gazebo-1] [INFO] [1788898087.188449264] [arm_controller]: Accepted new action goal
+[pick_place_supervisor-11] [INFO] [1788898087.289937626] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 3.2951419370874646e-12, "sim_time_s": 13.012, "source": "supervisor", "state": "CLOSE", "wall_time_s": 1788898087.2894375}
+[pick_place_supervisor-11] [INFO] [1788898087.790384988] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0023999856821466103, "sim_time_s": 13.252, "source": "supervisor", "state": "CLOSE", "wall_time_s": 1788898087.7896678}
+[pick_place_supervisor-11] [INFO] [1788898088.340339828] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.003999976106138781, "sim_time_s": 13.488, "source": "supervisor", "state": "CLOSE", "wall_time_s": 1788898088.3396106}
+[pick_place_supervisor-11] [INFO] [1788898088.843989720] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.003199980854970752, "sim_time_s": 13.696, "source": "supervisor", "state": "CLOSE", "wall_time_s": 1788898088.8430996}
+[pick_place_supervisor-11] [INFO] [1788898089.389995741] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.003999976083113865, "sim_time_s": 13.95, "source": "supervisor", "state": "CLOSE", "wall_time_s": 1788898089.3895023}
+[pick_place_supervisor-11] [INFO] [1788898089.928323450] [pick_place_supervisor]: {"attached": false, "event": "transition", "from_state": "CLOSE", "reason": "condition_met", "sim_time_s": 14.177, "source": "supervisor", "state": "VERIFY_GRASP", "to_state": "VERIFY_GRASP", "wall_time_s": 1788898089.927649}
+[pick_place_supervisor-11] [INFO] [1788898089.942012270] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.002399985744668487, "sim_time_s": 14.186, "source": "supervisor", "state": "VERIFY_GRASP", "wall_time_s": 1788898089.9409773}
+[pick_place_supervisor-11] [INFO] [1788898090.490138526] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.07533989187972234, "sim_time_s": 14.422, "source": "supervisor", "state": "VERIFY_GRASP", "wall_time_s": 1788898090.4893847}
+[pick_place_supervisor-11] [INFO] [1788898090.991738091] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.15533507201206553, "sim_time_s": 14.62, "source": "supervisor", "state": "VERIFY_GRASP", "wall_time_s": 1788898090.9912262}
+[pick_place_supervisor-11] [INFO] [1788898091.540377122] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.2473325299514224, "sim_time_s": 14.851, "source": "supervisor", "state": "VERIFY_GRASP", "wall_time_s": 1788898091.5397134}
+[pick_place_supervisor-11] [INFO] [1788898092.040486670] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.3353303425291745, "sim_time_s": 15.071, "source": "supervisor", "state": "VERIFY_GRASP", "wall_time_s": 1788898092.039739}
+[pick_place_supervisor-11] [INFO] [1788898092.540761846] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.4193278935697896, "sim_time_s": 15.28, "source": "supervisor", "state": "VERIFY_GRASP", "wall_time_s": 1788898092.5398524}
+[pick_place_supervisor-11] [INFO] [1788898093.040695012] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.5113248249112698, "sim_time_s": 15.511, "source": "supervisor", "state": "VERIFY_GRASP", "wall_time_s": 1788898093.0400033}
+[pick_place_supervisor-11] [INFO] [1788898093.544713044] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.5873221893263662, "sim_time_s": 15.709, "source": "supervisor", "state": "VERIFY_GRASP", "wall_time_s": 1788898093.5437121}
+[pick_place_supervisor-11] [INFO] [1788898094.095250416] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.6833193485045372, "sim_time_s": 15.94, "source": "supervisor", "state": "VERIFY_GRASP", "wall_time_s": 1788898094.094499}
+[managed_gazebo-1] [INFO] [1788898094.123391954] [arm_controller]: Goal reached, success!
+[pick_place_supervisor-11] [INFO] [1788898094.139818956] [pick_place_supervisor]: {"attached": false, "event": "trajectory_result", "observed_positions": {"front_left_joint": -1.703488488789114e-12, "front_right_joint": 1.1477439995256832e-11, "poppy_m1_joint": 0.02649640208844008, "poppy_m2_joint": 1.4499723469887578, "poppy_m3_joint": -0.58058109876826, "poppy_m4_joint": 1.3573310009732483e-05, "poppy_m5_joint": -0.753150854982121, "poppy_m6_joint": 0.6953189531192512, "rear_left_joint": -2.0700953271504857e-11, "rear_right_joint": 1.820185734997873e-13}, "sim_time_s": 15.973, "source": "supervisor", "state": "VERIFY_GRASP", "wall_time_s": 1788898094.1393142}
+[pick_place_supervisor-11] [INFO] [1788898124.288105473] [pick_place_supervisor]: {"attached": false, "event": "transition", "from_state": "VERIFY_GRASP", "reason": "state_timeout:VERIFY_GRASP", "sim_time_s": 29.183, "source": "supervisor", "state": "RECOVER", "to_state": "RECOVER", "wall_time_s": 1788898124.2876654}
+[pick_place_supervisor-11] [INFO] [1788898124.307789376] [pick_place_supervisor]: {"attached": false, "attempt": 1, "duration_s": 2.5, "event": "trajectory_sent", "pose": "home", "sim_time_s": 29.202, "source": "supervisor", "state": "RECOVER", "wall_time_s": 1788898124.3074145, "waypoints": [[0.0, 0.0, 0.0, 0.0, 0.0, 1.2]]}
+[managed_gazebo-1] [INFO] [1788898124.308213867] [arm_controller]: Received new action goal
+[managed_gazebo-1] [INFO] [1788898124.308265790] [arm_controller]: Accepted new action goal
+[pick_place_supervisor-11] [INFO] [1788898124.359645380] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0027113431131023935, "sim_time_s": 29.229, "source": "supervisor", "state": "RECOVER", "wall_time_s": 1788898124.3592198}
+[pick_place_supervisor-11] [INFO] [1788898124.909705296] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0032389014084180934, "sim_time_s": 29.536, "source": "supervisor", "state": "RECOVER", "wall_time_s": 1788898124.9091425}
+[pick_place_supervisor-11] [INFO] [1788898125.459452663] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0015854351466368932, "sim_time_s": 29.833, "source": "supervisor", "state": "RECOVER", "wall_time_s": 1788898125.459004}
+[pick_place_supervisor-11] [INFO] [1788898125.959791957] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0045073930738182, "sim_time_s": 30.064, "source": "supervisor", "state": "RECOVER", "wall_time_s": 1788898125.9592462}
+[pick_place_supervisor-11] [INFO] [1788898126.509401237] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0038365971437093194, "sim_time_s": 30.361, "source": "supervisor", "state": "RECOVER", "wall_time_s": 1788898126.508961}
+[pick_place_supervisor-11] [INFO] [1788898127.009543512] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.004352838854139396, "sim_time_s": 30.63, "source": "supervisor", "state": "RECOVER", "wall_time_s": 1788898127.0090547}
+[pick_place_supervisor-11] [INFO] [1788898127.510302920] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.003345413374371664, "sim_time_s": 30.913, "source": "supervisor", "state": "RECOVER", "wall_time_s": 1788898127.509532}
+[pick_place_supervisor-11] [INFO] [1788898128.064095516] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0014134829712832975, "sim_time_s": 31.186, "source": "supervisor", "state": "RECOVER", "wall_time_s": 1788898128.0633726}
+[pick_place_supervisor-11] [INFO] [1788898128.609870966] [pick_place_supervisor]: {"attached": false, "event": "trajectory_feedback", "max_joint_error_rad": 0.0029084693840368825, "sim_time_s": 31.465, "source": "supervisor", "state": "RECOVER", "wall_time_s": 1788898128.60901}
+[managed_gazebo-1] [INFO] [1788898129.062549832] [arm_controller]: Goal reached, success!
+[pick_place_supervisor-11] [INFO] [1788898129.110416572] [pick_place_supervisor]: {"attached": false, "event": "trajectory_result", "observed_positions": {"front_left_joint": -3.78459429331579e-13, "front_right_joint": 1.2267356925562305e-11, "poppy_m1_joint": -8.807627808189047e-05, "poppy_m2_joint": 0.0008831571374961016, "poppy_m3_joint": -0.0003236142291669797, "poppy_m4_joint": -6.497766617412548e-08, "poppy_m5_joint": 0.0015295677142837514, "poppy_m6_joint": 1.199999740858527, "rear_left_joint": -1.9376117816660138e-11, "rear_right_joint": 9.717530373609023e-13}, "sim_time_s": 31.722, "source": "supervisor", "state": "RECOVER", "wall_time_s": 1788898129.1097887}
+[pick_place_supervisor-11] [INFO] [1788898129.128866277] [pick_place_supervisor]: {"attached": false, "event": "transition", "from_state": "RECOVER", "reason": "state_timeout:VERIFY_GRASP", "sim_time_s": 31.74, "source": "supervisor", "state": "FAILED", "to_state": "FAILED", "wall_time_s": 1788898129.1279309}
+[pick_place_supervisor-11] [INFO] [1788898129.148002668] [pick_place_supervisor]: {"attached": false, "event": "terminal", "reason": "state_timeout:VERIFY_GRASP", "result": "FAILED", "sim_time_s": 31.747, "source": "supervisor", "state": "FAILED", "wall_time_s": 1788898129.1476202}
+[pick_place_evaluator-10] [INFO] [1788898129.169797675] [pick_place_evaluator]: {"attach_authorizations": [], "attach_count": 0, "completed_sim_time_s": 31.747, "completed_wall_time_s": 1788898129.1476202, "control_source": "predefined_joint_trajectories", "criteria": {"base_drift": true, "grasp_contract_verified": false, "hold_at_least_3s": false, "lift_at_least_50mm": false, "no_forbidden_contacts": true, "placement_within_30mm": false, "pregrasp_orientation": true, "pregrasp_position": true, "released": false, "separated_from_pick_support": false, "stable_at_least_2s": false, "terminal_done": false}, "detach_count": 0, "final_base_pose_xy_m": [-1.1402110450851944e-13, -4.1112608023092213e-25], "final_grasp_frame_pose_m": [-0.04468647499909126, -0.15344752898351552, 0.27593988381454665], "final_object_pose_m": [-0.04230863236198361, -0.2229329180129882, 0.16250000005196497], "final_tool_pose_m": [-0.029986074013868182, -0.15799622889349146, 0.275946208578455], "forbidden_contacts": [], "grasp_mode": "attach_conditioned", "ground_truth_source": "/model/pick_object/pose (actual Gazebo model Pose_V)", "ground_truth_used_for_attachment_gate": true, "ground_truth_used_for_control": false, "ground_truth_used_for_evaluation": true, "hold_duration_s": 0.0, "initial_base_pose_xy_m": [9.778167839004482e-17, 1.7531459276005139e-28], "initial_object_pose_m": [-0.04400002042947591, -0.22500378055395925, 0.16250000004099713], "initial_tool_pose_m": [-0.03000000000011763, -0.15961651718423073, 0.271722600544085], "lift_m": 0.00019363380447628975, "maximum_base_drift_m": 2.0551392691952625e-13, "maximum_joint_tracking_error_rad": 0.6833193485045372, "maximum_object_z_m": 0.16269363384547342, "maximum_pick_support_clearance_m": 0.00019363384547341211, "object_pose_at_grasp_m": null, "object_pose_at_lift_m": null, "placement_error_xy_m": 0.08687832226999316, "pregrasp_position_error_m": 0.0054238706271878285, "pregrasp_relevant_angle_error_deg": 3.6512139695466224, "raw_events": "events.jsonl", "raw_samples": "samples.csv", "run_id": "negative_invalid_tf_frame", "seed": 704, "simulator_assisted": true, "source_dirty": false, "source_sha": "165fb6cde69c1e74619cf54b811deb5c6c1c6324", "stability_motion_tolerance_m": 0.0005, "stable_duration_s": 0.0, "started_sim_time_s": 0.0, "started_wall_time_s": 1788898065.0563228, "status": "failed", "terminal_reason": "state_timeout:VERIFY_GRASP", "terminal_state": "FAILED", "timeout_or_failure_cause": "state_timeout:VERIFY_GRASP", "trajectory_goal_count": 5, "trajectory_retry_count": 0, "transitions": [{"attached": false, "event": "transition", "from_state": "IDLE", "reason": "condition_met", "sim_time_s": 0.855, "source": "supervisor", "state": "FREEZE_BASE", "to_state": "FREEZE_BASE", "wall_time_s": 1788898065.1477711}, {"attached": false, "event": "transition", "from_state": "FREEZE_BASE", "reason": "condition_met", "sim_time_s": 2.37, "source": "supervisor", "state": "OPEN", "to_state": "OPEN", "wall_time_s": 1788898067.8076658}, {"attached": false, "event": "transition", "from_state": "OPEN", "reason": "condition_met", "sim_time_s": 4.885, "source": "supervisor", "state": "PREGRASP", "to_state": "PREGRASP", "wall_time_s": 1788898072.2476056}, {"attached": false, "event": "transition", "from_state": "PREGRASP", "reason": "condition_met", "sim_time_s": 10.402, "source": "supervisor", "state": "APPROACH", "to_state": "APPROACH", "wall_time_s": 1788898082.427551}, {"attached": false, "event": "transition", "from_state": "APPROACH", "reason": "condition_met", "sim_time_s": 12.946, "source": "supervisor", "state": "CLOSE", "to_state": "CLOSE", "wall_time_s": 1788898087.1674864}, {"attached": false, "event": "transition", "from_state": "CLOSE", "reason": "condition_met", "sim_time_s": 14.177, "source": "supervisor", "state": "VERIFY_GRASP", "to_state": "VERIFY_GRASP", "wall_time_s": 1788898089.927649}, {"attached": false, "event": "transition", "from_state": "VERIFY_GRASP", "reason": "state_timeout:VERIFY_GRASP", "sim_time_s": 29.183, "source": "supervisor", "state": "RECOVER", "to_state": "RECOVER", "wall_time_s": 1788898124.2876654}, {"attached": false, "event": "transition", "from_state": "RECOVER", "reason": "state_timeout:VERIFY_GRASP", "sim_time_s": 31.74, "source": "supervisor", "state": "FAILED", "to_state": "FAILED", "wall_time_s": 1788898129.1279309}], "world": "pick_and_place.sdf"}
+[INFO] [pick_place_supervisor-11]: process has finished cleanly [pid 48920]
+[INFO] [gz-13]: process started with pid [48997]
+[gz-13] data: true
+[gz-13] 
+[INFO] [gz-13]: process has finished cleanly [pid 48997]
+[INFO] [pick_place_evaluator-10]: sending signal 'SIGINT' to process[pick_place_evaluator-10]
+[INFO] [pick_place_attach_gate-9]: sending signal 'SIGINT' to process[pick_place_attach_gate-9]
+[INFO] [parameter_bridge-4]: sending signal 'SIGINT' to process[parameter_bridge-4]
+[INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
+[INFO] [managed_gazebo-1]: sending signal 'SIGINT' to process[managed_gazebo-1]
+[parameter_bridge-4] [INFO] [1788898134.163496422] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-2] [INFO] [1788898134.164722648] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [parameter_bridge-4]: process has finished cleanly [pid 48713]
+[INFO] [robot_state_publisher-2]: process has finished cleanly [pid 48668]
+[INFO] [pick_place_evaluator-10]: process has finished cleanly [pid 48919]
+[INFO] [pick_place_attach_gate-9]: process has finished cleanly [pid 48918]
+[managed_gazebo-1] managed_gazebo shutdown child_pid=48705 action=SIGKILL
+[INFO] [managed_gazebo-1]: process has finished cleanly [pid 48667]

@@ -1,0 +1,7 @@
+{"event": "evaluator_started", "ground_truth_source": "/model/pick_object/pose (actual Gazebo model Pose_V)", "sim_time_s": 0.0, "source": "evaluator", "state": "IDLE", "wall_time_s": 1788898145.3008642}
+{"event": "gate_state_changed", "from_state": "IDLE", "sim_time_s": 1.321, "source": "attach_gate", "state": "FREEZE_BASE", "wall_time_s": 1788898146.0714166}
+{"attached": false, "event": "transition", "from_state": "FREEZE_BASE", "reason": "state_timeout:FREEZE_BASE", "sim_time_s": 15.94, "source": "supervisor", "state": "RECOVER", "to_state": "RECOVER", "wall_time_s": 1788898175.0312128}
+{"event": "gate_state_changed", "from_state": "FREEZE_BASE", "sim_time_s": 15.94, "source": "attach_gate", "state": "RECOVER", "wall_time_s": 1788898175.0528893}
+{"attached": false, "event": "transition", "from_state": "RECOVER", "reason": "state_timeout:FREEZE_BASE", "sim_time_s": 22.078, "source": "supervisor", "state": "FAILED", "to_state": "FAILED", "wall_time_s": 1788898188.3843472}
+{"attached": false, "event": "terminal", "reason": "state_timeout:FREEZE_BASE", "result": "FAILED", "sim_time_s": 22.078, "source": "supervisor", "state": "FAILED", "wall_time_s": 1788898188.3866012}
+{"event": "gate_state_changed", "from_state": "RECOVER", "sim_time_s": 22.177, "source": "attach_gate", "state": "FAILED", "wall_time_s": 1788898188.387646}
