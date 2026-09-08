@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <robot name="mobile_manipulator" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="pick_place_enabled" default="false"/>
+  <xacro:arg name="manipulation_enabled" default="false"/>
   <material name="SlateGray"><color rgba="0.44 0.50 0.56 1"/></material>
   <material name="Black"><color rgba="0.04 0.04 0.04 1"/></material>
   <material name="PoppyOrange"><color rgba="1.0 0.32 0.05 1"/></material>
@@ -235,9 +237,10 @@
       <origin xyz="0 -0.058 0"/>
       <geometry><box size="0.036 0.032 0.030"/></geometry>
     </collision>
-    <collision>
-      <origin xyz="0 -0.082 0.0145"/>
-      <geometry><box size="0.024 0.092 0.006"/></geometry>
+    <collision name="poppy_fixed_finger_collision">
+      <!-- Functional contact pad centered on the audited fingertip frame. -->
+      <origin xyz="0 -0.11 0"/>
+      <geometry><sphere radius="0.003"/></geometry>
     </collision>
   </link>
   <joint name="poppy_m5_joint" type="revolute">
@@ -260,10 +263,10 @@
         <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/gripper.dae"/>
       </geometry>
     </visual>
-    <collision>
-      <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/collision/poppy_link_6_convex.stl"/>
-      </geometry>
+    <collision name="poppy_moving_finger_collision">
+      <!-- Functional contact pad centered on the audited fingertip frame. -->
+      <origin xyz="0 -0.052 0"/>
+      <geometry><sphere radius="0.003"/></geometry>
     </collision>
   </link>
   <joint name="poppy_m6_joint" type="revolute">
@@ -285,6 +288,17 @@
     <parent link="poppy_fixed_tip"/>
     <child link="poppy_tool_frame"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <!--
+    The validated tool frame remains on the fixed fingertip.  At m6=0.60 rad,
+    this grasp frame is the midpoint between the two audited fingertip frames;
+    it does not redefine or move poppy_tool_frame.
+  -->
+  <link name="poppy_grasp_frame"/>
+  <joint name="poppy_grasp_frame_joint" type="fixed">
+    <parent link="poppy_tool_frame"/>
+    <child link="poppy_grasp_frame"/>
+    <origin xyz="0 0.0147 0.00455" rpy="0 0 0"/>
   </joint>
   <link name="poppy_moving_tip"/>
   <joint name="poppy_moving_tip_joint" type="fixed">
@@ -372,6 +386,28 @@
   <gazebo>
     <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
       <parameters>$(find mobile_manipulator)/config/controllers.yaml</parameters>
+      <xacro:if value="$(arg manipulation_enabled)">
+        <position_proportional_gain>2.0</position_proportional_gain>
+      </xacro:if>
     </plugin>
   </gazebo>
+  <xacro:if value="$(arg pick_place_enabled)">
+    <!--
+      Gazebo Sim 8 DetachableJoint is simulator assistance, not physical grasp.
+      The plugin is configured before pick_object is spawned, detached during
+      RESET, and commanded only by the bilateral-contact gate.
+    -->
+    <gazebo>
+      <plugin filename="gz-sim-detachable-joint-system"
+              name="gz::sim::systems::DetachableJoint">
+        <parent_link>poppy_link_5</parent_link>
+        <child_model>pick_object</child_model>
+        <child_link>object_link</child_link>
+        <detach_topic>/pick_object/detach</detach_topic>
+        <attach_topic>/pick_object/attach</attach_topic>
+        <output_topic>/pick_object/joint_state</output_topic>
+        <suppress_child_warning>true</suppress_child_warning>
+      </plugin>
+    </gazebo>
+  </xacro:if>
 </robot>

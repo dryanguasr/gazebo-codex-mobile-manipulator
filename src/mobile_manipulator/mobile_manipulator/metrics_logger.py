@@ -1,13 +1,13 @@
-import csv
 from collections import Counter, deque
+import csv
 import json
 import math
 from pathlib import Path
 from statistics import mean
 
-import rclpy
 from geometry_msgs.msg import PoseStamped, TwistStamped, Vector3Stamped
 from nav_msgs.msg import Odometry
+import rclpy
 from rclpy.duration import Duration
 from rclpy.node import Node
 from rclpy.time import Time
@@ -39,6 +39,7 @@ CSV_FIELDS = [
     'ground_truth_camera_distance_m',
     'estimation_error_m',
 ]
+
 
 class ReferenceUnavailable(RuntimeError):
     """A tracking reference could not be built without stale fallbacks."""

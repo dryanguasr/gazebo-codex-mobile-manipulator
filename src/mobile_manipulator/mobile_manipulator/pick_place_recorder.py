@@ -1,0 +1,184 @@
+"""Record real Gazebo camera evidence for a pick-and-place run."""
+
+import json
+from pathlib import Path
+import time
+
+import cv2
+from cv_bridge import CvBridge
+import rclpy
+from rclpy.node import Node
+from rclpy.qos import qos_profile_sensor_data
+from sensor_msgs.msg import Image
+from std_msgs.msg import String
+
+
+PHASE_BY_DESTINATION = {
+    'APPROACH': 'pregrasp',
+    'HOLD': 'lift',
+    'TRANSFER': 'retention',
+    'RELEASE': 'deposit',
+    'RETREAT': 'release',
+}
+
+
+class PickPlaceRecorder(Node):
+    """Write an MP4 and event-aligned PNGs from the simulation camera."""
+
+    def __init__(self):
+        super().__init__('pick_place_recorder')
+        self.declare_parameter('output_dir', '/tmp/pick_place_a1')
+        self.declare_parameter('fps', 15.0)
+        self.output = Path(str(self.get_parameter('output_dir').value)) / 'media'
+        self.raw_output = self.output / 'raw'
+        self.output.mkdir(parents=True, exist_ok=True)
+        self.raw_output.mkdir(parents=True, exist_ok=True)
+        self.bridge = CvBridge()
+        self.state = 'IDLE'
+        self.last_frame = None
+        self.writer = None
+        self.frame_count = 0
+        self.captured = {}
+        self.closed = False
+        self.started_wall = time.time()
+        self.create_subscription(
+            Image,
+            '/pick_place/evidence/image',
+            self.image_callback,
+            qos_profile_sensor_data,
+        )
+        self.create_subscription(
+            String, '/pick_place/status', self.status_callback, 50
+        )
+        self.create_subscription(
+            String, '/pick_place/gate_event', self.gate_callback, 50
+        )
+
+    def annotated(self, frame):
+        image = frame.copy()
+        cv2.rectangle(image, (0, 0), (image.shape[1], 48), (20, 20, 20), -1)
+        cv2.putText(
+            image,
+            f'A1 REAL GAZEBO | {self.state}',
+            (14, 32),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.72,
+            (70, 240, 90),
+            2,
+            cv2.LINE_AA,
+        )
+        return image
+
+    def ensure_writer(self, frame):
+        if self.writer is not None:
+            return
+        height, width = frame.shape[:2]
+        path = self.output / 'pick_and_place_a1.mp4'
+        self.writer = cv2.VideoWriter(
+            str(path),
+            cv2.VideoWriter_fourcc(*'mp4v'),
+            float(self.get_parameter('fps').value),
+            (width, height),
+        )
+        if not self.writer.isOpened():
+            raise RuntimeError(f'Could not create video at {path}')
+
+    def image_callback(self, message):
+        if self.closed:
+            return
+        frame = self.bridge.imgmsg_to_cv2(message, desired_encoding='bgr8')
+        self.last_frame = frame
+        annotated = self.annotated(frame)
+        self.ensure_writer(annotated)
+        self.writer.write(annotated)
+        self.frame_count += 1
+
+    def capture(self, phase):
+        if phase in self.captured or self.last_frame is None:
+            return
+        raw_path = self.raw_output / f'{phase}.png'
+        annotated_path = self.output / f'{phase}.png'
+        if not cv2.imwrite(str(raw_path), self.last_frame):
+            raise RuntimeError(f'Could not write {raw_path}')
+        if not cv2.imwrite(str(annotated_path), self.annotated(self.last_frame)):
+            raise RuntimeError(f'Could not write {annotated_path}')
+        self.captured[phase] = {
+            'frame': self.frame_count,
+            'state': self.state,
+            'raw': str(raw_path.relative_to(self.output)),
+            'annotated': annotated_path.name,
+        }
+
+    def status_callback(self, message):
+        try:
+            data = json.loads(message.data)
+        except json.JSONDecodeError:
+            return
+        self.state = str(data.get('state', self.state))
+        if data.get('event') == 'transition':
+            phase = PHASE_BY_DESTINATION.get(str(data.get('to_state')))
+            if phase is not None:
+                self.capture(phase)
+        if data.get('event') == 'terminal':
+            self.close()
+
+    def gate_callback(self, message):
+        try:
+            data = json.loads(message.data)
+        except json.JSONDecodeError:
+            return
+        if data.get('event') in (
+            'attach_command', 'physical_grasp_verified'
+        ):
+            self.capture('contact')
+
+    def close(self):
+        if self.closed:
+            return
+        self.closed = True
+        if self.writer is not None:
+            self.writer.release()
+        manifest = {
+            'source': '/pick_place/evidence/image (Gazebo camera)',
+            'video': 'pick_and_place_a1.mp4',
+            'frame_count': self.frame_count,
+            'fps': float(self.get_parameter('fps').value),
+            'started_wall_time_s': self.started_wall,
+            'completed_wall_time_s': time.time(),
+            'captured_phases': self.captured,
+            'required_phases': [
+                'pregrasp', 'contact', 'lift', 'retention',
+                'deposit', 'release',
+            ],
+        }
+        manifest['complete'] = all(
+            phase in self.captured for phase in manifest['required_phases']
+        )
+        (self.output / 'manifest.json').write_text(
+            json.dumps(manifest, indent=2) + '\n',
+            encoding='utf-8',
+        )
+
+    def destroy_node(self):
+        self.close()
+        return super().destroy_node()
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = PickPlaceRecorder()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    except RuntimeError:
+        if rclpy.ok():
+            raise
+    finally:
+        node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()

@@ -3,8 +3,8 @@
 from pathlib import Path
 
 import cv2
-import rclpy
 from cv_bridge import CvBridge
+import rclpy
 from rclpy.node import Node
 from rclpy.qos import qos_profile_sensor_data
 from sensor_msgs.msg import Image

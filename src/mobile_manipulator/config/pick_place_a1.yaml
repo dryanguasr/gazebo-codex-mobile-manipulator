@@ -1,0 +1,59 @@
+pick_place_supervisor:
+  ros__parameters:
+    use_sim_time: true
+    auto_start: true
+    joint_names: [poppy_m1_joint, poppy_m2_joint, poppy_m3_joint, poppy_m4_joint, poppy_m5_joint, poppy_m6_joint]
+    home: [0.0, 0.0, 0.0, 0.0, 0.0, 1.20]
+    pregrasp_clearance_1: [-1.0, 0.0, 0.0, 0.0, 0.0, 1.20]
+    pregrasp_clearance_2: [-1.0, 1.383500, -0.822123, 0.045428, -0.742069, 1.20]
+    pregrasp: [-0.020800, 1.383500, -0.822123, 0.045428, -0.742069, 1.20]
+    grasp: [0.026497, 1.450000, -0.580578, 0.000013, -0.753151, 1.20]
+    close: [0.026497, 1.450000, -0.580578, 0.000013, -0.753151, 0.00]
+    lift: [-0.020800, 1.383500, -0.822123, 0.045428, -0.742069, 0.60]
+    transfer: [0.362891, 1.394351, -0.822774, 0.065445, -0.744443, 0.60]
+    place: [0.422991, 1.450000, -0.580630, 0.000013, -0.753150, 0.65]
+    release_open: [0.422991, 1.450000, -0.580630, 0.000013, -0.753150, 1.20]
+    retreat: [0.362891, 1.394351, -0.822774, 0.065445, -0.744443, 1.20]
+    motion_duration_s: 2.5
+    joint_tolerance_rad: 0.035
+    state_timeout_s: 15.0
+    hold_duration_s: 3.2
+    release_stability_s: 2.2
+    base_speed_limit_mps: 0.01
+    base_drift_limit_m: 0.01
+    wall_watchdog_s: 3.0
+
+pick_place_attach_gate:
+  ros__parameters:
+    use_sim_time: true
+    contact_max_age_s: 0.10
+    contact_persistence_s: 0.15
+    object_pose_max_age_s: 0.10
+    geometry_position_tolerance_m: 0.020
+    geometry_angle_tolerance_deg: 5.0
+    transform_max_age_s: 0.10
+    close_feedback_max_rad: 0.78
+    base_speed_limit_mps: 0.01
+    object_name: pick_object
+    attach_enabled: true
+    object_collision_token: pick_object_collision
+    fixed_collision_token: poppy_fixed_finger_collision
+    moving_collision_token: poppy_moving_finger_collision
+    grasp_frame: poppy_grasp_frame
+    fixed_tip_frame: poppy_fixed_tip
+    moving_tip_frame: poppy_moving_tip
+
+pick_place_evaluator:
+  ros__parameters:
+    use_sim_time: true
+    object_name: pick_object
+    place_x_m: 0.044
+    place_y_m: -0.213
+    placement_tolerance_m: 0.030
+    minimum_lift_m: 0.050
+    minimum_hold_s: 3.0
+    object_height_m: 0.045
+    pick_support_top_z_m: 0.140
+    minimum_support_clearance_m: 0.005
+    minimum_stable_s: 2.0
+    base_drift_limit_m: 0.010

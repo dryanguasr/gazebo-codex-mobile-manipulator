@@ -79,6 +79,13 @@ setup(
             'target_trajectory=mobile_manipulator.target_trajectory:main',
             'metrics_logger=mobile_manipulator.metrics_logger:main',
             'evidence_capture=mobile_manipulator.evidence_capture:main',
+            'pick_place_supervisor=mobile_manipulator.pick_place_supervisor:main',
+            'pick_place_attach_gate=mobile_manipulator.pick_place_attach_gate:main',
+            'pick_place_evaluator=mobile_manipulator.pick_place_evaluator:main',
+            'pick_place_recorder=mobile_manipulator.pick_place_recorder:main',
+            'managed_gazebo=mobile_manipulator.managed_gazebo:main',
+            'pick_place_negative_injector=mobile_manipulator.pick_place_negative_injector:main',
+            'pick_place_initializer=mobile_manipulator.pick_place_initializer:main',
         ],
     },
 )
