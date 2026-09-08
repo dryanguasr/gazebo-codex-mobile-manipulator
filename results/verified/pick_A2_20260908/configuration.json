@@ -1,0 +1,21 @@
+{
+  "created_utc": "2026-09-08T20:16:45.006056+00:00",
+  "source_sha": "dda9a06539fa4773a50d418145c22b5525cb23f4",
+  "source_dirty": false,
+  "world": "pick_and_place.sdf",
+  "launch": "pick_and_place_a2.launch.py",
+  "grasp_mode": "physical_contact",
+  "simulator_assisted": false,
+  "attach_enabled": false,
+  "control_source": "predefined_joint_trajectories",
+  "object": "pick_object.sdf",
+  "object_dimensions_m": {
+    "diameter": 0.03,
+    "height": 0.045
+  },
+  "object_mass_kg": 0.03,
+  "poses_config": "src/mobile_manipulator/config/pick_place_a1.yaml",
+  "poses_config_sha256": "798bf4eb4adab93f291b7f922da1ebefbe3527c6675545d1bc08832591685e5b",
+  "maximum_configurations_authorized": 2,
+  "configurations_executed": 1
+}

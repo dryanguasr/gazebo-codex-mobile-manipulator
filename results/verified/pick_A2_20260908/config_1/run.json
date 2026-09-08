@@ -1,0 +1,299 @@
+{
+  "run_id": "a2_config_1",
+  "status": "failed",
+  "terminal_state": "DONE",
+  "terminal_reason": "",
+  "source_sha": "dda9a06539fa4773a50d418145c22b5525cb23f4",
+  "source_dirty": false,
+  "world": "pick_and_place.sdf",
+  "seed": 801,
+  "grasp_mode": "physical_contact",
+  "simulator_assisted": false,
+  "control_source": "predefined_joint_trajectories",
+  "ground_truth_used_for_control": false,
+  "ground_truth_used_for_attachment_gate": true,
+  "ground_truth_used_for_evaluation": true,
+  "ground_truth_source": "/model/pick_object/pose (actual Gazebo model Pose_V)",
+  "started_wall_time_s": 1788898419.4291906,
+  "completed_wall_time_s": 1788898477.1328087,
+  "started_sim_time_s": 0.0,
+  "completed_sim_time_s": 32.671,
+  "initial_base_pose_xy_m": [
+    -1.2653004163044548e-19,
+    8.430143954405616e-39
+  ],
+  "final_base_pose_xy_m": [
+    1.2480999328193956e-13,
+    4.963359440445987e-27
+  ],
+  "initial_tool_pose_m": [
+    -0.03000000000065311,
+    -0.15965919074317086,
+    0.27165703647403516
+  ],
+  "final_tool_pose_m": [
+    0.05808644374800743,
+    -0.20829531753352432,
+    0.21725832027563896
+  ],
+  "final_grasp_frame_pose_m": [
+    0.04286697914467256,
+    -0.21015130640848392,
+    0.21594847200814304
+  ],
+  "initial_object_pose_m": [
+    -0.044,
+    -0.225,
+    0.16249999998242465
+  ],
+  "object_pose_at_grasp_m": [
+    -0.04178045855955153,
+    -0.22567136531253118,
+    0.1625255928633498
+  ],
+  "object_pose_at_lift_m": [
+    -0.041878100806971616,
+    -0.22628425961618093,
+    0.16250000004842718
+  ],
+  "final_object_pose_m": [
+    -0.041878100806971616,
+    -0.22628425961618093,
+    0.16250000004842718
+  ],
+  "maximum_object_z_m": 0.16315056024204855,
+  "lift_m": 0.0006505602596239002,
+  "maximum_pick_support_clearance_m": 0.0006505602420485423,
+  "stability_motion_tolerance_m": 0.0005,
+  "hold_duration_s": 3.2049999999999983,
+  "stable_duration_s": 0.0,
+  "placement_error_xy_m": 0.08689948073356063,
+  "pregrasp_position_error_m": 0.005429952218424837,
+  "pregrasp_relevant_angle_error_deg": 3.720690919105377,
+  "maximum_base_drift_m": 1.2833259822106424e-13,
+  "maximum_joint_tracking_error_rad": 0.047037446077242584,
+  "trajectory_goal_count": 9,
+  "trajectory_retry_count": 0,
+  "timeout_or_failure_cause": "",
+  "attach_count": 0,
+  "detach_count": 0,
+  "attach_authorizations": [
+    {
+      "attach_enabled": false,
+      "authorized_state": "VERIFY_GRASP",
+      "contract": "bilateral_fresh_contact+geometry+closure+authorized_state+base_stopped+tf",
+      "event": "physical_grasp_verified",
+      "grasp_xyz_m": [
+        -0.03877228717490103,
+        -0.22401201289661318,
+        0.1634864908438452
+      ],
+      "ground_truth_used_for_attachment_gate": true,
+      "sim_time_s": 14.678,
+      "snapshot": {
+        "base_stopped": true,
+        "close_commanded": true,
+        "contact_persistence_s": 0.165,
+        "fixed_contact_fresh": true,
+        "geometry_angle_deg": 2.256194002750268,
+        "geometry_error_m": 0.0035673338011129752,
+        "m6_rad": 0.6951421925875673,
+        "moving_contact_fresh": true,
+        "object_present": true,
+        "state": "VERIFY_GRASP",
+        "tf_valid": true
+      },
+      "source": "attach_gate",
+      "state": "VERIFY_GRASP",
+      "wall_time_s": 1788898443.049458
+    }
+  ],
+  "forbidden_contacts": [
+    {
+      "sim_time_s": 17.192,
+      "state": "HOLD",
+      "other_collision": "pick_support::support_link::pick_support_collision"
+    },
+    {
+      "sim_time_s": 20.398,
+      "state": "TRANSFER",
+      "other_collision": "pick_support::support_link::pick_support_collision"
+    },
+    {
+      "sim_time_s": 22.907,
+      "state": "LOWER",
+      "other_collision": "pick_support::support_link::pick_support_collision"
+    },
+    {
+      "sim_time_s": 25.448,
+      "state": "RELEASE",
+      "other_collision": "pick_support::support_link::pick_support_collision"
+    },
+    {
+      "sim_time_s": 30.157,
+      "state": "RETREAT",
+      "other_collision": "pick_support::support_link::pick_support_collision"
+    }
+  ],
+  "criteria": {
+    "terminal_done": true,
+    "grasp_contract_verified": true,
+    "released": true,
+    "lift_at_least_50mm": false,
+    "separated_from_pick_support": false,
+    "hold_at_least_3s": true,
+    "placement_within_30mm": false,
+    "stable_at_least_2s": false,
+    "base_drift": true,
+    "no_forbidden_contacts": false,
+    "pregrasp_position": true,
+    "pregrasp_orientation": true
+  },
+  "transitions": [
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "IDLE",
+      "reason": "condition_met",
+      "sim_time_s": 0.833,
+      "source": "supervisor",
+      "state": "FREEZE_BASE",
+      "to_state": "FREEZE_BASE",
+      "wall_time_s": 1788898419.5126247
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "FREEZE_BASE",
+      "reason": "condition_met",
+      "sim_time_s": 2.622,
+      "source": "supervisor",
+      "state": "OPEN",
+      "to_state": "OPEN",
+      "wall_time_s": 1788898422.3728077
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "OPEN",
+      "reason": "condition_met",
+      "sim_time_s": 5.149,
+      "source": "supervisor",
+      "state": "PREGRASP",
+      "to_state": "PREGRASP",
+      "wall_time_s": 1788898426.5141635
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "PREGRASP",
+      "reason": "condition_met",
+      "sim_time_s": 10.667,
+      "source": "supervisor",
+      "state": "APPROACH",
+      "to_state": "APPROACH",
+      "wall_time_s": 1788898436.052744
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "APPROACH",
+      "reason": "condition_met",
+      "sim_time_s": 13.213,
+      "source": "supervisor",
+      "state": "CLOSE",
+      "to_state": "CLOSE",
+      "wall_time_s": 1788898440.532702
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "CLOSE",
+      "reason": "condition_met",
+      "sim_time_s": 14.448,
+      "source": "supervisor",
+      "state": "VERIFY_GRASP",
+      "to_state": "VERIFY_GRASP",
+      "wall_time_s": 1788898442.6328223
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "VERIFY_GRASP",
+      "reason": "condition_met",
+      "sim_time_s": 14.682,
+      "source": "supervisor",
+      "state": "LIFT",
+      "to_state": "LIFT",
+      "wall_time_s": 1788898443.052745
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "LIFT",
+      "reason": "condition_met",
+      "sim_time_s": 17.19,
+      "source": "supervisor",
+      "state": "HOLD",
+      "to_state": "HOLD",
+      "wall_time_s": 1788898447.533022
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "HOLD",
+      "reason": "condition_met",
+      "sim_time_s": 20.395,
+      "source": "supervisor",
+      "state": "TRANSFER",
+      "to_state": "TRANSFER",
+      "wall_time_s": 1788898453.3329437
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "TRANSFER",
+      "reason": "condition_met",
+      "sim_time_s": 22.903,
+      "source": "supervisor",
+      "state": "LOWER",
+      "to_state": "LOWER",
+      "wall_time_s": 1788898458.2728524
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "LOWER",
+      "reason": "condition_met",
+      "sim_time_s": 25.444,
+      "source": "supervisor",
+      "state": "RELEASE",
+      "to_state": "RELEASE",
+      "wall_time_s": 1788898463.1527812
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "RELEASE",
+      "reason": "condition_met",
+      "sim_time_s": 30.156,
+      "source": "supervisor",
+      "state": "RETREAT",
+      "to_state": "RETREAT",
+      "wall_time_s": 1788898472.2327821
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "RETREAT",
+      "reason": "condition_met",
+      "sim_time_s": 32.671,
+      "source": "supervisor",
+      "state": "DONE",
+      "to_state": "DONE",
+      "wall_time_s": 1788898477.1128576
+    }
+  ],
+  "raw_events": "events.jsonl",
+  "raw_samples": "samples.csv"
+}
