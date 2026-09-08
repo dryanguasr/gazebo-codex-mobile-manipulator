@@ -237,11 +237,19 @@
       <origin xyz="0 -0.058 0"/>
       <geometry><box size="0.036 0.032 0.030"/></geometry>
     </collision>
-    <collision name="poppy_fixed_finger_collision">
-      <!-- Functional contact pad centered on the audited fingertip frame. -->
-      <origin xyz="0 -0.11 0"/>
-      <geometry><sphere radius="0.003"/></geometry>
-    </collision>
+    <xacro:unless value="$(arg manipulation_enabled)">
+      <collision>
+        <origin xyz="0 -0.082 0.0145"/>
+        <geometry><box size="0.024 0.092 0.006"/></geometry>
+      </collision>
+    </xacro:unless>
+    <xacro:if value="$(arg manipulation_enabled)">
+      <collision name="poppy_fixed_finger_collision">
+        <!-- Functional contact pad centered on the audited fingertip frame. -->
+        <origin xyz="0 -0.11 0"/>
+        <geometry><sphere radius="0.003"/></geometry>
+      </collision>
+    </xacro:if>
   </link>
   <joint name="poppy_m5_joint" type="revolute">
     <parent link="poppy_link_4"/>
@@ -263,11 +271,20 @@
         <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/gripper.dae"/>
       </geometry>
     </visual>
-    <collision name="poppy_moving_finger_collision">
-      <!-- Functional contact pad centered on the audited fingertip frame. -->
-      <origin xyz="0 -0.052 0"/>
-      <geometry><sphere radius="0.003"/></geometry>
-    </collision>
+    <xacro:unless value="$(arg manipulation_enabled)">
+      <collision>
+        <geometry>
+          <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/collision/poppy_link_6_convex.stl"/>
+        </geometry>
+      </collision>
+    </xacro:unless>
+    <xacro:if value="$(arg manipulation_enabled)">
+      <collision name="poppy_moving_finger_collision">
+        <!-- Functional contact pad centered on the audited fingertip frame. -->
+        <origin xyz="0 -0.052 0"/>
+        <geometry><sphere radius="0.003"/></geometry>
+      </collision>
+    </xacro:if>
   </link>
   <joint name="poppy_m6_joint" type="revolute">
     <parent link="poppy_link_5"/>
