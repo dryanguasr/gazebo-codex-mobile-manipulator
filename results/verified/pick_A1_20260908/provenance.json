@@ -1,0 +1,34 @@
+{
+  "created_utc": "2026-09-08T19:47:55.428347+00:00",
+  "source_sha": "1d03fc59d05a7de8b95bd01e40a0db0e70bcd8ef",
+  "source_dirty": false,
+  "config": "src/mobile_manipulator/config/pick_place_a1.yaml",
+  "config_sha256": "798bf4eb4adab93f291b7f922da1ebefbe3527c6675545d1bc08832591685e5b",
+  "world": "pick_and_place.sdf",
+  "launch": "pick_and_place.launch.py",
+  "requested_runs": 10,
+  "seed_start": 601,
+  "timeout_s": 180.0,
+  "versions": {
+    "gz": {
+      "command": [
+        "gz",
+        "sim",
+        "--versions"
+      ],
+      "returncode": 0,
+      "output": "8.11.0"
+    },
+    "ros_distro": "jazzy",
+    "package_prefix": {
+      "command": [
+        "ros2",
+        "pkg",
+        "prefix",
+        "mobile_manipulator"
+      ],
+      "returncode": 0,
+      "output": "/home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/install/mobile_manipulator"
+    }
+  }
+}

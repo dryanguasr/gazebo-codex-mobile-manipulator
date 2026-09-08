@@ -1,0 +1,55 @@
+{
+  "source": "/pick_place/evidence/image (Gazebo camera)",
+  "video": "pick_and_place_a1.mp4",
+  "frame_count": 829,
+  "fps": 15.0,
+  "started_wall_time_s": 1788896882.4395375,
+  "completed_wall_time_s": 1788896938.718287,
+  "captured_phases": {
+    "pregrasp": {
+      "frame": 229,
+      "state": "APPROACH",
+      "raw": "raw/pregrasp.png",
+      "annotated": "pregrasp.png"
+    },
+    "contact": {
+      "frame": 329,
+      "state": "VERIFY_GRASP",
+      "raw": "raw/contact.png",
+      "annotated": "contact.png"
+    },
+    "lift": {
+      "frame": 392,
+      "state": "HOLD",
+      "raw": "raw/lift.png",
+      "annotated": "lift.png"
+    },
+    "retention": {
+      "frame": 484,
+      "state": "TRANSFER",
+      "raw": "raw/retention.png",
+      "annotated": "retention.png"
+    },
+    "deposit": {
+      "frame": 630,
+      "state": "RELEASE",
+      "raw": "raw/deposit.png",
+      "annotated": "deposit.png"
+    },
+    "release": {
+      "frame": 757,
+      "state": "RETREAT",
+      "raw": "raw/release.png",
+      "annotated": "release.png"
+    }
+  },
+  "required_phases": [
+    "pregrasp",
+    "contact",
+    "lift",
+    "retention",
+    "deposit",
+    "release"
+  ],
+  "complete": true
+}
