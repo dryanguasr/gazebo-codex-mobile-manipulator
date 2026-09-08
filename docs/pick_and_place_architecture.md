@@ -1,192 +1,149 @@
-# Arquitectura propuesta para pick-and-place
+# Arquitectura implementada de pick-and-place nivel A
 
-## Estado de partida y alcance
+## Alcance y compatibilidad
 
-Este documento diseña la fase siguiente; **no afirma que pick-and-place esté
-implementado**. El punto de partida será el commit estable de consolidación
-mecánica, con `poppy_tool_frame`, seis joints, base 4WD, cámara y tracking
-existentes.
+Esta arquitectura ya está implementada. Añade manipulación determinista sin
+alterar el flujo B3 de tracking: `sim.launch.py` conserva la esfera de 240 mm,
+la base compacta, cámara y colliders originales; `pick_and_place.launch.py` usa
+un world separado y activa únicamente allí los pads de contacto de la pinza.
 
-La esfera roja de seguimiento conserva radio ≈ 0,12 m (diámetro ≈ 0,24 m) y no
-es agarrable por la pinza Poppy 1:1. Debe seguir siendo el objetivo de tracking,
-separada de un nuevo modelo `pick_object`.
+El ensamblaje Poppy permanece 1:1, con seis joints, siete visuales DAE oficiales
+y `poppy_tool_frame` validado. El objeto manipulable no es la esfera: es un
+cilindro de 30 mm × 45 mm y 30 g.
 
-## Auditoría del efector y objeto
+## Componentes y flujo
 
-La geometría oficial confirma una mordaza fija en link 5 y una rotativa en link
-6:
+~~~text
+pick_and_place.launch.py
+ ├─ managed_gazebo ── pick_and_place.sdf + soportes + cámara de evidencia
+ ├─ robot_state_publisher ── Xacro manipulation_enabled=true
+ ├─ ros_gz_bridge
+ │   ├─ contactos y pose real del objeto
+ │   ├─ imagen de evidencia
+ │   └─ attach/detach y estado de la unión
+ ├─ controllers ── joint_state, base y arm
+ ├─ pick_place_initializer ── RESET verificado, fuera de medición
+ ├─ pick_place_supervisor ── única autoridad de m1–m6 y base cero
+ ├─ pick_place_attach_gate ── contrato A1 / verificación física A2
+ ├─ pick_place_evaluator ── métricas independientes de Gazebo
+ └─ pick_place_recorder ── PNG y video
+~~~
 
-- `m6=0 rad`: cerrado; separación aproximada entre caras internas 2,1 mm;
-- `m6=1,20 rad`: abierto;
-- dedos de aproximadamente 80–92 mm desde el pivote/soporte;
-- apertura no paralela: el ancho útil depende de la profundidad de inserción;
-- esfuerzo URDF actual de m6: 0,39 N·m;
-- collider móvil: hull convexo de 92 triángulos;
-- collider fijo: box simplificada.
-
-Objeto MVP recomendado: cilindro vertical de 30 mm de diámetro, 45 mm de alto y
-masa 30 g. Es claramente distinto de la esfera de tracking, admite contacto
-lateral y deja margen frente a un cubo de 40 mm. Alternativa posterior: cubo de
-30 mm. El siguiente hito debe medir de nuevo la apertura útil a la profundidad
-real de pregrasp y no asumir que el AABB es la capacidad de agarre.
+El launch inicia el objeto y el robot, activa controladores, ejecuta el reset y
+solo si este pasa inicia el intervalo medido. Al terminar el supervisor solicita
+el cierre del servidor y el wrapper gestiona su grupo exacto de procesos.
 
 ## Marcos
 
-Cadena propuesta:
-
 ~~~text
-world/odom -> base_footprint -> base_link -> ... -> poppy_link_5
-                                              -> poppy_tool_frame
-world -> pick_object (ground truth, evaluación)
-camera_link -> object_measurement (control en Nivel C)
+world/odom → base_footprint → base_link → ... → poppy_link_5
+                                            ├→ poppy_tool_frame
+                                            └→ poppy_grasp_frame
+world → pick_object                  (ground truth de gate/evaluación)
 ~~~
 
-`poppy_tool_frame` está fijo al centro de la punta del dedo fijo; m6 solo
-modifica la mordaza móvil. Las poses objetivo deben llevar sello temporal y
-frame. Toda transformación a `base_footprint` debe ocurrir antes de planificar
-el brazo.
+- `poppy_tool_frame` está en la punta fija y es la referencia de FK/diagnóstico.
+- `poppy_grasp_frame` representa el centro efectivo entre dedos y es la
+  referencia geométrica del gate.
+- `poppy_fixed_tip` y `poppy_moving_tip` verifican la configuración bilateral.
+- La base no se realinea en A: las poses articulares son predefinidas.
 
-## Interfaces propuestas
+## Interfaces reales
 
-No se añaden aún estas interfaces; son el contrato recomendado:
-
-| Interfaz | Tipo | Uso |
+| Interfaz | Tipo | Propietario y uso |
 |---|---|---|
-| `/pick_and_place/command` | service o action propia | iniciar/cancelar ensayo |
-| `/pick_and_place/state` | mensaje/string | estado observable |
-| `/pick_object/estimate` | `PoseStamped` | control, Nivel B/C |
-| `/arm_controller/joint_trajectory` | topic/action existente | consignas m1–m6 |
-| `/base_controller/cmd_vel` | `TwistStamped` | alinear/aproximar base |
-| TF a `poppy_tool_frame` | TF2 | pregrasp/grasp y verificación |
-| contactos Gazebo | topic/plugin a definir | confirmar contacto físico |
-| estado joint m6 | `JointState` | cierre/apertura |
-| `/pick_and_place/metrics` | JSONL o mensaje | evidencia por corrida |
-| ground truth de Gazebo | servicio/topic de evaluación | métricas, nunca control Nivel C |
-
-Una ROS 2 action es preferible para la tarea completa porque admite feedback,
-cancelación y resultado. En el Nivel A basta un nodo determinista con máquina de
-estados y un disparador explícito.
+| `/arm_controller/follow_joint_trajectory` | action | supervisor, m1–m6 |
+| `/base_controller/cmd_vel` | `TwistStamped` | supervisor publica cero |
+| `/base_controller/odom` | `Odometry` | gate de velocidad/deriva y evaluación |
+| `/joint_states` | `JointState` | cierre y tolerancia articular |
+| `/pick_place/status` | `String` JSON | eventos y transiciones del supervisor |
+| `/pick_place/gate_command` | `String` JSON | estado/cierre autorizados |
+| `/pick_object/contacts` | `Contacts` | contacto bilateral real |
+| `/model/pick_object/pose` | `TFMessage` | GT del gate A1 y evaluación |
+| `/pick_object/attach`, `/detach` | `Empty` | comando de unión temporal |
+| `/pick_object/joint_state` | `String` | feedback unido/desunido |
+| `/pick_place/physical_grasp_verified` | `Bool` | criterio A2 sin attach |
+| `/pick_place/cancel` | `Bool` | cancelación observable |
+| `/pick_place/evidence/image` | `Image` | evidencia visual real de Gazebo |
 
 ## Máquina de estados
 
-| Estado | Entrada/condición de entrada | Acción e interfaz | Condición de salida | Timeout | Fallo y recuperación |
-|---|---|---|---|---:|---|
-| `IDLE` | controladores activos, modelo y object presentes | publicar estado y esperar command | orden válida | sin timeout | rechazar si faltan TF/controladores |
-| `SEARCH_DETECT` | Nivel C y cámara lista | buscar detección estable en `/pick_object/estimate` | N muestras válidas | 10 s | reorientar base; luego `RECOVERY` |
-| `ALIGN_BASE` | pose objeto en base disponible | giro mediante `cmd_vel` | error angular bajo gate | 8 s | detener, volver a SEARCH |
-| `APPROACH_BASE` | alineación lograda | avance acotado | objeto dentro del workspace de brazo | 10 s | detener; recalcular o RECOVERY |
-| `FREEZE_BASE` | precondición de manipulación | publicar velocidad cero y comprobar odom | velocidad lineal/angular estable | 2 s | frenar de nuevo; abortar si deriva |
-| `ESTIMATE_OBJECT_POSE` | base quieta | transformar medición a base/tool | pose fresca y covariance/gate válidos | 3 s | nueva observación; no usar GT oculto |
-| `PREGRASP` | objetivo alcanzable | trayectoria segura predefinida (A) o IK (B/C) | joints dentro de tolerancia | 6 s | retirar a home |
-| `APPROACH_ARM` | pregrasp logrado, gripper abierto | avance final del brazo | tool dentro de error de grasp | 4 s | retroceder y reintentar una vez |
-| `CLOSE_GRIPPER` | objeto entre dedos | comandar m6 hacia cerrado con límite | contacto/esfuerzo/posición estable | 3 s | reabrir; ajustar approach |
-| `VERIFY_GRASP` | cierre finalizado | comprobar contactos y movimiento relativo | criterio de retención cumplido | 2 s | reabrir y volver a PREGRASP |
-| `LIFT` | grasp verificado | elevar con trayectoria vertical/segura | altura mínima alcanzada | 5 s | detener y bajar si hay pérdida |
-| `TRANSPORT` | objeto retenido | Nivel A: brazo/base a pose conocida | región de place alcanzada | 12 s | detener y recuperar |
-| `PLACE` | sobre región destino | bajar hasta altura de liberación | error de place bajo gate | 5 s | recalcular una vez |
-| `OPEN_GRIPPER` | objeto soportado | mandar m6 a 1,20 rad | separación confirmada | 3 s | repetir apertura o abortar seguro |
-| `RETREAT` | objeto liberado | elevar/retirar brazo, luego home | distancia segura | 6 s | parada segura |
-| `SUCCESS` | objeto colocado y robot seguro | cerrar métricas y resultado action | resultado emitido | 1 s | si registro falla, marcar corrida inválida |
-| `RECOVERY` | cualquier fallo recuperable | velocidad cero, abrir pinza, retirar/home | estado seguro | 10 s | `FAILURE` si no se logra |
-| `FAILURE` | reintentos agotados | detener actuadores y persistir causa | acknowledgement/cancel | — | intervención o nueva orden |
+Secuencia nominal exacta:
 
-Todos los timeouts son valores iniciales que deben medirse y ajustarse; no son
-resultados experimentales.
+~~~text
+IDLE → FREEZE_BASE → OPEN → PREGRASP → APPROACH → CLOSE → VERIFY_GRASP
+     → LIFT → HOLD → TRANSFER → LOWER → RELEASE → RETREAT → DONE
+~~~
 
-## Información de control frente a ground truth
+Los terminales alternos son `RECOVER → FAILED` y
+`RECOVER → CANCELLED`. Cada estado no terminal tiene timeout simulado de 15 s;
+un watchdog de pared de 3 s cubre reloj detenido. Las trayectorias duran 2.5 s,
+salvo pregrasp de tres waypoints (1.5, 3.0 y 5.5 s) y close (3 s).
 
-| Dato | Nivel A | Nivel B | Nivel C |
-|---|---|---|---|
-| pose inicial del objeto | constante configurada | pose suministrada en base | estimación cámara/TF |
-| pose del robot | odom/TF | odom/TF | odom/TF |
-| pose real de Gazebo del objeto | métricas | métricas | solo métricas |
-| contacto | control y métrica | control y métrica | control y métrica |
-| detector visual | no requerido | opcional | requerido |
-| éxito | contacto + lift/place, verificado con GT | igual | igual, sin GT para decidir acciones |
+El supervisor es el único dueño de m1–m6. Exige resultado de la action y
+tolerancia final de 0.035 rad. Un goal rechazado puede reintentarse una sola vez
+tras 0.25 s; todo reintento queda en eventos.
 
-Cada métrica debe registrar `control_source` y `ground_truth_used_for_control`.
-En Nivel C este último debe ser `false`.
+Durante estados posteriores a freeze, velocidad >0.01 m/s o deriva >0.01 m
+provoca `RECOVER`. En recuperación, un objeto unido se baja a `grasp` antes de
+transfer o a `place` después de iniciarla. Release se autoriza solo tras bajar;
+si el descenso falla se retiene el objeto.
 
-## Niveles de implementación
+## Separación entre control, gate y evaluación
 
-### Nivel A — baseline determinista recomendado
+| Dato | Supervisor | Gate A1 | Evaluador |
+|---|---:|---:|---:|
+| poses articulares configuradas | sí | no | observa |
+| joints/odom | sí | sí | sí |
+| contactos | no | sí | sí |
+| pose real Gazebo del objeto | no | sí | sí |
+| attach/detach | solicita contexto | decide/publica | observa |
+| resultado físico | no | no | sí |
 
-- objeto en pose conocida;
-- base estacionaria y congelada;
-- secuencia de poses articulares predefinidas;
-- validar apertura, approach, contacto, cierre, lift y liberación;
-- registrar toda causa de fallo.
+El supervisor declara `control_source=predefined_joint_trajectories` y
+`ground_truth_used_for_control=false`. El gate A1 declara uso de GT porque su
+validación geométrica consulta la pose real; el evaluador también. Esta
+separación impide presentar A1 como percepción o control autónomo.
 
-Es el siguiente paso recomendado porque aísla física del gripper, collisions y
-secuencia de estados antes de introducir IK o ruido de percepción.
+## Contrato A1
 
-### Nivel B — cinemática
+Attach requiere simultáneamente:
 
-- pose objeto expresada en `base_footprint`;
-- IK numérica pequeña o analítica específica;
-- pregrasp y approach separados;
-- validación de workspace y límites.
+1. estado `VERIFY_GRASP` y cierre comandado;
+2. contactos frescos de las collisions exactas del dedo fijo y móvil;
+3. persistencia bilateral mínima de 0.15 s;
+4. pose del objeto y TF frescos, máximo 0.10 s;
+5. error a `poppy_grasp_frame` ≤20 mm y orientación ≤5°;
+6. feedback m6≤0.78 rad;
+7. base ≤0.01 m/s.
 
-No se necesita MoveIt como condición inicial. Una solución simple, observable y
-verificable es más adecuada para aprender la cadena de frames.
+No existe ruta de attach por proximidad o temporizador. Detach nominal solo se
+acepta en `RELEASE`. El reset inicial está explícitamente fuera de medición.
 
-### Nivel C — percepción integrada
+## A2
 
-- estima `pick_object` desde cámara;
-- alinea/aproxima base sin leer ground truth;
-- congela la base, vuelve a estimar y ejecuta el brazo;
-- usa ground truth únicamente para calcular métricas.
+`pick_and_place_a2.launch.py` incluye la misma arquitectura con
+`attach_enabled=false` y `grasp_mode=physical_contact`. El gate publica
+verificación física bilateral, pero no crea un joint. El evaluador, no el
+terminal del supervisor, decide si hubo separación, lift y depósito.
 
-## Agarre físico y attach
+La evaluación acotada demostró contacto bilateral, pero no separación del
+soporte. Por ello A2 está rechazado y A1 permanece etiquetado como asistido.
 
-### Agarre físico por contacto
+## Persistencia de evidencia
 
-Requiere:
+Cada corrida guarda procedencia, inicialización, eventos, muestras y resultado.
+El evaluador serializa magnitudes no finitas como `null`; ausencia de dato no
+puede convertirse en NaN JSON ni éxito. Los runners verifican SHA limpio, hash
+de configuración, cantidad exacta de intentos, logs e inexistencia de procesos
+residuales.
 
-- superficies de collision útiles en ambos dedos;
-- fricción estática/dinámica suficiente y documentada;
-- paso de simulación y solver estables;
-- masa e inercia realistas del objeto;
-- esfuerzo/velocidad de m6 compatibles;
-- ausencia de penetración inicial;
-- comprobación de dos contactos o retención relativa durante lift.
+## Límites de esta arquitectura
 
-Es la validación física final, pero puede ser sensible al solver.
-
-### Attach/detach explícito
-
-Un plugin puede crear una unión temporal cuando se cumplen distancia, contacto
-y cierre. Es útil como MVP reproducible **solo si** las métricas dicen
-`grasp_mode=attach`. No demuestra fricción ni retención por contacto y nunca
-debe presentarse como tal.
-
-Recomendación:
-
-1. Nivel A inicial con attach condicionado por contacto para depurar estados y
-   trayectorias;
-2. conservar una prueba negativa que impida attach sin contacto;
-3. luego ejecutar una variante física sin attach y comparar tasa de éxito;
-4. no avanzar a Nivel C hasta entender por qué falla cada variante.
-
-## Riesgos principales
-
-- la pinza rotativa no produce caras paralelas en todo su recorrido;
-- el objeto puede quedar fuera del workspace aun si la cámara lo ve;
-- el esfuerzo de m6 puede mover el objeto o la base;
-- collisions simplificadas válidas para navegación visual pueden ser
-  insuficientes para contacto de dedos;
-- un tool frame correcto puede seguir no coincidiendo con el punto de contacto
-  elegido;
-- mezclar frame de cámara, base y world produce grasps aparentemente aleatorios;
-- un attach incondicional ocultaría todos los fallos anteriores.
-
-## Gate antes de Nivel B
-
-No implementar IK/percepción hasta que Nivel A demuestre:
-
-- 10 corridas reproducibles;
-- ≥ 90 % de grasp y ≥ 90 % de place con semilla/estado inicial registrado;
-- lift ≥ 50 mm y retención ≥ 3 s;
-- cero attach sin contacto;
-- cero colisiones no permitidas;
-- logs que distinguen percepción, control y ground truth.
+- no hay IK, MoveIt, planificación general ni percepción del cilindro;
+- las poses de pick/place son constantes de configuración;
+- A1 usa una unión temporal posterior a contacto y no valida fricción;
+- A2 aún no pasa;
+- tracking y manipulación son regresiones separadas;
+- la referencia métrica de tracking usa pose solicitada + TF, no GT real
+  independiente del simulador.

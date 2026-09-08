@@ -1,11 +1,10 @@
 # Seguimiento visual con ROS 2 Jazzy y Gazebo
 
 Ejemplo reproducible para estudiantes de ingeniería mecatrónica: un robot móvil
-4WD observa una esfera roja con una cámara monocular, estima su rango usando
-los intrínsecos de `CameraInfo` y controla la base para mantener una distancia
-de referencia. El manipulador integra ahora seis motores y geometría CAD
-oficial de Poppy Ergo Jr, incluida su pinza rotativa, sin perder el seguimiento
-visual medible.
+4WD observa y sigue una esfera con visión monocular y, en un world separado,
+ejecuta pick-and-place determinista con su brazo Poppy Ergo Jr. El sistema
+conserva percepción y tracking B3 medibles, geometría CAD oficial 1:1 y añade un
+nivel A1 asistido por simulador con contacto bilateral condicionado.
 
 ## Estado verificado
 
@@ -23,15 +22,21 @@ El flujo completo fue validado en ROS 2 Jazzy y Gazebo Sim 8:
 - FK independiente de la punta comparada contra TF;
 - base compacta con ruedas, inercia, odometría y cámara coherentes;
 - diagnóstico estricto y experimento A/B reproducibles;
-- once pruebas unitarias.
+- pick-and-place A1 con máquina de estados, gate y evaluación independientes;
+- diez corridas nominales y siete negativas verificadas;
+- 34 pruebas automatizadas.
 
-En la campaña A/B corregida, el seguimiento redujo el MAE de distancia objetivo
-de **0.632 m** a **0.048 m** (mejora de **92.43%**), con 100% de detección,
-100% de referencias geométricas válidas y RMS horizontal B de 0.025. La
-referencia usa la pose aceptada del objetivo y TF odométrico hasta
-`camera_link`; no es ground truth independiente del simulador. La evidencia
-está en
-[`results/verified/tracking_metric_reference_v2_20260904_retry1/`](results/verified/tracking_metric_reference_v2_20260904_retry1/).
+La campaña A1 obtuvo **10/10 grasp y 10/10 placement**, con lift medio de
+55.19 mm y error de depósito medio de 2.30 mm. Es un MVP
+`attach_conditioned`, explícitamente asistido por simulador; A2 físico sin
+attach no levantó el objeto y se conserva como FAIL.
+
+En la campaña A/B final, el tracking redujo el MAE de distancia objetivo de
+**0.632 m** a **0.055 m** (mejora de **91.37%**), con 100% de referencias
+geométricas válidas. La referencia usa la pose aceptada del objetivo y TF
+odométrico hasta `camera_link`; no es ground truth independiente del
+simulador. Evidencia:
+[`results/verified/tracking_metric_reference_v3_pick_A1_20260908/`](results/verified/tracking_metric_reference_v3_pick_A1_20260908/).
 
 ## Arquitectura resumida
 
@@ -96,7 +101,7 @@ colcon test --event-handlers console_direct+
 colcon test-result --verbose
 ```
 
-El resultado esperado es `11 tests, 0 errors, 0 failures`.
+El resultado esperado es `34 tests, 0 errors, 0 failures`.
 
 ## Lanzamiento interactivo
 
@@ -145,6 +150,31 @@ ros2 launch mobile_manipulator sim.launch.py --show-args
 Las ganancias, saturaciones, umbrales HSV, radio de esfera y distancia objetivo
 son parámetros ROS 2 declarados por sus respectivos nodos.
 
+## Pick-and-place nivel A
+
+Una corrida A1 con captura:
+
+```bash
+source /opt/ros/jazzy/setup.bash
+source install/setup.bash
+ros2 launch mobile_manipulator pick_and_place.launch.py \
+  output_dir:="$PWD/results/manual/pick_a1" run_id:=manual \
+  seed:=901 source_sha:="$(git rev-parse HEAD)" capture_evidence:=true
+```
+
+La base se congela y el brazo recorre
+`IDLE → FREEZE_BASE → OPEN → PREGRASP → APPROACH → CLOSE → VERIFY_GRASP →
+LIFT → HOLD → TRANSFER → LOWER → RELEASE → RETREAT → DONE`.
+Attach solo se autoriza con contactos frescos en ambos dedos, geometría, cierre,
+estado, base detenida y TF válidos. La pose real de Gazebo se usa en ese gate y
+en evaluación, no para elegir trayectorias.
+
+Para reproducir la campaña y las siete negativas, consulte
+[`docs/pick_and_place_tutorial.md`](docs/pick_and_place_tutorial.md). Resultados:
+[`A1`](results/verified/pick_A1_20260908/),
+[`negativas`](results/verified/pick_A1_negative_20260908/) y
+[`A2`](results/verified/pick_A2_20260908/).
+
 ## Diagnóstico reproducible
 
 ```bash
@@ -158,7 +188,7 @@ de la base y dos poses de los seis joints Poppy con tolerancia numérica. Tambi�
 valida transforms oficiales, escala 1:1, landmarks de punta, acuerdo entre FK
 independiente y TF y la extrínseca efectiva de `camera_link` derivada del
 URDF. La evidencia vigente queda en
-[`results/verified/diagnostic_metric_reference_v2_retry1/`](results/verified/diagnostic_metric_reference_v2_retry1/).
+[`results/verified/diagnostic_pick_A1_20260908_retry1/`](results/verified/diagnostic_pick_A1_20260908_retry1/).
 
 ## Experimento A/B
 
@@ -173,7 +203,7 @@ Cada condición dura 30 s y produce CSV, JSON, resumen legible y log. El
 comparador falla si la trayectoria no se mueve en ambos ejes, la detección cae
 por debajo de 90%, B no mueve el robot, el error estacionario supera 0.20 m o
 B no reduce a la mitad el error de A. Resultados:
-[`results/verified/tracking_metric_reference_v2_20260904_retry1/comparison.json`](results/verified/tracking_metric_reference_v2_20260904_retry1/comparison.json).
+[`results/verified/tracking_metric_reference_v3_pick_A1_20260908/comparison.json`](results/verified/tracking_metric_reference_v3_pick_A1_20260908/comparison.json).
 
 La campaña histórica de `results/verified/experiments/` se conserva sin
 reescribir, pero su distancia física está marcada como afectada en
@@ -184,8 +214,11 @@ reescribir, pero su distancia física está marcada como afectada en
 ```text
 src/mobile_manipulator/
   config/controllers.yaml        controladores ros2_control
-  launch/sim.launch.py           composición y argumentos del sistema
-  mobile_manipulator/            percepción, control, trayectoria y métricas
+  launch/sim.launch.py           seguimiento B3
+  launch/pick_and_place*.py       manipulación A1/A2
+  config/pick_place_a1.yaml       poses y gates congelados
+  worlds/pick_and_place.sdf       escena de manipulación separada
+  mobile_manipulator/            percepción, control, supervisor, gate y métricas
   meshes/poppy_ergo_jr/         CAD fuente, visual, collision y manifest
   test/test_algorithms.py        pruebas de geometría y funciones puras
   urdf/mobile_manipulator.urdf.xacro
@@ -195,6 +228,9 @@ scripts/
   run_diagnostic.sh              aceptación de integración
   run_experiments.sh             comparación A/B
   validate_diagnostic.py
+tools/
+  run_pick_place_campaign.py      diez intentos nominales
+  run_pick_place_negative_tests.py siete negativas
   compare_experiments.py
 docs/
   cad_import_tutorial.md
@@ -206,7 +242,10 @@ docs/
   tutorial_handoff.md
   experiment_log.md
   final_report.md
-results/verified/                evidencia textual, CSV e imágenes
+  pick_and_place_tutorial.md
+  pick_and_place_troubleshooting.md
+  pick_and_place_final_report.md
+results/verified/                evidencia textual, CSV, imágenes y video
 ```
 
 ## Limitaciones y extensiones
@@ -217,14 +256,15 @@ results/verified/                evidencia textual, CSV e imágenes
 - El detector presupone una esfera roja de radio conocido y una cámara pinhole.
 - La odometría se usa como pose del robot en la evaluación; no se incorpora
   localización global ni ruido de sensores.
-- El brazo y la pinza se validan por control articular, FK/TF, geometría y
-  evidencia visual, pero no hay IK, MoveIt ni pick-and-place autónomo.
-- Navegación, manipulación, múltiples objetos, calibración real y control
-  avanzado quedan deliberadamente fuera de este corte.
+- A1 usa attach temporal después de un gate bilateral; valida la secuencia y
+  seguridad, no la fuerza/fricción de un agarre real.
+- A2 físico sin attach está rechazado porque no separó el objeto del soporte.
+- No hay IK, MoveIt, percepción del cilindro ni planificación general.
+- Navegación, múltiples objetos, calibración real y Sim2Real quedan fuera.
 
-Para estudiar el estado actual, empezar por
-[`docs/mechanical_assembly_closure_report.md`](docs/mechanical_assembly_closure_report.md),
-seguir con [`docs/mechanical_assembly_validation.md`](docs/mechanical_assembly_validation.md)
-y [`docs/cad_import_tutorial.md`](docs/cad_import_tutorial.md).
-Para el sistema perceptivo previo, continuar con
-[`docs/tutorial_handoff.md`](docs/tutorial_handoff.md).
+Para el hito actual, empezar por
+[`docs/pick_and_place_final_report.md`](docs/pick_and_place_final_report.md),
+continuar con
+[`docs/pick_and_place_tutorial.md`](docs/pick_and_place_tutorial.md) y
+[`docs/pick_and_place_troubleshooting.md`](docs/pick_and_place_troubleshooting.md).
+La validación mecánica y el tutorial CAD se conservan como baseline.
