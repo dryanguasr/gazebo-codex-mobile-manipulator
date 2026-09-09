@@ -4,14 +4,21 @@ import time
 
 from builtin_interfaces.msg import Duration
 from control_msgs.action import FollowJointTrajectory
-from geometry_msgs.msg import TwistStamped
+from geometry_msgs.msg import TransformStamped, TwistStamped
+from mobile_manipulator.mobile_transport import (
+    model_planar_pose, PlanarRoute, SmoothRoute, TRANSPORT_STATES, world_to_odom,
+    yaw_from_quaternion,
+)
 from nav_msgs.msg import Odometry
 import rclpy
 from rclpy.action import ActionClient
 from rclpy.clock import Clock, ClockType
 from rclpy.node import Node
+from ros_gz_interfaces.msg import Contacts
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Bool, String
+from tf2_msgs.msg import TFMessage
+from tf2_ros import TransformBroadcaster
 from trajectory_msgs.msg import JointTrajectoryPoint
 
 
@@ -25,12 +32,17 @@ MOTION_STATES = {
     'PREGRASP': 'pregrasp',
     'APPROACH': 'grasp',
     'LIFT': 'lift',
+    'FOLD': 'transport_pose',
     'TRANSFER': 'transfer',
     'LOWER': 'place',
     'RETREAT': 'retreat',
 }
 
 NOMINAL_STATE_SEQUENCE = STATES[:14]
+MOBILE_STATE_SEQUENCE = (
+    *NOMINAL_STATE_SEQUENCE[:9], 'FOLD', *TRANSPORT_STATES,
+    *NOMINAL_STATE_SEQUENCE[9:],
+)
 
 
 def state_has_timed_out(elapsed_s, timeout_s):
@@ -61,12 +73,36 @@ class PickPlaceSupervisor(Node):
     def __init__(self):
         super().__init__('pick_place_supervisor')
         self.declare_parameter('auto_start', True)
+        self.declare_parameter('mobile_transport', False)
+        self.declare_parameter('route', [
+            0.838, 0.0, 0.0, 0.838, 0.0, 1.570796327,
+            0.838, 0.35, 1.570796327, 0.838, 0.738, 1.570796327,
+        ])
+        self.declare_parameter('navigation_timeout_s', 180.0)
+        self.declare_parameter('smooth_transport', False)
+        self.mobile = bool(self.get_parameter('mobile_transport').value)
+        self.world_base = None
+        self.world_base_ns = 0
+        self.odom_rx_ns = 0
+        self.nav_tick_ns = 0
+        self.dock_stopped_since = None
+        values = list(self.get_parameter('route').value)
+        self.route = (SmoothRoute(values[-3:])
+                      if self.get_parameter('smooth_transport').value
+                      else PlanarRoute([values[i:i + 3] for i in range(0, len(values), 3)]))
+        self.localization_tf = TransformBroadcaster(self)
+        self.create_subscription(
+            TFMessage, '/model/mobile_manipulator/pose', self.base_pose_callback, 20
+        )
         self.declare_parameter('grasp_mode', 'attach_conditioned')
+        if self.mobile and self.get_parameter('grasp_mode').value != 'attach_conditioned':
+            raise ValueError('Mobile exercise requires contact-gated temporary attachment')
         self.declare_parameter(
             'joint_names',
             [f'poppy_m{i}_joint' for i in range(1, 7)],
         )
         defaults = {
+            'transport_pose': [-0.05806242, 0.15, -1.05, 0.0, 0.9, 0.0],
             'home': [0.0, 0.0, 0.0, 0.0, 0.0, 1.2],
             'pregrasp_clearance_1': [-1.0, 0.0, 0.0, 0.0, 0.0, 1.2],
             'pregrasp_clearance_2': [-1.0, 0.86082245, -0.30659458, 0.0, -0.55422787, 1.2],
@@ -140,6 +176,8 @@ class PickPlaceSupervisor(Node):
         self.zero_pub = self.create_publisher(
             TwistStamped, '/base_controller/cmd_vel', 20
         )
+        for topic in ('/pick_support/contacts', '/place_support/contacts'):
+            self.create_subscription(Contacts, topic, self.support_contact_callback, 20)
         self.create_subscription(
             JointState, '/joint_states', self.joint_callback, 20
         )
@@ -164,9 +202,11 @@ class PickPlaceSupervisor(Node):
             'supervisor_started',
             action_endpoint=str(self.get_parameter('action_name').value),
             action_type='control_msgs/action/FollowJointTrajectory',
-            states=list(STATES),
-            control_source='predefined_joint_trajectories',
-            ground_truth_used_for_control=False,
+            states=list(MOBILE_STATE_SEQUENCE if self.mobile else STATES),
+            control_source='joint_trajectories+localized_base_route' if self.mobile
+            else 'predefined_joint_trajectories',
+            ground_truth_used_for_control=self.mobile,
+            base_localization='Gazebo model pose' if self.mobile else 'wheel odometry',
         )
 
     def sim_ns(self):
@@ -197,7 +237,38 @@ class PickPlaceSupervisor(Node):
             if index < len(message.position):
                 self.joints[name] = float(message.position[index])
 
+    def support_contact_callback(self, message):
+        if not self.mobile:
+            return
+        for contact in message.contacts:
+            names = (contact.collision1.name, contact.collision2.name)
+            if any('mobile_manipulator::' in name for name in names):
+                self.emit('robot_support_collision', collisions=list(names))
+                self.fail('robot_contacted_station')
+                return
+
+    def base_pose_callback(self, message):
+        pose = model_planar_pose(message)
+        if pose is None:
+            return
+        self.world_base = pose
+        self.world_base_ns = self.sim_ns()
+        if self.mobile and self.odom is not None:
+            p = self.odom.pose.pose.position
+            q = self.odom.pose.pose.orientation
+            correction = world_to_odom(pose, (p.x, p.y, yaw_from_quaternion(q)))
+            tf = TransformStamped()
+            tf.header.stamp = self.get_clock().now().to_msg()
+            tf.header.frame_id = 'world'
+            tf.child_frame_id = 'odom'
+            tf.transform.translation.x = correction[0]
+            tf.transform.translation.y = correction[1]
+            tf.transform.rotation.z = math.sin(correction[2] / 2.0)
+            tf.transform.rotation.w = math.cos(correction[2] / 2.0)
+            self.localization_tf.sendTransform(tf)
+
     def odom_callback(self, message):
+        self.odom_rx_ns = self.sim_ns()
         self.odom = message
         if self.base_origin is None:
             p = message.pose.pose.position
@@ -218,7 +289,8 @@ class PickPlaceSupervisor(Node):
         if self.odom is None or self.base_origin is None:
             return math.inf, math.inf
         p = self.odom.pose.pose.position
-        drift = math.hypot(p.x - self.base_origin[0], p.y - self.base_origin[1])
+        xy = self.world_base[:2] if self.mobile and self.world_base else (p.x, p.y)
+        drift = math.dist(xy, self.base_origin)
         t = self.odom.twist.twist
         speed = math.sqrt(t.linear.x ** 2 + t.linear.y ** 2 + t.angular.z ** 2)
         return drift, speed
@@ -238,9 +310,12 @@ class PickPlaceSupervisor(Node):
     def transition(self, state, reason='condition_met'):
         old = self.state
         self.state = state
-        if state == 'OPEN' and self.odom is not None:
+        if (state == 'OPEN' or (self.mobile and state == 'TRANSFER')) and self.odom is not None:
             p = self.odom.pose.pose.position
-            self.base_origin = (float(p.x), float(p.y))
+            self.base_origin = (
+                self.world_base[:2] if self.mobile and self.world_base
+                else (float(p.x), float(p.y))
+            )
         self.state_started_ns = self.sim_ns()
         self.state_started_wall = time.monotonic()
         self.motion_started = False
@@ -253,6 +328,7 @@ class PickPlaceSupervisor(Node):
     def fail(self, reason, cancelled=False):
         if self.state in ('RECOVER', 'FAILED', 'CANCELLED', 'DONE'):
             return
+        self.publish_base()
         self.motion_generation += 1
         if self.goal_handle is not None:
             self.goal_handle.cancel_goal_async()
@@ -272,7 +348,7 @@ class PickPlaceSupervisor(Node):
         values = [
             float(x) for x in self.get_parameter(name).value
         ]
-        if name in ('lift', 'transfer', 'place'):
+        if name in ('lift', 'transport_pose', 'transfer', 'place'):
             # Keep closing against the object; replaying the measured angle
             # removes the preload needed for frictional retention.
             values[5] = float(self.get_parameter('close').value[5])
@@ -308,12 +384,16 @@ class PickPlaceSupervisor(Node):
         )
         timestamps = [seconds]
         if pose_name == 'pregrasp':
-            timestamps = [1.5, 3.0, 5.5]
+            timestamps = [t * seconds / 2.5 for t in (1.5, 3.0, 5.5)]
         goal = FollowJointTrajectory.Goal()
         goal.trajectory.joint_names = names
         for positions, timestamp in zip(waypoint_positions, timestamps):
             point = JointTrajectoryPoint()
             point.positions = positions
+            if self.mobile:
+                # Quintic interpolation gives zero velocity/acceleration at rest.
+                point.velocities = [0.0] * len(names)
+                point.accelerations = [0.0] * len(names)
             whole = int(timestamp)
             point.time_from_start = Duration(
                 sec=whole, nanosec=int((timestamp - whole) * 1e9)
@@ -431,6 +511,7 @@ class PickPlaceSupervisor(Node):
                 self.odom is not None
                 and len(self.joints) >= 6
                 and self.action.server_is_ready()
+                and (not self.mobile or self.world_base is not None)
                 and self.elapsed_sim() >= 1.5
             ):
                 self.transition('OPEN')
@@ -442,7 +523,7 @@ class PickPlaceSupervisor(Node):
                 self.fail(self.motion_error)
                 return
             arrived = self.motion_done and self.joints_at(
-                pose, ignore_m6=self.state in ('LIFT', 'TRANSFER', 'LOWER')
+                pose, ignore_m6=self.state in ('LIFT', 'FOLD', 'TRANSFER', 'LOWER')
             )
             if self.state == 'OPEN' and self.motion_done:
                 arrived = abs(
@@ -454,6 +535,7 @@ class PickPlaceSupervisor(Node):
                     'PREGRASP': 'APPROACH',
                     'APPROACH': 'CLOSE',
                     'LIFT': 'HOLD',
+                    'FOLD': 'NAVIGATE',
                     'TRANSFER': 'LOWER',
                     'LOWER': 'RELEASE',
                     'RETREAT': 'DONE',
@@ -490,7 +572,39 @@ class PickPlaceSupervisor(Node):
             elif self.elapsed_sim() >= float(
                 self.get_parameter('hold_duration_s').value
             ):
-                self.transition('TRANSFER')
+                self.transition('FOLD' if self.mobile else 'TRANSFER')
+            return
+        if self.state == 'NAVIGATE':
+            now = self.sim_ns()
+            if (
+                self.world_base is None or (now - self.world_base_ns) / 1e9 > 0.3
+                or (now - self.odom_rx_ns) / 1e9 > 0.3
+            ):
+                self.publish_base()
+                self.fail('base_localization_or_odometry_stale')
+                return
+            dt = (now - self.nav_tick_ns) / 1e9 if self.nav_tick_ns else 0.0
+            self.nav_tick_ns = now
+            previous_index = self.route.index
+            linear, angular, done = self.route.step(self.world_base, dt)
+            self.publish_base(linear, angular)
+            if self.route.index != previous_index:
+                self.emit('base_waypoint_reached', waypoint=previous_index,
+                          actual_world_pose=self.world_base,
+                          identified_turn_pivot_m=self.route.pivot_offset)
+            if done:
+                self.publish_base()
+                self.transition('DOCK_BASE')
+            return
+        if self.state == 'DOCK_BASE':
+            _, speed = self.base_metrics()
+            if speed <= 0.005:
+                if self.dock_stopped_since is None:
+                    self.dock_stopped_since = self.sim_ns()
+                elif (self.sim_ns() - self.dock_stopped_since) / 1e9 >= 1.0:
+                    self.transition('TRANSFER')
+            else:
+                self.dock_stopped_since = None
             return
         if self.state == 'RELEASE':
             self.gate_command('RELEASE')
@@ -506,7 +620,7 @@ class PickPlaceSupervisor(Node):
             return
 
     def recovery_tick(self):
-        if str(self.get_parameter('grasp_mode').value) == 'physical_contact':
+        if self.mobile or str(self.get_parameter('grasp_mode').value) == 'physical_contact':
             # Do not open or sweep home with a possibly retained/dropped object.
             self.start_motion('recovery_hold', duration_s=0.25)
             if self.motion_done or self.motion_error or self.elapsed_sim() > 2.0:
@@ -555,16 +669,22 @@ class PickPlaceSupervisor(Node):
                 terminal = recovery_terminal_state(self.cancel_requested)
                 self.transition(terminal, reason=self.failure_reason)
 
+    def publish_base(self, linear=0.0, angular=0.0):
+        command = TwistStamped()
+        command.header.stamp = self.get_clock().now().to_msg()
+        command.header.frame_id = 'base_footprint'
+        command.twist.linear.x = linear
+        command.twist.angular.z = angular
+        self.zero_pub.publish(command)
+
     def tick(self):
         sim_ns = self.sim_ns()
         if sim_ns > self.last_sim_ns:
             self.last_sim_ns = sim_ns
             self.last_sim_progress_wall = time.monotonic()
 
-        zero = TwistStamped()
-        zero.header.stamp = self.get_clock().now().to_msg()
-        zero.header.frame_id = 'base_footprint'
-        self.zero_pub.publish(zero)
+        if self.state != 'NAVIGATE':
+            self.publish_base()
         self.gate_command()
 
         if self.state in ('DONE', 'FAILED', 'CANCELLED'):
@@ -595,15 +715,20 @@ class PickPlaceSupervisor(Node):
         if self.cancel_requested and self.state != 'RECOVER':
             self.fail('explicit_cancel', cancelled=True)
         drift, speed = self.base_metrics()
-        if self.state not in ('IDLE', 'FREEZE_BASE', 'RECOVER'):
+        if self.state not in ('IDLE', 'FREEZE_BASE', 'RECOVER', *TRANSPORT_STATES):
             if drift > float(self.get_parameter('base_drift_limit_m').value):
                 self.fail('base_drift_limit')
             elif speed > float(self.get_parameter('base_speed_limit_mps').value):
                 self.fail('base_speed_limit')
 
+        if (self.mobile
+                and self.state in ('FOLD', 'TRANSFER', 'LOWER', *TRANSPORT_STATES)
+                and not self.attached):
+            self.fail('temporary_joint_lost_during_transport')
+
         if (
             str(self.get_parameter('grasp_mode').value) == 'physical_contact'
-            and self.state in ('LIFT', 'HOLD', 'TRANSFER', 'LOWER')
+            and self.state in ('LIFT', 'HOLD', 'FOLD', 'TRANSFER', 'LOWER', *TRANSPORT_STATES)
         ):
             fresh = (sim_ns - self.physical_feedback_ns) / 1e9 <= 0.25
             if fresh and self.physical_grasp_verified:
@@ -619,7 +744,10 @@ class PickPlaceSupervisor(Node):
         if self.state != 'IDLE' and (
             state_has_timed_out(
                 self.elapsed_sim(),
-                float(self.get_parameter('state_timeout_s').value),
+                float(self.get_parameter(
+                    'navigation_timeout_s' if self.state == 'NAVIGATE'
+                    else 'state_timeout_s'
+                ).value),
             )
         ):
             self.fail(f'state_timeout:{self.state}')

@@ -1,0 +1,154 @@
+pick_place_supervisor:
+  ros__parameters:
+    use_sim_time: true
+    auto_start: true
+    joint_names:
+    - poppy_m1_joint
+    - poppy_m2_joint
+    - poppy_m3_joint
+    - poppy_m4_joint
+    - poppy_m5_joint
+    - poppy_m6_joint
+    home:
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 1.2
+    pregrasp_clearance_1:
+    - -1.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 1.2
+    pregrasp_clearance_2:
+    - -1.0
+    - 0.86082245
+    - -0.30659458
+    - 0.0
+    - -0.55422787
+    - 1.2
+    pregrasp:
+    - -0.05806242
+    - 0.86082245
+    - -0.30659458
+    - 0.0
+    - -0.55422787
+    - 1.2
+    grasp:
+    - -0.05548826
+    - 1.42673829
+    - -0.3318062
+    - 0.0
+    - -1.09493209
+    - 1.2
+    close:
+    - -0.05548826
+    - 1.42673829
+    - -0.3318062
+    - 0.0
+    - -1.09493209
+    - 0.0
+    lift:
+    - -0.05806242
+    - 0.86082245
+    - -0.30659458
+    - 0.0
+    - -0.55422787
+    - 0.0
+    transport_pose: [-0.05806242, 0.15, -1.05, 0.0, 0.9, 0.0]
+    transfer:
+    - -0.05806242
+    - 0.86082245
+    - -0.30659458
+    - 0.0
+    - -0.55422787
+    - 0.0
+    place:
+    - -0.05548826
+    - 1.42673829
+    - -0.3318062
+    - 0.0
+    - -1.09493209
+    - 0.0
+    release_open:
+    - -0.05548826
+    - 1.42673829
+    - -0.3318062
+    - 0.0
+    - -1.09493209
+    - 1.2
+    retreat:
+    - -0.05806242
+    - 0.86082245
+    - -0.30659458
+    - 0.0
+    - -0.55422787
+    - 1.2
+    motion_duration_s: 2.2
+    joint_tolerance_rad: 0.035
+    state_timeout_s: 15.0
+    hold_duration_s: 3.2
+    release_stability_s: 2.2
+    base_speed_limit_mps: 0.01
+    base_drift_limit_m: 0.01
+    wall_watchdog_s: 3.0
+    mobile_transport: true
+    smooth_transport: true
+    navigation_timeout_s: 180.0
+    route:
+    - 0.838
+    - 0.0
+    - 0.0
+    - 0.838
+    - 0.0
+    - 1.5707963267948966
+    - 0.838
+    - 0.35
+    - 1.5707963267948966
+    - 0.838
+    - 0.738
+    - 1.5707963267948966
+pick_place_attach_gate:
+  ros__parameters:
+    use_sim_time: true
+    contact_max_age_s: 0.1
+    contact_persistence_s: 0.15
+    object_pose_max_age_s: 0.1
+    geometry_position_tolerance_m: 0.02
+    geometry_angle_tolerance_deg: 5.0
+    transform_max_age_s: 0.1
+    close_feedback_max_rad: 0.2
+    base_speed_limit_mps: 0.01
+    object_name: pick_object
+    attach_enabled: true
+    object_collision_token: pick_object_collision
+    fixed_collision_token: poppy_fixed_finger_collision
+    moving_collision_token: poppy_moving_finger_collision
+    grasp_frame: poppy_grasp_frame
+    fixed_tip_frame: poppy_fixed_contact
+    moving_tip_frame: poppy_moving_contact
+    reference_frame: world
+pick_place_evaluator:
+  ros__parameters:
+    use_sim_time: true
+    object_name: pick_object
+    place_x_m: 1.063
+    place_y_m: 0.694
+    placement_tolerance_m: 0.03
+    minimum_lift_m: 0.05
+    minimum_hold_s: 3.0
+    object_height_m: 0.045
+    pick_support_top_z_m: 0.14
+    minimum_support_clearance_m: 0.005
+    minimum_stable_s: 2.0
+    base_drift_limit_m: 0.01
+    reference_frame: world
+    mobile_transport: true
+    world: pick_and_place_mobile.sdf
+    base_goal:
+    - 0.838
+    - 0.738
+    - 1.5707963267948966

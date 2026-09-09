@@ -1,0 +1,295 @@
+{
+  "mobile_transport": false,
+  "maximum_relative_rotation_deg": 0.0,
+  "relative_orientation_samples": 0,
+  "base_localization": "wheel odometry",
+  "base_path_length_m": 0.0,
+  "base_accumulated_rotation_rad": 0.0,
+  "final_base_pose_xyyaw": null,
+  "maximum_stationary_drift_m": 0.0,
+  "maximum_stationary_speed": 0.0,
+  "navigation_samples": 0,
+  "transport_posture_samples": 0,
+  "transport_posture_invalid_samples": 0,
+  "maximum_transport_joint_error_rad": 0.0,
+  "navigation_retention_samples": 0,
+  "navigation_invalid_retention_samples": 0,
+  "run_id": "smooth_stationary_regression",
+  "status": "passed",
+  "terminal_state": "DONE",
+  "terminal_reason": "",
+  "source_sha": "unknown",
+  "source_dirty": true,
+  "world": "pick_and_place.sdf",
+  "seed": 606,
+  "grasp_mode": "physical_contact",
+  "simulator_assisted": false,
+  "control_source": "predefined_joint_trajectories",
+  "ground_truth_used_for_control": false,
+  "ground_truth_used_for_attachment_gate": true,
+  "ground_truth_used_for_evaluation": true,
+  "ground_truth_source": "/model/pick_object/pose (actual Gazebo model Pose_V)",
+  "started_wall_time_s": 1788982533.6858237,
+  "completed_wall_time_s": 1788982575.114481,
+  "started_sim_time_s": 0.0,
+  "completed_sim_time_s": 34.571,
+  "initial_base_pose_xy_m": [
+    -1.2681095379346016e-19,
+    1.177157263448382e-38
+  ],
+  "final_base_pose_xy_m": [
+    -3.884738486382845e-10,
+    4.2637420855127063e-20
+  ],
+  "initial_tool_pose_m": [
+    -0.030000000000556172,
+    -0.15965919072140206,
+    0.27165703655695833
+  ],
+  "final_tool_pose_m": [
+    0.04541937668460696,
+    -0.20246420577465812,
+    0.22475154348292092
+  ],
+  "final_grasp_frame_pose_m": [
+    0.0440137342886617,
+    -0.2029878177060742,
+    0.22475154348361448
+  ],
+  "initial_object_pose_m": [
+    -0.044,
+    -0.225,
+    0.16249942761582956
+  ],
+  "object_pose_at_grasp_m": [
+    -0.04349437360943865,
+    -0.22502353013708395,
+    0.1625032718773417
+  ],
+  "object_pose_at_lift_m": [
+    -0.04350968848907366,
+    -0.21519800159882535,
+    0.2251709669770824
+  ],
+  "final_object_pose_m": [
+    0.044767852101686795,
+    -0.21366872413487495,
+    0.16249999541838112
+  ],
+  "maximum_object_z_m": 0.22517747364863808,
+  "lift_m": 0.06267804603280852,
+  "maximum_pick_support_clearance_m": 0.06267747364863807,
+  "stability_motion_tolerance_m": 0.0005,
+  "hold_duration_s": 3.200000000000003,
+  "hold_samples_valid": true,
+  "maximum_retention_error_m": 0.0026261672868593306,
+  "retention_sample_count": 651,
+  "final_object_tilt_deg": 4.000911206360573e-05,
+  "final_m6_rad": 1.1999982027634968,
+  "ground_truth_used_for_safety": true,
+  "stable_duration_s": 2.5160000000000053,
+  "placement_error_xy_m": 0.0010182282743221617,
+  "pregrasp_position_error_m": 0.0009375688430221392,
+  "pregrasp_relevant_angle_error_deg": 0.03959997702867069,
+  "maximum_base_drift_m": 3.886116848355604e-10,
+  "maximum_joint_tracking_error_rad": 0.03560635663664153,
+  "trajectory_goal_count": 9,
+  "trajectory_retry_count": 0,
+  "timeout_or_failure_cause": "",
+  "attach_count": 0,
+  "detach_count": 0,
+  "attach_authorizations": [
+    {
+      "attach_enabled": false,
+      "authorized_state": "VERIFY_GRASP",
+      "contract": "bilateral_fresh_contact+geometry+closure+authorized_state+base_stopped+tf",
+      "event": "physical_grasp_verified",
+      "grasp_xyz_m": [
+        -0.04400242116707669,
+        -0.22499983507694907,
+        0.1625001334187891
+      ],
+      "ground_truth_used_for_attachment_gate": true,
+      "sim_time_s": 16.467,
+      "snapshot": {
+        "base_stopped": true,
+        "close_commanded": true,
+        "contact_persistence_s": 0.154,
+        "fixed_contact_fresh": true,
+        "geometry_angle_deg": 0.1910448328033358,
+        "geometry_error_m": 0.0005086095030756546,
+        "m6_rad": 0.038382819860966914,
+        "moving_contact_fresh": true,
+        "object_present": true,
+        "state": "VERIFY_GRASP",
+        "tf_valid": true
+      },
+      "source": "attach_gate",
+      "state": "VERIFY_GRASP",
+      "wall_time_s": 1788982551.6142833
+    }
+  ],
+  "forbidden_contacts": [],
+  "criteria": {
+    "terminal_done": true,
+    "grasp_contract_verified": true,
+    "released": true,
+    "lift_at_least_50mm": true,
+    "separated_from_pick_support": true,
+    "hold_at_least_3s": true,
+    "retained_through_transport": true,
+    "placement_within_30mm": true,
+    "stable_at_least_2s": true,
+    "base_drift": true,
+    "no_forbidden_contacts": true,
+    "pregrasp_position": true,
+    "pregrasp_orientation": true
+  },
+  "transitions": [
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "IDLE",
+      "reason": "condition_met",
+      "sim_time_s": 1.27,
+      "source": "supervisor",
+      "state": "FREEZE_BASE",
+      "to_state": "FREEZE_BASE",
+      "wall_time_s": 1788982533.8744266
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "FREEZE_BASE",
+      "reason": "condition_met",
+      "sim_time_s": 2.776,
+      "source": "supervisor",
+      "state": "OPEN",
+      "to_state": "OPEN",
+      "wall_time_s": 1788982535.7356632
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "OPEN",
+      "reason": "condition_met",
+      "sim_time_s": 5.341,
+      "source": "supervisor",
+      "state": "PREGRASP",
+      "to_state": "PREGRASP",
+      "wall_time_s": 1788982538.6779253
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "PREGRASP",
+      "reason": "condition_met",
+      "sim_time_s": 10.858,
+      "source": "supervisor",
+      "state": "APPROACH",
+      "to_state": "APPROACH",
+      "wall_time_s": 1788982545.1535969
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "APPROACH",
+      "reason": "condition_met",
+      "sim_time_s": 13.38,
+      "source": "supervisor",
+      "state": "CLOSE",
+      "to_state": "CLOSE",
+      "wall_time_s": 1788982548.0339139
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "CLOSE",
+      "reason": "condition_met",
+      "sim_time_s": 15.931,
+      "source": "supervisor",
+      "state": "VERIFY_GRASP",
+      "to_state": "VERIFY_GRASP",
+      "wall_time_s": 1788982550.9538777
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "VERIFY_GRASP",
+      "reason": "condition_met",
+      "sim_time_s": 16.477,
+      "source": "supervisor",
+      "state": "LIFT",
+      "to_state": "LIFT",
+      "wall_time_s": 1788982551.6345222
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "LIFT",
+      "reason": "condition_met",
+      "sim_time_s": 19.034,
+      "source": "supervisor",
+      "state": "HOLD",
+      "to_state": "HOLD",
+      "wall_time_s": 1788982555.9736807
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "HOLD",
+      "reason": "condition_met",
+      "sim_time_s": 22.234,
+      "source": "supervisor",
+      "state": "TRANSFER",
+      "to_state": "TRANSFER",
+      "wall_time_s": 1788982559.6339765
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "TRANSFER",
+      "reason": "condition_met",
+      "sim_time_s": 24.762,
+      "source": "supervisor",
+      "state": "LOWER",
+      "to_state": "LOWER",
+      "wall_time_s": 1788982562.5139427
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "LOWER",
+      "reason": "condition_met",
+      "sim_time_s": 27.303,
+      "source": "supervisor",
+      "state": "RELEASE",
+      "to_state": "RELEASE",
+      "wall_time_s": 1788982565.6940572
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "RELEASE",
+      "reason": "condition_met",
+      "sim_time_s": 32.015,
+      "source": "supervisor",
+      "state": "RETREAT",
+      "to_state": "RETREAT",
+      "wall_time_s": 1788982572.0139146
+    },
+    {
+      "attached": false,
+      "event": "transition",
+      "from_state": "RETREAT",
+      "reason": "condition_met",
+      "sim_time_s": 34.55,
+      "source": "supervisor",
+      "state": "DONE",
+      "to_state": "DONE",
+      "wall_time_s": 1788982575.0936694
+    }
+  ],
+  "raw_events": "events.jsonl",
+  "raw_samples": "samples.csv"
+}

@@ -1,0 +1,1246 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <world name="pick_and_place">
+    <gravity>0 0 -9.81</gravity>
+    <physics name="a1_1ms" type="gz">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact" />
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <light type="directional" name="sun">
+      <pose>0 0 5 0 0 0</pose>
+      <direction>-0.4 0.3 -1</direction>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+    </light>
+    <model name="ground">
+      <static>true</static>
+      <link name="ground_link">
+        <collision name="ground_collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>8 8</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="ground_visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>8 8</size>
+            </plane>
+          </geometry>
+          <material>
+            <diffuse>0.32 0.35 0.38 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="pick_support">
+      <static>true</static>
+      <pose>-0.044 -0.225 0.070 0 0 0</pose>
+      <link name="support_link">
+        <collision name="pick_support_collision">
+          <geometry>
+            <box>
+              <size>0.032 0.032 0.140</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>100000</kp>
+                <kd>1.0</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.0001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="pick_support_visual">
+          <geometry>
+            <box>
+              <size>0.032 0.032 0.140</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.12 0.45 0.85 1</diffuse>
+          </material>
+        </visual>
+        <sensor name="pick_support_contact_sensor" type="contact">
+          <contact>
+            <collision>pick_support_collision</collision>
+            <topic>/pick_support/contacts</topic>
+          </contact>
+          <always_on>true</always_on>
+          <update_rate>200</update_rate>
+        </sensor>
+      </link>
+    </model>
+    <model name="place_support">
+      <static>true</static>
+      <pose>1.063 0.694 0.070 0 0 1.570796327</pose>
+      <link name="support_link">
+        <collision name="place_support_collision">
+          <geometry>
+            <box>
+              <size>0.032 0.032 0.140</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>100000</kp>
+                <kd>1.0</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.0001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="place_support_visual">
+          <geometry>
+            <box>
+              <size>0.032 0.032 0.140</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.15 0.75 0.28 1</diffuse>
+          </material>
+        </visual>
+        <visual name="target_ring">
+          <pose>0 0 0.072 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.004</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.95 0.8 0.08 1</diffuse>
+          </material>
+        </visual>
+        <sensor name="place_support_contact_sensor" type="contact">
+          <contact>
+            <collision>place_support_collision</collision>
+            <topic>/place_support/contacts</topic>
+          </contact>
+          <always_on>true</always_on>
+          <update_rate>200</update_rate>
+        </sensor>
+      </link>
+    </model>
+    <model name="evidence_camera">
+      <static>true</static>
+      <pose>-0.65 -0.85 1.80 0 0.85 0.86</pose>
+      <link name="camera_link">
+        <sensor name="a1_evidence_camera" type="camera">
+          <topic>/pick_place/evidence/image</topic>
+          <update_rate>60</update_rate>
+          <always_on>true</always_on>
+          <camera>
+            <horizontal_fov>1.05</horizontal_fov>
+            <image>
+              <width>1280</width>
+              <height>960</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.05</near>
+              <far>10.0</far>
+            </clip>
+          </camera>
+        </sensor>
+      </link>
+    </model>
+    <model name="inspection_grid_20cm">
+      <static>true</static>
+      <link name="grid">
+        <visual name="x_00">
+          <pose>0 -4.000 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.006 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_01">
+          <pose>0 -3.800 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_02">
+          <pose>0 -3.600 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_03">
+          <pose>0 -3.400 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_04">
+          <pose>0 -3.200 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_05">
+          <pose>0 -3.000 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.006 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_06">
+          <pose>0 -2.800 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_07">
+          <pose>0 -2.600 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_08">
+          <pose>0 -2.400 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_09">
+          <pose>0 -2.200 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_10">
+          <pose>0 -2.000 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.006 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_11">
+          <pose>0 -1.800 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_12">
+          <pose>0 -1.600 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_13">
+          <pose>0 -1.400 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_14">
+          <pose>0 -1.200 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_15">
+          <pose>0 -1.000 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.006 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_16">
+          <pose>0 -0.800 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_17">
+          <pose>0 -0.600 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_18">
+          <pose>0 -0.400 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_19">
+          <pose>0 -0.200 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_20">
+          <pose>0 0.000 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.006 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_21">
+          <pose>0 0.200 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_22">
+          <pose>0 0.400 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_23">
+          <pose>0 0.600 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_24">
+          <pose>0 0.800 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_25">
+          <pose>0 1.000 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.006 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_26">
+          <pose>0 1.200 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_27">
+          <pose>0 1.400 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_28">
+          <pose>0 1.600 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_29">
+          <pose>0 1.800 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_30">
+          <pose>0 2.000 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.006 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_31">
+          <pose>0 2.200 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_32">
+          <pose>0 2.400 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_33">
+          <pose>0 2.600 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_34">
+          <pose>0 2.800 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_35">
+          <pose>0 3.000 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.006 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_36">
+          <pose>0 3.200 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_37">
+          <pose>0 3.400 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_38">
+          <pose>0 3.600 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_39">
+          <pose>0 3.800 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.0025 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="x_40">
+          <pose>0 4.000 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8 0.006 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_00">
+          <pose>-4.000 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.006 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_01">
+          <pose>-3.800 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_02">
+          <pose>-3.600 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_03">
+          <pose>-3.400 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_04">
+          <pose>-3.200 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_05">
+          <pose>-3.000 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.006 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_06">
+          <pose>-2.800 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_07">
+          <pose>-2.600 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_08">
+          <pose>-2.400 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_09">
+          <pose>-2.200 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_10">
+          <pose>-2.000 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.006 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_11">
+          <pose>-1.800 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_12">
+          <pose>-1.600 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_13">
+          <pose>-1.400 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_14">
+          <pose>-1.200 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_15">
+          <pose>-1.000 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.006 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_16">
+          <pose>-0.800 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_17">
+          <pose>-0.600 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_18">
+          <pose>-0.400 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_19">
+          <pose>-0.200 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_20">
+          <pose>0.000 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.006 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_21">
+          <pose>0.200 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_22">
+          <pose>0.400 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_23">
+          <pose>0.600 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_24">
+          <pose>0.800 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_25">
+          <pose>1.000 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.006 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_26">
+          <pose>1.200 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_27">
+          <pose>1.400 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_28">
+          <pose>1.600 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_29">
+          <pose>1.800 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_30">
+          <pose>2.000 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.006 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_31">
+          <pose>2.200 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_32">
+          <pose>2.400 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_33">
+          <pose>2.600 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_34">
+          <pose>2.800 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_35">
+          <pose>3.000 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.006 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_36">
+          <pose>3.200 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_37">
+          <pose>3.400 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_38">
+          <pose>3.600 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_39">
+          <pose>3.800 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0025 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.45 0.48 0.51 1</ambient>
+            <diffuse>0.45 0.48 0.51 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="y_40">
+          <pose>4.000 0 0.001 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.006 8 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.62 0.65 0.68 1</ambient>
+            <diffuse>0.62 0.65 0.68 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

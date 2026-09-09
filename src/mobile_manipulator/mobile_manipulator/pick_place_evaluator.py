@@ -4,6 +4,10 @@ import math
 from pathlib import Path
 import time
 
+from mobile_manipulator.mobile_transport import (
+    model_planar_pose, quaternion_distance_deg, relative_quaternion,
+    TRANSPORT_STATES, wrap_angle,
+)
 from mobile_manipulator.pick_place_attach_gate import (
     cylinder_tilt_deg,
     extract_single_model_pose,
@@ -65,6 +69,18 @@ def update_spatial_stability(
     )
 
 
+def expected_fixed_jaw_approach(state, other, pose, initial, grasp, m6, speed):
+    """Permit the fixed jaw to meet the supported piece at the end of approach."""
+    return (
+        state == 'APPROACH' and 'poppy_fixed_finger_collision' in other
+        and pose is not None and initial is not None and grasp is not None
+        and math.dist(pose[:2], initial[:2]) <= 0.010
+        and abs(pose[2] - initial[2]) <= 0.002
+        and math.dist(pose, grasp) <= 0.030
+        and m6 >= 1.15 and speed <= 0.01
+    )
+
+
 class PickPlaceEvaluator(Node):
     """Independent evaluator using actual Gazebo Pose_V state."""
 
@@ -72,6 +88,11 @@ class PickPlaceEvaluator(Node):
         super().__init__('pick_place_evaluator')
         defaults = (
             ('object_name', 'pick_object'),
+            ('reference_frame', 'odom'),
+            ('mobile_transport', False),
+            ('base_goal', [0.838, 0.738, 1.570796327]),
+            ('minimum_base_travel_m', 1.3),
+            ('minimum_base_rotation_rad', 1.4),
             ('tool_frame', 'poppy_tool_frame'),
             ('grasp_frame', 'poppy_grasp_frame'),
             ('place_x_m', 0.044),
@@ -108,6 +129,8 @@ class PickPlaceEvaluator(Node):
             'object_y_m', 'object_z_m', 'attached', 'base_x_m',
             'base_y_m', 'tool_x_m', 'tool_y_m', 'tool_z_m',
             'grasp_x_m', 'grasp_y_m', 'grasp_z_m',
+            'base_yaw_rad', 'object_tilt_deg',
+            *[f'm{i}_rad' for i in range(1, 7)],
         ]
         self.writer = csv.DictWriter(
             self.samples_handle, fieldnames=self.sample_fields
@@ -132,7 +155,23 @@ class PickPlaceEvaluator(Node):
         self.attach_gate_snapshots = []
         self.transitions = []
         self.forbidden_contacts = []
+        self.mobile = bool(self.get_parameter('mobile_transport').value)
         self.base_origin = None
+        self.base_world_pose = None
+        self.base_yaw_origin = None
+        self.base_path_length = 0.0
+        self.base_rotation = 0.0
+        self.stationary_anchor = None
+        self.max_stationary_drift = 0.0
+        self.base_nav_samples = 0
+        self.nav_retention_samples = 0
+        self.retention_invalid_count = 0
+        self.relative_orientation_at_attach = None
+        self.max_relative_rotation_deg = 0.0
+        self.relative_orientation_samples = 0
+        self.object_quaternion = None
+        self.base_speed = 0.0
+        self.max_stationary_speed = 0.0
         self.forbidden_contact_keys = set()
         self.base_pose = None
         self.tool_pose = None
@@ -145,6 +184,14 @@ class PickPlaceEvaluator(Node):
         self.retention_sample_count = 0
         self.max_retention_error = 0.0
         self.m6_rad = math.nan
+        self.joint_positions = {}
+        self.joint_stamp_s = -math.inf
+        self.transport_posture_samples = 0
+        self.transport_posture_invalid = 0
+        self.max_transport_posture_error = 0.0
+        self.declare_parameter(
+            'transport_pose', [-0.05806242, 0.15, -1.05, 0.0, 0.9, 0.0]
+        )
         self.object_tilt_deg = math.inf
         self.detached_at = None
         self.stable_since = None
@@ -174,6 +221,8 @@ class PickPlaceEvaluator(Node):
             self.pose_callback,
             50,
         )
+        for topic in ('/pick_support/contacts', '/place_support/contacts'):
+            self.create_subscription(Contacts, topic, self.support_contact_callback, 20)
         self.create_subscription(
             Contacts, '/pick_object/contacts', self.contact_callback, 50
         )
@@ -182,6 +231,9 @@ class PickPlaceEvaluator(Node):
         )
         self.create_subscription(
             Odometry, '/base_controller/odom', self.odom_callback, 20
+        )
+        self.create_subscription(
+            TFMessage, '/model/mobile_manipulator/pose', self.base_world_callback, 20
         )
         self.create_subscription(
             JointState, '/joint_states', self.joint_callback, 20
@@ -203,6 +255,8 @@ class PickPlaceEvaluator(Node):
         })
 
     def joint_callback(self, message):
+        self.joint_positions.update(zip(message.name, message.position))
+        self.joint_stamp_s = self.get_clock().now().nanoseconds / 1e9
         if 'poppy_m6_joint' in message.name:
             index = message.name.index('poppy_m6_joint')
             if index < len(message.position):
@@ -219,12 +273,45 @@ class PickPlaceEvaluator(Node):
         self.object_pose = pose
         q = message.transforms[-1].transform.rotation
         self.object_tilt_deg = cylinder_tilt_deg(q)
+        self.object_quaternion = (q.x, q.y, q.z, q.w)
         self.object_pose_rx_wall = time.monotonic()
         if self.initial_pose is None:
             self.initial_pose = self.object_pose
         self.max_z = max(self.max_z, self.object_pose[2])
 
+    def base_world_callback(self, message):
+        pose = model_planar_pose(message)
+        if not self.mobile or pose is None:
+            return
+        if self.base_world_pose is not None:
+            self.base_path_length += math.dist(pose[:2], self.base_world_pose[:2])
+            self.base_rotation += abs(wrap_angle(pose[2] - self.base_world_pose[2]))
+        else:
+            self.base_yaw_origin = pose[2]
+        self.base_world_pose = pose
+        self.base_pose = pose[:2]
+        if self.base_origin is None:
+            self.base_origin = self.base_pose
+        self.max_base_drift = max(
+            self.max_base_drift, math.dist(self.base_origin, self.base_pose)
+        )
+        if self.state in TRANSPORT_STATES:
+            self.base_nav_samples += 1
+            self.stationary_anchor = None
+        elif self.state not in ('IDLE', 'FREEZE_BASE', 'RECOVER'):
+            if self.stationary_anchor is None:
+                self.stationary_anchor = self.base_pose
+            self.max_stationary_drift = max(
+                self.max_stationary_drift,
+                math.dist(self.stationary_anchor, self.base_pose),
+            )
+            self.max_stationary_speed = max(self.max_stationary_speed, self.base_speed)
+
     def odom_callback(self, message):
+        t = message.twist.twist
+        self.base_speed = math.hypot(t.linear.x, t.angular.z)
+        if self.mobile:
+            return
         p = message.pose.pose.position
         self.base_pose = (float(p.x), float(p.y))
         if self.base_origin is None:
@@ -281,7 +368,7 @@ class PickPlaceEvaluator(Node):
             if destination == 'HOLD':
                 self.hold_started = sim_time
                 self.lift_object_pose = self.object_pose
-            if destination == 'TRANSFER' and self.hold_started is not None:
+            if previous == 'HOLD' and self.hold_started is not None:
                 self.hold_duration = sim_time - self.hold_started
         if data.get('event') == 'terminal' and not self.finalized:
             self.terminal_payload = data
@@ -290,13 +377,30 @@ class PickPlaceEvaluator(Node):
             self.stable_since = None
             self.stability_anchor = None
 
+    def support_contact_callback(self, message):
+        if not self.mobile:
+            return
+        for contact in message.contacts:
+            names = (contact.collision1.name, contact.collision2.name)
+            robot = next((name for name in names if 'mobile_manipulator::' in name), None)
+            if robot is not None:
+                key = ('robot_station_collision', self.state, robot)
+                if key not in self.forbidden_contact_keys:
+                    self.forbidden_contact_keys.add(key)
+                    self.forbidden_contacts.append({
+                        'sim_time_s': self.get_clock().now().nanoseconds / 1e9,
+                        'state': self.state, 'other_collision': robot,
+                        'collisions': list(names), 'source': 'station_contact_sensor',
+                    })
+
     def contact_callback(self, message):
         finger_tokens = (
             'poppy_fixed_finger_collision',
             'poppy_moving_finger_collision',
         )
         finger_states = {
-            'CLOSE', 'VERIFY_GRASP', 'LIFT', 'HOLD', 'TRANSFER', 'LOWER',
+            'CLOSE', 'VERIFY_GRASP', 'LIFT', 'HOLD', 'FOLD', 'TRANSFER', 'LOWER',
+            *TRANSPORT_STATES,
             'RELEASE', 'RETREAT', 'RECOVER',
         }
         pick_support_states = {
@@ -313,7 +417,11 @@ class PickPlaceEvaluator(Node):
                 continue
             other = names[1] if 'pick_object_collision' in names[0] else names[0]
             allowed = (
-                (
+                expected_fixed_jaw_approach(
+                    self.state, other, self.object_pose, self.initial_pose,
+                    self.grasp_pose, self.m6_rad, self.base_speed,
+                )
+                or (
                     self.state in finger_states
                     and any(token in other for token in finger_tokens)
                 )
@@ -339,7 +447,8 @@ class PickPlaceEvaluator(Node):
 
     def lookup(self, frame, timeout_s=0.05):
         tf = self.tf_buffer.lookup_transform(
-            'odom', frame, Time(), timeout=Duration(seconds=timeout_s)
+            str(self.get_parameter('reference_frame').value),
+            frame, Time(), timeout=Duration(seconds=timeout_s)
         )
         p = tf.transform.translation
         return (float(p.x), float(p.y), float(p.z))
@@ -405,14 +514,54 @@ class PickPlaceEvaluator(Node):
             'grasp_x_m': gx,
             'grasp_y_m': gy,
             'grasp_z_m': gz,
+            'base_yaw_rad': self.base_world_pose[2] if self.base_world_pose else math.nan,
+            'object_tilt_deg': self.object_tilt_deg,
+            **{f'm{i}_rad': self.joint_positions.get(f'poppy_m{i}_joint', math.nan)
+               for i in range(1, 7)},
         })
         self.samples_handle.flush()
 
-        if self.state in ('LIFT', 'HOLD', 'TRANSFER', 'LOWER'):
+        if self.mobile and self.attached and self.object_quaternion is not None:
+            try:
+                tf = self.tf_buffer.lookup_transform(
+                    'world', 'poppy_link_5', Time(), timeout=Duration(seconds=0.0)
+                )
+                q = tf.transform.rotation
+                relative = relative_quaternion(
+                    (q.x, q.y, q.z, q.w), self.object_quaternion,
+                )
+                if self.relative_orientation_at_attach is None:
+                    self.relative_orientation_at_attach = relative
+                error_deg = quaternion_distance_deg(
+                    self.relative_orientation_at_attach, relative,
+                )
+                self.max_relative_rotation_deg = max(self.max_relative_rotation_deg, error_deg)
+                self.relative_orientation_samples += 1
+            except TransformException:
+                pass
+        if self.state in ('LIFT', 'HOLD', 'FOLD', 'TRANSFER', 'LOWER', *TRANSPORT_STATES):
             error = math.dist((x, y, z), (gx, gy, gz))
             if math.isfinite(error):
                 self.max_retention_error = max(self.max_retention_error, error)
                 self.retention_sample_count += 1
+            if self.state in TRANSPORT_STATES:
+                self.nav_retention_samples += 1
+                self.transport_posture_samples += 1
+                target = self.get_parameter('transport_pose').value
+                measured = [
+                    self.joint_positions.get(f'poppy_m{i}_joint', math.nan)
+                    for i in range(1, 6)
+                ]
+                posture_error = (max(abs(a - b) for a, b in zip(measured, target))
+                                 if all(math.isfinite(v) for v in measured) else math.inf)
+                self.max_transport_posture_error = max(
+                    self.max_transport_posture_error, posture_error)
+                self.transport_posture_invalid += int(
+                    posture_error > 0.035 or sim_time - self.joint_stamp_s > 0.3
+                )
+                self.retention_invalid_count += int(
+                    not math.isfinite(error) or error > 0.008 or not self.attached
+                )
             if self.state == 'HOLD':
                 self.hold_samples_valid &= (
                     math.isfinite(error) and error <= 0.008
@@ -533,7 +682,8 @@ class PickPlaceEvaluator(Node):
             'stable_at_least_2s': self.stable_duration >= float(
                 self.get_parameter('minimum_stable_s').value
             ),
-            'base_drift': self.max_base_drift <= float(
+            'base_drift': (self.max_stationary_drift if self.mobile else self.max_base_drift)
+            <= float(
                 self.get_parameter('base_drift_limit_m').value
             ),
             'no_forbidden_contacts': not self.forbidden_contacts,
@@ -546,7 +696,55 @@ class PickPlaceEvaluator(Node):
                 and self.pregrasp_angle_error <= 5.0
             ),
         }
+        if self.mobile:
+            goal = list(self.get_parameter('base_goal').value)
+            base_error = (
+                math.dist(self.base_pose, goal[:2]) if self.base_pose else math.inf
+            )
+            yaw_error = (
+                abs(wrap_angle(self.base_world_pose[2] - goal[2]))
+                if self.base_world_pose else math.inf
+            )
+            criteria.update({
+                'base_traveled_at_least_1_3m': self.base_path_length >= float(
+                    self.get_parameter('minimum_base_travel_m').value
+                ),
+                'base_reoriented_at_least_80deg': (
+                    self.base_world_pose is not None
+                    and abs(wrap_angle(self.base_world_pose[2] - self.base_yaw_origin))
+                    >= float(self.get_parameter('minimum_base_rotation_rad').value)
+                ),
+                'base_docked_within_5mm_1deg': base_error <= 0.005 and yaw_error <= 0.01745,
+                'base_stopped_during_manipulation': self.max_stationary_speed <= 0.01,
+                'orientation_fixed_relative_to_gripper': (
+                    self.relative_orientation_samples > 100
+                    and self.max_relative_rotation_deg <= 1.0
+                ),
+                'arm_folded_during_transport': (
+                    self.transport_posture_samples > 100
+                    and self.transport_posture_invalid == 0
+                ),
+                'mobile_retention_observed': (
+                    self.base_nav_samples > 100 and self.nav_retention_samples > 100
+                    and self.retention_invalid_count == 0
+                ),
+            })
         result = {
+            'mobile_transport': self.mobile,
+            'maximum_relative_rotation_deg': self.max_relative_rotation_deg,
+            'relative_orientation_samples': self.relative_orientation_samples,
+            'base_localization': 'Gazebo model pose' if self.mobile else 'wheel odometry',
+            'base_path_length_m': self.base_path_length,
+            'base_accumulated_rotation_rad': self.base_rotation,
+            'final_base_pose_xyyaw': self.base_world_pose,
+            'maximum_stationary_drift_m': self.max_stationary_drift,
+            'maximum_stationary_speed': self.max_stationary_speed,
+            'navigation_samples': self.base_nav_samples,
+            'transport_posture_samples': self.transport_posture_samples,
+            'transport_posture_invalid_samples': self.transport_posture_invalid,
+            'maximum_transport_joint_error_rad': self.max_transport_posture_error,
+            'navigation_retention_samples': self.nav_retention_samples,
+            'navigation_invalid_retention_samples': self.retention_invalid_count,
             'run_id': str(self.get_parameter('run_id').value),
             'status': 'passed' if all(criteria.values()) else 'failed',
             'terminal_state': terminal,
@@ -557,8 +755,9 @@ class PickPlaceEvaluator(Node):
             'seed': int(self.get_parameter('seed').value),
             'grasp_mode': grasp_mode,
             'simulator_assisted': simulator_assisted,
-            'control_source': 'predefined_joint_trajectories',
-            'ground_truth_used_for_control': False,
+            'control_source': ('joint_trajectories+localized_base_route' if self.mobile
+                               else 'predefined_joint_trajectories'),
+            'ground_truth_used_for_control': self.mobile,
             'ground_truth_used_for_attachment_gate': True,
             'ground_truth_used_for_evaluation': True,
             'ground_truth_source': (

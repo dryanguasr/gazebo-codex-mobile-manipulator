@@ -1,0 +1,13 @@
+
+7 files checked
+No problems found
+
+Checked files:
+
+* src/mobile_manipulator/mobile_manipulator/mobile_transport.py
+* src/mobile_manipulator/mobile_manipulator/pick_place_supervisor.py
+* src/mobile_manipulator/mobile_manipulator/pick_place_evaluator.py
+* src/mobile_manipulator/mobile_manipulator/pick_place_attach_gate.py
+* src/mobile_manipulator/test/test_mobile_transport.py
+* tools/verify_mobile_pick_place.py
+* tools/plot_mobile_route_comparison.py

@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "criteria": {
+    "terminal_cancelled": true,
+    "explicit_reason": true,
+    "cancel_while_navigating": true,
+    "joint_retained": true,
+    "stopped_within_5mm": true,
+    "piece_remained_elevated": true
+  },
+  "travel_after_cancel_m": 0.00015360291027731454
+}

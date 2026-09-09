@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "criteria": {
+    "runtime_all_criteria": true,
+    "actual_mobile_sequence": true,
+    "raw_base_path_at_least_1_3m": true,
+    "raw_base_yaw_change_at_least_80deg": true,
+    "raw_retention_samples": true,
+    "raw_joint_kept_during_transport": true,
+    "raw_retention_error_under_8mm": true,
+    "one_conditional_attach_and_release": true,
+    "orientation_measured_and_fixed": true,
+    "station_separation_over_1_3m": true
+  },
+  "raw_base_path_m": 1.6822437312664635,
+  "raw_base_yaw_change_deg": 89.77843855962618,
+  "raw_navigation_samples": 28038,
+  "raw_max_retention_error_m": 0.003450514693223963
+}

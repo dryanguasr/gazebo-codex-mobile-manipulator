@@ -16,6 +16,7 @@ class PickPlaceNegativeInjector(Node):
         self.scenario = str(self.get_parameter('scenario').value)
         self.state = 'IDLE'
         self.cancel_sent = False
+        self.navigation_started_ns = None
         self.base_pub = self.create_publisher(
             TwistStamped, '/base_controller/cmd_vel', 20
         )
@@ -40,6 +41,8 @@ class PickPlaceNegativeInjector(Node):
         except json.JSONDecodeError:
             return
         self.state = str(data.get('state', self.state))
+        if self.state == 'NAVIGATE' and self.navigation_started_ns is None:
+            self.navigation_started_ns = self.get_clock().now().nanoseconds
         if (
             self.scenario == 'cancel_during_transport'
             and data.get('event') == 'transition'
@@ -53,6 +56,15 @@ class PickPlaceNegativeInjector(Node):
             self.get_logger().warning('Injected transport cancellation')
 
     def tick(self):
+        if (
+            self.scenario == 'cancel_mobile_route'
+            and self.state == 'NAVIGATE' and self.navigation_started_ns is not None
+            and not self.cancel_sent
+            and (self.get_clock().now().nanoseconds - self.navigation_started_ns) / 1e9 > 3.0
+        ):
+            self.cancel_pub.publish(Bool(data=True))
+            self.cancel_sent = True
+            self.get_logger().warning('Injected cancellation while driving with load')
         if self.scenario != 'base_motion':
             return
         if self.state in (

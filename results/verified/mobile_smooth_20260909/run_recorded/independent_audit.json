@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "criteria": {
+    "runtime_all_criteria": true,
+    "actual_mobile_sequence": true,
+    "raw_folded_posture_during_transport": true,
+    "raw_base_path_at_least_1_3m": true,
+    "raw_base_yaw_change_at_least_80deg": true,
+    "raw_retention_samples": true,
+    "raw_joint_kept_during_transport": true,
+    "raw_retention_error_under_8mm": true,
+    "one_conditional_attach_and_release": true,
+    "orientation_measured_and_fixed": true,
+    "station_separation_over_1_3m": true
+  },
+  "folded_posture_expected": true,
+  "raw_base_path_m": 1.5198008656571944,
+  "raw_base_yaw_change_deg": 90.22927885791277,
+  "raw_navigation_samples": 11750,
+  "raw_max_retention_error_m": 0.005409401635889937
+}

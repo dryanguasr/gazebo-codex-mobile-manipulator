@@ -1,0 +1,49 @@
+{
+  "source": "/pick_place/detail/image (Gazebo camera)",
+  "video": "pick_and_place_a1.mp4",
+  "frame_count": 1765,
+  "source_frame_count": 1512,
+  "fps": 60.0,
+  "timing_source": "Gazebo image header stamp",
+  "simulated_duration_s": 29.408,
+  "encoded_duration_s": 29.416666666666668,
+  "started_wall_time_s": 1788981978.351065,
+  "completed_wall_time_s": 1788982259.7932796,
+  "captured_phases": {
+    "pregrasp": {
+      "frame": 529,
+      "state": "APPROACH",
+      "raw": "raw/pregrasp.png",
+      "annotated": "pregrasp.png"
+    },
+    "contact": {
+      "frame": 822,
+      "state": "VERIFY_GRASP",
+      "raw": "raw/contact.png",
+      "annotated": "contact.png"
+    },
+    "lift": {
+      "frame": 953,
+      "state": "HOLD",
+      "raw": "raw/lift.png",
+      "annotated": "lift.png"
+    },
+    "transport_start": {
+      "frame": 1279,
+      "state": "NAVIGATE",
+      "raw": "raw/transport_start.png",
+      "annotated": "transport_start.png"
+    }
+  },
+  "required_phases": [
+    "pregrasp",
+    "contact",
+    "lift",
+    "retention",
+    "deposit",
+    "release",
+    "transport_start",
+    "arrival"
+  ],
+  "complete": false
+}

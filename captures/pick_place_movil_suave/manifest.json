@@ -1,0 +1,153 @@
+{
+  "grasp_mode": "attach_conditioned",
+  "simulator_assisted": true,
+  "source_run": "../../results/verified/mobile_smooth_20260909/run_recorded",
+  "speed": "1x simulation time",
+  "encoding": "H.264 yuv420p, 60 fps CFR; no motion interpolation",
+  "source_camera_delivery": {
+    "overview": {
+      "received_images": 2167,
+      "CFR_frames": 3301
+    },
+    "detail": {
+      "received_images": 2635,
+      "CFR_frames": 3301
+    }
+  },
+  "frame_gap_policy": "Repeat previous real frame when camera delivery has gaps; not 60 guaranteed distinct images/s",
+  "videos": [
+    {
+      "name": "ciclo_completo_60fps.mp4",
+      "view": "overview",
+      "source": "media/pick_and_place_a1.mp4",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 960,
+            "r_frame_rate": "60/1",
+            "avg_frame_rate": "60/1",
+            "duration": "55.016667",
+            "nb_frames": "3301"
+          }
+        ],
+        "format": {
+          "duration": "55.016667"
+        }
+      },
+      "sha256": "8222d4cbc88870e1e0642f2918029c8db2bef57814ecbd658a8d91308dc80ac7",
+      "source_sha256": "37895844290ec0213edd05afd5b9bf75df32fcc7e788f1f654d512dada28780b",
+      "full_decode": "passed"
+    },
+    {
+      "name": "detalle_gripper_60fps.mp4",
+      "view": "detail",
+      "source": "detail/media/pick_and_place_a1.mp4",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 720,
+            "r_frame_rate": "60/1",
+            "avg_frame_rate": "60/1",
+            "duration": "55.016667",
+            "nb_frames": "3301"
+          }
+        ],
+        "format": {
+          "duration": "55.016667"
+        }
+      },
+      "sha256": "69f022b3243d06ce9bb6534862a9111dabeca65e2934a07a26da3bc3e76df764",
+      "source_sha256": "a1b991854d3a63e6c78bba2704f46e4073732c3aff79c9a5afe1bbbe92590ca0",
+      "full_decode": "passed"
+    },
+    {
+      "name": "recogida_60fps.mp4",
+      "view": "detail",
+      "start": 8.566666666666666,
+      "end": 16.883333333333333,
+      "source": "detail/media/pick_and_place_a1.mp4",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 720,
+            "r_frame_rate": "60/1",
+            "avg_frame_rate": "60/1",
+            "duration": "8.316667",
+            "nb_frames": "499"
+          }
+        ],
+        "format": {
+          "duration": "8.316667"
+        }
+      },
+      "sha256": "f6ceeea2453f7178cf65914e4f814c89ab9d00c7228f9b375fc1dcd85036def4",
+      "source_sha256": "a1b991854d3a63e6c78bba2704f46e4073732c3aff79c9a5afe1bbbe92590ca0",
+      "full_decode": "passed"
+    },
+    {
+      "name": "repliegue_y_traslado_60fps.mp4",
+      "view": "overview",
+      "start": 18.3,
+      "end": 44.266666666666666,
+      "source": "media/pick_and_place_a1.mp4",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 960,
+            "r_frame_rate": "60/1",
+            "avg_frame_rate": "60/1",
+            "duration": "25.966667",
+            "nb_frames": "1558"
+          }
+        ],
+        "format": {
+          "duration": "25.966667"
+        }
+      },
+      "sha256": "c1d4e20840f881c3b5b1261c2ef004a95cd37c68da3cfca31775c3253abb1039",
+      "source_sha256": "37895844290ec0213edd05afd5b9bf75df32fcc7e788f1f654d512dada28780b",
+      "full_decode": "passed"
+    },
+    {
+      "name": "deposito_60fps.mp4",
+      "view": "overview",
+      "start": 43.766666666666666,
+      "end": 55.016666666666666,
+      "source": "media/pick_and_place_a1.mp4",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 720,
+            "r_frame_rate": "60/1",
+            "avg_frame_rate": "60/1",
+            "duration": "11.250000",
+            "nb_frames": "675"
+          }
+        ],
+        "format": {
+          "duration": "11.250000"
+        }
+      },
+      "sha256": "2dd0d8b581d37b08548fa1bdcec077e0f25f5a0502fe8a47f163bdf135e75d7d",
+      "source_sha256": "37895844290ec0213edd05afd5b9bf75df32fcc7e788f1f654d512dada28780b",
+      "crop": "crop=440:330:480:120,scale=960:720",
+      "full_decode": "passed",
+      "video_filter": "crop=440:330:480:120,scale=960:720,drawbox=x=0:y=0:w=iw:h=40:color=black@0.85:t=fill,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='attach_conditioned | DEPOSITO | 1x sim':fontcolor=white:fontsize=22:x=12:y=9"
+    }
+  ]
+}

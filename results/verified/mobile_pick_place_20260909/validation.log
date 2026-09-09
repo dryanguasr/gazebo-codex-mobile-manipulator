@@ -1,0 +1,20 @@
+Starting >>> mobile_manipulator
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+cachedir: /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/.pytest_cache
+rootdir: /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/src/mobile_manipulator
+plugins: launch-testing-ros-0.26.12, ament-xmllint-0.17.5, ament-copyright-0.17.5, ament-pep257-0.17.5, ament-lint-0.17.5, ament-flake8-0.17.5, launch-testing-3.4.11, cov-4.1.0, colcon-core-0.21.0, typeguard-4.1.5
+collected 77 items
+
+test/test_algorithms.py ...................................              [ 45%]
+test/test_gripper_fix.py ...............                                 [ 64%]
+test/test_mobile_transport.py .................                          [ 87%]
+test/test_render_assets.py ..........                                    [100%]
+
+- generated xml file: /home/dryanguasr/proyectos/gazebo-tutorial/gazebo-codex-mobile-manipulator/build/mobile_manipulator/pytest.xml -
+============================== 77 passed in 1.07s ==============================
+Finished <<< mobile_manipulator [1.62s]
+
+Summary: 1 package finished [1.76s]
+Summary: 77 tests, 0 errors, 0 failures, 0 skipped
+Mechanical assembly validation PASS: 6 joints, 3 FK poses, 0 failure(s)

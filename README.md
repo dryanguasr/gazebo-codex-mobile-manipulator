@@ -4,7 +4,8 @@ Ejemplo reproducible para estudiantes de ingeniería mecatrónica: un robot móv
 4WD observa y sigue una esfera con visión monocular y, en un world separado,
 ejecuta pick-and-place determinista con su brazo Poppy Ergo Jr. El sistema
 conserva percepción y tracking B3 medibles, geometría CAD oficial 1:1 y añade un
-nivel A1 asistido por simulador con contacto bilateral condicionado.
+nivel A1 asistido por simulador con contacto bilateral condicionado. El ejercicio
+móvil ampliado incorpora estaciones separadas, traslado y reorientación del carro.
 
 ## Estado verificado
 
@@ -24,7 +25,7 @@ El flujo completo fue validado en ROS 2 Jazzy y Gazebo Sim 8:
 - diagnóstico estricto y experimento A/B reproducibles;
 - pick-and-place A1 con máquina de estados, gate y evaluación independientes;
 - diez corridas nominales y siete negativas verificadas;
-- 60 pruebas automatizadas.
+- 89 pruebas automatizadas.
 
 La campaña A1 obtuvo **10/10 grasp y 10/10 placement**, con lift medio de
 55.19 mm y error de depósito medio de 2.30 mm. Es un MVP
@@ -106,7 +107,7 @@ colcon test --event-handlers console_direct+
 colcon test-result --verbose
 ```
 
-El resultado esperado es `60 tests, 0 errors, 0 failures`.
+El resultado esperado es `89 tests, 0 errors, 0 failures`.
 
 ## Lanzamiento interactivo
 
@@ -155,7 +156,39 @@ ros2 launch mobile_manipulator sim.launch.py --show-args
 Las ganancias, saturaciones, umbrales HSV, radio de esfera y distancia objetivo
 son parámetros ROS 2 declarados por sus respectivos nodos.
 
-## Pick-and-place nivel A
+## Pick-and-place móvil: ejercicio completo
+
+Las estaciones están separadas 1,439 m. El carro transporta la pieza, gira
+90° y se alinea antes de entregarla; el piso tiene una rejilla de 20 cm.
+La pieza lleva marcas visuales para inspeccionar su orientación.
+La revisión actual recoge el brazo durante el transporte, redondea la esquina
+sin parada intermedia y aumenta la velocidad de crucero a 0,10 m/s.
+El brazo usa perfiles suaves de 2,2 s; conserva los tiempos de comprobación
+del agarre y del depósito.
+
+~~~bash
+source /opt/ros/jazzy/setup.bash
+source install/setup.bash
+ros2 launch mobile_manipulator pick_and_place_mobile.launch.py \
+  output_dir:="$PWD/results/manual/pick_mobile" run_id:=pick_mobile \
+  seed:=504 capture_evidence:=true evidence_fps:=60
+~~~
+
+Este ejercicio utiliza una unión rígida temporal después de verificar contacto
+bilateral y cierre. Fija la pieza **respecto al gripper**, y se libera al
+depositarla. La navegación usa pose de Gazebo como localización simulada para
+compensar la deriva del skid-steer; el carro se mueve físicamente mediante
+sus ruedas. No es navegación visual ni una prueba de fricción sin asistencia.
+
+La revisión de cierre pasó dos corridas nominales, cancelación con carga y
+regresión del agarre físico estacionario. El ciclo baja de unos 90 a **55–57 s**,
+con error de depósito de **0,36–0,60 mm**; las 89 pruebas pasan.
+
+[Guía completa y límites](docs/mobile_pick_and_place.md) ·
+[Videos a 60 fps CFR](captures/pick_place_movil_suave/README.md) ·
+[Resultados verificados](results/verified/mobile_smooth_20260909/README.md).
+
+## Pick-and-place estacionario: nivel A
 
 Para observar el agarre físico corregido, sin unión asistida:
 

@@ -1,0 +1,37 @@
+{
+  "unit_tests": {
+    "passed": 89,
+    "failed": 0,
+    "log": "pytest.log"
+  },
+  "lint": {
+    "status": "passed",
+    "files": 7,
+    "log": "lint.log"
+  },
+  "mechanical_assembly": {
+    "status": "passed",
+    "joints": 6,
+    "poses": 3,
+    "report": "mechanical_assembly.json"
+  },
+  "negative_cancel": {
+    "status": "passed",
+    "criteria": {
+      "cancelled_on_request": true,
+      "kept_temporary_joint": true,
+      "piece_kept_elevated": true,
+      "base_stopped_within_5mm": true,
+      "gripper_not_opened": true
+    },
+    "maximum_motion_after_cancel_m": 0.0004851211363000008,
+    "post_cancel_samples": 19
+  },
+  "stationary_physical_regression": {
+    "status": "passed",
+    "simulator_assisted": false,
+    "attach_count": 0,
+    "detach_count": 0,
+    "all_criteria": true
+  }
+}

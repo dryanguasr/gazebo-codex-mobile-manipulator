@@ -44,7 +44,7 @@ def test_cylinder_decomposition_preserves_volume_mass_and_sensor_coverage():
     }
 
 
-@pytest.mark.parametrize('pose', ['lift', 'transfer', 'place'])
+@pytest.mark.parametrize('pose', ['lift', 'transport_pose', 'transfer', 'place'])
 def test_transport_keeps_closing_instead_of_replaying_contact_angle(pose):
     configuration = {'close': [0.0] * 6, pose: [0.0] * 5 + [0.6]}
     node = NS(
@@ -116,6 +116,7 @@ def test_loss_or_stale_heartbeat_stops_transport(verified, age_s):
         'base_drift_limit_m': 0.01, 'base_speed_limit_mps': 0.01,
     }
     node = NS(
+        mobile=False, publish_base=lambda: None,
         state='LIFT', last_sim_ns=1_000_000_000,
         last_sim_progress_wall=time.monotonic(),
         sim_ns=lambda: 1_000_000_000,
@@ -147,6 +148,7 @@ def test_loss_or_stale_heartbeat_stops_transport(verified, age_s):
 def test_physical_recovery_does_not_open_or_sweep_home():
     calls = []
     node = NS(
+        mobile=False,
         get_parameter=lambda _: NS(value='physical_contact'),
         start_motion=lambda pose, duration_s: calls.append(pose),
         motion_done=False, motion_error=None,

@@ -1,0 +1,16 @@
+
+10 files checked
+No problems found
+
+Checked files:
+
+* src/mobile_manipulator/mobile_manipulator/mobile_transport.py
+* src/mobile_manipulator/mobile_manipulator/pick_place_supervisor.py
+* src/mobile_manipulator/mobile_manipulator/pick_place_evaluator.py
+* src/mobile_manipulator/mobile_manipulator/pick_place_recorder.py
+* src/mobile_manipulator/mobile_manipulator/pick_place_negative_injector.py
+* src/mobile_manipulator/launch/pick_and_place.launch.py
+* src/mobile_manipulator/launch/pick_and_place_mobile.launch.py
+* scripts/build_mobile_world.py
+* src/mobile_manipulator/test/test_mobile_transport.py
+* tools/verify_mobile_pick_place.py

@@ -15,7 +15,9 @@ from launch.actions import (
 from launch.conditions import IfCondition, UnlessCondition
 from launch.event_handlers import OnProcessExit
 from launch.events import Shutdown
-from launch.substitutions import Command, LaunchConfiguration, PythonExpression
+from launch.substitutions import (
+    Command, LaunchConfiguration, PathJoinSubstitution, PythonExpression,
+)
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 
@@ -23,9 +25,9 @@ from launch_ros.parameter_descriptions import ParameterValue
 def generate_launch_description():
     share = get_package_share_directory('mobile_manipulator')
     xacro = os.path.join(share, 'urdf', 'mobile_manipulator.urdf.xacro')
-    world = os.path.join(share, 'worlds', 'pick_and_place.sdf')
+    world = LaunchConfiguration('world_file')
     default_object_sdf = os.path.join(share, 'worlds', 'pick_object.sdf')
-    config = os.path.join(share, 'config', 'pick_place_a1.yaml')
+    config = LaunchConfiguration('config_file')
     output_dir = LaunchConfiguration('output_dir')
     run_id = LaunchConfiguration('run_id')
     source_sha = LaunchConfiguration('source_sha')
@@ -59,6 +61,7 @@ def generate_launch_description():
     description = Command([
         'xacro ', xacro, ' manipulation_enabled:=true',
         ' pick_place_enabled:=', attach_enabled,
+        ' mobile_transport:=', LaunchConfiguration('mobile_transport'),
     ])
     state_publisher = Node(
         package='robot_state_publisher',
@@ -83,13 +86,26 @@ def generate_launch_description():
         executable='parameter_bridge',
         arguments=[
             '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
+            '/model/mobile_manipulator/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
             '/pick_object/contacts@ros_gz_interfaces/msg/Contacts[gz.msgs.Contacts',
+            '/pick_support/contacts@ros_gz_interfaces/msg/Contacts[gz.msgs.Contacts',
+            '/place_support/contacts@ros_gz_interfaces/msg/Contacts[gz.msgs.Contacts',
             '/model/pick_object/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
-            '/pick_place/evidence/image@sensor_msgs/msg/Image[gz.msgs.Image',
             '/pick_object/attach@std_msgs/msg/Empty]gz.msgs.Empty',
             '/pick_object/detach@std_msgs/msg/Empty]gz.msgs.Empty',
             '/pick_object/joint_state@std_msgs/msg/String[gz.msgs.StringMsg',
         ],
+    )
+
+    image_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        name='pick_place_image_bridge',
+        arguments=[
+            '/pick_place/evidence/image@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/pick_place/detail/image@sensor_msgs/msg/Image[gz.msgs.Image',
+        ],
+        condition=IfCondition(capture_evidence),
     )
 
     def controller_spawner(name):
@@ -136,15 +152,35 @@ def generate_launch_description():
         parameters=[{
             'output_dir': output_dir,
             'fps': ParameterValue(evidence_fps, value_type=float),
+            'mobile_transport': ParameterValue(
+                LaunchConfiguration('mobile_transport'), value_type=bool,
+            ),
             'grasp_mode': grasp_mode,
         }],
         condition=IfCondition(capture_evidence),
         output='screen',
     )
+    detail_recorder = Node(
+        package='mobile_manipulator',
+        executable='pick_place_recorder',
+        name='pick_place_detail_recorder',
+        parameters=[{
+            'output_dir': PathJoinSubstitution([output_dir, 'detail']),
+            'fps': ParameterValue(evidence_fps, value_type=float),
+            'grasp_mode': grasp_mode,
+            'mobile_transport': True,
+            'image_topic': '/pick_place/detail/image',
+        }],
+        condition=IfCondition(PythonExpression([
+            "'", capture_evidence, "' == 'true' and '",
+            LaunchConfiguration('mobile_transport'), "' == 'true'",
+        ])),
+        output='screen',
+    )
     negative_injector = Node(
         package='mobile_manipulator',
         executable='pick_place_negative_injector',
-        parameters=[{'scenario': negative_scenario}],
+        parameters=[{'scenario': negative_scenario, 'use_sim_time': True}],
         condition=IfCondition(
             PythonExpression(["'", negative_scenario, "' != 'none'"])
         ),
@@ -225,7 +261,7 @@ def generate_launch_description():
             return [TimerAction(
                 period=0.5,
                 actions=[
-                    gate, evaluator, recorder, negative_injector, supervisor,
+                    gate, evaluator, recorder, detail_recorder, negative_injector, supervisor,
                 ],
             )]
         return [stop_gazebo]
@@ -234,7 +270,7 @@ def generate_launch_description():
         OnProcessExit(
             target_action=robot_spawn,
             on_exit=[
-                bridge, TimerAction(period=4.0, actions=[joint_state_spawner]),
+                bridge, image_bridge, TimerAction(period=4.0, actions=[joint_state_spawner]),
                 TimerAction(period=2.0, actions=[object_spawn]),
             ],
         )
@@ -304,6 +340,13 @@ def generate_launch_description():
         )
     )
     return LaunchDescription([
+        DeclareLaunchArgument(
+            'world_file', default_value=os.path.join(share, 'worlds', 'pick_and_place.sdf'),
+        ),
+        DeclareLaunchArgument(
+            'config_file', default_value=os.path.join(share, 'config', 'pick_place_a1.yaml'),
+        ),
+        DeclareLaunchArgument('mobile_transport', default_value='false'),
         DeclareLaunchArgument('output_dir', default_value='/tmp/pick_place_a1'),
         DeclareLaunchArgument('run_id', default_value='manual'),
         DeclareLaunchArgument('source_sha', default_value='unknown'),

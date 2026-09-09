@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "criteria": {
+    "cancelled_on_request": true,
+    "kept_temporary_joint": true,
+    "piece_kept_elevated": true,
+    "base_stopped_within_5mm": true,
+    "gripper_not_opened": true
+  },
+  "maximum_motion_after_cancel_m": 0.0004851211363000008,
+  "post_cancel_samples": 19
+}

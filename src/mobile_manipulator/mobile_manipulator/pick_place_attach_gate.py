@@ -17,7 +17,7 @@ from tf2_ros import Buffer, TransformException, TransformListener
 
 AUTHORIZED_ATTACH_STATE = 'VERIFY_GRASP'
 AUTHORIZED_DETACH_STATE = 'RELEASE'
-RETENTION_STATES = ('LIFT', 'HOLD', 'TRANSFER', 'LOWER')
+RETENTION_STATES = ('LIFT', 'HOLD', 'FOLD', 'NAVIGATE', 'DOCK_BASE', 'TRANSFER', 'LOWER')
 
 
 def extract_single_model_pose(message):
@@ -77,6 +77,7 @@ class PickPlaceAttachGate(Node):
     def __init__(self):
         super().__init__('pick_place_attach_gate')
         for name, value in (
+            ('reference_frame', 'odom'),
             ('object_pose_max_age_s', 0.10),
             ('contact_max_age_s', 0.10),
             ('contact_persistence_s', 0.15),
@@ -240,7 +241,7 @@ class PickPlaceAttachGate(Node):
 
     def lookup_xyz(self, frame):
         transform = self.tf_buffer.lookup_transform(
-            'odom',
+            str(self.get_parameter('reference_frame').value),
             frame,
             Time(),
             timeout=Duration(seconds=0.02),

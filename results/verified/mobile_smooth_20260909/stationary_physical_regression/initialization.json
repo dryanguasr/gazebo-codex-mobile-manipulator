@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "reason": "detachable_joint_disabled_and_fresh_pose",
+  "phase": "INITIALIZE_RESET",
+  "excluded_from_measured_run": true,
+  "run_id": "smooth_stationary_regression",
+  "source_sha": "unknown",
+  "source_dirty": true,
+  "seed": 606,
+  "started_wall_time_s": 1788982531.4674761,
+  "completed_wall_time_s": 1788982532.4355133,
+  "initial_joint_state": null,
+  "observed_joint_states": [],
+  "final_joint_state": null,
+  "detach_command_count": 0,
+  "detachable_joint_enabled": false,
+  "verified_free": true,
+  "object_pose_fresh": true,
+  "object_pose_m": [
+    -0.044,
+    -0.225,
+    0.16249121653174078
+  ],
+  "object_motion_during_reset_m": 1.0265317407776031e-06,
+  "ground_truth_source": "/model/pick_object/pose (actual Gazebo model Pose_V)"
+}

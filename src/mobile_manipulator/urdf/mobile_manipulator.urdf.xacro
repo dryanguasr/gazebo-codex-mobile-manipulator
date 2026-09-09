@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <robot name="mobile_manipulator" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="mobile_transport" default="false"/>
   <xacro:arg name="pick_place_enabled" default="false"/>
   <xacro:arg name="manipulation_enabled" default="false"/>
   <material name="SlateGray"><color rgba="0.44 0.50 0.56 1"/></material>
@@ -437,6 +438,32 @@
         <attach_topic>/pick_object/attach</attach_topic>
         <output_topic>/pick_object/joint_state</output_topic>
         <suppress_child_warning>true</suppress_child_warning>
+      </plugin>
+    </gazebo>
+  </xacro:if>
+  <xacro:if value="$(arg mobile_transport)">
+    <gazebo reference="base_link">
+      <sensor name="mobile_detail_camera" type="camera">
+        <pose>-0.26 -0.53 0.38 0 0.32 0.94</pose>
+        <topic>/pick_place/detail/image</topic>
+        <update_rate>60</update_rate>
+        <always_on>true</always_on>
+        <camera>
+          <horizontal_fov>1.0</horizontal_fov>
+          <image><width>960</width><height>720</height><format>R8G8B8</format></image>
+          <clip><near>0.05</near><far>4</far></clip>
+        </camera>
+      </sensor>
+    </gazebo>
+    <gazebo>
+      <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
+        <publish_model_pose>true</publish_model_pose>
+        <publish_link_pose>false</publish_link_pose>
+        <publish_nested_model_pose>false</publish_nested_model_pose>
+        <publish_collision_pose>false</publish_collision_pose>
+        <publish_visual_pose>false</publish_visual_pose>
+        <use_pose_vector_msg>true</use_pose_vector_msg>
+        <update_frequency>100</update_frequency>
       </plugin>
     </gazebo>
   </xacro:if>

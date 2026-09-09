@@ -1,0 +1,73 @@
+header {
+  stamp {
+    sec: 64
+    nsec: 50000000
+  }
+}
+contact {
+  header {
+    stamp {
+      sec: 64
+      nsec: 50000000
+    }
+  }
+  collision1 {
+    id: 17
+    name: "place_support::support_link::place_support_collision"
+  }
+  collision2 {
+    id: 82
+    name: "mobile_manipulator::front_right_link::front_right_link_collision"
+  }
+  position {
+    x: 1.0470018411112403
+    y: 0.67799999999671867
+    z: 0.0699999954466279
+  }
+  position {
+    x: 1.0470000000032815
+    y: 0.67800049881303626
+    z: 0.06999999544662916
+  }
+  normal {
+    x: 0.26150481331289149
+    y: 0.96520217188638247
+    z: -0
+  }
+  normal {
+    x: 0.26150481331289149
+    y: 0.96520217188638247
+    z: -0
+  }
+  depth: 4.81458593409867e-07
+  depth: 4.81458593409867e-07
+  wrench {
+    body_1_wrench {
+      force {
+        x: 4.9746952961366881
+        y: 18.361370268772017
+      }
+    }
+    body_2_wrench {
+      force {
+        x: -4.9746952961366881
+        y: -18.361370268772017
+        z: -0
+      }
+    }
+  }
+  wrench {
+    body_1_wrench {
+      force {
+      }
+    }
+    body_2_wrench {
+      force {
+        x: -0
+        y: -0
+        z: -0
+      }
+    }
+  }
+}
+

@@ -35,6 +35,8 @@ PHASE_BY_DESTINATION = {
     'APPROACH': 'pregrasp',
     'HOLD': 'lift',
     'TRANSFER': 'retention',
+    'NAVIGATE': 'transport_start',
+    'DOCK_BASE': 'arrival',
     'RELEASE': 'deposit',
     'RETREAT': 'release',
 }
@@ -47,6 +49,8 @@ class PickPlaceRecorder(Node):
         super().__init__('pick_place_recorder')
         self.declare_parameter('output_dir', '/tmp/pick_place_a1')
         self.declare_parameter('fps', 60.0)
+        self.declare_parameter('image_topic', '/pick_place/evidence/image')
+        self.declare_parameter('mobile_transport', False)
         self.declare_parameter('grasp_mode', 'attach_conditioned')
         self.output = Path(str(self.get_parameter('output_dir').value)) / 'media'
         self.raw_output = self.output / 'raw'
@@ -66,7 +70,7 @@ class PickPlaceRecorder(Node):
         self.started_wall = time.time()
         self.create_subscription(
             Image,
-            '/pick_place/evidence/image',
+            str(self.get_parameter('image_topic').value),
             self.image_callback,
             qos_profile_sensor_data,
         )
@@ -96,7 +100,9 @@ class PickPlaceRecorder(Node):
         )
         cv2.putText(
             image,
-            'FIJA: VERDE | MOVIL: MAGENTA | SERVOMOTORES: GRIS',
+            ('REJILLA: 20 cm | AGARRE: UNION TEMPORAL'
+             if bool(self.get_parameter('mobile_transport').value)
+             else 'FIJA: VERDE | MOVIL: MAGENTA | SERVOMOTORES: GRIS'),
             (14, image.shape[0] - 10),
             cv2.FONT_HERSHEY_SIMPLEX, 0.48, (230, 230, 230), 1, cv2.LINE_AA,
         )
@@ -189,7 +195,7 @@ class PickPlaceRecorder(Node):
         if self.writer is not None:
             self.writer.release()
         manifest = {
-            'source': '/pick_place/evidence/image (Gazebo camera)',
+            'source': str(self.get_parameter('image_topic').value) + ' (Gazebo camera)',
             'video': 'pick_and_place_a1.mp4',
             'frame_count': self.frame_count,
             'source_frame_count': self.source_frame_count,
@@ -213,6 +219,8 @@ class PickPlaceRecorder(Node):
                 'deposit', 'release',
             ],
         }
+        if bool(self.get_parameter('mobile_transport').value):
+            manifest['required_phases'] += ['transport_start', 'arrival']
         manifest['complete'] = all(
             phase in self.captured for phase in manifest['required_phases']
         )

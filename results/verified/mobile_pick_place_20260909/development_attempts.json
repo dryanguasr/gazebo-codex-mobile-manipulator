@@ -1,0 +1,23 @@
+[
+  {
+    "attempt": "attempt_01",
+    "status": "failed",
+    "terminal_state": "CANCELLED",
+    "reason": "Cancelled after station sensor confirmed front-right wheel collision.",
+    "source": "development/attempt_01/run.json"
+  },
+  {
+    "attempt": "attempt_02",
+    "status": "failed",
+    "terminal_state": "DONE",
+    "reason": "Delivery stable, but base docking error exceeded the 5 mm gate.",
+    "source": "development/attempt_02/run.json"
+  },
+  {
+    "attempt": "attempt_03",
+    "status": "failed",
+    "terminal_state": "DONE",
+    "reason": "Docking met tolerance; evaluator incorrectly rejected normal fixed-jaw approach contact.",
+    "source": "development/attempt_03/run.json"
+  }
+]

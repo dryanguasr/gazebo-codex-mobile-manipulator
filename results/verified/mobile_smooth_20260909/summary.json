@@ -1,0 +1,153 @@
+{
+  "status": "passed",
+  "scope": "Folded arm, continuous rounded route, moderately faster motion; contact-gated rigid retention unchanged",
+  "run_nominal": {
+    "status": "passed",
+    "seed": 604,
+    "cycle_sim_s": 56.679,
+    "navigation_s": 21.799000000000003,
+    "base_path_m": 1.5198802922552956,
+    "base_goal_error_m": 0.0015400947860227648,
+    "placement_error_m": 0.00036010837252088137,
+    "max_relative_orientation_deg": 0.6998330488602886,
+    "max_transport_joint_error_rad": 0.001829998574017333,
+    "transport_posture_samples": 1297,
+    "attach_count": 1,
+    "detach_count": 1,
+    "stable_duration_s": 4.378,
+    "criteria": {
+      "terminal_done": true,
+      "grasp_contract_verified": true,
+      "released": true,
+      "lift_at_least_50mm": true,
+      "separated_from_pick_support": true,
+      "hold_at_least_3s": true,
+      "retained_through_transport": true,
+      "placement_within_30mm": true,
+      "stable_at_least_2s": true,
+      "base_drift": true,
+      "no_forbidden_contacts": true,
+      "pregrasp_position": true,
+      "pregrasp_orientation": true,
+      "base_traveled_at_least_1_3m": true,
+      "base_reoriented_at_least_80deg": true,
+      "base_docked_within_5mm_1deg": true,
+      "base_stopped_during_manipulation": true,
+      "orientation_fixed_relative_to_gripper": true,
+      "arm_folded_during_transport": true,
+      "mobile_retention_observed": true
+    }
+  },
+  "run_recorded": {
+    "status": "passed",
+    "seed": 603,
+    "cycle_sim_s": 55.281,
+    "navigation_s": 21.663,
+    "base_path_m": 1.5198027905016667,
+    "base_goal_error_m": 0.0014850196171639438,
+    "placement_error_m": 0.0005949980554214957,
+    "max_relative_orientation_deg": 0.689631230320646,
+    "max_transport_joint_error_rad": 0.003875649588329866,
+    "transport_posture_samples": 11750,
+    "attach_count": 1,
+    "detach_count": 1,
+    "stable_duration_s": 4.393000000000001,
+    "criteria": {
+      "terminal_done": true,
+      "grasp_contract_verified": true,
+      "released": true,
+      "lift_at_least_50mm": true,
+      "separated_from_pick_support": true,
+      "hold_at_least_3s": true,
+      "retained_through_transport": true,
+      "placement_within_30mm": true,
+      "stable_at_least_2s": true,
+      "base_drift": true,
+      "no_forbidden_contacts": true,
+      "pregrasp_position": true,
+      "pregrasp_orientation": true,
+      "base_traveled_at_least_1_3m": true,
+      "base_reoriented_at_least_80deg": true,
+      "base_docked_within_5mm_1deg": true,
+      "base_stopped_during_manipulation": true,
+      "orientation_fixed_relative_to_gripper": true,
+      "arm_folded_during_transport": true,
+      "mobile_retention_observed": true
+    }
+  },
+  "baseline_recorded": {
+    "status": "passed",
+    "seed": 506,
+    "cycle_sim_s": 90.081,
+    "navigation_s": 55.552,
+    "base_path_m": 1.682245233706115,
+    "base_goal_error_m": 0.0015806315640252081,
+    "placement_error_m": 0.0022618343377579426,
+    "max_relative_orientation_deg": 0.36671628766966946,
+    "max_transport_joint_error_rad": null,
+    "transport_posture_samples": null,
+    "attach_count": 1,
+    "detach_count": 1,
+    "stable_duration_s": 4.688999999999993,
+    "criteria": {
+      "terminal_done": true,
+      "grasp_contract_verified": true,
+      "released": true,
+      "lift_at_least_50mm": true,
+      "separated_from_pick_support": true,
+      "hold_at_least_3s": true,
+      "retained_through_transport": true,
+      "placement_within_30mm": true,
+      "stable_at_least_2s": true,
+      "base_drift": true,
+      "no_forbidden_contacts": true,
+      "pregrasp_position": true,
+      "pregrasp_orientation": true,
+      "base_traveled_at_least_1_3m": true,
+      "base_reoriented_at_least_80deg": true,
+      "base_docked_within_5mm_1deg": true,
+      "base_stopped_during_manipulation": true,
+      "orientation_fixed_relative_to_gripper": true,
+      "mobile_retention_observed": true
+    }
+  },
+  "source_fingerprints_unchanged": true,
+  "validation": {
+    "unit_tests": {
+      "passed": 89,
+      "failed": 0,
+      "log": "pytest.log"
+    },
+    "lint": {
+      "status": "passed",
+      "files": 7,
+      "log": "lint.log"
+    },
+    "mechanical_assembly": {
+      "status": "passed",
+      "joints": 6,
+      "poses": 3,
+      "report": "mechanical_assembly.json"
+    },
+    "negative_cancel": {
+      "status": "passed",
+      "criteria": {
+        "cancelled_on_request": true,
+        "kept_temporary_joint": true,
+        "piece_kept_elevated": true,
+        "base_stopped_within_5mm": true,
+        "gripper_not_opened": true
+      },
+      "maximum_motion_after_cancel_m": 0.0004851211363000008,
+      "post_cancel_samples": 19
+    },
+    "stationary_physical_regression": {
+      "status": "passed",
+      "simulator_assisted": false,
+      "attach_count": 0,
+      "detach_count": 0,
+      "all_criteria": true
+    }
+  },
+  "capture_notes": "Final detail camera reframed; interrupted first capture retained under development."
+}

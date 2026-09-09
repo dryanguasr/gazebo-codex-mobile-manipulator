@@ -1,0 +1,158 @@
+{
+  "grasp_mode": "attach_conditioned",
+  "simulator_assisted": true,
+  "localization": "Gazebo model pose",
+  "source_run": "../../results/verified/mobile_pick_place_20260909/run_02",
+  "speed": "1x simulation time",
+  "encoding": "H.264, yuv420p, CFR 60 fps; no motion interpolation",
+  "source_camera_delivery": {
+    "overview": {
+      "received_images": 3438,
+      "CFR_frames": 5389
+    },
+    "detail": {
+      "received_images": 4723,
+      "CFR_frames": 5390
+    }
+  },
+  "frame_gap_policy": "repeat previous real camera frame; 60 distinct images per second are not guaranteed",
+  "videos": [
+    {
+      "name": "ciclo_completo_60fps.mp4",
+      "source": "media/pick_and_place_a1.mp4",
+      "view": "overview",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 960,
+            "r_frame_rate": "60/1",
+            "avg_frame_rate": "60/1",
+            "duration": "89.816667",
+            "nb_frames": "5389"
+          }
+        ],
+        "format": {
+          "duration": "89.816667"
+        }
+      },
+      "sha256": "c6236e6789c8d76b097befe1221a7ffd13dcaea7d3c8a67b6908980e81b85685",
+      "full_decode": "passed",
+      "source_sha256": "a835a7414417b3d85cea7d9a1bcf4b497a272d98ca4d5388f4471d4264f505a7"
+    },
+    {
+      "name": "detalle_gripper_60fps.mp4",
+      "source": "detail/media/pick_and_place_a1.mp4",
+      "view": "robot_relative",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 720,
+            "r_frame_rate": "60/1",
+            "avg_frame_rate": "60/1",
+            "duration": "89.833333",
+            "nb_frames": "5390"
+          }
+        ],
+        "format": {
+          "duration": "89.833333"
+        }
+      },
+      "sha256": "fae9bcd95ab732e3fdbe2ce98165d2f3eb3c13710f79b50b74d773c29810b816",
+      "full_decode": "passed",
+      "source_sha256": "8fdc7690496dff5490b4ddc22a5d348299f63bc6514d566804880e5d7977856b"
+    },
+    {
+      "name": "recogida_60fps.mp4",
+      "source": "detail/media/pick_and_place_a1.mp4",
+      "view": "robot_relative",
+      "start": 9.483333333333333,
+      "end": 21.516666666666666,
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 720,
+            "r_frame_rate": "60/1",
+            "avg_frame_rate": "60/1",
+            "duration": "12.033333",
+            "nb_frames": "722"
+          }
+        ],
+        "format": {
+          "duration": "12.033333"
+        }
+      },
+      "sha256": "43df0f9cd1c3930f1724b250b42ffb06cc01fd6c77606f905a5e057f896e01ec",
+      "full_decode": "passed",
+      "source_sha256": "8fdc7690496dff5490b4ddc22a5d348299f63bc6514d566804880e5d7977856b"
+    },
+    {
+      "name": "traslado_y_giro_60fps.mp4",
+      "source": "media/pick_and_place_a1.mp4",
+      "view": "overview",
+      "start": 20.716666666666665,
+      "end": 77.76666666666667,
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 960,
+            "r_frame_rate": "60/1",
+            "avg_frame_rate": "60/1",
+            "duration": "57.050000",
+            "nb_frames": "3423"
+          }
+        ],
+        "format": {
+          "duration": "57.050000"
+        }
+      },
+      "sha256": "cb17c50a137a4cc41dbde030dfc5d59ea8539be3132cb9cd1007f4c8e473352a",
+      "full_decode": "passed",
+      "source_sha256": "a835a7414417b3d85cea7d9a1bcf4b497a272d98ca4d5388f4471d4264f505a7"
+    },
+    {
+      "name": "deposito_60fps.mp4",
+      "source": "detail/media/pick_and_place_a1.mp4",
+      "view": "robot_relative",
+      "start": 76.3,
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 720,
+            "r_frame_rate": "60/1",
+            "avg_frame_rate": "60/1",
+            "duration": "13.533333",
+            "nb_frames": "812"
+          }
+        ],
+        "format": {
+          "duration": "13.533333"
+        }
+      },
+      "sha256": "11b0abee7a147cf296b4bc57870c0bee9865a2ddd2e6097311c97c36e7120ae1",
+      "full_decode": "passed",
+      "source_sha256": "8fdc7690496dff5490b4ddc22a5d348299f63bc6514d566804880e5d7977856b"
+    }
+  ],
+  "images": {
+    "pieza_sujeta.png": "e59124d66b48ff876b7358d1619dc2614bd7b655fac605dd63b56ab8afec9cf0",
+    "entrega_final.jpg": "e513e293c1200b60dfaf9dafecc4d99821fd01a7a3b02c6f7dd41f879b148de5",
+    "vista_general_inicio.png": "09cb718f10ced2c856d1d650b5f3eaa1c11113bf2650777f18f3e3f95ff9b14f",
+    "vista_general_llegada.png": "68ff459b3371ad47f0486ff7c5138140060b5c81e5a7bf3b50079670c5fdabb5",
+    "pieza_depositada.png": "84ae7b3f728f174c8dbd5bdb356df13fcc182ddc851ef055cd60eca98f41f324"
+  }
+}
