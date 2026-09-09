@@ -2,8 +2,9 @@
 """Dependency-light Collada triangle reader for mechanical reference meshes.
 
 The official Poppy description stores each rigid section as a Collada scene made
-from instanced geometry. Gazebo understands that scene directly, but a numerical
-alignment tool needs evaluated triangles and each instance transform. This
+from instanced geometry. The Gazebo 5.8 mesh reader can misplace reused
+instances, so runtime assets bake these transforms before loading. A numerical
+alignment tool also needs evaluated triangles and each instance transform. This
 module implements the Collada 1.4 features used by the pinned Poppy assets.
 """
 

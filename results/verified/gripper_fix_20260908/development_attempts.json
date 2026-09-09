@@ -1,0 +1,114 @@
+[
+  {
+    "attempt": 1,
+    "configuration": "CAD-aligned single plates, zero closure, pitching trajectory",
+    "status": "failed",
+    "terminal_state": "DONE",
+    "lift_m": 0.061517610478676016,
+    "placement_error_xy_m": 0.20082192558593953,
+    "criteria": {
+      "terminal_done": true,
+      "grasp_contract_verified": true,
+      "released": true,
+      "lift_at_least_50mm": true,
+      "separated_from_pick_support": true,
+      "hold_at_least_3s": true,
+      "placement_within_30mm": false,
+      "stable_at_least_2s": false,
+      "base_drift": true,
+      "no_forbidden_contacts": false,
+      "pregrasp_position": true,
+      "pregrasp_orientation": true
+    }
+  },
+  {
+    "attempt": 2,
+    "configuration": "split finger plates",
+    "status": "failed",
+    "terminal_state": "DONE",
+    "lift_m": 0.02016302858505381,
+    "placement_error_xy_m": 0.038816683540404455,
+    "criteria": {
+      "terminal_done": true,
+      "grasp_contract_verified": true,
+      "released": true,
+      "lift_at_least_50mm": false,
+      "separated_from_pick_support": true,
+      "hold_at_least_3s": true,
+      "placement_within_30mm": false,
+      "stable_at_least_2s": false,
+      "base_drift": true,
+      "no_forbidden_contacts": false,
+      "pregrasp_position": true,
+      "pregrasp_orientation": true
+    }
+  },
+  {
+    "attempt": 3,
+    "configuration": "split finger plates and 0.030 rad closure",
+    "status": "failed",
+    "terminal_state": "FAILED",
+    "lift_m": 0.022640851141351115,
+    "placement_error_xy_m": 0.07154897791010327,
+    "criteria": {
+      "terminal_done": false,
+      "grasp_contract_verified": true,
+      "released": true,
+      "lift_at_least_50mm": false,
+      "separated_from_pick_support": true,
+      "hold_at_least_3s": false,
+      "placement_within_30mm": false,
+      "stable_at_least_2s": false,
+      "base_drift": true,
+      "no_forbidden_contacts": true,
+      "pregrasp_position": true,
+      "pregrasp_orientation": true
+    }
+  },
+  {
+    "attempt": 4,
+    "configuration": "single plates and vertical trajectory",
+    "status": "failed",
+    "terminal_state": "FAILED",
+    "lift_m": 0.021158125650763027,
+    "placement_error_xy_m": 0.08011816878776816,
+    "criteria": {
+      "terminal_done": false,
+      "grasp_contract_verified": true,
+      "released": false,
+      "lift_at_least_50mm": false,
+      "separated_from_pick_support": true,
+      "hold_at_least_3s": false,
+      "retained_through_transport": false,
+      "placement_within_30mm": false,
+      "stable_at_least_2s": false,
+      "base_drift": true,
+      "no_forbidden_contacts": true,
+      "pregrasp_position": true,
+      "pregrasp_orientation": true
+    }
+  },
+  {
+    "attempt": 5,
+    "configuration": "three contiguous object collision slices",
+    "status": "passed",
+    "terminal_state": "DONE",
+    "lift_m": 0.06287336830921453,
+    "placement_error_xy_m": 0.004376517422235363,
+    "criteria": {
+      "terminal_done": true,
+      "grasp_contract_verified": true,
+      "released": true,
+      "lift_at_least_50mm": true,
+      "separated_from_pick_support": true,
+      "hold_at_least_3s": true,
+      "retained_through_transport": true,
+      "placement_within_30mm": true,
+      "stable_at_least_2s": true,
+      "base_drift": true,
+      "no_forbidden_contacts": true,
+      "pregrasp_position": true,
+      "pregrasp_orientation": true
+    }
+  }
+]

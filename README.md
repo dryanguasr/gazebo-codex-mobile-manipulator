@@ -24,12 +24,17 @@ El flujo completo fue validado en ROS 2 Jazzy y Gazebo Sim 8:
 - diagnóstico estricto y experimento A/B reproducibles;
 - pick-and-place A1 con máquina de estados, gate y evaluación independientes;
 - diez corridas nominales y siete negativas verificadas;
-- 34 pruebas automatizadas.
+- 60 pruebas automatizadas.
 
 La campaña A1 obtuvo **10/10 grasp y 10/10 placement**, con lift medio de
 55.19 mm y error de depósito medio de 2.30 mm. Es un MVP
 `attach_conditioned`, explícitamente asistido por simulador; A2 físico sin
-attach no levantó el objeto y se conserva como FAIL.
+attach no levantó el objeto en aquella revisión y se conserva como FAIL histórico.
+
+**Corrección del gripper:** el contacto físico actualizado pasó dos repeticiones
+sin attach, con elevación de 62,8–62,9 mm y error de depósito de 2,1–3,6 mm.
+Se corrigieron colisiones fuera del CAD, precarga, representación del contacto
+y detección de pérdida. [Diagnóstico y reproducción](docs/gripper_fix_report.md).
 
 En la campaña A/B final, el tracking redujo el MAE de distancia objetivo de
 **0.632 m** a **0.055 m** (mejora de **91.37%**), con 100% de referencias
@@ -101,7 +106,7 @@ colcon test --event-handlers console_direct+
 colcon test-result --verbose
 ```
 
-El resultado esperado es `35 tests, 0 errors, 0 failures`.
+El resultado esperado es `60 tests, 0 errors, 0 failures`.
 
 ## Lanzamiento interactivo
 
@@ -152,7 +157,18 @@ son parámetros ROS 2 declarados por sus respectivos nodos.
 
 ## Pick-and-place nivel A
 
-Una corrida A1 con captura:
+Para observar el agarre físico corregido, sin unión asistida:
+
+~~~bash
+source /opt/ros/jazzy/setup.bash
+source install/setup.bash
+ros2 launch mobile_manipulator pick_and_place.launch.py \
+  attach_enabled:=false grasp_mode:=physical_contact \
+  output_dir:="$PWD/results/manual/gripper_fisico" \
+  run_id:=gripper_fisico seed:=402 capture_evidence:=true evidence_fps:=60
+~~~
+
+Una corrida A1 asistida con captura:
 
 ```bash
 source /opt/ros/jazzy/setup.bash
@@ -176,7 +192,11 @@ Para reproducir la campaña y las siete negativas, consulte
 [`A2`](results/verified/pick_A2_20260908/).
 
 Videos representativos del ciclo completo y sus operaciones, grabados desde
-Gazebo a 60 fps: [`captures/pick_and_place/`](captures/pick_and_place/).
+Gazebo a 60 fps: [captures/ensamblaje_inspeccion/](captures/ensamblaje_inspeccion/).
+La [corrección visual del ensamblaje](docs/assembly_render_fix.md) resuelve
+instancias de servomotor superpuestas y añade colores para inspección.
+Los [videos A1 anteriores](captures/pick_and_place/) son históricos y no
+demuestran retención física correcta.
 
 ## Diagnóstico reproducible
 
@@ -261,7 +281,8 @@ results/verified/                evidencia textual, CSV, imágenes y video
   localización global ni ruido de sensores.
 - A1 usa attach temporal después de un gate bilateral; valida la secuencia y
   seguridad, no la fuerza/fricción de un agarre real.
-- A2 físico sin attach está rechazado porque no separó el objeto del soporte.
+- El A2 histórico falló; el contacto físico corregido pasó dos repeticiones de
+  esta escena. No equivale a validación en hardware ni agarre general.
 - No hay IK, MoveIt, percepción del cilindro ni planificación general.
 - Navegación, múltiples objetos, calibración real y Sim2Real quedan fuera.
 

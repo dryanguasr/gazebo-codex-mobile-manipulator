@@ -17,6 +17,7 @@ from tf2_ros import Buffer, TransformException, TransformListener
 
 AUTHORIZED_ATTACH_STATE = 'VERIFY_GRASP'
 AUTHORIZED_DETACH_STATE = 'RELEASE'
+RETENTION_STATES = ('LIFT', 'HOLD', 'TRANSFER', 'LOWER')
 
 
 def extract_single_model_pose(message):
@@ -32,9 +33,21 @@ def extract_single_model_pose(message):
     return (float(p.x), float(p.y), float(p.z))
 
 
+def cylinder_tilt_deg(rotation):
+    values = (rotation.x, rotation.y, rotation.z, rotation.w)
+    norm2 = sum(value * value for value in values)
+    if not all(math.isfinite(value) for value in values) or norm2 < 1e-12:
+        return math.inf
+    cosine = 1.0 - 2.0 * (rotation.x ** 2 + rotation.y ** 2) / norm2
+    return math.degrees(math.acos(max(-1.0, min(1.0, cosine))))
+
+
 def evaluate_attach_gate(snapshot, limits):
     """Pure, fail-closed A1 authorization contract."""
     reasons = []
+    for key in ('geometry_error_m', 'geometry_angle_deg', 'm6_rad'):
+        if not math.isfinite(snapshot.get(key, math.inf)):
+            reasons.append('nonfinite_' + key)
     if snapshot.get('state') != AUTHORIZED_ATTACH_STATE:
         reasons.append('state_not_authorized')
     if not snapshot.get('object_present'):
@@ -70,7 +83,7 @@ class PickPlaceAttachGate(Node):
             ('geometry_position_tolerance_m', 0.020),
             ('geometry_angle_tolerance_deg', 5.0),
             ('transform_max_age_s', 0.10),
-            ('close_feedback_max_rad', 0.78),
+            ('close_feedback_max_rad', 0.20),
             ('base_speed_limit_mps', 0.01),
             ('attach_enabled', True),
             ('object_name', 'pick_object'),
@@ -78,8 +91,8 @@ class PickPlaceAttachGate(Node):
             ('fixed_collision_token', 'poppy_fixed_finger_collision'),
             ('moving_collision_token', 'poppy_moving_finger_collision'),
             ('grasp_frame', 'poppy_grasp_frame'),
-            ('fixed_tip_frame', 'poppy_fixed_tip'),
-            ('moving_tip_frame', 'poppy_moving_tip'),
+            ('fixed_tip_frame', 'poppy_fixed_contact'),
+            ('moving_tip_frame', 'poppy_moving_contact'),
         ):
             self.declare_parameter(name, value)
 
@@ -88,6 +101,7 @@ class PickPlaceAttachGate(Node):
         self.m6_rad = math.inf
         self.base_stopped = False
         self.object_pose = None
+        self.object_tilt_deg = math.inf
         self.object_pose_rx_ns = 0
         self.fixed_contact_ns = 0
         self.moving_contact_ns = 0
@@ -159,7 +173,10 @@ class PickPlaceAttachGate(Node):
         self.close_commanded = bool(data.get('close_commanded', False))
         if self.state != previous:
             self.emit('gate_state_changed', from_state=previous)
-        if self.state != AUTHORIZED_ATTACH_STATE:
+        if (
+            self.state != AUTHORIZED_ATTACH_STATE
+            and self.state not in RETENTION_STATES
+        ):
             self.attach_sent = False
             self.bilateral_since_ns = 0
         if self.state != AUTHORIZED_DETACH_STATE:
@@ -198,6 +215,8 @@ class PickPlaceAttachGate(Node):
         if pose is None:
             return
         self.object_pose = pose
+        q = message.transforms[-1].transform.rotation
+        self.object_tilt_deg = cylinder_tilt_deg(q)
         self.object_pose_rx_ns = self.now_ns()
 
     def contacts_callback(self, message):
@@ -263,7 +282,13 @@ class PickPlaceAttachGate(Node):
                 self.emit('detach_command', authorized_state=self.state)
             return
 
-        if self.state != AUTHORIZED_ATTACH_STATE or self.attached:
+        monitoring = (
+            not bool(self.get_parameter('attach_enabled').value)
+            and self.state in RETENTION_STATES
+        )
+        if not monitoring and (
+            self.state != AUTHORIZED_ATTACH_STATE or self.attached
+        ):
             return
         now_ns = self.now_ns()
         contact_age_limit = float(
@@ -298,6 +323,29 @@ class PickPlaceAttachGate(Node):
                 self.bilateral_since_ns = now_ns
         else:
             self.bilateral_since_ns = 0
+
+        if monitoring:
+            # A verification event is not a permanent guarantee of retention.
+            retained = (
+                object_fresh and tf_valid
+                and fixed_contact_fresh and moving_contact_fresh
+                and geometry_error <= 0.008
+                and self.object_tilt_deg <= 10.0
+                and self.close_commanded and self.m6_rad <= 0.20
+            )
+            self.physical_pub.publish(Bool(data=retained))
+            key = ('retained', retained)
+            if key != self.last_reasons:
+                self.last_reasons = key
+                self.emit(
+                    'retention_changed', retained=retained,
+                    geometry_error_m=geometry_error,
+                    object_tilt_deg=self.object_tilt_deg,
+                    fixed_contact_fresh=fixed_contact_fresh,
+                    moving_contact_fresh=moving_contact_fresh,
+                    ground_truth_used_for_safety=True,
+                )
+            return
 
         snapshot = {
             'state': self.state,

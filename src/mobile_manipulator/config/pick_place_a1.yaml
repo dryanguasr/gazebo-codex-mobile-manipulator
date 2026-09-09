@@ -5,15 +5,15 @@ pick_place_supervisor:
     joint_names: [poppy_m1_joint, poppy_m2_joint, poppy_m3_joint, poppy_m4_joint, poppy_m5_joint, poppy_m6_joint]
     home: [0.0, 0.0, 0.0, 0.0, 0.0, 1.20]
     pregrasp_clearance_1: [-1.0, 0.0, 0.0, 0.0, 0.0, 1.20]
-    pregrasp_clearance_2: [-1.0, 1.383500, -0.822123, 0.045428, -0.742069, 1.20]
-    pregrasp: [-0.020800, 1.383500, -0.822123, 0.045428, -0.742069, 1.20]
-    grasp: [0.026497, 1.450000, -0.580578, 0.000013, -0.753151, 1.20]
-    close: [0.026497, 1.450000, -0.580578, 0.000013, -0.753151, 0.00]
-    lift: [-0.020800, 1.383500, -0.822123, 0.045428, -0.742069, 0.60]
-    transfer: [0.362891, 1.394351, -0.822774, 0.065445, -0.744443, 0.60]
-    place: [0.422991, 1.450000, -0.580630, 0.000013, -0.753150, 0.65]
-    release_open: [0.422991, 1.450000, -0.580630, 0.000013, -0.753150, 1.20]
-    retreat: [0.362891, 1.394351, -0.822774, 0.065445, -0.744443, 1.20]
+    pregrasp_clearance_2: [-1.0, 0.86082245, -0.30659458, 0.0, -0.55422787, 1.2]
+    pregrasp: [-0.05806242, 0.86082245, -0.30659458, 0.0, -0.55422787, 1.2]
+    grasp: [-0.05548826, 1.42673829, -0.3318062, 0.0, -1.09493209, 1.2]
+    close: [-0.05548826, 1.42673829, -0.3318062, 0.0, -1.09493209, 0.0]
+    lift: [-0.05806242, 0.86082245, -0.30659458, 0.0, -0.55422787, 0.0]
+    transfer: [0.35650417, 0.88430762, -0.34516417, 0.0, -0.53914345, 0.0]
+    place: [0.34102488, 1.39662108, -0.3160789, 0.0, -1.08054218, 0.0]
+    release_open: [0.34102488, 1.39662108, -0.3160789, 0.0, -1.08054218, 1.2]
+    retreat: [0.35650417, 0.88430762, -0.34516417, 0.0, -0.53914345, 1.2]
     motion_duration_s: 2.5
     joint_tolerance_rad: 0.035
     state_timeout_s: 15.0
@@ -32,7 +32,7 @@ pick_place_attach_gate:
     geometry_position_tolerance_m: 0.020
     geometry_angle_tolerance_deg: 5.0
     transform_max_age_s: 0.10
-    close_feedback_max_rad: 0.78
+    close_feedback_max_rad: 0.20
     base_speed_limit_mps: 0.01
     object_name: pick_object
     attach_enabled: true
@@ -40,8 +40,8 @@ pick_place_attach_gate:
     fixed_collision_token: poppy_fixed_finger_collision
     moving_collision_token: poppy_moving_finger_collision
     grasp_frame: poppy_grasp_frame
-    fixed_tip_frame: poppy_fixed_tip
-    moving_tip_frame: poppy_moving_tip
+    fixed_tip_frame: poppy_fixed_contact
+    moving_tip_frame: poppy_moving_contact
 
 pick_place_evaluator:
   ros__parameters:

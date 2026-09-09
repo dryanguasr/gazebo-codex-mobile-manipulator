@@ -1,0 +1,16 @@
+{
+  "recorded": "after_run",
+  "source_dirty": true,
+  "note": "URDF differs from executed version only in explanatory comment; visual paths and runtime parameters unchanged.",
+  "sha256": {
+    "src/mobile_manipulator/urdf/mobile_manipulator.urdf.xacro": "f24f887c5abc269e8be261b9389c0f1383133f9660e83cfb222fb818a02ad161",
+    "src/mobile_manipulator/mobile_manipulator/pick_place_recorder.py": "6368439eba1252d9c4d16aa114e885bf431e7e5789c103441ce8209f1f7c41e3",
+    "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/section_2.dae": "151087320fb7f16aafa04ef468581b6e2c8e66450008d75278610594a161dd7f",
+    "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/section_4.dae": "eb44b54ab0dd45391377b2a0a3b381f17b8b282bbd830946e3f1ebc0851558df",
+    "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/base.dae": "8e0d475ab3d0d380d08e45a2189540912807f5853cfebba7bf51d25bf8194e45",
+    "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/section_3.dae": "b8a957e0399e9ba8e7672373c1666b66dd271487c6ef29dca64c0e6108137b8d",
+    "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/long_U.dae": "8ffd87c696ab8f50e01e69afa3fb20cdeffaa4ad1a954fd63a69d283c625a3e7",
+    "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/gripper.dae": "aeae77453e1742ea9db792429d870a64234d81a99f1ecea39b45bc0f3e9722bc",
+    "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/section_1.dae": "79101ac25f28b4a345fc1b8d0a36692f5fa578a2776a2b785a8858dc34e0bef6"
+  }
+}

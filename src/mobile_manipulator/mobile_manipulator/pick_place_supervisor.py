@@ -69,15 +69,15 @@ class PickPlaceSupervisor(Node):
         defaults = {
             'home': [0.0, 0.0, 0.0, 0.0, 0.0, 1.2],
             'pregrasp_clearance_1': [-1.0, 0.0, 0.0, 0.0, 0.0, 1.2],
-            'pregrasp_clearance_2': [-1.0, 1.3835, -0.822123, 0.045428, -0.742069, 1.2],
-            'pregrasp': [-0.0208, 1.3835, -0.822123, 0.045428, -0.742069, 1.2],
-            'grasp': [0.026497, 1.45, -0.580578, 0.000013, -0.753151, 1.2],
-            'close': [0.026497, 1.45, -0.580578, 0.000013, -0.753151, 0.0],
-            'lift': [-0.0208, 1.3835, -0.822123, 0.045428, -0.742069, 0.60],
-            'transfer': [0.362891, 1.394351, -0.822774, 0.065445, -0.744443, 0.60],
-            'place': [0.422991, 1.45, -0.580630, 0.000013, -0.753150, 0.65],
-            'release_open': [0.422991, 1.45, -0.580630, 0.000013, -0.753150, 1.2],
-            'retreat': [0.362891, 1.394351, -0.822774, 0.065445, -0.744443, 1.2],
+            'pregrasp_clearance_2': [-1.0, 0.86082245, -0.30659458, 0.0, -0.55422787, 1.2],
+            'pregrasp': [-0.05806242, 0.86082245, -0.30659458, 0.0, -0.55422787, 1.2],
+            'grasp': [-0.05548826, 1.42673829, -0.3318062, 0.0, -1.09493209, 1.2],
+            'close': [-0.05548826, 1.42673829, -0.3318062, 0.0, -1.09493209, 0.0],
+            'lift': [-0.05806242, 0.86082245, -0.30659458, 0.0, -0.55422787, 0.0],
+            'transfer': [0.35650417, 0.88430762, -0.34516417, 0.0, -0.53914345, 0.0],
+            'place': [0.34102488, 1.39662108, -0.3160789, 0.0, -1.08054218, 0.0],
+            'release_open': [0.34102488, 1.39662108, -0.3160789, 0.0, -1.08054218, 1.2],
+            'retreat': [0.35650417, 0.88430762, -0.34516417, 0.0, -0.53914345, 1.2],
         }
         for name, value in defaults.items():
             self.declare_parameter(name, value)
@@ -108,6 +108,9 @@ class PickPlaceSupervisor(Node):
         self.base_origin = None
         self.attached = False
         self.physical_grasp_verified = False
+        self.physical_feedback_ns = 0
+        self.grasp_lost_since_ns = None
+        self.motion_generation = 0
         self.motion_started = False
         self.motion_done = False
         self.motion_error = None
@@ -205,6 +208,7 @@ class PickPlaceSupervisor(Node):
 
     def physical_callback(self, message):
         self.physical_grasp_verified = bool(message.data)
+        self.physical_feedback_ns = self.sim_ns()
 
     def cancel_callback(self, message):
         if message.data and self.state not in ('DONE', 'FAILED', 'CANCELLED'):
@@ -244,12 +248,15 @@ class PickPlaceSupervisor(Node):
         self.motion_error = None
         self.motion_attempt = 0
         self.motion_retry_after_wall = 0.0
-        self.goal_handle = None
         self.emit('transition', from_state=old, to_state=state, reason=reason)
 
     def fail(self, reason, cancelled=False):
         if self.state in ('RECOVER', 'FAILED', 'CANCELLED', 'DONE'):
             return
+        self.motion_generation += 1
+        if self.goal_handle is not None:
+            self.goal_handle.cancel_goal_async()
+            self.goal_handle = None
         self.failure_reason = reason
         self.cancel_requested = cancelled
         self.transition('RECOVER', reason=reason)
@@ -257,17 +264,18 @@ class PickPlaceSupervisor(Node):
         self.recovery_release_logged = False
 
     def positions(self, name):
+        if name == 'recovery_hold':
+            names = self.get_parameter('joint_names').value
+            values = [self.joints[joint] for joint in names]
+            values[5] = float(self.get_parameter('close').value[5])
+            return values
         values = [
             float(x) for x in self.get_parameter(name).value
         ]
-        physical_mode = (
-            str(self.get_parameter('grasp_mode').value) == 'physical_contact'
-        )
-        if name in ('lift', 'transfer', 'place') and (
-            self.attached or physical_mode
-        ):
-            current_m6 = self.joints.get('poppy_m6_joint', values[5])
-            values[5] = current_m6
+        if name in ('lift', 'transfer', 'place'):
+            # Keep closing against the object; replaying the measured angle
+            # removes the preload needed for frictional retention.
+            values[5] = float(self.get_parameter('close').value[5])
         return values
 
     def start_motion(self, pose_name, duration_s=None):
@@ -321,8 +329,12 @@ class PickPlaceSupervisor(Node):
             duration_s=timestamps[-1],
             attempt=self.motion_attempt,
         )
+        self.motion_generation += 1
+        generation = self.motion_generation
         future = self.action.send_goal_async(goal, feedback_callback=self.feedback)
-        future.add_done_callback(self.goal_response)
+        future.add_done_callback(
+            lambda done: self.goal_response(done, generation)
+        )
 
     def feedback(self, feedback):
         desired = feedback.feedback.desired.positions
@@ -334,10 +346,16 @@ class PickPlaceSupervisor(Node):
                 self.last_feedback_emit_wall = now
                 self.emit('trajectory_feedback', max_joint_error_rad=error)
 
-    def goal_response(self, future):
+    def goal_response(self, future, generation):
         try:
             handle = future.result()
+            if generation != self.motion_generation:
+                if handle.accepted:
+                    handle.cancel_goal_async()
+                return
         except Exception as error:
+            if generation != self.motion_generation:
+                return
             self.motion_error = f'goal_exception:{error}'
             return
         if not handle.accepted:
@@ -365,9 +383,13 @@ class PickPlaceSupervisor(Node):
             return
         self.goal_handle = handle
         result = handle.get_result_async()
-        result.add_done_callback(self.goal_result)
+        result.add_done_callback(
+            lambda done: self.goal_result(done, generation)
+        )
 
-    def goal_result(self, future):
+    def goal_result(self, future, generation):
+        if generation != self.motion_generation:
+            return
         try:
             wrapped = future.result()
             code = int(wrapped.result.error_code)
@@ -444,7 +466,7 @@ class PickPlaceSupervisor(Node):
             self.close_commanded = True
             self.start_motion('close', duration_s=3.0)
             m6 = self.joints.get('poppy_m6_joint', math.inf)
-            if m6 <= 0.72 and self.elapsed_sim() >= 0.2:
+            if m6 <= 0.20 and self.elapsed_sim() >= 0.2:
                 self.transition('VERIFY_GRASP')
             elif self.motion_error:
                 self.fail(self.motion_error)
@@ -456,8 +478,7 @@ class PickPlaceSupervisor(Node):
             )
             verified = self.physical_grasp_verified if physical_mode else self.attached
             if verified:
-                if self.goal_handle is not None:
-                    self.goal_handle.cancel_goal_async()
+                # The next goal supersedes CLOSE and keeps its closing target.
                 self.transition('LIFT')
             return
         if self.state == 'HOLD':
@@ -485,6 +506,15 @@ class PickPlaceSupervisor(Node):
             return
 
     def recovery_tick(self):
+        if str(self.get_parameter('grasp_mode').value) == 'physical_contact':
+            # Do not open or sweep home with a possibly retained/dropped object.
+            self.start_motion('recovery_hold', duration_s=0.25)
+            if self.motion_done or self.motion_error or self.elapsed_sim() > 2.0:
+                self.transition(
+                    recovery_terminal_state(self.cancel_requested),
+                    reason=self.failure_reason,
+                )
+            return
         # Attached failures are lowered before the only authorized release.
         if self.attached:
             if self.recovery_stage == 0:
@@ -570,6 +600,18 @@ class PickPlaceSupervisor(Node):
                 self.fail('base_drift_limit')
             elif speed > float(self.get_parameter('base_speed_limit_mps').value):
                 self.fail('base_speed_limit')
+
+        if (
+            str(self.get_parameter('grasp_mode').value) == 'physical_contact'
+            and self.state in ('LIFT', 'HOLD', 'TRANSFER', 'LOWER')
+        ):
+            fresh = (sim_ns - self.physical_feedback_ns) / 1e9 <= 0.25
+            if fresh and self.physical_grasp_verified:
+                self.grasp_lost_since_ns = None
+            elif self.grasp_lost_since_ns is None:
+                self.grasp_lost_since_ns = sim_ns
+            elif (sim_ns - self.grasp_lost_since_ns) / 1e9 > 0.25:
+                self.fail('physical_grasp_lost_or_stale')
 
         if self.state == 'RECOVER':
             self.recovery_tick()

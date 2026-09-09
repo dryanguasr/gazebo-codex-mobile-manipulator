@@ -1,0 +1,127 @@
+{
+  "source_run": "../../results/verified/assembly_render_20260909/run_01/run.json",
+  "source_manifest": {
+    "source": "/pick_place/evidence/image (Gazebo camera)",
+    "video": "pick_and_place_a1.mp4",
+    "frame_count": 2005,
+    "source_frame_count": 1843,
+    "fps": 60.0,
+    "timing_source": "Gazebo image header stamp",
+    "simulated_duration_s": 33.408,
+    "encoded_duration_s": 33.416666666666664,
+    "started_wall_time_s": 1788976100.879384,
+    "completed_wall_time_s": 1788976236.513201,
+    "captured_phases": {
+      "pregrasp": {
+        "frame": 594,
+        "state": "APPROACH",
+        "raw": "raw/pregrasp.png",
+        "annotated": "pregrasp.png"
+      },
+      "contact": {
+        "frame": 928,
+        "state": "VERIFY_GRASP",
+        "raw": "raw/contact.png",
+        "annotated": "contact.png"
+      },
+      "lift": {
+        "frame": 1080,
+        "state": "HOLD",
+        "raw": "raw/lift.png",
+        "annotated": "lift.png"
+      },
+      "retention": {
+        "frame": 1272,
+        "state": "TRANSFER",
+        "raw": "raw/retention.png",
+        "annotated": "retention.png"
+      },
+      "deposit": {
+        "frame": 1573,
+        "state": "RELEASE",
+        "raw": "raw/deposit.png",
+        "annotated": "deposit.png"
+      },
+      "release": {
+        "frame": 1856,
+        "state": "RETREAT",
+        "raw": "raw/release.png",
+        "annotated": "release.png"
+      }
+    },
+    "required_phases": [
+      "pregrasp",
+      "contact",
+      "lift",
+      "retention",
+      "deposit",
+      "release"
+    ],
+    "complete": true
+  },
+  "files": {
+    "ciclo_completo_60fps.mp4": {
+      "codec_name": "h264",
+      "width": 960,
+      "height": 720,
+      "r_frame_rate": "60/1",
+      "avg_frame_rate": "60/1",
+      "duration": "33.416667",
+      "nb_read_frames": "2005",
+      "sha256": "cf5d0d313a29633b56ab0e5f32337dee384418cb16bb2c32a94d86e569989aaf",
+      "window_start_s": 0,
+      "crop_and_scale": null
+    },
+    "agarre_y_elevacion_60fps.mp4": {
+      "codec_name": "h264",
+      "width": 960,
+      "height": 720,
+      "r_frame_rate": "60/1",
+      "avg_frame_rate": "60/1",
+      "duration": "9.000000",
+      "nb_read_frames": "540",
+      "sha256": "331a0abc39e2ab8b1dd44c2384afc60d98b5b4a543233f58495b665d66046c8b",
+      "window_start_s": 9.4,
+      "crop_and_scale": null
+    },
+    "retencion_y_transferencia_60fps.mp4": {
+      "codec_name": "h264",
+      "width": 960,
+      "height": 720,
+      "r_frame_rate": "60/1",
+      "avg_frame_rate": "60/1",
+      "duration": "7.700000",
+      "nb_read_frames": "462",
+      "sha256": "e958d4787f87c5b2c40eee957c876df70ebb0690cf742e0d04ccbce95328aa4c",
+      "window_start_s": 17.3,
+      "crop_and_scale": null
+    },
+    "deposito_y_liberacion_60fps.mp4": {
+      "codec_name": "h264",
+      "width": 960,
+      "height": 720,
+      "r_frame_rate": "60/1",
+      "avg_frame_rate": "60/1",
+      "duration": "10.416667",
+      "nb_read_frames": "625",
+      "sha256": "fa01afba101ba42cc541fb94c51576eb7017b9211359033176a9d6c17b6b635d",
+      "window_start_s": 23.0,
+      "crop_and_scale": null
+    },
+    "detalle_muneca_60fps.mp4": {
+      "codec_name": "h264",
+      "width": 1120,
+      "height": 640,
+      "r_frame_rate": "60/1",
+      "avg_frame_rate": "60/1",
+      "duration": "6.000000",
+      "nb_read_frames": "360",
+      "sha256": "c4cd9e7339ce0530807dbe2ab613a5dc506bdef875afb820d6eefebbf29a6518",
+      "window_start_s": 20.0,
+      "crop_and_scale": "crop=560:320:150:90,scale=1120:640:flags=lanczos"
+    }
+  },
+  "simulator_assisted": false,
+  "geometry_audit": "../../results/verified/assembly_render_20260909/runtime_vertices_after.json",
+  "visual_palette": "../../src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/manifest.json"
+}

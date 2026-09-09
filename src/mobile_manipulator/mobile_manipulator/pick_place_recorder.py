@@ -47,6 +47,7 @@ class PickPlaceRecorder(Node):
         super().__init__('pick_place_recorder')
         self.declare_parameter('output_dir', '/tmp/pick_place_a1')
         self.declare_parameter('fps', 60.0)
+        self.declare_parameter('grasp_mode', 'attach_conditioned')
         self.output = Path(str(self.get_parameter('output_dir').value)) / 'media'
         self.raw_output = self.output / 'raw'
         self.output.mkdir(parents=True, exist_ok=True)
@@ -81,13 +82,23 @@ class PickPlaceRecorder(Node):
         cv2.rectangle(image, (0, 0), (image.shape[1], 48), (20, 20, 20), -1)
         cv2.putText(
             image,
-            f'A1 REAL GAZEBO | {self.state}',
+            f'{self.get_parameter("grasp_mode").value} | {self.state}',
             (14, 32),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.72,
             (70, 240, 90),
             2,
             cv2.LINE_AA,
+        )
+        cv2.rectangle(
+            image, (0, image.shape[0] - 32),
+            (image.shape[1], image.shape[0]), (20, 20, 20), -1,
+        )
+        cv2.putText(
+            image,
+            'FIJA: VERDE | MOVIL: MAGENTA | SERVOMOTORES: GRIS',
+            (14, image.shape[0] - 10),
+            cv2.FONT_HERSHEY_SIMPLEX, 0.48, (230, 230, 230), 1, cv2.LINE_AA,
         )
         return image
 

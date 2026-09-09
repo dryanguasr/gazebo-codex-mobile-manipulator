@@ -10,6 +10,7 @@ from pathlib import Path
 import sys
 import xml.etree.ElementTree as ET
 
+from build_gazebo_visuals import verify_baked_geometry
 import numpy as np
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -295,9 +296,25 @@ def main() -> int:
         f'poppy_link_{index}.stl' for index in range(1, 7)
     ] + ['poppy_mount.stl']
     source_text = args.xacro.read_text(encoding='utf-8')
+    visual_check_start = len(failures)
+    visual_equivalence = []
+    visual_root = (
+        REPO_ROOT / 'src/mobile_manipulator/meshes/poppy_ergo_jr'
+    )
     for mesh_name in runtime_meshes:
-        token = f'/official/{mesh_name}'
-        if token not in source_text:
+        baked_token = f'/gazebo_inspection/{mesh_name}'
+        if baked_token in source_text:
+            try:
+                visual_equivalence.append({
+                    'mesh': mesh_name,
+                    **verify_baked_geometry(
+                        visual_root / 'official' / mesh_name,
+                        visual_root / 'gazebo_inspection' / mesh_name,
+                    ),
+                })
+            except (OSError, ValueError) as error:
+                failures.append(f'{mesh_name}: {error}')
+        elif f'/official/{mesh_name}' not in source_text:
             failures.append(f'{mesh_name}: consolidated runtime visual URI missing')
     teaching_root = (
         REPO_ROOT / 'src' / 'mobile_manipulator' / 'meshes'
@@ -315,8 +332,9 @@ def main() -> int:
         {
             'name': 'official_visual_fallback_and_cad_teaching_assets_coexist',
             'runtime_meshes': runtime_meshes,
+            'baked_vertex_equivalence': visual_equivalence,
             'teaching_meshes': teaching_meshes,
-            'status': 'PASS',
+            'status': 'PASS' if len(failures) == visual_check_start else 'FAIL',
         }
     )
 
@@ -559,8 +577,8 @@ def main() -> int:
     args.output.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
     print(
         f"Mechanical assembly validation {result['status']}: "
-        f"{len(joint_audit)} joints, {len(pose_results)} FK poses, "
-        f"{len(failures)} failure(s)"
+        f'{len(joint_audit)} joints, {len(pose_results)} FK poses, '
+        f'{len(failures)} failure(s)'
     )
     for failure in failures:
         print(f'ERROR: {failure}', file=sys.stderr)

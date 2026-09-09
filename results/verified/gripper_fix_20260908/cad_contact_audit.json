@@ -1,0 +1,21 @@
+{
+  "fixed": {
+    "inner_face_center_m": [
+      0.0,
+      -0.11,
+      0.014
+    ],
+    "samples": 9,
+    "max_distance_to_visible_CAD_m": 0.0005635000000000084
+  },
+  "moving": {
+    "inner_face_center_m": [
+      -0.014,
+      -0.052,
+      0.0001
+    ],
+    "samples": 9,
+    "max_distance_to_visible_CAD_m": 0.0005635000000000015
+  },
+  "status": "passed"
+}

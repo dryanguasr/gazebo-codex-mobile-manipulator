@@ -1,0 +1,52 @@
+{
+  "nominal_successes": 2,
+  "nominal_attempts": 2,
+  "simulator_assisted": false,
+  "negative_test_passed": true,
+  "negative_detection_to_recovery_s": 0.26000000000000156,
+  "tests_passed": 50,
+  "mechanical_regression_passed": true,
+  "trials": [
+    {
+      "run": "run_01",
+      "kind": "nominal",
+      "expected_status": "passed",
+      "observed_status": "passed",
+      "terminal_state": "DONE",
+      "terminal_reason": "",
+      "seed": 402,
+      "lift_m": 0.0629163682013053,
+      "placement_error_xy_m": 0.0035834061730614015,
+      "maximum_retention_error_m": 0.0031876512790901617,
+      "attach_count": 0
+    },
+    {
+      "run": "run_02",
+      "kind": "nominal",
+      "expected_status": "passed",
+      "observed_status": "passed",
+      "terminal_state": "DONE",
+      "terminal_reason": "",
+      "seed": 403,
+      "lift_m": 0.0627733933769078,
+      "placement_error_xy_m": 0.0020921934676866954,
+      "maximum_retention_error_m": 0.0029029135245759985,
+      "attach_count": 0
+    },
+    {
+      "run": "run_03",
+      "kind": "negative_single_collision",
+      "expected_status": "failed",
+      "observed_status": "failed",
+      "terminal_state": "FAILED",
+      "terminal_reason": "physical_grasp_lost_or_stale",
+      "seed": 404,
+      "lift_m": 0.062752762082084,
+      "placement_error_xy_m": 0.061121635496397736,
+      "maximum_retention_error_m": 0.04193294170876065,
+      "attach_count": 0
+    }
+  ],
+  "source_note": "Executed on modified ac364f1 tree; per-run SHA-256 fingerprints retained; not a clean-commit campaign.",
+  "scope": "Deterministic Gazebo scene only, not hardware validation or general grasping."
+}

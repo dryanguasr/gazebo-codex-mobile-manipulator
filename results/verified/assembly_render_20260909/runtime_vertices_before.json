@@ -1,0 +1,3227 @@
+{
+  "reader": "gz::common::MeshManager (installed gz-common5-graphics)",
+  "comparison": "every triangle vertex versus transformed official source; tolerance 1e-10 m",
+  "visual_dir": "src/mobile_manipulator/meshes/poppy_ergo_jr/official",
+  "status": "FAIL",
+  "meshes": [
+    {
+      "mesh": "base.dae",
+      "status": "FAIL",
+      "errors": [
+        "base: missing_normals",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "support_camera: missing_normals",
+        "PI_CAMERA: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "disk_support: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "horn: missing_normals",
+        "body: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals"
+      ],
+      "instances": [
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.01551376
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.01451552
+        },
+        {
+          "name": "support_camera",
+          "triangle_count": 6204,
+          "normal_count": 0,
+          "vertex_count": 3086,
+          "min_m": [
+            -0.016099999999974527,
+            -0.02799994814,
+            0.011128896000000001
+          ],
+          "max_m": [
+            0.016100000000025472,
+            -0.01396391,
+            0.032820614000000005
+          ],
+          "diffuse": [
+            0.9607840180397034,
+            0.9686269760131836,
+            0.9686269760131836,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "PI_CAMERA",
+          "triangle_count": 1778,
+          "normal_count": 0,
+          "vertex_count": 883,
+          "min_m": [
+            -0.012499999999974531,
+            -0.03180494629353,
+            0.001902402174999998
+          ],
+          "max_m": [
+            0.01250000000002547,
+            -0.017248382899999998,
+            0.0325675452
+          ],
+          "diffuse": [
+            0.11372499912977219,
+            0.1254899948835373,
+            0.11372499912977219,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID30/ID30",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID39/ID39/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0443462
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID39/ID39/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0443462
+        },
+        {
+          "name": "disk_support",
+          "triangle_count": 10958,
+          "normal_count": 0,
+          "vertex_count": 5425,
+          "min_m": [
+            -0.075,
+            -0.0371184,
+            0
+          ],
+          "max_m": [
+            0.075,
+            0.112882,
+            0.0040999999999999995
+          ],
+          "diffuse": [
+            0.9411759972572327,
+            0.7254899740219116,
+            0.4627450108528137,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID49/ID49/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.026042419999999997
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID49/ID49/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.027040659999999998
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID50/ID50/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.03653951
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID50/ID50/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.03653951
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID51/ID51/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0393981
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID51/ID51/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0399981
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID52/ID52/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0313575
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID52/ID52/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0313575
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID53/ID53/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.01451552
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID53/ID53/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.01551376
+        },
+        {
+          "name": "base",
+          "triangle_count": 20247,
+          "normal_count": 0,
+          "vertex_count": 10085,
+          "min_m": [
+            -0.028,
+            -0.0289997,
+            0.0021
+          ],
+          "max_m": [
+            0.028,
+            0.0279972,
+            0.0287
+          ],
+          "diffuse": [
+            0.9686269760131836,
+            0.9686269760131836,
+            0.9686269760131836,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID54/ID54",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID63/ID63/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.04770126
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID63/ID63/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.04770126
+        },
+        {
+          "name": "horn",
+          "triangle_count": 4364,
+          "normal_count": 0,
+          "vertex_count": 2168,
+          "min_m": [
+            -0.0089,
+            -0.008896999999999992,
+            0.0298
+          ],
+          "max_m": [
+            0.0089,
+            0.008897000000000009,
+            0.0327
+          ],
+          "diffuse": [
+            0.24705900251865387,
+            0.23921599984169006,
+            0.23921599984169006,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID64/ID64/anonymous/instance:ID65/ID65",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "body",
+          "triangle_count": 14134,
+          "normal_count": 0,
+          "vertex_count": 7057,
+          "min_m": [
+            -0.012000000000000002,
+            -0.008999999999999992,
+            0.0057
+          ],
+          "max_m": [
+            0.012000000000000007,
+            0.02700000000000001,
+            0.0297
+          ],
+          "diffuse": [
+            0.67843097448349,
+            0.67843097448349,
+            0.67843097448349,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID64/ID64/anonymous/instance:ID74/ID74",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID83/ID83/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0393981
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID83/ID83/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0399981
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID84/ID84/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0313575
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID84/ID84/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0313575
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID85/ID85/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0428981
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID85/ID85/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0434981
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID86/ID86/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0399981
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID86/ID86/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0393981
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID87/ID87/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0393981
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID87/ID87/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0399981
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID88/ID88/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.027040659999999998
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID88/ID88/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.026042419999999997
+        }
+      ]
+    },
+    {
+      "mesh": "long_U.dae",
+      "status": "FAIL",
+      "errors": [
+        "5eb856b29167d915bdb4b0af: missing_normals"
+      ],
+      "instances": [
+        {
+          "name": "5eb856b29167d915bdb4b0af",
+          "triangle_count": 10284,
+          "normal_count": 0,
+          "vertex_count": 5126,
+          "min_m": [
+            -0.01715,
+            -0.0099,
+            -1.18333e-18
+          ],
+          "max_m": [
+            0.01715,
+            0.0099,
+            0.0338944
+          ],
+          "diffuse": [
+            0.9607840180397034,
+            0.9607840180397034,
+            0.9607840180397034,
+            1
+          ],
+          "source_ancestry": "ID2",
+          "maximum_vertex_error_m": 0.0
+        }
+      ]
+    },
+    {
+      "mesh": "section_1.dae",
+      "status": "FAIL",
+      "errors": [
+        "base: missing_normals",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "horn: missing_normals",
+        "body: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "side2side: missing_normals",
+        "horn2horn: missing_normals"
+      ],
+      "instances": [
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.01475,
+            -0.00837496,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999997,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.015349999999999999,
+            -0.00837486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.01475,
+            -0.00837496,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999997,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.015349999999999999,
+            -0.00837486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.01475,
+            -0.00837496,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999997,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.015349999999999999,
+            -0.00837486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "horn",
+          "triangle_count": 4364,
+          "normal_count": 0,
+          "vertex_count": 2168,
+          "min_m": [
+            0.0121,
+            -0.008897,
+            -0.0089
+          ],
+          "max_m": [
+            0.015,
+            0.008897,
+            0.0089
+          ],
+          "diffuse": [
+            0.24705900251865387,
+            0.23921599984169006,
+            0.23921599984169006,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID22/ID22/anonymous/instance:ID23/ID23",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "body",
+          "triangle_count": 14134,
+          "normal_count": 0,
+          "vertex_count": 7057,
+          "min_m": [
+            -0.012,
+            -0.012,
+            -0.009
+          ],
+          "max_m": [
+            0.012,
+            0.012,
+            0.027
+          ],
+          "diffuse": [
+            0.67843097448349,
+            0.67843097448349,
+            0.67843097448349,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID22/ID22/anonymous/instance:ID32/ID32",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.015349999999999999,
+            -0.00837486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.012
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.01475,
+            -0.00837496,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999997,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.012
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.015349999999999999,
+            -0.00837486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID42/ID42/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.006000000000000001
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.01475,
+            -0.00837496,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999997,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID42/ID42/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.006000000000000001
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.01475,
+            -0.00837496,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999997,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID43/ID43/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.015349999999999999,
+            -0.00837486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID43/ID43/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "side2side",
+          "triangle_count": 4144,
+          "normal_count": 0,
+          "vertex_count": 2066,
+          "min_m": [
+            -0.0171,
+            -0.0099,
+            0.019
+          ],
+          "max_m": [
+            -0.012,
+            0.0099,
+            0.0639
+          ],
+          "diffuse": [
+            0.9607840180397034,
+            0.9607840180397034,
+            0.9607840180397034,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID44/ID44",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "horn2horn",
+          "triangle_count": 2312,
+          "normal_count": 0,
+          "vertex_count": 1144,
+          "min_m": [
+            0.012,
+            -0.0099,
+            0.019
+          ],
+          "max_m": [
+            0.0171,
+            0.0099,
+            0.0638968
+          ],
+          "diffuse": [
+            0.9607840180397034,
+            0.9607840180397034,
+            0.9607840180397034,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID53/ID53",
+          "maximum_vertex_error_m": 0.0
+        }
+      ]
+    },
+    {
+      "mesh": "section_2.dae",
+      "status": "FAIL",
+      "errors": [
+        "base: missing_normals",
+        "insert: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "body: missing_normals",
+        "horn: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "short_U: missing_normals"
+      ],
+      "instances": [
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.01475,
+            0.00837496,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.01475,
+            0.00837496,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "body",
+          "triangle_count": 14134,
+          "normal_count": 0,
+          "vertex_count": 7057,
+          "min_m": [
+            -0.012,
+            -0.012,
+            -0.009
+          ],
+          "max_m": [
+            0.012,
+            0.012,
+            0.027
+          ],
+          "diffuse": [
+            0.67843097448349,
+            0.67843097448349,
+            0.67843097448349,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID22/ID22",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "horn",
+          "triangle_count": 4364,
+          "normal_count": 0,
+          "vertex_count": 2168,
+          "min_m": [
+            0.0121,
+            -0.008897,
+            -0.0089
+          ],
+          "max_m": [
+            0.015,
+            0.008897,
+            0.0089
+          ],
+          "diffuse": [
+            0.24705900251865387,
+            0.23921599984169006,
+            0.23921599984169006,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID31/ID31",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.01475,
+            0.00837496,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.01475,
+            0.00837496,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.01475,
+            0.00837496,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID42/ID42/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.012
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID42/ID42/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.012
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.01475,
+            0.00837496,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID43/ID43/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.006000000000000001
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID43/ID43/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.006000000000000001
+        },
+        {
+          "name": "short_U",
+          "triangle_count": 3130,
+          "normal_count": 0,
+          "vertex_count": 1547,
+          "min_m": [
+            -0.014100000000000001,
+            -0.01,
+            0.019999999999999997
+          ],
+          "max_m": [
+            0.014099999999999998,
+            0.01,
+            0.03
+          ],
+          "diffuse": [
+            0.9686269760131836,
+            0.9764710068702698,
+            0.9843140244483948,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID44/ID44",
+          "maximum_vertex_error_m": 0.0
+        }
+      ]
+    },
+    {
+      "mesh": "section_3.dae",
+      "status": "FAIL",
+      "errors": [
+        "base: missing_normals",
+        "insert: missing_normals",
+        "horn2horn: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "side2side: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "horn: missing_normals",
+        "body: missing_normals"
+      ],
+      "instances": [
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.0023749599999999984
+          ],
+          "max_m": [
+            0.01475,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.002374859999999998
+          ],
+          "max_m": [
+            0.015349999999999999,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "horn2horn",
+          "triangle_count": 2312,
+          "normal_count": 0,
+          "vertex_count": 1144,
+          "min_m": [
+            0.011999999999999999,
+            -0.057896800000000005,
+            -0.009899999999999999
+          ],
+          "max_m": [
+            0.0171,
+            -0.013,
+            0.009900000000000003
+          ],
+          "diffuse": [
+            0.9607840180397034,
+            0.9607840180397034,
+            0.9607840180397034,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.0023749599999999984
+          ],
+          "max_m": [
+            0.01475,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID29/ID29/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.002374859999999998
+          ],
+          "max_m": [
+            0.015349999999999999,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID29/ID29/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "side2side",
+          "triangle_count": 4144,
+          "normal_count": 0,
+          "vertex_count": 2066,
+          "min_m": [
+            -0.0171,
+            -0.0579,
+            -0.009899999999999999
+          ],
+          "max_m": [
+            -0.011999999999999999,
+            -0.013,
+            0.009900000000000003
+          ],
+          "diffuse": [
+            0.9607840180397034,
+            0.9607840180397034,
+            0.9607840180397034,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID30/ID30",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.002374859999999998
+          ],
+          "max_m": [
+            0.015349999999999999,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID37/ID37/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.0023749599999999984
+          ],
+          "max_m": [
+            0.01475,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID37/ID37/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.002374859999999998
+          ],
+          "max_m": [
+            0.015349999999999999,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID38/ID38/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.005999999999999999
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.0023749599999999984
+          ],
+          "max_m": [
+            0.01475,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID38/ID38/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.005999999999999999
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.002374859999999998
+          ],
+          "max_m": [
+            0.015349999999999999,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID39/ID39/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.0023749599999999984
+          ],
+          "max_m": [
+            0.01475,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID39/ID39/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.0023749599999999984
+          ],
+          "max_m": [
+            0.01475,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.006000000000000003
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.002374859999999998
+          ],
+          "max_m": [
+            0.015349999999999999,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.006000000000000003
+        },
+        {
+          "name": "horn",
+          "triangle_count": 4364,
+          "normal_count": 0,
+          "vertex_count": 2168,
+          "min_m": [
+            -0.00889917866178,
+            -0.0089002366227,
+            -0.015
+          ],
+          "max_m": [
+            0.0088979498177,
+            0.0089002366227,
+            -0.0121
+          ],
+          "diffuse": [
+            0.24705900251865387,
+            0.23921599984169006,
+            0.23921599984169006,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID42/ID42",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "body",
+          "triangle_count": 14134,
+          "normal_count": 0,
+          "vertex_count": 7057,
+          "min_m": [
+            -0.012,
+            -0.027,
+            -0.012
+          ],
+          "max_m": [
+            0.012,
+            0.009,
+            0.012
+          ],
+          "diffuse": [
+            0.67843097448349,
+            0.67843097448349,
+            0.67843097448349,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID51/ID51",
+          "maximum_vertex_error_m": 0.0
+        }
+      ]
+    },
+    {
+      "mesh": "section_4.dae",
+      "status": "FAIL",
+      "errors": [
+        "insert: missing_normals",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "fixed_part: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "body: missing_normals",
+        "horn: missing_normals",
+        "fixation: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "body: vertex_position",
+        "body: missing_normals",
+        "horn: vertex_position",
+        "horn: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals"
+      ],
+      "instances": [
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.02874972
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.028749919999999998
+        },
+        {
+          "name": "fixed_part",
+          "triangle_count": 4701,
+          "normal_count": 0,
+          "vertex_count": 2349,
+          "min_m": [
+            0.012,
+            -0.069994,
+            -0.012
+          ],
+          "max_m": [
+            0.0171,
+            0.022,
+            0.012
+          ],
+          "diffuse": [
+            0.9843140244483948,
+            0.9882349967956543,
+            0.992156982421875,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID22/ID22",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID31/ID31/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID31/ID31/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID32/ID32/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.023225000000000003
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID32/ID32/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.023825
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID33/ID33/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.028749919999999998
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID33/ID33/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.02874972
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID34/ID34/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.016000000000000004
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID34/ID34/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.016000000000000004
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID35/ID35/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID35/ID35/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID36/ID36/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.016000000000000004
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID36/ID36/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.016000000000000004
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID37/ID37/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0295
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID37/ID37/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.030699999999999998
+        },
+        {
+          "name": "body",
+          "triangle_count": 14134,
+          "normal_count": 0,
+          "vertex_count": 7057,
+          "min_m": [
+            -0.012,
+            -0.009,
+            -0.012
+          ],
+          "max_m": [
+            0.012,
+            0.027,
+            0.012
+          ],
+          "diffuse": [
+            0.67843097448349,
+            0.67843097448349,
+            0.67843097448349,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID38/ID38/anonymous/instance:ID39/ID39",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "horn",
+          "triangle_count": 4364,
+          "normal_count": 0,
+          "vertex_count": 2168,
+          "min_m": [
+            -0.0089,
+            -0.008897,
+            0.0121
+          ],
+          "max_m": [
+            0.0089,
+            0.008897,
+            0.015
+          ],
+          "diffuse": [
+            0.24705900251865387,
+            0.23921599984169006,
+            0.23921599984169006,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID38/ID38/anonymous/instance:ID48/ID48",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "fixation",
+          "triangle_count": 4112,
+          "normal_count": 0,
+          "vertex_count": 2032,
+          "min_m": [
+            -0.01,
+            0.02,
+            -0.014199999999999996
+          ],
+          "max_m": [
+            0.01,
+            0.044000000000000004,
+            0.014000000000000009
+          ],
+          "diffuse": [
+            0.9843140244483948,
+            0.9882349967956543,
+            0.992156982421875,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID57/ID57",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID64/ID64/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.023125
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID64/ID64/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.023725
+        },
+        {
+          "name": "body",
+          "triangle_count": 14134,
+          "normal_count": 0,
+          "vertex_count": 7057,
+          "min_m": [
+            -0.012,
+            -0.009,
+            -0.012
+          ],
+          "max_m": [
+            0.012,
+            0.027,
+            0.012
+          ],
+          "diffuse": [
+            0.67843097448349,
+            0.67843097448349,
+            0.67843097448349,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID65/ID65/anonymous/instance:ID39/ID39",
+          "maximum_vertex_error_m": 0.076
+        },
+        {
+          "name": "horn",
+          "triangle_count": 4364,
+          "normal_count": 0,
+          "vertex_count": 2168,
+          "min_m": [
+            -0.0089,
+            -0.008897,
+            0.0121
+          ],
+          "max_m": [
+            0.0089,
+            0.008897,
+            0.015
+          ],
+          "diffuse": [
+            0.24705900251865387,
+            0.23921599984169006,
+            0.23921599984169006,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID65/ID65/anonymous/instance:ID48/ID48",
+          "maximum_vertex_error_m": 0.05800000000000001
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID66/ID66/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.012
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID66/ID66/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.012
+        }
+      ]
+    },
+    {
+      "mesh": "gripper.dae",
+      "status": "FAIL",
+      "errors": [
+        "base: missing_normals",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "rotative_part: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "base: vertex_position",
+        "base: missing_normals",
+        "insert: vertex_position",
+        "insert: missing_normals"
+      ],
+      "instances": [
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.002375,
+            0.00362504,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.002375,
+            0.00837486,
+            0.01785
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.002375,
+            0.0036251400000000002,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.002375,
+            0.00837486,
+            0.01845
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.002375,
+            0.00362504,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.002375,
+            0.00837486,
+            0.01785
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.006000000000000001
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.002375,
+            0.0036251400000000002,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.002375,
+            0.00837486,
+            0.01845
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.006000000000000001
+        },
+        {
+          "name": "rotative_part",
+          "triangle_count": 7884,
+          "normal_count": 0,
+          "vertex_count": 3932,
+          "min_m": [
+            -0.0171,
+            -0.0699943,
+            -0.017
+          ],
+          "max_m": [
+            0.0099,
+            0.00989763,
+            0.0172
+          ],
+          "diffuse": [
+            0.9843140244483948,
+            0.9882349967956543,
+            0.992156982421875,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.002375,
+            0.0036251400000000002,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.002375,
+            0.00837486,
+            0.01845
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID30/ID30/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.006000000000000001
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.002375,
+            0.00362504,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.002375,
+            0.00837486,
+            0.01785
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID30/ID30/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.006000000000000001
+        },
+        {
+          "name": "base",
+          "triangle_count": 3032,
+          "normal_count": 0,
+          "vertex_count": 1516,
+          "min_m": [
+            -0.002375,
+            0.00362504,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.002375,
+            0.00837486,
+            0.01785
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID31/ID31/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 0.012
+        },
+        {
+          "name": "insert",
+          "triangle_count": 744,
+          "normal_count": 0,
+          "vertex_count": 374,
+          "min_m": [
+            -0.002375,
+            0.0036251400000000002,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.002375,
+            0.00837486,
+            0.01845
+          ],
+          "diffuse": [
+            0.9176470041275024,
+            0.6588240265846252,
+            0.20784300565719604,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID31/ID31/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 0.012
+        }
+      ]
+    }
+  ]
+}

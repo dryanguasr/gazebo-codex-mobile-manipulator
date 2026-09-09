@@ -1,5 +1,10 @@
 # Informe final: pick-and-place nivel A
 
+Nota posterior: el problema de agarre del video A1 fue corregido. Consulte
+[el informe del gripper](gripper_fix_report.md) y los
+[videos físicos actualizados](../captures/gripper_corregido/).
+Los resultados A1/A2 de este documento corresponden a la revisión histórica.
+
 ## Resultado
 
 El nivel A1 quedó implementado y aceptado como **MVP asistido por simulador**.

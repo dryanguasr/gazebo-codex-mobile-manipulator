@@ -12,8 +12,38 @@
           <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
         </inertia>
       </inertial>
-      <collision name="pick_object_collision">
-        <geometry><cylinder><radius>0.015</radius><length>0.045</length></cylinder></geometry>
+      <!-- Three coaxial, contiguous slices preserve the exact 30 x 45 mm
+           cylinder volume. Separate collision pairs expose the finite vertical
+           contact patch to the solver, avoiding an artificial point pivot. -->
+      <collision name="pick_object_collision_0">
+        <pose>0 0 -0.015 0 0 0</pose>
+        <geometry><cylinder><radius>0.015</radius><length>0.015</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.85</mu><mu2>0.85</mu2><slip1>0</slip1><slip2>0</slip2></ode>
+          </friction>
+          <contact>
+            <collide_without_contact>false</collide_without_contact>
+            <ode><kp>100000</kp><kd>1.0</kd><max_vel>0.01</max_vel><min_depth>0.0001</min_depth></ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="pick_object_collision_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><cylinder><radius>0.015</radius><length>0.015</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.85</mu><mu2>0.85</mu2><slip1>0</slip1><slip2>0</slip2></ode>
+          </friction>
+          <contact>
+            <collide_without_contact>false</collide_without_contact>
+            <ode><kp>100000</kp><kd>1.0</kd><max_vel>0.01</max_vel><min_depth>0.0001</min_depth></ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="pick_object_collision_2">
+        <pose>0 0 0.015 0 0 0</pose>
+        <geometry><cylinder><radius>0.015</radius><length>0.015</length></cylinder></geometry>
         <surface>
           <friction>
             <ode><mu>0.85</mu><mu2>0.85</mu2><slip1>0</slip1><slip2>0</slip2></ode>
@@ -30,7 +60,9 @@
       </visual>
       <sensor name="pick_object_contact_sensor" type="contact">
         <contact>
-          <collision>pick_object_collision</collision>
+          <collision>pick_object_collision_0</collision>
+          <collision>pick_object_collision_1</collision>
+          <collision>pick_object_collision_2</collision>
           <topic>/pick_object/contacts</topic>
         </contact>
         <always_on>true</always_on>

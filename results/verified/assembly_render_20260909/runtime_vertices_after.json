@@ -1,0 +1,3009 @@
+{
+  "reader": "gz::common::MeshManager (installed gz-common5-graphics)",
+  "comparison": "every triangle vertex versus transformed official source; tolerance 1e-10 m",
+  "visual_dir": "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection",
+  "status": "PASS",
+  "meshes": [
+    {
+      "mesh": "base.dae",
+      "status": "PASS",
+      "errors": [],
+      "instances": [
+        {
+          "name": "base_000_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.0197981,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "base_001_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.0197981,
+            0.00680954,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "base_002_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00885,
+            -0.00237486,
+            0.009325
+          ],
+          "max_m": [
+            0.01485,
+            0.00237496,
+            0.014075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 7.806255641895632e-18
+        },
+        {
+          "name": "base_003_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00885,
+            -0.00237486,
+            0.009325
+          ],
+          "max_m": [
+            0.01545,
+            0.00237486,
+            0.014075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 7.806255641895632e-18
+        },
+        {
+          "name": "base_004_support_camera",
+          "triangle_count": 6204,
+          "normal_count": 14463,
+          "vertex_count": 14463,
+          "min_m": [
+            -0.0161,
+            -0.02799994814,
+            0.011128896
+          ],
+          "max_m": [
+            0.0161,
+            -0.01396391,
+            0.032820614
+          ],
+          "diffuse": [
+            0.23999999463558197,
+            0.30000001192092896,
+            0.3700000047683716,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21",
+          "maximum_vertex_error_m": 4.999993474807951e-14
+        },
+        {
+          "name": "base_005_PI_CAMERA",
+          "triangle_count": 1778,
+          "normal_count": 3324,
+          "vertex_count": 3324,
+          "min_m": [
+            -0.0125,
+            -0.0318049462935,
+            0.001902402175
+          ],
+          "max_m": [
+            0.0125,
+            -0.0172483829,
+            0.0325675452
+          ],
+          "diffuse": [
+            0.23999999463558197,
+            0.30000001192092896,
+            0.3700000047683716,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID30/ID30",
+          "maximum_vertex_error_m": 5.000166947155549e-14
+        },
+        {
+          "name": "base_006_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.0245481,
+            -0.01155926,
+            -0.00115
+          ],
+          "max_m": [
+            -0.0197981,
+            -0.00680954,
+            0.00545
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID39/ID39/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "base_007_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.0245481,
+            -0.01155936,
+            -0.00115
+          ],
+          "max_m": [
+            -0.0197981,
+            -0.00680954,
+            0.00485
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID39/ID39/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.801714581503802e-15
+        },
+        {
+          "name": "base_008_disk_support",
+          "triangle_count": 10958,
+          "normal_count": 21720,
+          "vertex_count": 21720,
+          "min_m": [
+            -0.075,
+            -0.0371184,
+            0
+          ],
+          "max_m": [
+            0.075,
+            0.112882,
+            0.0041
+          ],
+          "diffuse": [
+            0.23999999463558197,
+            0.30000001192092896,
+            0.3700000047683716,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40",
+          "maximum_vertex_error_m": 8.673617379884035e-19
+        },
+        {
+          "name": "base_009_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00885,
+            0.01562514,
+            0.021325
+          ],
+          "max_m": [
+            0.01545,
+            0.02037486,
+            0.026075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID49/ID49/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "base_010_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00885,
+            0.01562514,
+            0.021325
+          ],
+          "max_m": [
+            0.01485,
+            0.02037496,
+            0.026075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID49/ID49/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 1.5602102942935403e-14
+        },
+        {
+          "name": "base_011_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.01235,
+            -0.026375,
+            0.01632514
+          ],
+          "max_m": [
+            0.01835,
+            -0.021625,
+            0.02107496
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID50/ID50/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "base_012_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.01235,
+            -0.026375,
+            0.01632514
+          ],
+          "max_m": [
+            0.01895,
+            -0.021625,
+            0.02107486
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID50/ID50/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "base_013_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01485,
+            -0.00237486,
+            0.021325
+          ],
+          "max_m": [
+            -0.00885,
+            0.00237496,
+            0.026075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID51/ID51/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.7704895589362195e-18
+        },
+        {
+          "name": "base_014_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01545,
+            -0.00237486,
+            0.021325
+          ],
+          "max_m": [
+            -0.00885,
+            0.00237486,
+            0.026075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID51/ID51/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 4.7704895589362195e-18
+        },
+        {
+          "name": "base_015_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.0068094,
+            -0.02454806,
+            -0.00115
+          ],
+          "max_m": [
+            0.0115594,
+            -0.01979824,
+            0.00485
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID52/ID52/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "base_016_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.0068094,
+            -0.02454796,
+            -0.00115
+          ],
+          "max_m": [
+            0.0115594,
+            -0.01979824,
+            0.00545
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID52/ID52/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "base_017_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00885,
+            0.01562514,
+            0.009325
+          ],
+          "max_m": [
+            0.01545,
+            0.02037486,
+            0.014075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID53/ID53/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "base_018_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00885,
+            0.01562504,
+            0.009325
+          ],
+          "max_m": [
+            0.01485,
+            0.02037486,
+            0.014075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID53/ID53/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "base_019_base",
+          "triangle_count": 20247,
+          "normal_count": 48005,
+          "vertex_count": 48005,
+          "min_m": [
+            -0.028,
+            -0.0289997,
+            0.0021
+          ],
+          "max_m": [
+            0.028,
+            0.0279972,
+            0.0287
+          ],
+          "diffuse": [
+            0.23999999463558197,
+            0.30000001192092896,
+            0.3700000047683716,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID54/ID54",
+          "maximum_vertex_error_m": 2.7989763284885782e-15
+        },
+        {
+          "name": "base_020_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.02454796,
+            0.0068094,
+            -0.00115
+          ],
+          "max_m": [
+            -0.01979824,
+            0.0115594,
+            0.00545
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID63/ID63/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "base_021_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.02454806,
+            0.0068094,
+            -0.00115
+          ],
+          "max_m": [
+            -0.01979824,
+            0.0115594,
+            0.00485
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID63/ID63/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "base_022_horn",
+          "triangle_count": 4364,
+          "normal_count": 8815,
+          "vertex_count": 8815,
+          "min_m": [
+            -0.0089,
+            -0.008897,
+            0.0298
+          ],
+          "max_m": [
+            0.0089,
+            0.008897,
+            0.0327
+          ],
+          "diffuse": [
+            0.6700000166893005,
+            0.7200000286102295,
+            0.7799999713897705,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID64/ID64/anonymous/instance:ID65/ID65",
+          "maximum_vertex_error_m": 8.673617379884035e-18
+        },
+        {
+          "name": "base_023_body",
+          "triangle_count": 14134,
+          "normal_count": 28619,
+          "vertex_count": 28619,
+          "min_m": [
+            -0.012,
+            -0.009,
+            0.0057
+          ],
+          "max_m": [
+            0.012,
+            0.027,
+            0.0297
+          ],
+          "diffuse": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.23000000417232513,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID64/ID64/anonymous/instance:ID74/ID74",
+          "maximum_vertex_error_m": 1.214306433183765e-17
+        },
+        {
+          "name": "base_024_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01485,
+            0.01562514,
+            0.009325
+          ],
+          "max_m": [
+            -0.00885,
+            0.02037496,
+            0.014075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID83/ID83/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 1.5602102942935403e-14
+        },
+        {
+          "name": "base_025_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01545,
+            0.01562514,
+            0.009325
+          ],
+          "max_m": [
+            -0.00885,
+            0.02037486,
+            0.014075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID83/ID83/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "base_026_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.0115594,
+            0.01979814,
+            -0.00115
+          ],
+          "max_m": [
+            -0.0068094,
+            0.02454796,
+            0.00485
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID84/ID84/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 1.5602102942935403e-14
+        },
+        {
+          "name": "base_027_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.0115594,
+            0.01979824,
+            -0.00115
+          ],
+          "max_m": [
+            -0.0068094,
+            0.02454796,
+            0.00545
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID84/ID84/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "base_028_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01835,
+            -0.02637486,
+            0.016325
+          ],
+          "max_m": [
+            -0.01235,
+            -0.02162504,
+            0.021075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID85/ID85/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "base_029_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01895,
+            -0.02637486,
+            0.016325
+          ],
+          "max_m": [
+            -0.01235,
+            -0.02162514,
+            0.021075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID85/ID85/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "base_030_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01545,
+            -0.00237486,
+            0.009325
+          ],
+          "max_m": [
+            -0.00885,
+            0.00237486,
+            0.014075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID86/ID86/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 7.806255641895632e-18
+        },
+        {
+          "name": "base_031_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01485,
+            -0.00237486,
+            0.009325
+          ],
+          "max_m": [
+            -0.00885,
+            0.00237496,
+            0.014075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID86/ID86/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 7.806255641895632e-18
+        },
+        {
+          "name": "base_032_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01485,
+            0.01562514,
+            0.021325
+          ],
+          "max_m": [
+            -0.00885,
+            0.02037496,
+            0.026075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID87/ID87/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 1.5602102942935403e-14
+        },
+        {
+          "name": "base_033_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01545,
+            0.01562514,
+            0.021325
+          ],
+          "max_m": [
+            -0.00885,
+            0.02037486,
+            0.026075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID87/ID87/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "base_034_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00885,
+            -0.00237486,
+            0.021325
+          ],
+          "max_m": [
+            0.01485,
+            0.00237496,
+            0.026075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID88/ID88/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.7704895589362195e-18
+        },
+        {
+          "name": "base_035_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00885,
+            -0.00237486,
+            0.021325
+          ],
+          "max_m": [
+            0.01545,
+            0.00237486,
+            0.026075
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID88/ID88/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 5.204170427930421e-18
+        }
+      ]
+    },
+    {
+      "mesh": "long_U.dae",
+      "status": "PASS",
+      "errors": [],
+      "instances": [
+        {
+          "name": "long_U_000_ID2",
+          "triangle_count": 10284,
+          "normal_count": 27128,
+          "vertex_count": 27128,
+          "min_m": [
+            -0.01715,
+            -0.0099,
+            -1.18333e-18
+          ],
+          "max_m": [
+            0.01715,
+            0.0099,
+            0.0338944
+          ],
+          "diffuse": [
+            0.07999999821186066,
+            0.3799999952316284,
+            0.7200000286102295,
+            1
+          ],
+          "source_ancestry": "ID2",
+          "maximum_vertex_error_m": 0.0
+        }
+      ]
+    },
+    {
+      "mesh": "section_1.dae",
+      "status": "PASS",
+      "errors": [],
+      "instances": [
+        {
+          "name": "section_1_000_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01475,
+            -0.00837496,
+            0.021625
+          ],
+          "max_m": [
+            -0.00875,
+            -0.00362514,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "section_1_001_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01535,
+            -0.00837486,
+            0.021625
+          ],
+          "max_m": [
+            -0.00875,
+            -0.00362514,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_1_002_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            0.00362504,
+            0.021625
+          ],
+          "max_m": [
+            0.01475,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "section_1_003_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            0.00362514,
+            0.021625
+          ],
+          "max_m": [
+            0.01535,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_1_004_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            -0.00237496,
+            0.021625
+          ],
+          "max_m": [
+            0.01475,
+            0.00237486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_1_005_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            -0.00237486,
+            0.021625
+          ],
+          "max_m": [
+            0.01535,
+            0.00237486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_1_006_horn",
+          "triangle_count": 4364,
+          "normal_count": 8815,
+          "vertex_count": 8815,
+          "min_m": [
+            0.0121,
+            -0.008897,
+            -0.0089
+          ],
+          "max_m": [
+            0.015,
+            0.008897,
+            0.0089
+          ],
+          "diffuse": [
+            0.6700000166893005,
+            0.7200000286102295,
+            0.7799999713897705,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID22/ID22/anonymous/instance:ID23/ID23",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "section_1_007_body",
+          "triangle_count": 14134,
+          "normal_count": 28619,
+          "vertex_count": 28619,
+          "min_m": [
+            -0.012,
+            -0.012,
+            -0.009
+          ],
+          "max_m": [
+            0.012,
+            0.012,
+            0.027
+          ],
+          "diffuse": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.23000000417232513,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID22/ID22/anonymous/instance:ID32/ID32",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "section_1_008_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01535,
+            0.00362514,
+            0.021625
+          ],
+          "max_m": [
+            -0.00875,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_1_009_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01475,
+            0.00362504,
+            0.021625
+          ],
+          "max_m": [
+            -0.00875,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "section_1_010_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01535,
+            -0.00237486,
+            0.021625
+          ],
+          "max_m": [
+            -0.00875,
+            0.00237486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID42/ID42/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_1_011_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01475,
+            -0.00237496,
+            0.021625
+          ],
+          "max_m": [
+            -0.00875,
+            0.00237486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID42/ID42/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_1_012_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            -0.00837496,
+            0.021625
+          ],
+          "max_m": [
+            0.01475,
+            -0.00362514,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID43/ID43/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "section_1_013_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            -0.00837486,
+            0.021625
+          ],
+          "max_m": [
+            0.01535,
+            -0.00362514,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID43/ID43/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_1_014_side2side",
+          "triangle_count": 4144,
+          "normal_count": 10809,
+          "vertex_count": 10809,
+          "min_m": [
+            -0.0171,
+            -0.0099,
+            0.019
+          ],
+          "max_m": [
+            -0.012,
+            0.0099,
+            0.0639
+          ],
+          "diffuse": [
+            0.03999999910593033,
+            0.5799999833106995,
+            0.6600000262260437,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID44/ID44",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "section_1_015_horn2horn",
+          "triangle_count": 2312,
+          "normal_count": 4514,
+          "vertex_count": 4514,
+          "min_m": [
+            0.012,
+            -0.0099,
+            0.019
+          ],
+          "max_m": [
+            0.0171,
+            0.0099,
+            0.0638968
+          ],
+          "diffuse": [
+            0.03999999910593033,
+            0.5799999833106995,
+            0.6600000262260437,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID53/ID53",
+          "maximum_vertex_error_m": 0.0
+        }
+      ]
+    },
+    {
+      "mesh": "section_2.dae",
+      "status": "PASS",
+      "errors": [],
+      "instances": [
+        {
+          "name": "section_2_000_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            0.00362514,
+            0.021625
+          ],
+          "max_m": [
+            0.01475,
+            0.00837496,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "section_2_001_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            0.00362514,
+            0.021625
+          ],
+          "max_m": [
+            0.01535,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_2_002_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01535,
+            0.00362514,
+            0.021625
+          ],
+          "max_m": [
+            -0.00875,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_2_003_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01475,
+            0.00362504,
+            0.021625
+          ],
+          "max_m": [
+            -0.00875,
+            0.00837486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "section_2_004_body",
+          "triangle_count": 14134,
+          "normal_count": 28619,
+          "vertex_count": 28619,
+          "min_m": [
+            -0.012,
+            -0.012,
+            -0.009
+          ],
+          "max_m": [
+            0.012,
+            0.012,
+            0.027
+          ],
+          "diffuse": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.23000000417232513,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID22/ID22",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "section_2_005_horn",
+          "triangle_count": 4364,
+          "normal_count": 8815,
+          "vertex_count": 8815,
+          "min_m": [
+            0.0121,
+            -0.008897,
+            -0.0089
+          ],
+          "max_m": [
+            0.015,
+            0.008897,
+            0.0089
+          ],
+          "diffuse": [
+            0.6700000166893005,
+            0.7200000286102295,
+            0.7799999713897705,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID31/ID31",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "section_2_006_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01475,
+            -0.00837496,
+            0.021625
+          ],
+          "max_m": [
+            -0.00875,
+            -0.00362514,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "section_2_007_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01535,
+            -0.00837486,
+            0.021625
+          ],
+          "max_m": [
+            -0.00875,
+            -0.00362514,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_2_008_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01535,
+            -0.00237486,
+            0.021625
+          ],
+          "max_m": [
+            -0.00875,
+            0.00237486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_2_009_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01475,
+            -0.00237496,
+            0.021625
+          ],
+          "max_m": [
+            -0.00875,
+            0.00237486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_2_010_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            -0.00837486,
+            0.021625
+          ],
+          "max_m": [
+            0.01475,
+            -0.00362504,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID42/ID42/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "section_2_011_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            -0.00837486,
+            0.021625
+          ],
+          "max_m": [
+            0.01535,
+            -0.00362514,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID42/ID42/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_2_012_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            -0.00237486,
+            0.021625
+          ],
+          "max_m": [
+            0.01475,
+            0.00237496,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID43/ID43/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_2_013_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            -0.00237486,
+            0.021625
+          ],
+          "max_m": [
+            0.01535,
+            0.00237486,
+            0.026375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID43/ID43/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_2_014_short_U",
+          "triangle_count": 3130,
+          "normal_count": 6094,
+          "vertex_count": 6094,
+          "min_m": [
+            -0.0141,
+            -0.01,
+            0.02
+          ],
+          "max_m": [
+            0.0141,
+            0.01,
+            0.03
+          ],
+          "diffuse": [
+            0.8799999952316284,
+            0.5699999928474426,
+            0.07999999821186066,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID44/ID44",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        }
+      ]
+    },
+    {
+      "mesh": "section_3.dae",
+      "status": "PASS",
+      "errors": [],
+      "instances": [
+        {
+          "name": "section_3_000_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            -0.020375,
+            -0.00237496
+          ],
+          "max_m": [
+            0.01475,
+            -0.015625,
+            0.00237486
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_3_001_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            -0.020375,
+            -0.00237486
+          ],
+          "max_m": [
+            0.01535,
+            -0.015625,
+            0.00237486
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_3_002_horn2horn",
+          "triangle_count": 2312,
+          "normal_count": 4514,
+          "vertex_count": 4514,
+          "min_m": [
+            0.012,
+            -0.0578968,
+            -0.0099
+          ],
+          "max_m": [
+            0.0171,
+            -0.013,
+            0.0099
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.27000001072883606,
+            0.6800000071525574,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20",
+          "maximum_vertex_error_m": 6.938893903907228e-18
+        },
+        {
+          "name": "section_3_003_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01475,
+            -0.020375,
+            0.00362514
+          ],
+          "max_m": [
+            -0.00875,
+            -0.015625,
+            0.00837496
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID29/ID29/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "section_3_004_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01535,
+            -0.020375,
+            0.00362514
+          ],
+          "max_m": [
+            -0.00875,
+            -0.015625,
+            0.00837486
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID29/ID29/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_3_005_side2side",
+          "triangle_count": 4144,
+          "normal_count": 10809,
+          "vertex_count": 10809,
+          "min_m": [
+            -0.0171,
+            -0.0579,
+            -0.0099
+          ],
+          "max_m": [
+            -0.012,
+            -0.013,
+            0.0099
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.27000001072883606,
+            0.6800000071525574,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID30/ID30",
+          "maximum_vertex_error_m": 6.938893903907228e-18
+        },
+        {
+          "name": "section_3_006_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01535,
+            -0.020375,
+            -0.00237486
+          ],
+          "max_m": [
+            -0.00875,
+            -0.015625,
+            0.00237486
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID37/ID37/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_3_007_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01475,
+            -0.020375,
+            -0.00237486
+          ],
+          "max_m": [
+            -0.00875,
+            -0.015625,
+            0.00237496
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID37/ID37/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_3_008_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            -0.020375,
+            0.00362514
+          ],
+          "max_m": [
+            0.01535,
+            -0.015625,
+            0.00837486
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID38/ID38/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_3_009_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            -0.020375,
+            0.00362504
+          ],
+          "max_m": [
+            0.01475,
+            -0.015625,
+            0.00837486
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID38/ID38/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "section_3_010_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.01535,
+            -0.020375,
+            -0.00837486
+          ],
+          "max_m": [
+            -0.00875,
+            -0.015625,
+            -0.00362514
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID39/ID39/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_3_011_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.01475,
+            -0.020375,
+            -0.00837486
+          ],
+          "max_m": [
+            -0.00875,
+            -0.015625,
+            -0.00362504
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID39/ID39/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "section_3_012_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            -0.020375,
+            -0.00837496
+          ],
+          "max_m": [
+            0.01475,
+            -0.015625,
+            -0.00362514
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "section_3_013_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            -0.020375,
+            -0.00837486
+          ],
+          "max_m": [
+            0.01535,
+            -0.015625,
+            -0.00362514
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_3_014_horn",
+          "triangle_count": 4364,
+          "normal_count": 8815,
+          "vertex_count": 8815,
+          "min_m": [
+            -0.00889917866178,
+            -0.0089002366227,
+            -0.015
+          ],
+          "max_m": [
+            0.0088979498177,
+            0.0089002366227,
+            -0.0121
+          ],
+          "diffuse": [
+            0.6700000166893005,
+            0.7200000286102295,
+            0.7799999713897705,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID42/ID42",
+          "maximum_vertex_error_m": 4.999906738634152e-15
+        },
+        {
+          "name": "section_3_015_body",
+          "triangle_count": 14134,
+          "normal_count": 28619,
+          "vertex_count": 28619,
+          "min_m": [
+            -0.012,
+            -0.027,
+            -0.012
+          ],
+          "max_m": [
+            0.012,
+            0.009,
+            0.012
+          ],
+          "diffuse": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.23000000417232513,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID51/ID51",
+          "maximum_vertex_error_m": 0.0
+        }
+      ]
+    },
+    {
+      "mesh": "section_4.dae",
+      "status": "PASS",
+      "errors": [],
+      "instances": [
+        {
+          "name": "section_4_000_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_4_001_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "section_4_002_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.003625,
+            0.02162514,
+            0.00865
+          ],
+          "max_m": [
+            0.008375,
+            0.02637486,
+            0.01525
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_4_003_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.003625,
+            0.02162504,
+            0.00865
+          ],
+          "max_m": [
+            0.008375,
+            0.02637486,
+            0.01465
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "section_4_004_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            -0.00237486,
+            -0.008375
+          ],
+          "max_m": [
+            0.01535,
+            0.00237486,
+            -0.003625
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 1.734723475976807e-18
+        },
+        {
+          "name": "section_4_005_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            -0.00237496,
+            -0.008375
+          ],
+          "max_m": [
+            0.01475,
+            0.00237486,
+            -0.003625
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 1.734723475976807e-18
+        },
+        {
+          "name": "section_4_006_fixed_part",
+          "triangle_count": 4701,
+          "normal_count": 8138,
+          "vertex_count": 8138,
+          "min_m": [
+            0.012,
+            -0.069994,
+            -0.012
+          ],
+          "max_m": [
+            0.0171,
+            0.022,
+            0.012
+          ],
+          "diffuse": [
+            0.1599999964237213,
+            0.6399999856948853,
+            0.3199999928474426,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID22/ID22",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "section_4_007_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.008375,
+            0.03762514,
+            0.00865
+          ],
+          "max_m": [
+            -0.003625,
+            0.04237486,
+            0.01525
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID31/ID31/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 6.938893903907228e-18
+        },
+        {
+          "name": "section_4_008_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.008375,
+            0.03762504,
+            0.00865
+          ],
+          "max_m": [
+            -0.003625,
+            0.04237486,
+            0.01465
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID31/ID31/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "section_4_009_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            0.01562504,
+            0.003625
+          ],
+          "max_m": [
+            0.01475,
+            0.02037486,
+            0.008375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID32/ID32/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "section_4_010_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            0.01562514,
+            0.003625
+          ],
+          "max_m": [
+            0.01535,
+            0.02037486,
+            0.008375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID32/ID32/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_4_011_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            -0.00237496,
+            0.003625
+          ],
+          "max_m": [
+            0.01475,
+            0.00237486,
+            0.008375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID33/ID33/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 1.734723475976807e-18
+        },
+        {
+          "name": "section_4_012_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            -0.00237486,
+            0.003625
+          ],
+          "max_m": [
+            0.01535,
+            0.00237486,
+            0.008375
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID33/ID33/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 1.734723475976807e-18
+        },
+        {
+          "name": "section_4_013_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.003625,
+            0.03762514,
+            -0.01545
+          ],
+          "max_m": [
+            0.008375,
+            0.04237486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID34/ID34/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 6.938893903907228e-18
+        },
+        {
+          "name": "section_4_014_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.003625,
+            0.03762514,
+            -0.01485
+          ],
+          "max_m": [
+            0.008375,
+            0.04237496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID34/ID34/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "section_4_015_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.003625,
+            0.03762504,
+            0.00865
+          ],
+          "max_m": [
+            0.008375,
+            0.04237486,
+            0.01465
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID35/ID35/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "section_4_016_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.003625,
+            0.03762514,
+            0.00865
+          ],
+          "max_m": [
+            0.008375,
+            0.04237486,
+            0.01525
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID35/ID35/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 6.938893903907228e-18
+        },
+        {
+          "name": "section_4_017_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.008375,
+            0.03762514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.04237496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID36/ID36/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "section_4_018_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.008375,
+            0.03762514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.04237486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID36/ID36/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 6.938893903907228e-18
+        },
+        {
+          "name": "section_4_019_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.008375,
+            0.02162504,
+            0.00865
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            0.01465
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID37/ID37/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "section_4_020_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            0.00865
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            0.01525
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID37/ID37/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_4_021_body",
+          "triangle_count": 14134,
+          "normal_count": 28619,
+          "vertex_count": 28619,
+          "min_m": [
+            -0.012,
+            -0.009,
+            -0.012
+          ],
+          "max_m": [
+            0.012,
+            0.027,
+            0.012
+          ],
+          "diffuse": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.23000000417232513,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID38/ID38/anonymous/instance:ID39/ID39",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "section_4_022_horn",
+          "triangle_count": 4364,
+          "normal_count": 8815,
+          "vertex_count": 8815,
+          "min_m": [
+            -0.0089,
+            -0.008897,
+            0.0121
+          ],
+          "max_m": [
+            0.0089,
+            0.008897,
+            0.015
+          ],
+          "diffuse": [
+            0.6700000166893005,
+            0.7200000286102295,
+            0.7799999713897705,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID38/ID38/anonymous/instance:ID48/ID48",
+          "maximum_vertex_error_m": 0.0
+        },
+        {
+          "name": "section_4_023_fixation",
+          "triangle_count": 4112,
+          "normal_count": 7972,
+          "vertex_count": 7972,
+          "min_m": [
+            -0.01,
+            0.02,
+            -0.0142
+          ],
+          "max_m": [
+            0.01,
+            0.044,
+            0.014
+          ],
+          "diffuse": [
+            0.1599999964237213,
+            0.6399999856948853,
+            0.3199999928474426,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID57/ID57",
+          "maximum_vertex_error_m": 1.0408340855860843e-17
+        },
+        {
+          "name": "section_4_024_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.00875,
+            0.01562504,
+            -0.008375
+          ],
+          "max_m": [
+            0.01475,
+            0.02037486,
+            -0.003625
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID64/ID64/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "section_4_025_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.00875,
+            0.01562514,
+            -0.008375
+          ],
+          "max_m": [
+            0.01535,
+            0.02037486,
+            -0.003625
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID64/ID64/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "section_4_026_body",
+          "triangle_count": 14134,
+          "normal_count": 28619,
+          "vertex_count": 28619,
+          "min_m": [
+            -0.012,
+            0.031,
+            -0.012
+          ],
+          "max_m": [
+            0.012,
+            0.067,
+            0.012
+          ],
+          "diffuse": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.23000000417232513,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID65/ID65/anonymous/instance:ID39/ID39",
+          "maximum_vertex_error_m": 1.3877787807814457e-17
+        },
+        {
+          "name": "section_4_027_horn",
+          "triangle_count": 4364,
+          "normal_count": 8815,
+          "vertex_count": 8815,
+          "min_m": [
+            0.0121,
+            0.049103,
+            -0.0089
+          ],
+          "max_m": [
+            0.015,
+            0.066897,
+            0.0089
+          ],
+          "diffuse": [
+            0.6700000166893005,
+            0.7200000286102295,
+            0.7799999713897705,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID65/ID65/anonymous/instance:ID48/ID48",
+          "maximum_vertex_error_m": 1.3877787807814457e-17
+        },
+        {
+          "name": "section_4_028_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.003625,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            0.008375,
+            0.02637496,
+            -0.00885
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID66/ID66/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 1.559863349598345e-14
+        },
+        {
+          "name": "section_4_029_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.003625,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            0.008375,
+            0.02637486,
+            -0.00885
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID66/ID66/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        }
+      ]
+    },
+    {
+      "mesh": "gripper.dae",
+      "status": "PASS",
+      "errors": [],
+      "instances": [
+        {
+          "name": "gripper_000_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.002375,
+            0.00362504,
+            0.01185
+          ],
+          "max_m": [
+            0.002375,
+            0.00837486,
+            0.01785
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "gripper_001_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.002375,
+            0.00362514,
+            0.01185
+          ],
+          "max_m": [
+            0.002375,
+            0.00837486,
+            0.01845
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "gripper_002_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            0.003625,
+            -0.00237496,
+            0.01185
+          ],
+          "max_m": [
+            0.008375,
+            0.00237486,
+            0.01785
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "gripper_003_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            0.003625,
+            -0.00237486,
+            0.01185
+          ],
+          "max_m": [
+            0.008375,
+            0.00237486,
+            0.01845
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "gripper_004_rotative_part",
+          "triangle_count": 7884,
+          "normal_count": 17358,
+          "vertex_count": 17358,
+          "min_m": [
+            -0.0171,
+            -0.0699943,
+            -0.017
+          ],
+          "max_m": [
+            0.0099,
+            0.00989763,
+            0.0172
+          ],
+          "diffuse": [
+            0.800000011920929,
+            0.11999999731779099,
+            0.4000000059604645,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "gripper_005_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.008375,
+            -0.00237486,
+            0.01185
+          ],
+          "max_m": [
+            -0.003625,
+            0.00237486,
+            0.01845
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID30/ID30/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "gripper_006_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.008375,
+            -0.00237496,
+            0.01185
+          ],
+          "max_m": [
+            -0.003625,
+            0.00237486,
+            0.01785
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID30/ID30/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        },
+        {
+          "name": "gripper_007_base",
+          "triangle_count": 3032,
+          "normal_count": 7858,
+          "vertex_count": 7858,
+          "min_m": [
+            -0.002375,
+            -0.00837496,
+            0.01185
+          ],
+          "max_m": [
+            0.002375,
+            -0.00362514,
+            0.01785
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID31/ID31/anonymous/instance:ID4/ID4",
+          "maximum_vertex_error_m": 4.799979858027825e-15
+        },
+        {
+          "name": "gripper_008_insert",
+          "triangle_count": 744,
+          "normal_count": 1703,
+          "vertex_count": 1703,
+          "min_m": [
+            -0.002375,
+            -0.00837486,
+            0.01185
+          ],
+          "max_m": [
+            0.002375,
+            -0.00362514,
+            0.01845
+          ],
+          "diffuse": [
+            0.47999998927116394,
+            0.5400000214576721,
+            0.6100000143051147,
+            1
+          ],
+          "source_ancestry": "ID2/anonymous/instance:ID31/ID31/anonymous/instance:ID13/ID13",
+          "maximum_vertex_error_m": 3.469446951953614e-18
+        }
+      ]
+    }
+  ]
+}

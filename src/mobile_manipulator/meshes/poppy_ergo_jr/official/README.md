@@ -1,4 +1,9 @@
-# Poppy Ergo Jr official runtime visuals
+# Poppy Ergo Jr official source visuals
+
+Runtime now uses the geometrically equivalent, flattened and colored assets in
+../gazebo_inspection. This avoids repeated-instance transform errors in Gazebo's
+loader. These original DAE files remain unmodified as the source of truth.
+See scripts/cad/build_gazebo_visuals.py and docs/assembly_render_fix.md.
 
 These seven Collada files are copied without geometric edits from
 [poppy-project/poppy_ergo_jr_description](https://github.com/poppy-project/poppy_ergo_jr_description)
@@ -17,9 +22,10 @@ GPL-3.0-only; the complete license text is in `LICENSE_GPL-3.0.txt`. Their
 SHA-256 hashes are recorded by
 `results/verified/mechanical_alignment/alignment_manifest.json`.
 
-They are runtime assets only because the bounded autonomous reconstruction could
+They were originally selected as runtime assets because the bounded autonomous reconstruction could
 align the available printed CAD parts but could not reconstruct or verify the
-missing XL-320 servo bodies, horns and fasteners. The final Xacro therefore uses
-the official visuals under the explicitly documented B3 fallback. The repository
+missing XL-320 servo bodies, horns and fasteners. The B3 Xacro originally used
+these official visuals directly; the current runtime bakes their instances without
+changing the source geometry. The repository
 code remains Apache-2.0. The original hardware CAD and its derived teaching
 meshes remain separately attributed under CC BY-SA 4.0.

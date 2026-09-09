@@ -136,6 +136,7 @@ def generate_launch_description():
         parameters=[{
             'output_dir': output_dir,
             'fps': ParameterValue(evidence_fps, value_type=float),
+            'grasp_mode': grasp_mode,
         }],
         condition=IfCondition(capture_evidence),
         output='screen',

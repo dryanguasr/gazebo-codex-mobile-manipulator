@@ -12,6 +12,7 @@ for category, pattern in (
     ('visual', '*.stl'),
     ('collision', '*.stl'),
     ('official', '*.dae'),
+    ('gazebo_inspection', '*.dae'),
 ):
     directory = asset_root / category
     runtime_mesh_data_files.append(
@@ -59,6 +60,13 @@ setup(
         (
             'share/' + package_name + '/meshes/poppy_ergo_jr/licenses/official',
             official_license_files,
+        ),
+        (
+            'share/' + package_name + '/meshes/poppy_ergo_jr/gazebo_inspection',
+            [
+                str(asset_root / 'gazebo_inspection/manifest.json'),
+                str(asset_root / 'gazebo_inspection/README.md'),
+            ],
         ),
         *runtime_mesh_data_files,
     ],

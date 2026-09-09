@@ -94,8 +94,9 @@
   <xacro:wheel name="rear_right" x="-${wheel_x}" y="-${wheel_y}"/>
 
   <!--
-    Final B3 consolidation: exact visual assembly from the pinned official
-    description. CAD-derived teaching meshes remain under visual/ and are
+    Gazebo-compatible visual assembly from the pinned official description:
+    instance transforms are baked; original files remain under official/.
+    CAD-derived teaching meshes remain under visual/ and are
     registered in results/verified/mechanical_alignment/alignment_manifest.json.
   -->
   <link name="poppy_mount_link">
@@ -107,7 +108,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/base.dae"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/gazebo_inspection/base.dae"/>
       </geometry>
     </visual>
     <collision>
@@ -130,7 +131,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/long_U.dae"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/gazebo_inspection/long_U.dae"/>
       </geometry>
     </visual>
     <collision>
@@ -155,7 +156,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 1.5707963267949 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/section_1.dae"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/gazebo_inspection/section_1.dae"/>
       </geometry>
     </visual>
     <collision>
@@ -180,7 +181,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 1.5707963267949 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/section_2.dae"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/gazebo_inspection/section_2.dae"/>
       </geometry>
     </visual>
     <collision>
@@ -205,7 +206,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 3.14159268 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/section_3.dae"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/gazebo_inspection/section_3.dae"/>
       </geometry>
     </visual>
     <collision>
@@ -230,7 +231,7 @@
     <visual>
       <origin xyz="0 -0.058 0" rpy="0 -1.5707963267949 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/section_4.dae"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/gazebo_inspection/section_4.dae"/>
       </geometry>
     </visual>
     <collision>
@@ -245,9 +246,9 @@
     </xacro:unless>
     <xacro:if value="$(arg manipulation_enabled)">
       <collision name="poppy_fixed_finger_collision">
-        <!-- Functional contact pad centered on the audited fingertip frame. -->
-        <origin xyz="0 -0.11 0"/>
-        <geometry><sphere radius="0.003"/></geometry>
+        <!-- Inner face z=14 mm matches the official distal CAD plate. -->
+        <origin xyz="0 -0.110 0.01555"/>
+        <geometry><box size="0.024 0.030 0.0031"/></geometry>
       </collision>
     </xacro:if>
   </link>
@@ -268,7 +269,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/official/gripper.dae"/>
+        <mesh filename="file://$(find mobile_manipulator)/meshes/poppy_ergo_jr/gazebo_inspection/gripper.dae"/>
       </geometry>
     </visual>
     <xacro:unless value="$(arg manipulation_enabled)">
@@ -280,9 +281,8 @@
     </xacro:unless>
     <xacro:if value="$(arg manipulation_enabled)">
       <collision name="poppy_moving_finger_collision">
-        <!-- Functional contact pad centered on the audited fingertip frame. -->
-        <origin xyz="0 -0.052 0"/>
-        <geometry><sphere radius="0.003"/></geometry>
+        <origin xyz="-0.01555 -0.052 0.0001"/>
+        <geometry><box size="0.0031 0.030 0.024"/></geometry>
       </collision>
     </xacro:if>
   </link>
@@ -307,21 +307,34 @@
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
   <!--
-    The validated tool frame remains on the fixed fingertip.  At m6=0.60 rad,
-    this grasp frame is the midpoint between the two audited fingertip frames;
-    it does not redefine or move poppy_tool_frame.
+    The historical tool/tip frames are retained for tracking compatibility.
+    Actual contact frames lie on the visible inner CAD surfaces. The grasp
+    center fits a 30 mm cylinder at m6 approximately 0.04 rad.
   -->
   <link name="poppy_grasp_frame"/>
   <joint name="poppy_grasp_frame_joint" type="fixed">
     <parent link="poppy_tool_frame"/>
     <child link="poppy_grasp_frame"/>
-    <origin xyz="0 0.0147 0.00455" rpy="0 0 0"/>
+    <origin xyz="0 0.0015 0" rpy="0 0 0"/>
   </joint>
   <link name="poppy_moving_tip"/>
   <joint name="poppy_moving_tip_joint" type="fixed">
     <parent link="poppy_link_6"/>
     <child link="poppy_moving_tip"/>
     <origin xyz="0 -0.052 0" rpy="-1.5707963267949 0 0"/>
+  </joint>
+
+  <link name="poppy_fixed_contact"/>
+  <joint name="poppy_fixed_contact_joint" type="fixed">
+    <parent link="poppy_link_5"/>
+    <child link="poppy_fixed_contact"/>
+    <origin xyz="0 -0.110 0.014"/>
+  </joint>
+  <link name="poppy_moving_contact"/>
+  <joint name="poppy_moving_contact_joint" type="fixed">
+    <parent link="poppy_link_6"/>
+    <child link="poppy_moving_contact"/>
+    <origin xyz="-0.014 -0.052 0.0001"/>
   </joint>
 
   <!-- The tracking camera stays on the vehicle front to preserve the A/B task. -->

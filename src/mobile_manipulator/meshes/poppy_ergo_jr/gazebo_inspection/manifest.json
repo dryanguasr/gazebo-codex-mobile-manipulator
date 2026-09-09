@@ -1,0 +1,2702 @@
+{
+  "license": "GPL-3.0-only (derivative of official Poppy DAE assets)",
+  "operation": "bake instance transforms; unique geometry names; explicit normals/materials",
+  "joint_or_collision_changes": false,
+  "palette": {
+    "links": {
+      "base": [
+        0.24,
+        0.3,
+        0.37
+      ],
+      "long_U": [
+        0.08,
+        0.38,
+        0.72
+      ],
+      "section_1": [
+        0.04,
+        0.58,
+        0.66
+      ],
+      "section_2": [
+        0.88,
+        0.57,
+        0.08
+      ],
+      "section_3": [
+        0.48,
+        0.27,
+        0.68
+      ],
+      "section_4": [
+        0.16,
+        0.64,
+        0.32
+      ],
+      "gripper": [
+        0.8,
+        0.12,
+        0.4
+      ]
+    },
+    "hardware": {
+      "servo": [
+        0.15,
+        0.18,
+        0.23
+      ],
+      "horn": [
+        0.67,
+        0.72,
+        0.78
+      ],
+      "fastener": [
+        0.48,
+        0.54,
+        0.61
+      ]
+    }
+  },
+  "meshes": [
+    {
+      "source": "src/mobile_manipulator/meshes/poppy_ergo_jr/official/base.dae",
+      "source_sha256": "cee7d49af3901d13b1f2c8a5894c1b1640b275c010b71696563bd08f960d857a",
+      "output": "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/base.dae",
+      "output_sha256": "8e0d475ab3d0d380d08e45a2189540912807f5853cfebba7bf51d25bf8194e45",
+      "instances": [
+        {
+          "name": "base_000_base",
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.019798100000000003,
+            0.00680944,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00485
+          ],
+          "vertex_mean_m": [
+            0.022173107331342225,
+            0.009184407693856811,
+            0.00043176563324538194
+          ]
+        },
+        {
+          "name": "base_001_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.019798100000000003,
+            0.006809540000000001,
+            -0.00115
+          ],
+          "max_m": [
+            0.0245481,
+            0.01155926,
+            0.00545
+          ],
+          "vertex_mean_m": [
+            0.0221730755903583,
+            0.009184439358288778,
+            0.003925034491978611
+          ]
+        },
+        {
+          "name": "base_002_base",
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.00885,
+            -0.002374859999999992,
+            0.009325
+          ],
+          "max_m": [
+            0.01485,
+            0.002374960000000008,
+            0.014075
+          ],
+          "vertex_mean_m": [
+            0.010431765633245313,
+            -7.693856803662372e-09,
+            0.011700007331342362
+          ]
+        },
+        {
+          "name": "base_003_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.00885,
+            -0.002374859999999992,
+            0.009325
+          ],
+          "max_m": [
+            0.01545,
+            0.0023748600000000077,
+            0.014075
+          ],
+          "vertex_mean_m": [
+            0.01392503449197868,
+            -3.935828876235324e-08,
+            0.011699975590358281
+          ]
+        },
+        {
+          "name": "base_004_support_camera",
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21",
+          "role": "printed",
+          "triangle_count": 6204,
+          "min_m": [
+            -0.016099999999974527,
+            -0.02799994814,
+            0.011128896000000001
+          ],
+          "max_m": [
+            0.016100000000025472,
+            -0.01396391,
+            0.032820614000000005
+          ],
+          "vertex_mean_m": [
+            4.270903398521402e-08,
+            -0.02279740511168209,
+            0.019980895532559873
+          ]
+        },
+        {
+          "name": "base_005_PI_CAMERA",
+          "source_ancestry": "ID2/anonymous/instance:ID30/ID30",
+          "role": "printed",
+          "triangle_count": 1778,
+          "min_m": [
+            -0.012499999999974531,
+            -0.03180494629353,
+            0.001902402174999998
+          ],
+          "max_m": [
+            0.01250000000002547,
+            -0.017248382899999998,
+            0.0325675452
+          ],
+          "vertex_mean_m": [
+            -9.059514567977951e-06,
+            -0.02459517158018789,
+            0.02212441628350231
+          ]
+        },
+        {
+          "name": "base_006_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID39/ID39/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.0245481,
+            -0.01155926,
+            -0.00115
+          ],
+          "max_m": [
+            -0.019798100000000003,
+            -0.006809540000000001,
+            0.00545
+          ],
+          "vertex_mean_m": [
+            -0.02217312440964169,
+            -0.009184360641711247,
+            0.003925034491978611
+          ]
+        },
+        {
+          "name": "base_007_base",
+          "source_ancestry": "ID2/anonymous/instance:ID39/ID39/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.0245481,
+            -0.011559360000000001,
+            -0.00115
+          ],
+          "max_m": [
+            -0.019798100000000003,
+            -0.006809540000000001,
+            0.00485
+          ],
+          "vertex_mean_m": [
+            -0.022173092668657766,
+            -0.009184392306143178,
+            0.00043176563324538194
+          ]
+        },
+        {
+          "name": "base_008_disk_support",
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40",
+          "role": "printed",
+          "triangle_count": 10958,
+          "min_m": [
+            -0.075,
+            -0.0371184,
+            0.0
+          ],
+          "max_m": [
+            0.075,
+            0.112882,
+            0.0040999999999999995
+          ],
+          "vertex_mean_m": [
+            -0.0025511424724574245,
+            0.030983769532718832,
+            0.0014807926267282178
+          ]
+        },
+        {
+          "name": "base_009_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID49/ID49/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.00885,
+            0.01562514,
+            0.021325
+          ],
+          "max_m": [
+            0.01545,
+            0.020374859999999998,
+            0.026074999999999997
+          ],
+          "vertex_mean_m": [
+            0.01392503449197868,
+            0.017999960641711207,
+            0.02369997559035828
+          ]
+        },
+        {
+          "name": "base_010_base",
+          "source_ancestry": "ID2/anonymous/instance:ID49/ID49/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.00885,
+            0.01562514,
+            0.021325
+          ],
+          "max_m": [
+            0.01485,
+            0.020374959999999998,
+            0.026074999999999997
+          ],
+          "vertex_mean_m": [
+            0.010431765633245313,
+            0.017999992306143197,
+            0.023700007331342365
+          ]
+        },
+        {
+          "name": "base_011_base",
+          "source_ancestry": "ID2/anonymous/instance:ID50/ID50/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.012350000000000002,
+            -0.026375,
+            0.016325140000000002
+          ],
+          "max_m": [
+            0.01835,
+            -0.021625000000000002,
+            0.02107496
+          ],
+          "vertex_mean_m": [
+            0.0139317656332457,
+            -0.02400000733134231,
+            0.018699992306143175
+          ]
+        },
+        {
+          "name": "base_012_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID50/ID50/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.012350000000000002,
+            -0.026375,
+            0.016325140000000002
+          ],
+          "max_m": [
+            0.01895,
+            -0.021625000000000002,
+            0.02107486
+          ],
+          "vertex_mean_m": [
+            0.017425034491978696,
+            -0.023999975590358297,
+            0.018699960641711227
+          ]
+        },
+        {
+          "name": "base_013_base",
+          "source_ancestry": "ID2/anonymous/instance:ID51/ID51/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01485,
+            -0.002374859999999995,
+            0.021325
+          ],
+          "max_m": [
+            -0.00885,
+            0.002374960000000005,
+            0.026074999999999997
+          ],
+          "vertex_mean_m": [
+            -0.01043176563324549,
+            -7.693856806799977e-09,
+            0.023699992668657643
+          ]
+        },
+        {
+          "name": "base_014_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID51/ID51/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.01545,
+            -0.002374859999999995,
+            0.021325
+          ],
+          "max_m": [
+            -0.00885,
+            0.0023748600000000047,
+            0.026074999999999997
+          ],
+          "vertex_mean_m": [
+            -0.013925034491978584,
+            -3.935828876556989e-08,
+            0.02370002440964169
+          ]
+        },
+        {
+          "name": "base_015_base",
+          "source_ancestry": "ID2/anonymous/instance:ID52/ID52/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.0068094,
+            -0.02454806,
+            -0.00115
+          ],
+          "max_m": [
+            0.011559400000000001,
+            -0.01979824,
+            0.00485
+          ],
+          "vertex_mean_m": [
+            0.009184407331342336,
+            -0.022173092306143175,
+            0.00043176563324538194
+          ]
+        },
+        {
+          "name": "base_016_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID52/ID52/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.0068094,
+            -0.02454796,
+            -0.00115
+          ],
+          "max_m": [
+            0.011559400000000001,
+            -0.01979824,
+            0.00545
+          ],
+          "vertex_mean_m": [
+            0.009184375590358292,
+            -0.022173060641711234,
+            0.003925034491978611
+          ]
+        },
+        {
+          "name": "base_017_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID53/ID53/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.00885,
+            0.01562514,
+            0.009325
+          ],
+          "max_m": [
+            0.015450000000000002,
+            0.020374859999999998,
+            0.014075
+          ],
+          "vertex_mean_m": [
+            0.01392503449197868,
+            0.01800003935828875,
+            0.011700024409641704
+          ]
+        },
+        {
+          "name": "base_018_base",
+          "source_ancestry": "ID2/anonymous/instance:ID53/ID53/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.00885,
+            0.01562504,
+            0.009325
+          ],
+          "max_m": [
+            0.01485,
+            0.020374859999999998,
+            0.014075
+          ],
+          "vertex_mean_m": [
+            0.010431765633245313,
+            0.01800000769385683,
+            0.011699992668657655
+          ]
+        },
+        {
+          "name": "base_019_base",
+          "source_ancestry": "ID2/anonymous/instance:ID54/ID54",
+          "role": "printed",
+          "triangle_count": 20247,
+          "min_m": [
+            -0.028,
+            -0.0289997,
+            0.0021
+          ],
+          "max_m": [
+            0.028,
+            0.0279972,
+            0.0287
+          ],
+          "vertex_mean_m": [
+            2.115996529493616e-06,
+            -0.0033911230959841263,
+            0.013041038763827865
+          ]
+        },
+        {
+          "name": "base_020_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID63/ID63/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.02454796,
+            0.0068094,
+            -0.00115
+          ],
+          "max_m": [
+            -0.01979824,
+            0.011559400000000001,
+            0.00545
+          ],
+          "vertex_mean_m": [
+            -0.022173060641711234,
+            0.009184424409641713,
+            0.003925034491978607
+          ]
+        },
+        {
+          "name": "base_021_base",
+          "source_ancestry": "ID2/anonymous/instance:ID63/ID63/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.02454806,
+            0.0068094,
+            -0.00115
+          ],
+          "max_m": [
+            -0.01979824,
+            0.011559400000000001,
+            0.00485
+          ],
+          "vertex_mean_m": [
+            -0.02217309230614312,
+            0.00918439266865763,
+            0.00043176563324538297
+          ]
+        },
+        {
+          "name": "base_022_horn",
+          "source_ancestry": "ID2/anonymous/instance:ID64/ID64/anonymous/instance:ID65/ID65",
+          "role": "horn",
+          "triangle_count": 4364,
+          "min_m": [
+            -0.0089,
+            -0.008896999999999992,
+            0.0298
+          ],
+          "max_m": [
+            0.0089,
+            0.008897000000000009,
+            0.0327
+          ],
+          "vertex_mean_m": [
+            7.050674353033466e-09,
+            4.5107011078623e-08,
+            0.031576549630996195
+          ]
+        },
+        {
+          "name": "base_023_body",
+          "source_ancestry": "ID2/anonymous/instance:ID64/ID64/anonymous/instance:ID74/ID74",
+          "role": "servo",
+          "triangle_count": 14134,
+          "min_m": [
+            -0.012000000000000002,
+            -0.008999999999999992,
+            0.0057
+          ],
+          "max_m": [
+            0.012000000000000007,
+            0.02700000000000001,
+            0.0297
+          ],
+          "vertex_mean_m": [
+            -6.557758643913737e-07,
+            0.013205198594728672,
+            0.016627547529239218
+          ]
+        },
+        {
+          "name": "base_024_base",
+          "source_ancestry": "ID2/anonymous/instance:ID83/ID83/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01485,
+            0.01562514,
+            0.009325
+          ],
+          "max_m": [
+            -0.00885,
+            0.020374959999999998,
+            0.014075
+          ],
+          "vertex_mean_m": [
+            -0.01043176563324549,
+            0.017999992306143214,
+            0.011699992668657646
+          ]
+        },
+        {
+          "name": "base_025_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID83/ID83/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.01545,
+            0.01562514,
+            0.009325
+          ],
+          "max_m": [
+            -0.00885,
+            0.020374859999999998,
+            0.014075
+          ],
+          "vertex_mean_m": [
+            -0.013925034491978584,
+            0.017999960641711225,
+            0.011700024409641697
+          ]
+        },
+        {
+          "name": "base_026_base",
+          "source_ancestry": "ID2/anonymous/instance:ID84/ID84/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.011559400000000001,
+            0.019798140000000002,
+            -0.00115
+          ],
+          "max_m": [
+            -0.0068094,
+            0.02454796,
+            0.00485
+          ],
+          "vertex_mean_m": [
+            -0.009184392668657658,
+            0.022173107693856837,
+            0.00043176563324538194
+          ]
+        },
+        {
+          "name": "base_027_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID84/ID84/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.011559400000000001,
+            0.01979824,
+            -0.00115
+          ],
+          "max_m": [
+            -0.0068094,
+            0.02454796,
+            0.00545
+          ],
+          "vertex_mean_m": [
+            -0.009184424409641711,
+            0.022173139358288768,
+            0.003925034491978611
+          ]
+        },
+        {
+          "name": "base_028_base",
+          "source_ancestry": "ID2/anonymous/instance:ID85/ID85/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01835,
+            -0.02637486,
+            0.016325000000000003
+          ],
+          "max_m": [
+            -0.012350000000000002,
+            -0.02162504,
+            0.021075
+          ],
+          "vertex_mean_m": [
+            -0.013931765633245618,
+            -0.02400000769385683,
+            0.018699992668657697
+          ]
+        },
+        {
+          "name": "base_029_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID85/ID85/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.01895,
+            -0.02637486,
+            0.016325000000000003
+          ],
+          "max_m": [
+            -0.012350000000000002,
+            -0.02162514,
+            0.021075
+          ],
+          "vertex_mean_m": [
+            -0.01742503449197858,
+            -0.024000039358288767,
+            0.01870002440964171
+          ]
+        },
+        {
+          "name": "base_030_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID86/ID86/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.01545,
+            -0.002374859999999992,
+            0.009325
+          ],
+          "max_m": [
+            -0.00885,
+            0.0023748600000000077,
+            0.014075
+          ],
+          "vertex_mean_m": [
+            -0.013925034491978584,
+            -3.9358288762357876e-08,
+            0.011700024409641697
+          ]
+        },
+        {
+          "name": "base_031_base",
+          "source_ancestry": "ID2/anonymous/instance:ID86/ID86/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01485,
+            -0.002374859999999992,
+            0.009325
+          ],
+          "max_m": [
+            -0.00885,
+            0.002374960000000008,
+            0.014075
+          ],
+          "vertex_mean_m": [
+            -0.01043176563324549,
+            -7.693856803668665e-09,
+            0.011699992668657646
+          ]
+        },
+        {
+          "name": "base_032_base",
+          "source_ancestry": "ID2/anonymous/instance:ID87/ID87/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01485,
+            0.01562514,
+            0.021325
+          ],
+          "max_m": [
+            -0.00885,
+            0.020374959999999998,
+            0.026074999999999997
+          ],
+          "vertex_mean_m": [
+            -0.01043176563324549,
+            0.017999992306143214,
+            0.023699992668657643
+          ]
+        },
+        {
+          "name": "base_033_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID87/ID87/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.01545,
+            0.01562514,
+            0.021325
+          ],
+          "max_m": [
+            -0.00885,
+            0.020374859999999998,
+            0.026074999999999997
+          ],
+          "vertex_mean_m": [
+            -0.013925034491978584,
+            0.017999960641711225,
+            0.02370002440964169
+          ]
+        },
+        {
+          "name": "base_034_base",
+          "source_ancestry": "ID2/anonymous/instance:ID88/ID88/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.00885,
+            -0.002374859999999995,
+            0.021325
+          ],
+          "max_m": [
+            0.01485,
+            0.002374960000000005,
+            0.026074999999999997
+          ],
+          "vertex_mean_m": [
+            0.010431765633245313,
+            -7.693856806790824e-09,
+            0.023700007331342365
+          ]
+        },
+        {
+          "name": "base_035_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID88/ID88/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.00885,
+            -0.002374859999999995,
+            0.021325
+          ],
+          "max_m": [
+            0.01545,
+            0.0023748600000000047,
+            0.026074999999999997
+          ],
+          "vertex_mean_m": [
+            0.01392503449197868,
+            -3.935828876552351e-08,
+            0.02369997559035828
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src/mobile_manipulator/meshes/poppy_ergo_jr/official/long_U.dae",
+      "source_sha256": "5440d3e6320de0bec70566f5763f87fe0a8507fdbc63c6195d7560961bf2e6ff",
+      "output": "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/long_U.dae",
+      "output_sha256": "8ffd87c696ab8f50e01e69afa3fb20cdeffaa4ad1a954fd63a69d283c625a3e7",
+      "instances": [
+        {
+          "name": "long_U_000_ID2",
+          "source_ancestry": "ID2",
+          "role": "printed",
+          "triangle_count": 10284,
+          "min_m": [
+            -0.01715,
+            -0.0099,
+            -1.18333e-18
+          ],
+          "max_m": [
+            0.01715,
+            0.0099,
+            0.0338944
+          ],
+          "vertex_mean_m": [
+            -0.0019365400958016386,
+            1.7396517752630992e-06,
+            0.018497883205173614
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src/mobile_manipulator/meshes/poppy_ergo_jr/official/section_1.dae",
+      "source_sha256": "efdb9319c4bfcfd0958463de41737ad4aca08de1fd970193e35ec284a7478ea1",
+      "output": "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/section_1.dae",
+      "output_sha256": "79101ac25f28b4a345fc1b8d0a36692f5fa578a2776a2b785a8858dc34e0bef6",
+      "instances": [
+        {
+          "name": "section_1_000_base",
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01475,
+            -0.00837496,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999997,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            -0.010331765633245416,
+            -0.0059999923061431915,
+            0.024000007331342273
+          ]
+        },
+        {
+          "name": "section_1_001_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.015349999999999999,
+            -0.00837486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            -0.013825034491978574,
+            -0.005999960641711232,
+            0.023999975590358293
+          ]
+        },
+        {
+          "name": "section_1_002_base",
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999999,
+            0.00362504,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.01475,
+            0.00837486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            0.0060000076938568165,
+            0.023999992668657634
+          ]
+        },
+        {
+          "name": "section_1_003_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.00837486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            0.0060000393582887715,
+            0.024000024409641725
+          ]
+        },
+        {
+          "name": "section_1_004_base",
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999997,
+            -0.00237496,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.01475,
+            0.00237486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            7.69385681136364e-09,
+            0.023999992668657627
+          ]
+        },
+        {
+          "name": "section_1_005_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            -0.00237486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.00237486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            3.935828877007832e-08,
+            0.024000024409641725
+          ]
+        },
+        {
+          "name": "section_1_006_horn",
+          "source_ancestry": "ID2/anonymous/instance:ID22/ID22/anonymous/instance:ID23/ID23",
+          "role": "horn",
+          "triangle_count": 4364,
+          "min_m": [
+            0.0121,
+            -0.008897,
+            -0.0089
+          ],
+          "max_m": [
+            0.015,
+            0.008897,
+            0.0089
+          ],
+          "vertex_mean_m": [
+            0.013876549630996823,
+            4.510701107114178e-08,
+            -7.0506743542450654e-09
+          ]
+        },
+        {
+          "name": "section_1_007_body",
+          "source_ancestry": "ID2/anonymous/instance:ID22/ID22/anonymous/instance:ID32/ID32",
+          "role": "servo",
+          "triangle_count": 14134,
+          "min_m": [
+            -0.012,
+            -0.012,
+            -0.009
+          ],
+          "max_m": [
+            0.012,
+            0.012,
+            0.027
+          ],
+          "vertex_mean_m": [
+            -0.0010724524707615413,
+            -6.557758643899416e-07,
+            0.01320519859472868
+          ]
+        },
+        {
+          "name": "section_1_008_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.015349999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            0.00837486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            -0.013825034491978574,
+            0.0060000393582887715,
+            0.023999975590358293
+          ]
+        },
+        {
+          "name": "section_1_009_base",
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01475,
+            0.00362504,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999997,
+            0.00837486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            -0.010331765633245416,
+            0.006000007693856804,
+            0.024000007331342273
+          ]
+        },
+        {
+          "name": "section_1_010_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID42/ID42/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.015349999999999999,
+            -0.00237486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            0.00237486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            -0.013825034491978574,
+            3.935828877002846e-08,
+            0.023999975590358293
+          ]
+        },
+        {
+          "name": "section_1_011_base",
+          "source_ancestry": "ID2/anonymous/instance:ID42/ID42/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01475,
+            -0.00237496,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999997,
+            0.00237486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            -0.010331765633245416,
+            7.693856811364497e-09,
+            0.024000007331342273
+          ]
+        },
+        {
+          "name": "section_1_012_base",
+          "source_ancestry": "ID2/anonymous/instance:ID43/ID43/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999997,
+            -0.00837496,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.01475,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            -0.005999992306143193,
+            0.023999992668657627
+          ]
+        },
+        {
+          "name": "section_1_013_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID43/ID43/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            -0.00837486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            -0.005999960641711229,
+            0.024000024409641725
+          ]
+        },
+        {
+          "name": "section_1_014_side2side",
+          "source_ancestry": "ID2/anonymous/instance:ID44/ID44",
+          "role": "printed",
+          "triangle_count": 4144,
+          "min_m": [
+            -0.0171,
+            -0.0099,
+            0.019
+          ],
+          "max_m": [
+            -0.012,
+            0.0099,
+            0.0639
+          ],
+          "vertex_mean_m": [
+            -0.013591480542110252,
+            -2.703142104066024e-06,
+            0.04763397787996098
+          ]
+        },
+        {
+          "name": "section_1_015_horn2horn",
+          "source_ancestry": "ID2/anonymous/instance:ID53/ID53",
+          "role": "printed",
+          "triangle_count": 2312,
+          "min_m": [
+            0.012,
+            -0.0099,
+            0.019
+          ],
+          "max_m": [
+            0.0171,
+            0.0099,
+            0.0638968
+          ],
+          "vertex_mean_m": [
+            0.014799125874125725,
+            -1.5382430070123112e-07,
+            0.04193297875874128
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src/mobile_manipulator/meshes/poppy_ergo_jr/official/section_2.dae",
+      "source_sha256": "e222c67d75ad0b80cc816e2c1811d505e4b9d1e064d7e0d4bb5e582530e236ef",
+      "output": "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/section_2.dae",
+      "output_sha256": "151087320fb7f16aafa04ef468581b6e2c8e66450008d75278610594a161dd7f",
+      "instances": [
+        {
+          "name": "section_2_000_base",
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.01475,
+            0.00837496,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            0.005999992306143186,
+            0.02400000733134231
+          ]
+        },
+        {
+          "name": "section_2_001_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.00837486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            0.005999960641711235,
+            0.023999975590358293
+          ]
+        },
+        {
+          "name": "section_2_002_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.015349999999999999,
+            0.0036251400000000002,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            0.00837486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            -0.013825034491978574,
+            0.00600003935828877,
+            0.023999975590358297
+          ]
+        },
+        {
+          "name": "section_2_003_base",
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01475,
+            0.00362504,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            0.00837486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            -0.010331765633245416,
+            0.006000007693856804,
+            0.024000007331342273
+          ]
+        },
+        {
+          "name": "section_2_004_body",
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID22/ID22",
+          "role": "servo",
+          "triangle_count": 14134,
+          "min_m": [
+            -0.012,
+            -0.012,
+            -0.009
+          ],
+          "max_m": [
+            0.012,
+            0.012,
+            0.027
+          ],
+          "vertex_mean_m": [
+            -0.0010724524707615413,
+            -6.557758643899416e-07,
+            0.01320519859472868
+          ]
+        },
+        {
+          "name": "section_2_005_horn",
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID31/ID31",
+          "role": "horn",
+          "triangle_count": 4364,
+          "min_m": [
+            0.0121,
+            -0.008897,
+            -0.0089
+          ],
+          "max_m": [
+            0.015,
+            0.008897,
+            0.0089
+          ],
+          "vertex_mean_m": [
+            0.013876549630996823,
+            4.510701107114178e-08,
+            -7.0506743542450654e-09
+          ]
+        },
+        {
+          "name": "section_2_006_base",
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01475,
+            -0.00837496,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            -0.010331765633245416,
+            -0.0059999923061431915,
+            0.024000007331342273
+          ]
+        },
+        {
+          "name": "section_2_007_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.015349999999999999,
+            -0.00837486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            -0.013825034491978574,
+            -0.005999960641711232,
+            0.023999975590358297
+          ]
+        },
+        {
+          "name": "section_2_008_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.015349999999999999,
+            -0.00237486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            0.00237486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            -0.013825034491978574,
+            3.9358288770065565e-08,
+            0.023999975590358297
+          ]
+        },
+        {
+          "name": "section_2_009_base",
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01475,
+            -0.00237496,
+            0.021625000000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            0.00237486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            -0.010331765633245416,
+            7.693856811368502e-09,
+            0.024000007331342273
+          ]
+        },
+        {
+          "name": "section_2_010_base",
+          "source_ancestry": "ID2/anonymous/instance:ID42/ID42/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999999,
+            -0.00837486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.01475,
+            -0.00362504,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            -0.006000007693856821,
+            0.02400000733134231
+          ]
+        },
+        {
+          "name": "section_2_011_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID42/ID42/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            -0.00837486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            -0.0036251400000000002,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            -0.006000039358288766,
+            0.023999975590358293
+          ]
+        },
+        {
+          "name": "section_2_012_base",
+          "source_ancestry": "ID2/anonymous/instance:ID43/ID43/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999999,
+            -0.00237486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.01475,
+            0.00237496,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            -7.693856811395394e-09,
+            0.02400000733134231
+          ]
+        },
+        {
+          "name": "section_2_013_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID43/ID43/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            -0.00237486,
+            0.021625000000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.00237486,
+            0.026375
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            -3.935828877008064e-08,
+            0.023999975590358293
+          ]
+        },
+        {
+          "name": "section_2_014_short_U",
+          "source_ancestry": "ID2/anonymous/instance:ID44/ID44",
+          "role": "printed",
+          "triangle_count": 3130,
+          "min_m": [
+            -0.014100000000000001,
+            -0.01,
+            0.019999999999999997
+          ],
+          "max_m": [
+            0.014099999999999998,
+            0.01,
+            0.03
+          ],
+          "vertex_mean_m": [
+            -8.338849385922442e-06,
+            -4.334433096315489e-05,
+            0.025833779185520368
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src/mobile_manipulator/meshes/poppy_ergo_jr/official/section_3.dae",
+      "source_sha256": "e5a62d4affe99f5b9bdb4dc7b317f2495b214909d551abf552eb5fc6e394e09b",
+      "output": "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/section_3.dae",
+      "output_sha256": "b8a957e0399e9ba8e7672373c1666b66dd271487c6ef29dca64c0e6108137b8d",
+      "instances": [
+        {
+          "name": "section_3_000_base",
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.0023749599999999984
+          ],
+          "max_m": [
+            0.01475,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            -0.01799999266865762,
+            7.69385681309813e-09
+          ]
+        },
+        {
+          "name": "section_3_001_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.002374859999999998
+          ],
+          "max_m": [
+            0.015349999999999999,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            -0.01800002440964171,
+            3.935828877178898e-08
+          ]
+        },
+        {
+          "name": "section_3_002_horn2horn",
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20",
+          "role": "printed",
+          "triangle_count": 2312,
+          "min_m": [
+            0.011999999999999999,
+            -0.057896800000000005,
+            -0.009899999999999999
+          ],
+          "max_m": [
+            0.0171,
+            -0.013,
+            0.009900000000000003
+          ],
+          "vertex_mean_m": [
+            0.014799125874125725,
+            -0.0359329787587413,
+            -1.5382430069759184e-07
+          ]
+        },
+        {
+          "name": "section_3_003_base",
+          "source_ancestry": "ID2/anonymous/instance:ID29/ID29/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01475,
+            -0.020374999999999997,
+            0.0036251400000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.015624999999999998,
+            0.00837496
+          ],
+          "vertex_mean_m": [
+            -0.010331765633245416,
+            -0.017999992668657587,
+            0.005999992306143194
+          ]
+        },
+        {
+          "name": "section_3_004_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID29/ID29/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.015349999999999999,
+            -0.020374999999999997,
+            0.0036251400000000002
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.015624999999999998,
+            0.00837486
+          ],
+          "vertex_mean_m": [
+            -0.013825034491978574,
+            -0.018000024409641706,
+            0.005999960641711231
+          ]
+        },
+        {
+          "name": "section_3_005_side2side",
+          "source_ancestry": "ID2/anonymous/instance:ID30/ID30",
+          "role": "printed",
+          "triangle_count": 4144,
+          "min_m": [
+            -0.0171,
+            -0.0579,
+            -0.009899999999999999
+          ],
+          "max_m": [
+            -0.011999999999999999,
+            -0.013,
+            0.009900000000000003
+          ],
+          "vertex_mean_m": [
+            -0.013591480542110252,
+            -0.041633977879961113,
+            -2.7031421040642397e-06
+          ]
+        },
+        {
+          "name": "section_3_006_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID37/ID37/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.015349999999999999,
+            -0.020374999999999997,
+            -0.002374859999999998
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.015624999999999998,
+            0.0023748600000000016
+          ],
+          "vertex_mean_m": [
+            -0.013825034491978574,
+            -0.018000024409641706,
+            -3.9358288768318956e-08
+          ]
+        },
+        {
+          "name": "section_3_007_base",
+          "source_ancestry": "ID2/anonymous/instance:ID37/ID37/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01475,
+            -0.020374999999999997,
+            -0.002374859999999998
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.015624999999999998,
+            0.002374960000000002
+          ],
+          "vertex_mean_m": [
+            -0.010331765633245416,
+            -0.017999992668657587,
+            -7.693856809628783e-09
+          ]
+        },
+        {
+          "name": "section_3_008_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID38/ID38/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            0.0036251400000000002
+          ],
+          "max_m": [
+            0.015349999999999999,
+            -0.015624999999999998,
+            0.00837486
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            -0.01800002440964171,
+            0.006000039358288772
+          ]
+        },
+        {
+          "name": "section_3_009_base",
+          "source_ancestry": "ID2/anonymous/instance:ID38/ID38/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            0.00362504
+          ],
+          "max_m": [
+            0.01475,
+            -0.015624999999999998,
+            0.00837486
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            -0.01799999266865762,
+            0.006000007693856819
+          ]
+        },
+        {
+          "name": "section_3_010_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID39/ID39/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.015349999999999999,
+            -0.020374999999999997,
+            -0.00837486
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.015624999999999998,
+            -0.0036251400000000002
+          ],
+          "vertex_mean_m": [
+            -0.013825034491978574,
+            -0.018000024409641706,
+            -0.0060000393582887715
+          ]
+        },
+        {
+          "name": "section_3_011_base",
+          "source_ancestry": "ID2/anonymous/instance:ID39/ID39/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.01475,
+            -0.020374999999999997,
+            -0.00837486
+          ],
+          "max_m": [
+            -0.008749999999999999,
+            -0.015624999999999998,
+            -0.00362504
+          ],
+          "vertex_mean_m": [
+            -0.010331765633245416,
+            -0.017999992668657587,
+            -0.006000007693856806
+          ]
+        },
+        {
+          "name": "section_3_012_base",
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.00837496
+          ],
+          "max_m": [
+            0.01475,
+            -0.015624999999999998,
+            -0.0036251400000000002
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            -0.01799999266865762,
+            -0.00599999230614319
+          ]
+        },
+        {
+          "name": "section_3_013_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID40/ID40/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            -0.020374999999999997,
+            -0.00837486
+          ],
+          "max_m": [
+            0.015349999999999999,
+            -0.015624999999999998,
+            -0.0036251400000000002
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            -0.01800002440964171,
+            -0.005999960641711228
+          ]
+        },
+        {
+          "name": "section_3_014_horn",
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID42/ID42",
+          "role": "horn",
+          "triangle_count": 4364,
+          "min_m": [
+            -0.00889917866178,
+            -0.0089002366227,
+            -0.015
+          ],
+          "max_m": [
+            0.0088979498177,
+            0.0089002366227,
+            -0.0121
+          ],
+          "vertex_mean_m": [
+            -2.3791100807631304e-08,
+            3.89658553611594e-08,
+            -0.013876549630996453
+          ]
+        },
+        {
+          "name": "section_3_015_body",
+          "source_ancestry": "ID2/anonymous/instance:ID41/ID41/anonymous/instance:ID51/ID51",
+          "role": "servo",
+          "triangle_count": 14134,
+          "min_m": [
+            -0.012,
+            -0.027,
+            -0.012
+          ],
+          "max_m": [
+            0.012,
+            0.009,
+            0.012
+          ],
+          "vertex_mean_m": [
+            -6.55775864394413e-07,
+            -0.013205198594728636,
+            0.0010724524707615075
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src/mobile_manipulator/meshes/poppy_ergo_jr/official/section_4.dae",
+      "source_sha256": "2480db62b58acc094adb9e90d4f3fcb914113d8cc29dbf257afb64555fd5c0e2",
+      "output": "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/section_4.dae",
+      "output_sha256": "eb44b54ab0dd45391377b2a0a3b381f17b8b282bbd830946e3f1ebc0851558df",
+      "instances": [
+        {
+          "name": "section_4_000_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            -0.00885
+          ],
+          "vertex_mean_m": [
+            -0.006000024409641711,
+            0.023999960641711202,
+            -0.01392503449197856
+          ]
+        },
+        {
+          "name": "section_4_001_base",
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637496,
+            -0.00885
+          ],
+          "vertex_mean_m": [
+            -0.005999992668657613,
+            0.023999992306143143,
+            -0.010431765633245372
+          ]
+        },
+        {
+          "name": "section_4_002_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.003625,
+            0.02162514,
+            0.00865
+          ],
+          "max_m": [
+            0.008375,
+            0.02637486,
+            0.01525
+          ],
+          "vertex_mean_m": [
+            0.00599997559035829,
+            0.02400003935828879,
+            0.013725034491978596
+          ]
+        },
+        {
+          "name": "section_4_003_base",
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.003625,
+            0.02162504,
+            0.00865
+          ],
+          "max_m": [
+            0.008375,
+            0.02637486,
+            0.01465
+          ],
+          "vertex_mean_m": [
+            0.006000007331342333,
+            0.024000007693856767,
+            0.010231765633245318
+          ]
+        },
+        {
+          "name": "section_4_004_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            -0.00237486,
+            -0.008375
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.00237486,
+            -0.003625
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            3.9358288769967e-08,
+            -0.005999975590358288
+          ]
+        },
+        {
+          "name": "section_4_005_base",
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999999,
+            -0.00237496,
+            -0.008375
+          ],
+          "max_m": [
+            0.01475,
+            0.00237486,
+            -0.003625
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            7.693856810869312e-09,
+            -0.006000007331342328
+          ]
+        },
+        {
+          "name": "section_4_006_fixed_part",
+          "source_ancestry": "ID2/anonymous/instance:ID22/ID22",
+          "role": "printed",
+          "triangle_count": 4701,
+          "min_m": [
+            0.012,
+            -0.069994,
+            -0.012
+          ],
+          "max_m": [
+            0.0171,
+            0.022,
+            0.012
+          ],
+          "vertex_mean_m": [
+            0.01412515449127277,
+            -0.03358988143039596,
+            -2.0086202639421078e-06
+          ]
+        },
+        {
+          "name": "section_4_007_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID31/ID31/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.008375,
+            0.03762514,
+            0.00865
+          ],
+          "max_m": [
+            -0.003625,
+            0.04237486,
+            0.01525
+          ],
+          "vertex_mean_m": [
+            -0.006000024409641711,
+            0.04000003935828876,
+            0.013725034491978596
+          ]
+        },
+        {
+          "name": "section_4_008_base",
+          "source_ancestry": "ID2/anonymous/instance:ID31/ID31/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.008375,
+            0.03762504,
+            0.00865
+          ],
+          "max_m": [
+            -0.003625,
+            0.04237486,
+            0.01465
+          ],
+          "vertex_mean_m": [
+            -0.005999992668657613,
+            0.040000007693856816,
+            0.010231765633245318
+          ]
+        },
+        {
+          "name": "section_4_009_base",
+          "source_ancestry": "ID2/anonymous/instance:ID32/ID32/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999999,
+            0.01562504,
+            0.003625
+          ],
+          "max_m": [
+            0.01475,
+            0.020374859999999998,
+            0.008375
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            0.01800000769385684,
+            0.005999992668657633
+          ]
+        },
+        {
+          "name": "section_4_010_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID32/ID32/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            0.01562514,
+            0.003625
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.020374859999999998,
+            0.008375
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            0.018000039358288752,
+            0.0060000244096417195
+          ]
+        },
+        {
+          "name": "section_4_011_base",
+          "source_ancestry": "ID2/anonymous/instance:ID33/ID33/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999999,
+            -0.00237496,
+            0.003625
+          ],
+          "max_m": [
+            0.01475,
+            0.00237486,
+            0.008375
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            7.693856810869312e-09,
+            0.005999992668657633
+          ]
+        },
+        {
+          "name": "section_4_012_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID33/ID33/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            -0.00237486,
+            0.003625
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.00237486,
+            0.008375
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            3.9358288769967e-08,
+            0.0060000244096417195
+          ]
+        },
+        {
+          "name": "section_4_013_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID34/ID34/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.003625,
+            0.03762514,
+            -0.01545
+          ],
+          "max_m": [
+            0.008375,
+            0.04237486,
+            -0.00885
+          ],
+          "vertex_mean_m": [
+            0.00599997559035829,
+            0.0399999606417112,
+            -0.01392503449197856
+          ]
+        },
+        {
+          "name": "section_4_014_base",
+          "source_ancestry": "ID2/anonymous/instance:ID34/ID34/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.003625,
+            0.03762514,
+            -0.01485
+          ],
+          "max_m": [
+            0.008375,
+            0.04237496,
+            -0.00885
+          ],
+          "vertex_mean_m": [
+            0.006000007331342333,
+            0.03999999230614324,
+            -0.010431765633245372
+          ]
+        },
+        {
+          "name": "section_4_015_base",
+          "source_ancestry": "ID2/anonymous/instance:ID35/ID35/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.003625,
+            0.03762504,
+            0.00865
+          ],
+          "max_m": [
+            0.008375,
+            0.04237486,
+            0.01465
+          ],
+          "vertex_mean_m": [
+            0.006000007331342333,
+            0.040000007693856816,
+            0.010231765633245318
+          ]
+        },
+        {
+          "name": "section_4_016_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID35/ID35/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.003625,
+            0.03762514,
+            0.00865
+          ],
+          "max_m": [
+            0.008375,
+            0.04237486,
+            0.01525
+          ],
+          "vertex_mean_m": [
+            0.00599997559035829,
+            0.04000003935828876,
+            0.013725034491978596
+          ]
+        },
+        {
+          "name": "section_4_017_base",
+          "source_ancestry": "ID2/anonymous/instance:ID36/ID36/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.008375,
+            0.03762514,
+            -0.01485
+          ],
+          "max_m": [
+            -0.003625,
+            0.04237496,
+            -0.00885
+          ],
+          "vertex_mean_m": [
+            -0.005999992668657613,
+            0.03999999230614324,
+            -0.010431765633245372
+          ]
+        },
+        {
+          "name": "section_4_018_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID36/ID36/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.008375,
+            0.03762514,
+            -0.01545
+          ],
+          "max_m": [
+            -0.003625,
+            0.04237486,
+            -0.00885
+          ],
+          "vertex_mean_m": [
+            -0.006000024409641711,
+            0.0399999606417112,
+            -0.01392503449197856
+          ]
+        },
+        {
+          "name": "section_4_019_base",
+          "source_ancestry": "ID2/anonymous/instance:ID37/ID37/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.008375,
+            0.02162504,
+            0.00865
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            0.01465
+          ],
+          "vertex_mean_m": [
+            -0.005999992668657613,
+            0.024000007693856767,
+            0.010231765633245318
+          ]
+        },
+        {
+          "name": "section_4_020_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID37/ID37/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.008375,
+            0.02162514,
+            0.00865
+          ],
+          "max_m": [
+            -0.003625,
+            0.02637486,
+            0.01525
+          ],
+          "vertex_mean_m": [
+            -0.006000024409641711,
+            0.02400003935828879,
+            0.013725034491978596
+          ]
+        },
+        {
+          "name": "section_4_021_body",
+          "source_ancestry": "ID2/anonymous/instance:ID38/ID38/anonymous/instance:ID39/ID39",
+          "role": "servo",
+          "triangle_count": 14134,
+          "min_m": [
+            -0.012,
+            -0.009,
+            -0.012
+          ],
+          "max_m": [
+            0.012,
+            0.027,
+            0.012
+          ],
+          "vertex_mean_m": [
+            -6.55775864394413e-07,
+            0.013205198594728636,
+            -0.0010724524707615075
+          ]
+        },
+        {
+          "name": "section_4_022_horn",
+          "source_ancestry": "ID2/anonymous/instance:ID38/ID38/anonymous/instance:ID48/ID48",
+          "role": "horn",
+          "triangle_count": 4364,
+          "min_m": [
+            -0.0089,
+            -0.008897,
+            0.0121
+          ],
+          "max_m": [
+            0.0089,
+            0.008897,
+            0.015
+          ],
+          "vertex_mean_m": [
+            7.050674353033466e-09,
+            4.510701107011567e-08,
+            0.013876549630996465
+          ]
+        },
+        {
+          "name": "section_4_023_fixation",
+          "source_ancestry": "ID2/anonymous/instance:ID57/ID57",
+          "role": "printed",
+          "triangle_count": 4112,
+          "min_m": [
+            -0.01,
+            0.02,
+            -0.014199999999999996
+          ],
+          "max_m": [
+            0.01,
+            0.044000000000000004,
+            0.014000000000000009
+          ],
+          "vertex_mean_m": [
+            1.5195904464757463e-19,
+            0.03174015649606304,
+            -9.99999999999904e-05
+          ]
+        },
+        {
+          "name": "section_4_024_base",
+          "source_ancestry": "ID2/anonymous/instance:ID64/ID64/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.008749999999999999,
+            0.01562504,
+            -0.008375
+          ],
+          "max_m": [
+            0.01475,
+            0.020374859999999998,
+            -0.003625
+          ],
+          "vertex_mean_m": [
+            0.010331765633245164,
+            0.01800000769385684,
+            -0.006000007331342328
+          ]
+        },
+        {
+          "name": "section_4_025_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID64/ID64/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.008749999999999999,
+            0.01562514,
+            -0.008375
+          ],
+          "max_m": [
+            0.015349999999999999,
+            0.020374859999999998,
+            -0.003625
+          ],
+          "vertex_mean_m": [
+            0.013825034491978498,
+            0.018000039358288752,
+            -0.005999975590358288
+          ]
+        },
+        {
+          "name": "section_4_026_body",
+          "source_ancestry": "ID2/anonymous/instance:ID65/ID65/anonymous/instance:ID39/ID39",
+          "role": "servo",
+          "triangle_count": 14134,
+          "min_m": [
+            -0.011999999999999997,
+            0.031000000000000003,
+            -0.012000000000000002
+          ],
+          "max_m": [
+            0.012000000000000004,
+            0.067,
+            0.012000000000000004
+          ],
+          "vertex_mean_m": [
+            -0.001072452470761541,
+            0.044794801405271055,
+            -6.557758643892915e-07
+          ]
+        },
+        {
+          "name": "section_4_027_horn",
+          "source_ancestry": "ID2/anonymous/instance:ID65/ID65/anonymous/instance:ID48/ID48",
+          "role": "horn",
+          "triangle_count": 4364,
+          "min_m": [
+            0.012100000000000007,
+            0.049103,
+            -0.008899999999999996
+          ],
+          "max_m": [
+            0.015000000000000006,
+            0.066897,
+            0.008900000000000003
+          ],
+          "vertex_mean_m": [
+            0.013876549630996823,
+            0.05800004510701101,
+            -7.0506743507756185e-09
+          ]
+        },
+        {
+          "name": "section_4_028_base",
+          "source_ancestry": "ID2/anonymous/instance:ID66/ID66/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.003625,
+            0.02162514,
+            -0.01485
+          ],
+          "max_m": [
+            0.008375,
+            0.02637496,
+            -0.00885
+          ],
+          "vertex_mean_m": [
+            0.006000007331342333,
+            0.023999992306143143,
+            -0.010431765633245372
+          ]
+        },
+        {
+          "name": "section_4_029_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID66/ID66/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.003625,
+            0.02162514,
+            -0.01545
+          ],
+          "max_m": [
+            0.008375,
+            0.02637486,
+            -0.00885
+          ],
+          "vertex_mean_m": [
+            0.00599997559035829,
+            0.023999960641711202,
+            -0.01392503449197856
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src/mobile_manipulator/meshes/poppy_ergo_jr/official/gripper.dae",
+      "source_sha256": "473452dad0661379fbc75be9aa3f3f4b9ea932fa4fd38db5cc1549c0597328de",
+      "output": "src/mobile_manipulator/meshes/poppy_ergo_jr/gazebo_inspection/gripper.dae",
+      "output_sha256": "aeae77453e1742ea9db792429d870a64234d81a99f1ecea39b45bc0f3e9722bc",
+      "instances": [
+        {
+          "name": "gripper_000_base",
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.002375,
+            0.00362504,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.002375,
+            0.00837486,
+            0.01785
+          ],
+          "vertex_mean_m": [
+            7.331342348151396e-09,
+            0.006000007693856807,
+            0.013431765633245362
+          ]
+        },
+        {
+          "name": "gripper_001_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID3/ID3/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.002375,
+            0.0036251400000000002,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.002375,
+            0.00837486,
+            0.01845
+          ],
+          "vertex_mean_m": [
+            -2.4409641711149112e-08,
+            0.00600003935828877,
+            0.01692503449197855
+          ]
+        },
+        {
+          "name": "gripper_002_base",
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            0.003625,
+            -0.00237496,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.008375,
+            0.00237486,
+            0.01785
+          ],
+          "vertex_mean_m": [
+            0.006000007331342333,
+            7.693856811412343e-09,
+            0.013431765633245362
+          ]
+        },
+        {
+          "name": "gripper_003_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID20/ID20/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            0.003625,
+            -0.00237486,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.008375,
+            0.00237486,
+            0.01845
+          ],
+          "vertex_mean_m": [
+            0.00599997559035829,
+            3.9358288770062084e-08,
+            0.01692503449197855
+          ]
+        },
+        {
+          "name": "gripper_004_rotative_part",
+          "source_ancestry": "ID2/anonymous/instance:ID21/ID21",
+          "role": "printed",
+          "triangle_count": 7884,
+          "min_m": [
+            -0.0171,
+            -0.0699943,
+            -0.017
+          ],
+          "max_m": [
+            0.0099,
+            0.00989763,
+            0.0172
+          ],
+          "vertex_mean_m": [
+            -0.006037815276703886,
+            -0.021654465768820158,
+            -0.0029240644575279653
+          ]
+        },
+        {
+          "name": "gripper_005_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID30/ID30/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.008375,
+            -0.002374859999999998,
+            0.011850000000000001
+          ],
+          "max_m": [
+            -0.003625,
+            0.0023748600000000016,
+            0.01845
+          ],
+          "vertex_mean_m": [
+            -0.006000024409641711,
+            3.935828877179681e-08,
+            0.01692503449197855
+          ]
+        },
+        {
+          "name": "gripper_006_base",
+          "source_ancestry": "ID2/anonymous/instance:ID30/ID30/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.008375,
+            -0.0023749599999999984,
+            0.011850000000000001
+          ],
+          "max_m": [
+            -0.003625,
+            0.0023748600000000016,
+            0.01785
+          ],
+          "vertex_mean_m": [
+            -0.005999992668657613,
+            7.693856813113882e-09,
+            0.013431765633245362
+          ]
+        },
+        {
+          "name": "gripper_007_base",
+          "source_ancestry": "ID2/anonymous/instance:ID31/ID31/anonymous/instance:ID4/ID4",
+          "role": "fastener",
+          "triangle_count": 3032,
+          "min_m": [
+            -0.002375,
+            -0.00837496,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.002375,
+            -0.0036251400000000002,
+            0.01785
+          ],
+          "vertex_mean_m": [
+            7.331342348151396e-09,
+            -0.005999992306143195,
+            0.013431765633245362
+          ]
+        },
+        {
+          "name": "gripper_008_insert",
+          "source_ancestry": "ID2/anonymous/instance:ID31/ID31/anonymous/instance:ID13/ID13",
+          "role": "fastener",
+          "triangle_count": 744,
+          "min_m": [
+            -0.002375,
+            -0.00837486,
+            0.011850000000000001
+          ],
+          "max_m": [
+            0.002375,
+            -0.0036251400000000002,
+            0.01845
+          ],
+          "vertex_mean_m": [
+            -2.4409641711149112e-08,
+            -0.00599996064171123,
+            0.01692503449197855
+          ]
+        }
+      ]
+    }
+  ]
+}

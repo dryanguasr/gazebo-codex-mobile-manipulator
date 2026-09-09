@@ -1,5 +1,11 @@
 # Videos de pick-and-place a 60 fps
 
+**Evidencia histórica A1, sustituida para inspeccionar el agarre.**
+Estos videos usan contacto asistido y muestran el problema de geometría/cierre
+reportado por el usuario. No demuestran retención física.
+Ver los [videos corregidos sin attach](../gripper_corregido/) y el
+[diagnóstico](../../docs/gripper_fix_report.md). Se conservan sin reescribir.
+
 Estos archivos proceden de una corrida nueva de la cámara real de Gazebo,
 ejecutada con el commit
 `7a083fad9a27fada89f697c33cf886dc4c57df15` y seed 911.

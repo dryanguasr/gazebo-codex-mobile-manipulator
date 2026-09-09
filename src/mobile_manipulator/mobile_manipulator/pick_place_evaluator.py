@@ -4,7 +4,10 @@ import math
 from pathlib import Path
 import time
 
-from mobile_manipulator.pick_place_attach_gate import extract_single_model_pose
+from mobile_manipulator.pick_place_attach_gate import (
+    cylinder_tilt_deg,
+    extract_single_model_pose,
+)
 from nav_msgs.msg import Odometry
 import rclpy
 from rclpy.clock import Clock, ClockType
@@ -12,6 +15,7 @@ from rclpy.duration import Duration
 from rclpy.node import Node
 from rclpy.time import Time
 from ros_gz_interfaces.msg import Contacts
+from sensor_msgs.msg import JointState
 from std_msgs.msg import Bool, String
 from tf2_msgs.msg import TFMessage
 from tf2_ros import Buffer, TransformException, TransformListener
@@ -137,6 +141,11 @@ class PickPlaceEvaluator(Node):
         self.max_base_drift = 0.0
         self.hold_started = None
         self.hold_duration = 0.0
+        self.hold_samples_valid = True
+        self.retention_sample_count = 0
+        self.max_retention_error = 0.0
+        self.m6_rad = math.nan
+        self.object_tilt_deg = math.inf
         self.detached_at = None
         self.stable_since = None
         self.stable_duration = 0.0
@@ -174,6 +183,9 @@ class PickPlaceEvaluator(Node):
         self.create_subscription(
             Odometry, '/base_controller/odom', self.odom_callback, 20
         )
+        self.create_subscription(
+            JointState, '/joint_states', self.joint_callback, 20
+        )
         self.create_timer(
             0.02,
             self.sample,
@@ -190,6 +202,12 @@ class PickPlaceEvaluator(Node):
             ),
         })
 
+    def joint_callback(self, message):
+        if 'poppy_m6_joint' in message.name:
+            index = message.name.index('poppy_m6_joint')
+            if index < len(message.position):
+                self.m6_rad = float(message.position[index])
+
     def record_event(self, data):
         self.events_handle.write(json.dumps(data, sort_keys=True) + '\n')
         self.events_handle.flush()
@@ -199,6 +217,8 @@ class PickPlaceEvaluator(Node):
         if pose is None:
             return
         self.object_pose = pose
+        q = message.transforms[-1].transform.rotation
+        self.object_tilt_deg = cylinder_tilt_deg(q)
         self.object_pose_rx_wall = time.monotonic()
         if self.initial_pose is None:
             self.initial_pose = self.object_pose
@@ -329,8 +349,8 @@ class PickPlaceEvaluator(Node):
             return
         try:
             grasp = self.lookup('poppy_grasp_frame')
-            fixed = self.lookup('poppy_fixed_tip')
-            moving = self.lookup('poppy_moving_tip')
+            fixed = self.lookup('poppy_fixed_contact')
+            moving = self.lookup('poppy_moving_contact')
         except TransformException:
             return
         self.pregrasp_position_error = math.dist(grasp, self.object_pose)
@@ -388,6 +408,24 @@ class PickPlaceEvaluator(Node):
         })
         self.samples_handle.flush()
 
+        if self.state in ('LIFT', 'HOLD', 'TRANSFER', 'LOWER'):
+            error = math.dist((x, y, z), (gx, gy, gz))
+            if math.isfinite(error):
+                self.max_retention_error = max(self.max_retention_error, error)
+                self.retention_sample_count += 1
+            if self.state == 'HOLD':
+                self.hold_samples_valid &= (
+                    math.isfinite(error) and error <= 0.008
+                    and self.initial_pose is not None
+                    and z - self.initial_pose[2] >= 0.050
+                    and self.object_tilt_deg <= 10.0
+                )
+        if (
+            str(self.get_parameter('grasp_mode').value) == 'physical_contact'
+            and self.state == 'RELEASE' and self.m6_rad >= 1.15
+            and self.detached_at is None
+        ):
+            self.detached_at = sim_time
         if self.detached_at is not None and self.object_pose is not None:
             target = (
                 float(self.get_parameter('place_x_m').value),
@@ -412,7 +450,12 @@ class PickPlaceEvaluator(Node):
                 target,
                 placement_tolerance,
                 motion_tolerance,
-                self.attached,
+                self.attached
+                or abs(
+                    z - float(self.get_parameter('pick_support_top_z_m').value)
+                    - float(self.get_parameter('object_height_m').value) / 2.0
+                ) > 0.002
+                or self.object_tilt_deg > 5.0,
             )
 
     def finalize(self):
@@ -461,6 +504,8 @@ class PickPlaceEvaluator(Node):
                 not self.attached
                 and self.attach_count == 0
                 and self.detach_count == 0
+                and self.detached_at is not None
+                and self.m6_rad >= 1.15
             )
             simulator_assisted = False
         criteria = {
@@ -473,8 +518,14 @@ class PickPlaceEvaluator(Node):
             'separated_from_pick_support': support_clearance >= float(
                 self.get_parameter('minimum_support_clearance_m').value
             ),
-            'hold_at_least_3s': self.hold_duration >= float(
-                self.get_parameter('minimum_hold_s').value
+            'hold_at_least_3s': (
+                self.hold_duration >= float(
+                    self.get_parameter('minimum_hold_s').value
+                ) and self.hold_samples_valid
+            ),
+            'retained_through_transport': (
+                self.retention_sample_count > 0
+                and self.max_retention_error <= 0.008
             ),
             'placement_within_30mm': placement_error <= float(
                 self.get_parameter('placement_tolerance_m').value
@@ -540,6 +591,12 @@ class PickPlaceEvaluator(Node):
                 self.get_parameter('stability_motion_tolerance_m').value
             ),
             'hold_duration_s': self.hold_duration,
+            'hold_samples_valid': self.hold_samples_valid,
+            'maximum_retention_error_m': self.max_retention_error,
+            'retention_sample_count': self.retention_sample_count,
+            'final_object_tilt_deg': self.object_tilt_deg,
+            'final_m6_rad': self.m6_rad,
+            'ground_truth_used_for_safety': grasp_mode == 'physical_contact',
             'stable_duration_s': self.stable_duration,
             'placement_error_xy_m': placement_error,
             'pregrasp_position_error_m': self.pregrasp_position_error,
